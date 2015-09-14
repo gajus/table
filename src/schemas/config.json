@@ -88,9 +88,7 @@
     "additionalProperties": false,
     "definitions": {
         "border": {
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 1
+            "type": "string"
         }
     }
 }

@@ -13,6 +13,8 @@
 
 Produces a string that represents array data in a text table.
 
+[!Demo of Table displaying a list of missions to Moon](./README/demo.png)
+
 ## Features
 
 * Works with strings containing [fullwidth](https://en.wikipedia.org/wiki/Halfwidth_and_fullwidth_forms) characters.
