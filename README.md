@@ -3,18 +3,25 @@
 [![NPM version](http://img.shields.io/npm/v/table.svg?style=flat)](https://www.npmjs.com/package/table)
 [![js-canonical-style](https://img.shields.io/badge/code%20style-canonical-brightgreen.svg?style=flat)](https://github.com/gajus/canonical)
 
+* [Features](#features)
 * [Usage](#usage)
     * [Custom Border](#custom-border)
     * [Minimum Column Width](#minimum-column-width)
     * [Maximum Column Width](#maximum-column-width)
-    * [Alignment](#alignment)
+    * [Cell Content Alignment](#cell-content-alignment)
 
 Formats data into a string table.
 
+## Features
+
 * Works with strings containing [fullwidth](https://en.wikipedia.org/wiki/Halfwidth_and_fullwidth_forms) characters.
 * Works with strings containing [ANSI escape codes](https://en.wikipedia.org/wiki/ANSI_escape_code).
-* Supports `minWidth`, `maxWidth` properties per column.
-* Supports expanding long cell values into multiple rows.
+* Custom border characters.
+* Content alignment.
+* Content padding.
+* Column `minWidth`.
+* Column `maxWidth`.
+* Expanding long cell values into multiple rows.
 
 ## Usage
 
@@ -100,6 +107,10 @@ console.log(output);
 
 ### Minimum Column Width
 
+|Property|`maxWidth`|
+|---|---|
+|Type|`Number`|
+
 `minWidth` pads the string.
 
 ```js
@@ -137,6 +148,10 @@ console.log(output);
 ```
 
 ### Maximum Column Width
+
+|Property|`maxWidth`|
+|---|---|
+|Type|`Number`|
 
 `maxWidth` makes the overflowing text break into multiple lines.
 
@@ -176,7 +191,13 @@ console.log(output);
 ╚══╧═══╧══╝
 ```
 
-### Alignment
+### Cell Content Alignment
+
+|Property|`alignment`|
+|---|---|
+|Type|`String`|
+|Default Value|`left`|
+|Supported Values|`left`, `center`, `right`|
 
 ```js
 let data,
@@ -191,7 +212,15 @@ data = [
 
 options = {
     column: {
+        0: {
+            alignment: 'left',
+            minWidth: 10
+        },
         1: {
+            alignment: 'center',
+            minWidth: 10
+        },
+        2: {
             alignment: 'right',
             minWidth: 10
         }
@@ -204,11 +233,53 @@ console.log(output);
 ```
 
 ```
-╔══╤══════════╤══╗
-║0A│        0B│0C║
-╟──┼──────────┼──╢
-║1A│        1B│1C║
-╟──┼──────────┼──╢
-║2A│        2B│2C║
-╚══╧══════════╧══╝
+╔══════════╤══════════╤══════════╗
+║0A        │    0B    │        0C║
+╟──────────┼──────────┼──────────╢
+║1A        │    1B    │        1C║
+╟──────────┼──────────┼──────────╢
+║2A        │    2B    │        2C║
+╚══════════╧══════════╧══════════╝
+```
+
+### Padding Cell Content
+
+```js
+let data,
+    output,
+    options;
+
+data = [
+    ['0A', 'AABBCC', '0C'],
+    ['1A', '1B', '1C'],
+    ['2A', '2B', '2C']
+];
+
+options = {
+    column: {
+        0: {
+            paddingLeft: 3
+        },
+        1: {
+            maxWidth: 2,
+            paddingRight: 3
+        }
+    }
+};
+
+output = table(data, options);
+
+console.log(output);
+```
+
+```
+╔═════╤═════╤══╗
+║   0A│AA   │0C║
+║     │BB   │  ║
+║     │CC   │  ║
+╟─────┼─────┼──╢
+║   1A│1B   │1C║
+╟─────┼─────┼──╢
+║   2A│2B   │2C║
+╚═════╧═════╧══╝
 ```

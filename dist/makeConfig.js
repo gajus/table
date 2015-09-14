@@ -87,6 +87,14 @@ exports['default'] = function (rows) {
             column.minWidth = column.maxWidth;
         }
 
+        if ((0, _lodashLangIsUndefined3['default'])(column.paddingLeft)) {
+            column.paddingLeft = 0;
+        }
+
+        if ((0, _lodashLangIsUndefined3['default'])(column.paddingRight)) {
+            column.paddingRight = 0;
+        }
+
         return column;
     });
 

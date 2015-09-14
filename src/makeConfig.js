@@ -50,6 +50,14 @@ export default (rows, inputConfig = {}) => {
             column.minWidth = column.maxWidth;
         }
 
+        if (_.isUndefined(column.paddingLeft)) {
+            column.paddingLeft = 0;
+        }
+
+        if (_.isUndefined(column.paddingRight)) {
+            column.paddingRight = 0;
+        }
+
         return column;
     });
 

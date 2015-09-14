@@ -103,6 +103,18 @@ export default (rows, config = {}) => {
         });
     });
 
+    dataMappedUsingRowSpanIndex = _.map(dataMappedUsingRowSpanIndex, (cells, index0) => {
+        return _.map(cells, (value, index1) => {
+            let column;
+
+            column = derivedConfig.column[index1];
+
+            return _.repeat(` `, column.paddingLeft) + value + _.repeat(` `, column.paddingRight);
+        });
+    });
+
+    //_.times(config.column[index1].paddingLeft, ` `)
+
     columnSizeIndex = calculateColumnSizeIndex(dataMappedUsingRowSpanIndex[0]);
 
     // console.log(`columnSizeIndex`, columnSizeIndex);

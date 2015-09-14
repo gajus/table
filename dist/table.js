@@ -4,6 +4,10 @@ var _lodashCollectionMap2 = require('lodash/collection/map');
 
 var _lodashCollectionMap3 = _interopRequireDefault(_lodashCollectionMap2);
 
+var _lodashStringRepeat2 = require('lodash/string/repeat');
+
+var _lodashStringRepeat3 = _interopRequireDefault(_lodashStringRepeat2);
+
 Object.defineProperty(exports, '__esModule', {
     value: true
 });
@@ -139,6 +143,18 @@ exports['default'] = function (rows) {
             }
         });
     });
+
+    dataMappedUsingRowSpanIndex = (0, _lodashCollectionMap3['default'])(dataMappedUsingRowSpanIndex, function (cells, index0) {
+        return (0, _lodashCollectionMap3['default'])(cells, function (value, index1) {
+            var column = undefined;
+
+            column = derivedConfig.column[index1];
+
+            return (0, _lodashStringRepeat3['default'])(' ', column.paddingLeft) + value + (0, _lodashStringRepeat3['default'])(' ', column.paddingRight);
+        });
+    });
+
+    //_.times(config.column[index1].paddingLeft, ` `)
 
     columnSizeIndex = (0, _calculateColumnSizeIndex2['default'])(dataMappedUsingRowSpanIndex[0]);
 

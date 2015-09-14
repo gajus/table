@@ -50,6 +50,32 @@ describe(`makeConfig`, () => {
                 expect(config.column[0].maxWidth).to.equal(Infinity);
             });
         });
+        context(`paddingLeft is not provided`, () => {
+            it(`defaults to 0`, () => {
+                let config;
+
+                config = makeConfig([
+                    [
+                        `aaaaa`
+                    ]
+                ]);
+
+                expect(config.column[0].paddingLeft).to.equal(0);
+            });
+        });
+        context(`paddingRight is not provided`, () => {
+            it(`defaults to Infinity`, () => {
+                let config;
+
+                config = makeConfig([
+                    [
+                        `aaaaa`
+                    ]
+                ]);
+
+                expect(config.column[0].paddingRight).to.equal(0);
+            });
+        });
         context(`minWidth is not provided`, () => {
             context(`maxWidth is not set`, () => {
                 it(`uses the maximum value length`, () => {

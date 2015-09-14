@@ -71,6 +71,12 @@
                         },
                         "maxWidth": {
                             "type": "number"
+                        },
+                        "paddingLeft": {
+                            "type": "number"
+                        },
+                        "paddingRight": {
+                            "type": "number"
                         }
                     },
                     "additionalProperties": false
