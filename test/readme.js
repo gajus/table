@@ -6,7 +6,7 @@ import _ from 'lodash';
 
 import table from './../src/table';
 
-describe(`table`, () => {
+describe(`readme`, () => {
     let expectTable;
 
     before(() => {
@@ -15,44 +15,133 @@ describe(`table`, () => {
         };
     });
 
-    it(`draws expected table`, () => {
-        let output;
+    it(`draws expected table (basic)`, () => {
+        let data,
+            output;
 
-        output = table([
-                ['0A', '0B', '0C'],
-                ['1A', '1B', '1C'],
-                ['2A', '2B', '2C']
-        ]);
+        data = [
+            ['0A', '0B', '0C'],
+            ['1A', '1B', '1C'],
+            ['2A', '2B', '2C']
+        ];
+
+        output = table(data);
 
         console.log(output);
 
         expectTable(output, `
-╔═╗
-║a║
-╚═╝
+╔══╤══╤══╗
+║0A│0B│0C║
+╟──┼──┼──╢
+║1A│1B│1C║
+╟──┼──┼──╢
+║2A│2B│2C║
+╚══╧══╧══╝
         `);
+    });
 
-        output = table([
-                [`a`, `b`]
-        ]);
+    it(`draws expected table (alignment)`, () => {
+        let data,
+            output,
+            options;
+
+        data = [
+            ['0A', '0B', '0C'],
+            ['1A', '1B', '1C'],
+            ['2A', '2B', '2C']
+        ];
+
+        options = {
+            column: {
+                1: {
+                    alignment: 'right',
+                    minWidth: 10
+                }
+            }
+        };
+
+        output = table(data, options);
+
+        console.log(output);
 
         expectTable(output, `
-╔═╤═╗
-║a│b║
-╚═╧═╝
+╔══╤══════════╤══╗
+║0A│        0B│0C║
+╟──┼──────────┼──╢
+║1A│        1B│1C║
+╟──┼──────────┼──╢
+║2A│        2B│2C║
+╚══╧══════════╧══╝
         `);
+    });
 
-        output = table([
-                [`a`, `b`],
-                [`0`, `1`]
-        ]);
+    it(`draws expected table (minWith)`, () => {
+        let data,
+            output,
+            options;
+
+        data = [
+            ['0A', '0B', '0C'],
+            ['1A', '1B', '1C'],
+            ['2A', '2B', '2C']
+        ];
+
+        options = {
+            column: {
+                1: {
+                    minWidth: 10
+                }
+            }
+        };
+
+        output = table(data, options);
+
+        console.log(output);
 
         expectTable(output, `
-╔═╤═╗
-║a│b║
-╟─┼─╢
-║0│1║
-╚═╧═╝
+╔══╤══════════╤══╗
+║0A│0B        │0C║
+╟──┼──────────┼──╢
+║1A│1B        │1C║
+╟──┼──────────┼──╢
+║2A│2B        │2C║
+╚══╧══════════╧══╝
+        `);
+    });
+
+    it(`draws expected table (maxWith)`, () => {
+        let data,
+            output,
+            options;
+
+        data = [
+            ['0A', 'AAABBBCCC', '0C'],
+            ['1A', '1B', '1C'],
+            ['2A', '2B', '2C']
+        ];
+
+        options = {
+            column: {
+                1: {
+                    maxWidth: 3
+                }
+            }
+        };
+
+        output = table(data, options);
+
+        console.log(output);
+
+        expectTable(output, `
+╔══╤═══╤══╗
+║0A│AAA│0C║
+║  │BBB│  ║
+║  │CCC│  ║
+╟──┼───┼──╢
+║1A│1B │1C║
+╟──┼───┼──╢
+║2A│2B │2C║
+╚══╧═══╧══╝
         `);
     });
 });

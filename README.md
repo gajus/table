@@ -5,7 +5,10 @@
 
 (This library is work in progress. The working library will be released in 2.0.0.)
 
-* [Usage]()
+* [Usage](#usage)
+    * [Minimum Column Width](#minimum-column-width)
+    * [Maximum Column Width](#maximum-column-width)
+    * [Alignment](#alignment)
 
 Formats data into a string table.
 
@@ -16,13 +19,13 @@ Formats data into a string table.
 
 ## Usage
 
-### Basic Table
-
 Table data is described using an array of arrays.
 
 ```js
-let table = require('table'),
-    data;
+import table from 'table';
+
+let data,
+    output;
 
 data = [
     ['0A', '0B', '0C'],
@@ -30,7 +33,9 @@ data = [
     ['2A', '2B', '2C']
 ];
 
-console.log(table(data));
+output = table(data);
+
+console.log(output);
 ```
 
 ```
@@ -41,4 +46,119 @@ console.log(table(data));
 ╟──┼──┼──╢
 ║2A│2B│2C║
 ╚══╧══╧══╝
+```
+
+### Minimum Column Width
+
+`minWidth` pads the string.
+
+```js
+let data,
+    output,
+    options;
+
+data = [
+    ['0A', '0B', '0C'],
+    ['1A', '1B', '1C'],
+    ['2A', '2B', '2C']
+];
+
+options = {
+    column: {
+        1: {
+            minWidth: 10
+        }
+    }
+};
+
+output = table(data, options);
+
+console.log(output);
+```
+
+```
+╔══╤══════════╤══╗
+║0A│0B        │0C║
+╟──┼──────────┼──╢
+║1A│1B        │1C║
+╟──┼──────────┼──╢
+║2A│2B        │2C║
+╚══╧══════════╧══╝
+```
+
+### Maximum Column Width
+
+`maxWidth` makes the overflowing text break into multiple lines.
+
+```js
+let data,
+    output,
+    options;
+
+data = [
+    ['0A', 'AAABBBCCC', '0C'],
+    ['1A', '1B', '1C'],
+    ['2A', '2B', '2C']
+];
+
+options = {
+    column: {
+        1: {
+            maxWidth: 3
+        }
+    }
+};
+
+output = table(data, options);
+
+console.log(output);
+```
+
+```
+╔══╤═══╤══╗
+║0A│AAA│0C║
+║  │BBB│  ║
+║  │CCC│  ║
+╟──┼───┼──╢
+║1A│1B │1C║
+╟──┼───┼──╢
+║2A│2B │2C║
+╚══╧═══╧══╝
+```
+
+### Alignment
+
+```js
+let data,
+    output,
+    options;
+
+data = [
+    ['0A', '0B', '0C'],
+    ['1A', '1B', '1C'],
+    ['2A', '2B', '2C']
+];
+
+options = {
+    column: {
+        1: {
+            alignment: 'right',
+            minWidth: 10
+        }
+    }
+};
+
+output = table(data, options);
+
+console.log(output);
+```
+
+```
+╔══╤══════════╤══╗
+║0A│        0B│0C║
+╟──┼──────────┼──╢
+║1A│        1B│1C║
+╟──┼──────────┼──╢
+║2A│        2B│2C║
+╚══╧══════════╧══╝
 ```

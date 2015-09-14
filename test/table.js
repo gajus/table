@@ -6,7 +6,7 @@ import _ from 'lodash';
 
 import table from './../src/table';
 
-describe(`table`, () => {
+xdescribe(`table`, () => {
     let expectTable;
 
     before(() => {

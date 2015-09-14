@@ -9,22 +9,23 @@ import _ from 'lodash';
 import makeConfig from './../src/makeConfig';
 
 describe(`makeConfig`, () => {
-    context(`column specific alignment is not provided`, () => {
-        it(`defaults to 'left'`, () => {
-            let config;
+    it(`does not affect the parameter configuration object`, () => {
+        let config;
 
-            config = makeConfig([
-                [
-                    `aaaaa`
-                ]
-            ]);
+        config = {};
 
-            expect(config.column[0].alignment).to.equal(`left`);
-        });
+        makeConfig([
+            [
+                `aaaaa`
+            ]
+        ], config);
+
+        expect(config).to.deep.equal({});
     });
-    context(`column specific minWidth is not provided`, () => {
-        context(`maxWidth is not set`, () => {
-            it(`uses the maximum value length`, () => {
+
+    context(`column`, () => {
+        context(`alignment is not provided`, () => {
+            it(`defaults to 'left'`, () => {
                 let config;
 
                 config = makeConfig([
@@ -33,11 +34,79 @@ describe(`makeConfig`, () => {
                     ]
                 ]);
 
-                expect(config.column[0].minWidth).to.equal(5);
+                expect(config.column[0].alignment).to.equal(`left`);
             });
         });
-        context(`maxWidth is set`, () => {
-            context(`maxWidth is larger than maximum value length`, () => {
+        context(`maxWidth is not provided`, () => {
+            it(`defaults to Infinity`, () => {
+                let config;
+
+                config = makeConfig([
+                    [
+                        `aaaaa`
+                    ]
+                ]);
+
+                expect(config.column[0].maxWidth).to.equal(Infinity);
+            });
+        });
+        context(`minWidth is not provided`, () => {
+            context(`maxWidth is not set`, () => {
+                it(`uses the maximum value length`, () => {
+                    let config;
+
+                    config = makeConfig([
+                        [
+                            `aaaaa`
+                        ]
+                    ]);
+
+                    expect(config.column[0].minWidth).to.equal(5);
+                });
+            });
+            context(`maxWidth is set`, () => {
+                context(`maxWidth is larger than maximum value length`, () => {
+                    it(`uses the maximum value length`, () => {
+                        let config;
+
+                        config = makeConfig([
+                            [
+                                `aaaaa`
+                            ]
+                        ], {
+                            column: {
+                                0: {
+                                    maxWidth: 10
+                                }
+                            }
+                        });
+
+                        expect(config.column[0].minWidth).to.equal(5);
+                    });
+                });
+                context(`maxWidth is lesser than maximum value length`, () => {
+                    it(`uses the maxWidth value`, () => {
+                        let config;
+
+                        config = makeConfig([
+                            [
+                                `aaaaaaaaaa`
+                            ]
+                        ], {
+                            column: {
+                                0: {
+                                    maxWidth: 5
+                                }
+                            }
+                        });
+
+                        expect(config.column[0].minWidth).to.equal(5);
+                    });
+                });
+            });
+        });
+        context(`minWidth is provided`, () => {
+            context(`minWidth is larger than maximum value length`, () => {
                 it(`uses the maximum value length`, () => {
                     let config;
 
@@ -48,72 +117,32 @@ describe(`makeConfig`, () => {
                     ], {
                         column: {
                             0: {
-                                maxWidth: 10
+                                minWidth: 10
                             }
                         }
                     });
 
-                    expect(config.column[0].minWidth).to.equal(5);
+                    expect(config.column[0].minWidth).to.deep.equal(10);
                 });
             });
-            context(`maxWidth is lesser than maximum value length`, () => {
-                it(`uses the maxWidth value`, () => {
+            context(`minWidth is smaller than maximum value length`, () => {
+                it(`uses the maximum value length`, () => {
                     let config;
 
                     config = makeConfig([
                         [
-                            `aaaaaaaaaa`
+                            `aaaaa`
                         ]
                     ], {
                         column: {
                             0: {
-                                maxWidth: 5
+                                minWidth: 2
                             }
                         }
                     });
 
-                    expect(config.column[0].minWidth).to.equal(5);
+                    expect(config.column[0].minWidth).to.deep.equal(5);
                 });
-            });
-        });
-    });
-    context(`column specific minWidth is provided`, () => {
-        context(`column specific minWidth is larger than maximum value length`, () => {
-            it(`uses the maximum value length`, () => {
-                let config;
-
-                config = makeConfig([
-                    [
-                        `aaaaa`
-                    ]
-                ], {
-                    column: {
-                        0: {
-                            minWidth: 10
-                        }
-                    }
-                });
-
-                expect(config.column[0].minWidth).to.deep.equal(10);
-            });
-        });
-        context(`column specific minWidth is smaller than maximum value length`, () => {
-            it(`uses the maximum value length`, () => {
-                let config;
-
-                config = makeConfig([
-                    [
-                        `aaaaa`
-                    ]
-                ], {
-                    column: {
-                        0: {
-                            minWidth: 2
-                        }
-                    }
-                });
-
-                expect(config.column[0].minWidth).to.deep.equal(5);
             });
         });
     });

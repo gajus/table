@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import stringWith from 'string-width';
+import stringWidth from 'string-width';
 
 /**
  * Produces an array of values that describe the largest value length in the column.
@@ -20,7 +20,7 @@ export default (rows) => {
         _.forEach(row, (value, index0) => {
             let valueLength;
 
-            valueLength = stringWith(value);
+            valueLength = stringWidth(value);
 
             if (_.isUndefined(columns[index0]) || columns[index0] < valueLength) {
                 columns[index0] = valueLength;

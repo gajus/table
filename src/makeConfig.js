@@ -5,19 +5,30 @@ import calculateMaximumColumnValueIndex from './calculateMaximumColumnValueIndex
 
 /**
  * @param {Array[]} rows
- * @param {formatData~config} config
- * @return {formatData~config}
+ * @param {Object} inputConfig
+ * @return {Object}
  */
-export default (rows, config = {}) => {
-    let maximumColumnValueIndex;
+export default (rows, inputConfig = {}) => {
+    let config,
+        maximumColumnValueIndex;
+
+    config = _.cloneDeep(inputConfig);
 
     validateConfig(rows, config);
 
     maximumColumnValueIndex = calculateMaximumColumnValueIndex(rows);
 
-    config.column = config.column || Array(rows[0].length);
+    if (!config.column) {
+        config.column = {};
+    }
 
-    config.column = _.map(config.column, (column = {}, index0) => {
+    _.times(rows[0].length, (index) => {
+        if (_.isUndefined(config.column[index])) {
+            config.column[index] = {};
+        }
+    });
+
+    config.column = _.mapValues(config.column, (column, index0) => {
         if (_.isUndefined(column.minWidth) || maximumColumnValueIndex[index0] > config.column[index0].minWidth) {
             column.minWidth = maximumColumnValueIndex[index0];
         }

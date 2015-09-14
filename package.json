@@ -18,7 +18,7 @@
     "table"
   ],
   "scripts": {
-    "test": "babel-node ./node_modules/.bin/gulp lint",
+    "test": "babel-node ./node_modules/.bin/gulp test",
     "build": "babel-node ./node_modules/.bin/gulp build",
     "watch": "babel-node ./node_modules/.bin/gulp watch"
   },
