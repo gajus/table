@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import border from './border';
+import border from './border/';
 import validateConfig from './validateConfig';
 import calculateMaximumColumnValueIndex from './calculateMaximumColumnValueIndex';
 
@@ -21,7 +21,7 @@ export default (rows, inputConfig = {}) => {
         config.border = {}
     }
 
-    config.border = _.assign({}, border, config.border);
+    config.border = _.assign({}, border(`honeywell`), config.border);
 
     maximumColumnValueIndex = calculateMaximumColumnValueIndex(rows);
 

@@ -27,7 +27,7 @@ describe(`readme`, () => {
 
         output = table(data);
 
-        console.log(output);
+        // console.log(output);
 
         expectTable(output, `
 ╔══╤══╤══╗
@@ -65,7 +65,7 @@ describe(`readme`, () => {
 
         output = table(data, options);
 
-        console.log(output);
+        // console.log(output);
 
         expectTable(output, `
 ╔═════╤═════╤══╗
@@ -110,7 +110,7 @@ describe(`readme`, () => {
 
         output = table(data, options);
 
-        console.log(output);
+        // console.log(output);
 
         expectTable(output, `
 ╔══════════╤══════════╤══════════╗
@@ -144,7 +144,7 @@ describe(`readme`, () => {
 
         output = table(data, options);
 
-        console.log(output);
+        // console.log(output);
 
         expectTable(output, `
 ╔══╤══════════╤══╗
@@ -178,7 +178,7 @@ describe(`readme`, () => {
 
         output = table(data, options);
 
-        console.log(output);
+        // console.log(output);
 
         expectTable(output, `
 ╔══╤═══╤══╗
@@ -229,7 +229,7 @@ describe(`readme`, () => {
 
         output = table(data, options);
 
-        console.log(output);
+        // console.log(output);
 
         expectTable(output, `
 ┌──┬──┬──┐

@@ -24,7 +24,7 @@ Object.defineProperty(exports, '__esModule', {
     value: true
 });
 
-var _border = require('./border');
+var _border = require('./border/');
 
 var _border2 = _interopRequireDefault(_border);
 
@@ -58,7 +58,7 @@ exports['default'] = function (rows) {
         config.border = {};
     }
 
-    config.border = (0, _lodashObjectAssign3['default'])({}, _border2['default'], config.border);
+    config.border = (0, _lodashObjectAssign3['default'])({}, (0, _border2['default'])('honeywell'), config.border);
 
     maximumColumnValueIndex = (0, _calculateMaximumColumnValueIndex2['default'])(rows);
 

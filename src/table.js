@@ -21,6 +21,8 @@ import validateData from './validateData';
  * @property {String} alignment
  * @property {Number} minWidth
  * @property {Number} maxWidth
+ * @property {Number} paddingLeft
+ * @property {Number} paddingRight
  */
 
 /**
@@ -49,15 +51,11 @@ import validateData from './validateData';
  */
 
 /**
- * Transforms data rows to rows fit for printing in the CLI. Transformation consists of
- * enforcing a fixed text width for values that are shorter than columnWidth and
- * breaking values that are longer than columnWidth into two or more rows.
- *
- * The current implementation assumes RTL text alignment.
+ * Generates a text table.
  *
  * @param {table~row[]} rows
  * @param {table~config} config
- * @return {Array[]}
+ * @return {String}
  */
 export default (rows, config = {}) => {
     let derivedConfig,

@@ -6,6 +6,7 @@
 * [Features](#features)
 * [Usage](#usage)
     * [Custom Border](#custom-border)
+        * [Predefined Border Templates](#predefined-border-templates)
     * [Minimum Column Width](#minimum-column-width)
     * [Maximum Column Width](#maximum-column-width)
     * [Cell Content Alignment](#cell-content-alignment)
@@ -25,7 +26,7 @@ Formats data into a string table.
 
 ## Usage
 
-Table data is described using an array of arrays.
+Table data is described using an array (rows) of array (cells).
 
 ```js
 import table from 'table';
@@ -39,6 +40,55 @@ data = [
     ['2A', '2B', '2C']
 ];
 
+/**
+ * @typedef {String} table~cell
+ */
+
+/**
+ * @typedef {table~cell[]} table~row
+ */
+
+/**
+ * @typedef {Object} table~configColumn
+ * @property {String} alignment
+ * @property {Number} minWidth
+ * @property {Number} maxWidth
+ * @property {Number} paddingLeft
+ * @property {Number} paddingRight
+ */
+
+/**
+ * @typedef {Object} table~configBorder
+ * @property {String} topBody
+ * @property {String} topJoin
+ * @property {String} topLeft
+ * @property {String} topRight
+ * @property {String} bottomBody
+ * @property {String} bottomJoin
+ * @property {String} bottomLeft
+ * @property {String} bottomRight
+ * @property {String} bodyLeft
+ * @property {String} bodyRight
+ * @property {String} bodyJoin
+ * @property {String} joinBody
+ * @property {String} joinLeft
+ * @property {String} joinRight
+ * @property {String} joinJoin
+ */
+
+/**
+ * @typedef {Object} table~config
+ * @property {table~configBorder}
+ * @property {table~configColumn[]} column Column specific configuration.
+ */
+
+/**
+ * Generates a text table.
+ *
+ * @param {table~row[]} rows
+ * @param {table~config} config
+ * @return {String}
+ */
 output = table(data);
 
 console.log(output);
@@ -55,6 +105,8 @@ console.log(output);
 ```
 
 ### Custom Border
+
+`border` property describes the characters used to draw the table borders.
 
 ```js
 let data,
@@ -94,6 +146,56 @@ output = table(data, options);
 
 console.log(output);
 ```
+
+```
+┌──┬──┬──┐
+│0A│0B│0C│
+├──┼──┼──┤
+│1A│1B│1C│
+├──┼──┼──┤
+│2A│2B│2C│
+└──┴──┴──┘
+```
+
+#### Predefined Border Templates
+
+You can load one of the predefined border templates using `border` function.
+
+Raise [an issue](https://github.com/gajus/table/issues) if you'd like to contribute a new border template.
+
+```js
+import table from 'table';
+
+import {
+    border
+} from 'table';
+
+let data;
+
+data = [
+    ['0A', '0B', '0C'],
+    ['1A', '1B', '1C'],
+    ['2A', '2B', '2C']
+];
+
+table(data, {
+    border: border(`name of the template`)
+});
+```
+
+##### `honeywell`
+
+```
+╔══╤══╤══╗
+║0A│0B│0C║
+╟──┼──┼──╢
+║1A│1B│1C║
+╟──┼──┼──╢
+║2A│2B│2C║
+╚══╧══╧══╝
+```
+
+##### `norc`
 
 ```
 ┌──┬──┬──┐

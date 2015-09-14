@@ -1,1 +1,1 @@
-{"version":3,"sources":["index.js"],"names":[],"mappings":";;;;qBAAkB,SAAS","file":"index.js","sourcesContent":["import table from './table';\n"],"sourceRoot":"/source/"}
+{"version":3,"sources":["index.js"],"names":[],"mappings":";;;;;;;;sBAAmB,WAAW;;;;qBACZ,SAAS;;;;QAGvB,MAAM","file":"index.js","sourcesContent":["import border from './border/';\nimport table from './table';\n\nexport {\n    border\n};\n\nexport default table;\n"],"sourceRoot":"/source/"}
