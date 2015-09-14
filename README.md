@@ -5,6 +5,8 @@
 
 (This library is work in progress. The working library will be released in 2.0.0.)
 
+* [Usage]()
+
 Formats data into a string table.
 
 * Works with strings containing [fullwidth](https://en.wikipedia.org/wiki/Halfwidth_and_fullwidth_forms) characters.
