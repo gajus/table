@@ -1,5 +1,4 @@
 import _ from 'lodash';
-import border from './border';
 import drawTable from './drawTable';
 import calculateColumnSizeIndex from './calculateColumnSizeIndex';
 import makeConfig from './makeConfig';
@@ -25,7 +24,27 @@ import validateData from './validateData';
  */
 
 /**
+ * @typedef {Object} table~configBorder
+ * @property {String} topBody
+ * @property {String} topJoin
+ * @property {String} topLeft
+ * @property {String} topRight
+ * @property {String} bottomBody
+ * @property {String} bottomJoin
+ * @property {String} bottomLeft
+ * @property {String} bottomRight
+ * @property {String} bodyLeft
+ * @property {String} bodyRight
+ * @property {String} bodyJoin
+ * @property {String} joinBody
+ * @property {String} joinLeft
+ * @property {String} joinRight
+ * @property {String} joinJoin
+ */
+
+/**
  * @typedef {Object} table~config
+ * @property {table~configBorder}
  * @property {table~configColumn[]} column Column specific configuration.
  */
 
@@ -45,7 +64,8 @@ export default (rows, config = {}) => {
         safeData,
         rowSpanIndex,
         columnSizeIndex,
-        dataMappedUsingRowSpanIndex;
+        dataMappedUsingRowSpanIndex,
+        tableBorder;
 
     validateData(rows);
 
@@ -87,5 +107,5 @@ export default (rows, config = {}) => {
 
     // console.log(`columnSizeIndex`, columnSizeIndex);
 
-    return drawTable(dataMappedUsingRowSpanIndex, border, columnSizeIndex, rowSpanIndex);
+    return drawTable(dataMappedUsingRowSpanIndex, derivedConfig.border, columnSizeIndex, rowSpanIndex);
 };

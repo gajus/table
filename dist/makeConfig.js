@@ -4,6 +4,10 @@ var _lodashLangCloneDeep2 = require('lodash/lang/cloneDeep');
 
 var _lodashLangCloneDeep3 = _interopRequireDefault(_lodashLangCloneDeep2);
 
+var _lodashObjectAssign2 = require('lodash/object/assign');
+
+var _lodashObjectAssign3 = _interopRequireDefault(_lodashObjectAssign2);
+
 var _lodashUtilityTimes2 = require('lodash/utility/times');
 
 var _lodashUtilityTimes3 = _interopRequireDefault(_lodashUtilityTimes2);
@@ -19,6 +23,10 @@ var _lodashObjectMapValues3 = _interopRequireDefault(_lodashObjectMapValues2);
 Object.defineProperty(exports, '__esModule', {
     value: true
 });
+
+var _border = require('./border');
+
+var _border2 = _interopRequireDefault(_border);
 
 var _validateConfig = require('./validateConfig');
 
@@ -45,6 +53,12 @@ exports['default'] = function (rows) {
     config = (0, _lodashLangCloneDeep3['default'])(inputConfig);
 
     (0, _validateConfig2['default'])(rows, config);
+
+    if (!config.border) {
+        config.border = {};
+    }
+
+    config.border = (0, _lodashObjectAssign3['default'])({}, _border2['default'], config.border);
 
     maximumColumnValueIndex = (0, _calculateMaximumColumnValueIndex2['default'])(rows);
 

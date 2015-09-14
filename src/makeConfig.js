@@ -1,5 +1,6 @@
 import _ from 'lodash';
 
+import border from './border';
 import validateConfig from './validateConfig';
 import calculateMaximumColumnValueIndex from './calculateMaximumColumnValueIndex';
 
@@ -15,6 +16,12 @@ export default (rows, inputConfig = {}) => {
     config = _.cloneDeep(inputConfig);
 
     validateConfig(rows, config);
+
+    if (!config.border) {
+        config.border = {}
+    }
+
+    config.border = _.assign({}, border, config.border);
 
     maximumColumnValueIndex = calculateMaximumColumnValueIndex(rows);
 

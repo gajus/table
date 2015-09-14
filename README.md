@@ -3,9 +3,8 @@
 [![NPM version](http://img.shields.io/npm/v/table.svg?style=flat)](https://www.npmjs.com/package/table)
 [![js-canonical-style](https://img.shields.io/badge/code%20style-canonical-brightgreen.svg?style=flat)](https://github.com/gajus/canonical)
 
-(This library is work in progress. The working library will be released in 2.0.0.)
-
 * [Usage](#usage)
+    * [Custom Border](#custom-border)
     * [Minimum Column Width](#minimum-column-width)
     * [Maximum Column Width](#maximum-column-width)
     * [Alignment](#alignment)
@@ -46,6 +45,57 @@ console.log(output);
 ╟──┼──┼──╢
 ║2A│2B│2C║
 ╚══╧══╧══╝
+```
+
+### Custom Border
+
+```js
+let data,
+    output,
+    options;
+
+data = [
+    ['0A', '0B', '0C'],
+    ['1A', '1B', '1C'],
+    ['2A', '2B', '2C']
+];
+
+options = {
+    border: {
+        topBody: `─`,
+        topJoin: `┬`,
+        topLeft: `┌`,
+        topRight: `┐`,
+
+        bottomBody: `─`,
+        bottomJoin: `┴`,
+        bottomLeft: `└`,
+        bottomRight: `┘`,
+
+        bodyLeft: `│`,
+        bodyRight: `│`,
+        bodyJoin: `│`,
+
+        joinBody: `─`,
+        joinLeft: `├`,
+        joinRight: `┤`,
+        joinJoin: `┼`
+    }
+};
+
+output = table(data, options);
+
+console.log(output);
+```
+
+```
+┌──┬──┬──┐
+│0A│0B│0C│
+├──┼──┼──┤
+│1A│1B│1C│
+├──┼──┼──┤
+│2A│2B│2C│
+└──┴──┴──┘
 ```
 
 ### Minimum Column Width

@@ -8,10 +8,6 @@ Object.defineProperty(exports, '__esModule', {
     value: true
 });
 
-var _border = require('./border');
-
-var _border2 = _interopRequireDefault(_border);
-
 var _drawTable = require('./drawTable');
 
 var _drawTable2 = _interopRequireDefault(_drawTable);
@@ -60,7 +56,27 @@ var _validateData2 = _interopRequireDefault(_validateData);
  */
 
 /**
+ * @typedef {Object} table~configBorder
+ * @property {String} topBody
+ * @property {String} topJoin
+ * @property {String} topLeft
+ * @property {String} topRight
+ * @property {String} bottomBody
+ * @property {String} bottomJoin
+ * @property {String} bottomLeft
+ * @property {String} bottomRight
+ * @property {String} bodyLeft
+ * @property {String} bodyRight
+ * @property {String} bodyJoin
+ * @property {String} joinBody
+ * @property {String} joinLeft
+ * @property {String} joinRight
+ * @property {String} joinJoin
+ */
+
+/**
  * @typedef {Object} table~config
+ * @property {table~configBorder}
  * @property {table~configColumn[]} column Column specific configuration.
  */
 
@@ -85,7 +101,8 @@ exports['default'] = function (rows) {
         safeData = undefined,
         rowSpanIndex = undefined,
         columnSizeIndex = undefined,
-        dataMappedUsingRowSpanIndex = undefined;
+        dataMappedUsingRowSpanIndex = undefined,
+        tableBorder = undefined;
 
     (0, _validateData2['default'])(rows);
 
@@ -127,7 +144,7 @@ exports['default'] = function (rows) {
 
     // console.log(`columnSizeIndex`, columnSizeIndex);
 
-    return (0, _drawTable2['default'])(dataMappedUsingRowSpanIndex, _border2['default'], columnSizeIndex, rowSpanIndex);
+    return (0, _drawTable2['default'])(dataMappedUsingRowSpanIndex, derivedConfig.border, columnSizeIndex, rowSpanIndex);
 };
 
 module.exports = exports['default'];
