@@ -13,7 +13,7 @@
 
 Produces a string that represents array data in a text table.
 
-[!Demo of Table displaying a list of missions to Moon](./README/demo.png)
+![Demo of Table displaying a list of missions to Moon](./README/demo.png)
 
 ## Features
 
