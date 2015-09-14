@@ -15,10 +15,10 @@ export default (rows, config = {}) => {
 
     maximumColumnValueIndex = calculateMaximumColumnValueIndex(rows);
 
-    config.columnConfig = config.columnConfig || Array(rows[0].length);
+    config.column = config.column || Array(rows[0].length);
 
-    config.columnConfig = _.map(config.columnConfig, (column = {}, index0) => {
-        if (_.isUndefined(column.minWidth) || maximumColumnValueIndex[index0] > config.columnConfig[index0].minWidth) {
+    config.column = _.map(config.column, (column = {}, index0) => {
+        if (_.isUndefined(column.minWidth) || maximumColumnValueIndex[index0] > config.column[index0].minWidth) {
             column.minWidth = maximumColumnValueIndex[index0];
         }
 

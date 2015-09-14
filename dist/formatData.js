@@ -32,7 +32,7 @@ var _align2 = _interopRequireDefault(_align);
 
 /**
  * @typedef formatData~columnConfig
- * @property {String} align
+ * @property {String} alignment
  * @property {Number} minWidth
  * @property {Number} maxWidth
  */
@@ -80,23 +80,23 @@ exports['default'] = function (rows) {
         row = formattedData[index0];
 
         formattedData[index0] = (0, _lodashCollectionMap3['default'])(formattedData[index0], function (value, index1) {
-            var columnConfig = undefined;
+            var column = undefined;
 
-            columnConfig = derivedConfig.columnConfig[index1];
+            column = derivedConfig.column[index1];
 
-            if ((0, _stringWidth2['default'])(value) > columnConfig.maxWidth) {
+            if ((0, _stringWidth2['default'])(value) > column.maxWidth) {
                 if (!nextRow) {
                     nextRow = (0, _lodashArrayFill3['default'])([], '', 0, row.length);
 
                     formattedData.splice(index0 + 1, 0, nextRow);
                 }
 
-                nextRow[index1] = (0, _ansiSlice2['default'])(value, columnConfig.maxWidth);
+                nextRow[index1] = (0, _ansiSlice2['default'])(value, column.maxWidth);
 
-                return (0, _ansiSlice2['default'])(value, 0, columnConfig.maxWidth);
+                return (0, _ansiSlice2['default'])(value, 0, column.maxWidth);
             }
 
-            return (0, _align2['default'])(value, columnConfig.minWidth, columnConfig.alignment);
+            return (0, _align2['default'])(value, column.minWidth, column.alignment);
         });
 
         index0++;

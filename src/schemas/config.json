@@ -1,0 +1,32 @@
+{
+    "type": "object",
+    "properties": {
+        "column": {
+            "type": "object",
+            "patternProperties": {
+                "^[0-9]+$": {
+                    "type": "object",
+                    "properties": {
+                        "alignment": {
+                            "type": "string",
+                            "enum": [
+                                "left",
+                                "right",
+                                "center"
+                            ]
+                        },
+                        "minWidth": {
+                            "type": "number"
+                        },
+                        "maxWidth": {
+                            "type": "number"
+                        }
+                    },
+                    "additionalProperties": false
+                }
+            },
+            "additionalProperties": false
+        }
+    },
+    "additionalProperties": false
+}

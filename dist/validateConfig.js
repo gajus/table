@@ -1,17 +1,5 @@
 'use strict';
 
-var _lodashArrayFirst2 = require('lodash/array/first');
-
-var _lodashArrayFirst3 = _interopRequireDefault(_lodashArrayFirst2);
-
-var _lodashArrayDifference2 = require('lodash/array/difference');
-
-var _lodashArrayDifference3 = _interopRequireDefault(_lodashArrayDifference2);
-
-var _lodashObjectKeys2 = require('lodash/object/keys');
-
-var _lodashObjectKeys3 = _interopRequireDefault(_lodashObjectKeys2);
-
 var _lodashCollectionForEach2 = require('lodash/collection/forEach');
 
 var _lodashCollectionForEach3 = _interopRequireDefault(_lodashCollectionForEach2);
@@ -24,7 +12,13 @@ Object.defineProperty(exports, '__esModule', {
     value: true
 });
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+var _schemasConfigJson = require('./schemas/config.json');
+
+var _schemasConfigJson2 = _interopRequireDefault(_schemasConfigJson);
+
+var _tv4 = require('tv4');
+
+var _tv42 = _interopRequireDefault(_tv4);
 
 /**
  * @param {row[]} rows
@@ -32,26 +26,30 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'd
  * @return {undefined}
  */
 
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
 exports['default'] = function (rows) {
     var config = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
 
-    var unknownPropertyName = undefined;
+    var result = undefined;
 
-    unknownPropertyName = (0, _lodashArrayFirst3['default'])((0, _lodashArrayDifference3['default'])((0, _lodashObjectKeys3['default'])(config), ['columnConfig']));
+    result = _tv42['default'].validateResult(config, _schemasConfigJson2['default']);
 
-    if (unknownPropertyName) {
-        throw new Error('Config must not define unknown properties. "' + unknownPropertyName + '" is an unknown property.');
+    if (!result.valid) {
+        console.log('config', config);
+        console.log('error', {
+            message: result.error.message,
+            params: result.error.params,
+            dataPath: result.error.dataPath,
+            schemaPath: result.error.schemaPath
+        });
+
+        throw new Error('Invalid config.');
     }
 
-    if (config.columnConfig) {
-        (0, _lodashCollectionForEach3['default'])(config.columnConfig, function (columnConfig) {
-            unknownPropertyName = (0, _lodashArrayFirst3['default'])((0, _lodashArrayDifference3['default'])((0, _lodashObjectKeys3['default'])(columnConfig), ['align', 'minWidth', 'maxWidth']));
-
-            if (unknownPropertyName) {
-                throw new Error('Column config must not define unknown properties. "' + unknownPropertyName + '" is an unknown property.');
-            }
-
-            if (!(0, _lodashLangIsUndefined3['default'])(columnConfig.minWidth) && !(0, _lodashLangIsUndefined3['default'])(columnConfig.maxWidth) && columnConfig.minWidth > columnConfig.maxWidth) {
+    if (config.column) {
+        (0, _lodashCollectionForEach3['default'])(config.column, function (column) {
+            if (!(0, _lodashLangIsUndefined3['default'])(column.minWidth) && !(0, _lodashLangIsUndefined3['default'])(column.maxWidth) && column.minWidth > column.maxWidth) {
                 throw new Error('Column minWidth cannot be greater than maxWidth.');
             }
         });

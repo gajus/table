@@ -44,6 +44,7 @@
     "string-length": "^1.0.1",
     "string-width": "^1.0.1",
     "strip-ansi": "^3.0.0",
+    "tv4": "^1.2.7",
     "xregexp": "slevithan/xregexp#baef6b6429fbd6f9aeb3c2c86a41b5422b023e18"
   }
 }

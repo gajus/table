@@ -28,13 +28,15 @@ describe(`formatData`, () => {
                     let rows;
 
                     rows = formatData([
-                        [`a`]
+                        [
+                            `a`
+                        ]
                     ], {
-                        columnConfig: [
-                            {
+                        column: {
+                            0: {
                                 minWidth: 10
                             }
-                        ]
+                        }
                     });
 
                     expect(rows[0][0]).to.equal(`a         `);
@@ -47,11 +49,11 @@ describe(`formatData`, () => {
                     rows = formatData([
                         [`aaaaaaaaaa`]
                     ], {
-                        columnConfig: [
-                            {
+                        column: {
+                            0: {
                                 minWidth: 5
                             }
-                        ]
+                        }
                     });
 
                     expect(rows[0][0]).to.equal(`aaaaaaaaaa`);
@@ -64,11 +66,11 @@ describe(`formatData`, () => {
                     rows = formatData([
                         [`aaabbbccc`]
                     ], {
-                        columnConfig: [
-                            {
+                        column: {
+                            0: {
                                 maxWidth: 3
                             }
-                        ]
+                        }
                     });
 
                     expect(_.pluck(rows, 0)).to.deep.equal([`aaa`, `bbb`, `ccc`]);
@@ -85,11 +87,11 @@ describe(`formatData`, () => {
                             chalk.red(`a`)
                         ]
                     ], {
-                        columnConfig: [
-                            {
+                        column: {
+                            0: {
                                 minWidth: 10
                             }
-                        ]
+                        }
                     });
 
                     expect(rows[0][0]).to.equal(`${chalk.red(`a`)}         `);
@@ -104,11 +106,11 @@ describe(`formatData`, () => {
                             chalk.red(`aaaaaaaaaa`)
                         ]
                     ], {
-                        columnConfig: [
-                            {
+                        column: {
+                            0: {
                                 minWidth: 5
                             }
-                        ]
+                        }
                     });
 
                     expect(rows[0][0]).to.equal(chalk.red(`aaaaaaaaaa`));
@@ -123,11 +125,11 @@ describe(`formatData`, () => {
                             chalk.red(`aaabbbccc`)
                         ]
                     ], {
-                        columnConfig: [
-                            {
+                        column: {
+                            0: {
                                 maxWidth: 3
                             }
-                        ]
+                        }
                     });
 
                     expect(_.pluck(rows, 0)).to.deep.equal([chalk.red(`aaa`), chalk.red(`bbb`), chalk.red(`ccc`)]);

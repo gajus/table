@@ -19,7 +19,7 @@ describe(`makeConfig`, () => {
                 ]
             ]);
 
-            expect(config.columnConfig[0].alignment).to.equal(`left`);
+            expect(config.column[0].alignment).to.equal(`left`);
         });
     });
     context(`column specific minWidth is not provided`, () => {
@@ -33,7 +33,7 @@ describe(`makeConfig`, () => {
                     ]
                 ]);
 
-                expect(config.columnConfig[0].minWidth).to.equal(5);
+                expect(config.column[0].minWidth).to.equal(5);
             });
         });
         context(`maxWidth is set`, () => {
@@ -46,14 +46,14 @@ describe(`makeConfig`, () => {
                             `aaaaa`
                         ]
                     ], {
-                        columnConfig: [
-                            {
+                        column: {
+                            0: {
                                 maxWidth: 10
                             }
-                        ]
+                        }
                     });
 
-                    expect(config.columnConfig[0].minWidth).to.equal(5);
+                    expect(config.column[0].minWidth).to.equal(5);
                 });
             });
             context(`maxWidth is lesser than maximum value length`, () => {
@@ -65,14 +65,14 @@ describe(`makeConfig`, () => {
                             `aaaaaaaaaa`
                         ]
                     ], {
-                        columnConfig: [
-                            {
+                        column: {
+                            0: {
                                 maxWidth: 5
                             }
-                        ]
+                        }
                     });
 
-                    expect(config.columnConfig[0].minWidth).to.equal(5);
+                    expect(config.column[0].minWidth).to.equal(5);
                 });
             });
         });
@@ -87,14 +87,14 @@ describe(`makeConfig`, () => {
                         `aaaaa`
                     ]
                 ], {
-                    columnConfig: [
-                        {
+                    column: {
+                        0: {
                             minWidth: 10
                         }
-                    ]
+                    }
                 });
 
-                expect(_.pluck(config.columnConfig, `minWidth`)).to.deep.equal([10]);
+                expect(config.column[0].minWidth).to.deep.equal(10);
             });
         });
         context(`column specific minWidth is smaller than maximum value length`, () => {
@@ -106,14 +106,14 @@ describe(`makeConfig`, () => {
                         `aaaaa`
                     ]
                 ], {
-                    columnConfig: [
-                        {
+                    column: {
+                        0: {
                             minWidth: 2
                         }
-                    ]
+                    }
                 });
 
-                expect(_.pluck(config.columnConfig, `minWidth`)).to.deep.equal([5]);
+                expect(config.column[0].minWidth).to.deep.equal(5);
             });
         });
     });

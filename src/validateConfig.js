@@ -1,28 +1,34 @@
 import _ from 'lodash';
 
+import schema from './schemas/config.json';
+
+import tv4 from 'tv4';
+
 /**
  * @param {row[]} rows
  * @param {formatData~config} config
  * @return {undefined}
  */
 export default (rows, config = {}) => {
-    let unknownPropertyName;
+    let result;
 
-    unknownPropertyName = _.first(_.difference(_.keys(config), [`columnConfig`]));
+    result = tv4.validateResult(config, schema);
 
-    if (unknownPropertyName) {
-        throw new Error(`Config must not define unknown properties. "${unknownPropertyName}" is an unknown property.`);
+    if (!result.valid) {
+        console.log(`config`, config);
+        console.log(`error`, {
+            message: result.error.message,
+            params: result.error.params,
+            dataPath: result.error.dataPath,
+            schemaPath: result.error.schemaPath
+        });
+
+        throw new Error(`Invalid config.`);
     }
 
-    if (config.columnConfig) {
-        _.forEach(config.columnConfig, (columnConfig) => {
-            unknownPropertyName = _.first(_.difference(_.keys(columnConfig), [`align`, `minWidth`, `maxWidth`]));
-
-            if (unknownPropertyName) {
-                throw new Error(`Column config must not define unknown properties. "${unknownPropertyName}" is an unknown property.`);
-            }
-
-            if (!_.isUndefined(columnConfig.minWidth) && !_.isUndefined(columnConfig.maxWidth) && columnConfig.minWidth > columnConfig.maxWidth) {
+    if (config.column) {
+        _.forEach(config.column, (column) => {
+            if (!_.isUndefined(column.minWidth) && !_.isUndefined(column.maxWidth) && column.minWidth > column.maxWidth) {
                 throw new Error(`Column minWidth cannot be greater than maxWidth.`);
             }
         });

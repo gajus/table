@@ -12,7 +12,7 @@ import align from './align';
 
 /**
  * @typedef formatData~columnConfig
- * @property {String} align
+ * @property {String} alignment
  * @property {Number} minWidth
  * @property {Number} maxWidth
  */
@@ -55,23 +55,23 @@ export default (rows, config = {}) => {
         row = formattedData[index0];
 
         formattedData[index0] = _.map(formattedData[index0], (value, index1) => {
-            let columnConfig;
+            let column;
 
-            columnConfig = derivedConfig.columnConfig[index1];
+            column = derivedConfig.column[index1];
 
-            if (stringWidth(value) > columnConfig.maxWidth) {
+            if (stringWidth(value) > column.maxWidth) {
                 if (!nextRow) {
                     nextRow = _.fill([], ``, 0, row.length);
 
                     formattedData.splice(index0 + 1, 0, nextRow);
                 }
 
-                nextRow[index1] = slice(value, columnConfig.maxWidth);
+                nextRow[index1] = slice(value, column.maxWidth);
 
-                return slice(value, 0, columnConfig.maxWidth);
+                return slice(value, 0, column.maxWidth);
             }
 
-            return align(value, columnConfig.minWidth, columnConfig.alignment);
+            return align(value, column.minWidth, column.alignment);
         });
 
         index0++;

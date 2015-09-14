@@ -37,12 +37,12 @@ exports['default'] = function (rows) {
 
     maximumColumnValueIndex = (0, _calculateMaximumColumnValueIndex2['default'])(rows);
 
-    config.columnConfig = config.columnConfig || Array(rows[0].length);
+    config.column = config.column || Array(rows[0].length);
 
-    config.columnConfig = (0, _lodashCollectionMap3['default'])(config.columnConfig, function (column, index0) {
+    config.column = (0, _lodashCollectionMap3['default'])(config.column, function (column, index0) {
         if (column === undefined) column = {};
 
-        if ((0, _lodashLangIsUndefined3['default'])(column.minWidth) || maximumColumnValueIndex[index0] > config.columnConfig[index0].minWidth) {
+        if ((0, _lodashLangIsUndefined3['default'])(column.minWidth) || maximumColumnValueIndex[index0] > config.column[index0].minWidth) {
             column.minWidth = maximumColumnValueIndex[index0];
         }
 
