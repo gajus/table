@@ -54,11 +54,11 @@ var _validateData2 = _interopRequireDefault(_validateData);
 
 /**
  * @typedef {Object} table~configColumn
- * @property {String} alignment
- * @property {Number} minWidth
- * @property {Number} maxWidth
- * @property {Number} paddingLeft
- * @property {Number} paddingRight
+ * @property {String} alignment Cell content alignment (enum: left, center, right) (default: left).
+ * @property {Number} minWidth Minimum column width (default: 0).
+ * @property {Number} maxWidth Maximum column width (default: Infinity).
+ * @property {Number} paddingLeft Cell content padding width left (default: 0).
+ * @property {Number} paddingRight Cell content padding width right (default: 0).
  */
 
 /**

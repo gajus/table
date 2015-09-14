@@ -11,7 +11,7 @@
     * [Maximum Column Width](#maximum-column-width)
     * [Cell Content Alignment](#cell-content-alignment)
 
-Formats data into a string table.
+Produces a string that represents array data in a text table.
 
 ## Features
 
@@ -50,11 +50,11 @@ data = [
 
 /**
  * @typedef {Object} table~configColumn
- * @property {String} alignment
- * @property {Number} minWidth
- * @property {Number} maxWidth
- * @property {Number} paddingLeft
- * @property {Number} paddingRight
+ * @property {String} alignment Cell content alignment (enum: left, center, right) (default: left).
+ * @property {Number} minWidth Minimum column width (default: 0).
+ * @property {Number} maxWidth Maximum column width (default: Infinity).
+ * @property {Number} paddingLeft Cell content padding width left (default: 0).
+ * @property {Number} paddingRight Cell content padding width right (default: 0).
  */
 
 /**
@@ -161,8 +161,6 @@ console.log(output);
 
 You can load one of the predefined border templates using `border` function.
 
-Raise [an issue](https://github.com/gajus/table/issues) if you'd like to contribute a new border template.
-
 ```js
 import table from 'table';
 
@@ -183,9 +181,9 @@ table(data, {
 });
 ```
 
-##### `honeywell`
-
 ```
+# honeywell
+
 ╔══╤══╤══╗
 ║0A│0B│0C║
 ╟──┼──┼──╢
@@ -193,11 +191,9 @@ table(data, {
 ╟──┼──┼──╢
 ║2A│2B│2C║
 ╚══╧══╧══╝
-```
 
-##### `norc`
+# norc
 
-```
 ┌──┬──┬──┐
 │0A│0B│0C│
 ├──┼──┼──┤
@@ -207,13 +203,11 @@ table(data, {
 └──┴──┴──┘
 ```
 
+Raise [an issue](https://github.com/gajus/table/issues) if you'd like to contribute a new border template.
+
 ### Minimum Column Width
 
-|Property|`maxWidth`|
-|---|---|
-|Type|`Number`|
-
-`minWidth` pads the string.
+`minWidth` property pads the string to fill the cell.
 
 ```js
 let data,
@@ -251,11 +245,7 @@ console.log(output);
 
 ### Maximum Column Width
 
-|Property|`maxWidth`|
-|---|---|
-|Type|`Number`|
-
-`maxWidth` makes the overflowing text break into multiple lines.
+`maxWidth` property makes the overflowing text break into multiple lines.
 
 ```js
 let data,
@@ -295,11 +285,9 @@ console.log(output);
 
 ### Cell Content Alignment
 
-|Property|`alignment`|
-|---|---|
-|Type|`String`|
-|Default Value|`left`|
-|Supported Values|`left`, `center`, `right`|
+`alignment` property controls content horizontal alignment within a cell.
+
+Valid values are: "left", "right" and "center".
 
 ```js
 let data,
@@ -345,6 +333,8 @@ console.log(output);
 ```
 
 ### Padding Cell Content
+
+`paddingLeft` and `paddingRight` properties control content padding within a cell. Property value represents a number of whitespaces using to pad the content.
 
 ```js
 let data,

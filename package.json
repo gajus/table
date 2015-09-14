@@ -15,7 +15,9 @@
   "keywords": [
     "ascii",
     "text",
-    "table"
+    "table",
+    "align",
+    "ansi"
   ],
   "scripts": {
     "test": "babel-node ./node_modules/.bin/gulp test",
