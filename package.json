@@ -1,6 +1,6 @@
 {
   "name": "table",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "Formats data into a string table.",
   "main": "./dist/index.js",
   "author": {
