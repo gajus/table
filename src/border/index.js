@@ -49,5 +49,28 @@ export default (name) => {
         };
     }
 
+    if (name === `ramac`) {
+        return {
+            topBody: `-`,
+            topJoin: `+`,
+            topLeft: `+`,
+            topRight: `+`,
+
+            bottomBody: `-`,
+            bottomJoin: `+`,
+            bottomLeft: `+`,
+            bottomRight: `+`,
+
+            bodyLeft: `|`,
+            bodyRight: `|`,
+            bodyJoin: `|`,
+
+            joinBody: `-`,
+            joinLeft: `|`,
+            joinRight: `|`,
+            joinJoin: `|`
+        };
+    }
+
     throw new Error(`Unknown border template "${name}".`);
 };

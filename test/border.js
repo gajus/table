@@ -66,4 +66,23 @@ describe(`border`, () => {
         `);
     });
 
+    it(`draws expected table (ramac)`, () => {
+        let output;
+
+        output = table(data, {
+            border: border(`ramac`)
+        });
+
+        // console.log(output);
+
+        expectTable(output, `
++--+--+--+
+|0A|0B|0C|
+|--|--|--|
+|1A|1B|1C|
+|--|--|--|
+|2A|2B|2C|
++--+--+--+
+        `);
+    });
 });
