@@ -1,6 +1,7 @@
 import _ from 'lodash';
 
-import schema from './schemas/config.json';
+// To accomodate for the ./dist/ package.
+import schema from './../src/schemas/config.json';
 
 import tv4 from 'tv4';
 

@@ -35,7 +35,7 @@ gulp.task('clean', ['lint'], () => {
 
 gulp.task('build-es5', ['clean'], () => {
     return gulp
-        .src('./src/*')
+        .src('./src/**/*.js')
         .pipe(sourcemaps.init())
         .pipe(babel())
         .pipe(sourcemaps.write('./'))

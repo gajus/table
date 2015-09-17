@@ -12,9 +12,11 @@ Object.defineProperty(exports, '__esModule', {
     value: true
 });
 
-var _schemasConfigJson = require('./schemas/config.json');
+// To accomodate for the ./dist/ package.
 
-var _schemasConfigJson2 = _interopRequireDefault(_schemasConfigJson);
+var _srcSchemasConfigJson = require('./../src/schemas/config.json');
+
+var _srcSchemasConfigJson2 = _interopRequireDefault(_srcSchemasConfigJson);
 
 var _tv4 = require('tv4');
 
@@ -33,7 +35,7 @@ exports['default'] = function (rows) {
 
     var result = undefined;
 
-    result = _tv42['default'].validateResult(config, _schemasConfigJson2['default']);
+    result = _tv42['default'].validateResult(config, _srcSchemasConfigJson2['default']);
 
     if (!result.valid) {
         console.log('config', config);
