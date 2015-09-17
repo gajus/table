@@ -31,7 +31,6 @@
     "babel-plugin-lodash": "^0.2.0",
     "canonical": "^1.0.1",
     "chai": "^3.2.0",
-    "chalk": "^1.1.1",
     "del": "^2.0.2",
     "globby": "^3.0.1",
     "gulp": "^3.9.0",
@@ -41,6 +40,7 @@
     "gulp-util": "^3.0.6"
   },
   "dependencies": {
+    "chalk": "^1.1.1",
     "ansi-slice": "^1.2.0",
     "bluebird": "^2.10.0",
     "lodash": "^3.10.1",
