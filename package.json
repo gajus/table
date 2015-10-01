@@ -41,14 +41,14 @@
     "gulp-util": "^3.0.6"
   },
   "dependencies": {
-    "chalk": "^1.1.1",
     "ansi-slice": "^1.2.0",
     "bluebird": "^2.10.0",
+    "chalk": "^1.1.1",
     "lodash": "^3.10.1",
     "string-length": "^1.0.1",
     "string-width": "^1.0.1",
     "strip-ansi": "^3.0.0",
     "tv4": "^1.2.7",
-    "xregexp": "slevithan/xregexp#baef6b6429fbd6f9aeb3c2c86a41b5422b023e18"
+    "xregexp": "^3.0.0"
   }
 }
