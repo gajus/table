@@ -2,10 +2,10 @@ import _ from 'lodash';
 import stringWidth from 'string-width';
 
 /**
- * Produces an array of values that describe the largest value length in the column.
+ * Produces an array of values that describe the largest value length (width) in every column.
  *
  * @param {Array[]} rows
- * @return {Number[]}
+ * @return {number[]}
  */
 export default (rows) => {
     let columns;
@@ -18,12 +18,12 @@ export default (rows) => {
 
     _.forEach(rows, (row) => {
         _.forEach(row, (value, index0) => {
-            let valueLength;
+            let valueWidth;
 
-            valueLength = stringWidth(value);
+            valueWidth = stringWidth(value);
 
-            if (_.isUndefined(columns[index0]) || columns[index0] < valueLength) {
-                columns[index0] = valueLength;
+            if (columns[index0] < valueWidth) {
+                columns[index0] = valueWidth;
             }
         });
     });
