@@ -20,9 +20,10 @@
     "ansi"
   ],
   "scripts": {
-    "test": "node ./node_modules/.bin/babel-node ./node_modules/.bin/gulp test",
-    "build": "node ./node_modules/.bin/babel-node ./node_modules/.bin/gulp build",
-    "watch": "node ./node_modules/.bin/babel-node ./node_modules/.bin/gulp watch"
+    "gulp": "node ./node_modules/.bin/babel-node ./node_modules/.bin/gulp",
+    "test": "npm run gulp test",
+    "build": "npm run gulp build",
+    "watch": "npm run gulp watch"
   },
   "devDependencies": {
     "babel": "^5.8.23",
