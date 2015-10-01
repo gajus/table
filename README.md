@@ -1,5 +1,6 @@
 # Table
 
+[![Travis build status](http://img.shields.io/travis/gajus/table/master.svg?style=flat)](https://travis-ci.org/gajus/table)
 [![NPM version](http://img.shields.io/npm/v/table.svg?style=flat)](https://www.npmjs.com/package/table)
 [![js-canonical-style](https://img.shields.io/badge/code%20style-canonical-brightgreen.svg?style=flat)](https://github.com/gajus/canonical)
 
@@ -7,13 +8,12 @@
 * [Usage](#usage)
     * [Custom Border](#custom-border)
         * [Predefined Border Templates](#predefined-border-templates)
-    * [Minimum Column Width](#minimum-column-width)
-    * [Maximum Column Width](#maximum-column-width)
+    * [Column Width](#column-width)
     * [Cell Content Alignment](#cell-content-alignment)
 
 Produces a string that represents array data in a text table.
 
-![Demo of Table displaying a list of missions to Moon](./README/demo.png)
+![Demo of Table displaying a list of missions to Moon](./.README/demo.png)
 
 ## Features
 
@@ -22,8 +22,7 @@ Produces a string that represents array data in a text table.
 * Custom border characters.
 * Content alignment.
 * Content padding.
-* Column `minWidth`.
-* Column `maxWidth`.
+* Column width.
 * Expanding long cell values into multiple rows.
 
 ## Usage
@@ -53,8 +52,7 @@ data = [
 /**
  * @typedef {Object} table~configColumn
  * @property {String} alignment Cell content alignment (enum: left, center, right) (default: left).
- * @property {Number} minWidth Minimum column width (default: 0).
- * @property {Number} maxWidth Maximum column width (default: Infinity).
+ * @property {Number} width Column width (default: auto).
  * @property {Number} paddingLeft Cell content padding width left (default: 0).
  * @property {Number} paddingRight Cell content padding width right (default: 0).
  */
@@ -217,9 +215,9 @@ table(data, {
 
 Raise [an issue](https://github.com/gajus/table/issues) if you'd like to contribute a new border template.
 
-### Minimum Column Width
+### Column Width
 
-`minWidth` property pads the string to fill the cell.
+`width` property restrictions column width to a fixed width.
 
 ```js
 let data,
@@ -235,7 +233,7 @@ data = [
 options = {
     column: {
         1: {
-            minWidth: 10
+            width: 10
         }
     }
 };
@@ -253,46 +251,6 @@ console.log(output);
 ╟──┼──────────┼──╢
 ║2A│2B        │2C║
 ╚══╧══════════╧══╝
-```
-
-### Maximum Column Width
-
-`maxWidth` property makes the overflowing text break into multiple lines.
-
-```js
-let data,
-    output,
-    options;
-
-data = [
-    ['0A', 'AAABBBCCC', '0C'],
-    ['1A', '1B', '1C'],
-    ['2A', '2B', '2C']
-];
-
-options = {
-    column: {
-        1: {
-            maxWidth: 3
-        }
-    }
-};
-
-output = table(data, options);
-
-console.log(output);
-```
-
-```
-╔══╤═══╤══╗
-║0A│AAA│0C║
-║  │BBB│  ║
-║  │CCC│  ║
-╟──┼───┼──╢
-║1A│1B │1C║
-╟──┼───┼──╢
-║2A│2B │2C║
-╚══╧═══╧══╝
 ```
 
 ### Cell Content Alignment
@@ -346,7 +304,7 @@ console.log(output);
 
 ### Padding Cell Content
 
-`paddingLeft` and `paddingRight` properties control content padding within a cell. Property value represents a number of whitespaces using to pad the content.
+`paddingLeft` and `paddingRight` properties control content padding within a cell. Property value represents a number of whitespaces used to pad the content.
 
 ```js
 let data,
@@ -365,7 +323,7 @@ options = {
             paddingLeft: 3
         },
         1: {
-            maxWidth: 2,
+            width: 2,
             paddingRight: 3
         }
     }
