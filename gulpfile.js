@@ -33,7 +33,13 @@ gulp.task('clean', ['lint'], () => {
         ]);
 });
 
-gulp.task('build-es5', ['clean'], () => {
+gulp.task('copy', ['clean'], () => {
+    return gulp
+        .src('./src/**/*')
+        .pipe(gulp.dest('./dist'));
+});
+
+gulp.task('build-es5', ['copy'], () => {
     return gulp
         .src('./src/**/*.js')
         .pipe(sourcemaps.init())
