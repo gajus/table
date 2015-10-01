@@ -1,14 +1,19 @@
 import _ from 'lodash';
-
-// To accomodate for the ./dist/ package.
-import schema from './../src/schemas/config.json';
-
+import schema from './schemas/config.json';
 import tv4 from 'tv4';
 
 /**
- * @param {row[]} rows
+ * @typedef {string} cell
+ */
+
+/**
+ * @typedef {cell[]} validateData~column
+ */
+
+/**
+ * @param {column[]} rows
  * @param {formatData~config} config
- * @return {undefined}
+ * @returns {undefined}
  */
 export default (rows, config = {}) => {
     let result;
