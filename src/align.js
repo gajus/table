@@ -1,7 +1,10 @@
 import _ from 'lodash';
 import stringWidth from 'string-width';
 
-let alignments;
+let alignCenter,
+    alignLeft,
+    alignments,
+    alignRight;
 
 alignments = [
     `left`,
@@ -10,14 +13,53 @@ alignments = [
 ];
 
 /**
- * @param {String} subject
- * @param {Number} containerWidth
- * @param {String} alignment (left, right, center)
- * @return {String}
+ * @param {string} subject
+ * @param {number} availableWidth
+ * @returns {string}
+ */
+alignLeft = (subject, availableWidth) => {
+    return subject + _.repeat(` `, availableWidth);
+};
+
+/**
+ * @param {string} subject
+ * @param {number} availableWidth
+ * @returns {string}
+ */
+alignRight = (subject, availableWidth) => {
+    return _.repeat(` `, availableWidth) + subject;
+};
+
+/**
+ * @param {string} subject
+ * @param {number} availableWidth
+ * @returns {string}
+ */
+alignCenter = (subject, availableWidth) => {
+    let halfAvailableWidth;
+
+    halfAvailableWidth = availableWidth / 2;
+
+    if (halfAvailableWidth % 2 === 0) {
+        return _.repeat(` `, halfAvailableWidth) + subject + _.repeat(` `, halfAvailableWidth);
+    } else {
+        halfAvailableWidth = _.floor(halfAvailableWidth);
+
+        return _.repeat(` `, halfAvailableWidth) + subject + _.repeat(` `, halfAvailableWidth + 1);
+    }
+};
+
+/**
+ * Pads a string to the left and/or right to position the subject
+ * text in a desired alignment within a container.
+ *
+ * @param {string} subject
+ * @param {number} containerWidth
+ * @param {string} alignment (left, right, center)
+ * @returns {string}
  */
 export default (subject, containerWidth, alignment) => {
     let availableWidth,
-        halfAvailableWidth,
         subjectWidth;
 
     if (!_.isString(subject)) {
@@ -45,20 +87,12 @@ export default (subject, containerWidth, alignment) => {
     availableWidth = containerWidth - subjectWidth;
 
     if (alignment === `left`) {
-        return subject + _.repeat(` `, availableWidth);
+        return alignLeft(subject, availableWidth);
     }
 
     if (alignment === `right`) {
-        return _.repeat(` `, availableWidth) + subject;
+        return alignRight(subject, availableWidth);
     }
 
-    halfAvailableWidth = availableWidth / 2;
-
-    if (halfAvailableWidth % 2 === 0) {
-        return _.repeat(` `, halfAvailableWidth) + subject + _.repeat(` `, halfAvailableWidth);
-    } else {
-        halfAvailableWidth = _.floor(halfAvailableWidth);
-
-        return _.repeat(` `, halfAvailableWidth) + subject + _.repeat(` `, halfAvailableWidth + 1);
-    }
+    return alignCenter(subject, availableWidth);
 };
