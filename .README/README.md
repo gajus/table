@@ -25,5 +25,6 @@ Produces a string that represents array data in a text table.
 {"gitdown": "include", "file": "./usage/cell_content_alignment.md"}
 {"gitdown": "include", "file": "./usage/column_width.md"}
 {"gitdown": "include", "file": "./usage/custom_border.md"}
+{"gitdown": "include", "file": "./usage/draw_join.md"}
 {"gitdown": "include", "file": "./usage/padding_cell_content.md"}
 {"gitdown": "include", "file": "./usage/predefined_border_templates.md"}

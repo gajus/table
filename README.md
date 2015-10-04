@@ -10,6 +10,7 @@
         * [Cell Content Alignment](#table-usage-cell-content-alignment)
         * [Column Width](#table-usage-column-width)
         * [Custom Border](#table-usage-custom-border)
+        * [Draw Join](#table-usage-draw-join)
         * [Padding Cell Content](#table-usage-padding-cell-content)
         * [Predefined Border Templates](#table-usage-predefined-border-templates)
 
@@ -80,9 +81,20 @@ data = [
  */
 
 /**
+ * Used to dynamically tell table whether to draw a line separating rows or not.
+ * The default behavior is to always return true.
+ *
+ * @typedef {function} drawJoin
+ * @param {number} index
+ * @param {number} size
+ * @return {boolean}
+ */
+
+/**
  * @typedef {Object} table~config
  * @property {table~border} border
  * @property {table~columns[]} columns Column specific configuration.
+ * @property {table~drawJoin} drawJoin
  */
 
 /**
@@ -110,7 +122,7 @@ console.log(output);
 
 <h3 id="table-usage-cell-content-alignment">Cell Content Alignment</h3>
 
-`config.columns[{number}].alignment` property controls content horizontal alignment within a cell.
+`{string} config.columns[{number}].alignment` property controls content horizontal alignment within a cell.
 
 Valid values are: "left", "right" and "center".
 
@@ -159,7 +171,7 @@ console.log(output);
 
 <h3 id="table-usage-column-width">Column Width</h3>
 
-`config.columns[{number}].width` property restrictions column width to a fixed width.
+`{number} config.columns[{number}].width` property restricts column width to a fixed width.
 
 ```js
 let data,
@@ -197,7 +209,7 @@ console.log(output);
 
 <h3 id="table-usage-custom-border">Custom Border</h3>
 
-`config.border` property describes characters used to draw the table border.
+`{object} config.border` property describes characters used to draw the table border.
 
 ```js
 let config,
@@ -248,9 +260,62 @@ console.log(output);
 └────┴────┴────┘
 ```
 
+<h3 id="table-usage-draw-join">Draw Join</h3>
+
+`{function} config.drawJoin` property is a function that is called for every row in the table. The result of the function `{boolean}` determines whether a join/separating row is drawn.
+
+```js
+let data,
+    output,
+    options;
+
+data = [
+    ['0A', '0B', '0C'],
+    ['1A', '1B', '1C'],
+    ['2A', '2B', '2C'],
+    ['3A', '3B', '3C'],
+    ['4A', '4B', '4C']
+];
+
+options = {
+    /**
+     * Used to dynamically tell table whether to draw a line separating rows or not.
+     * The default behavior is to always return true.
+     *
+     * @typedef {function} drawJoin
+     * @param {number} index
+     * @param {number} size
+     * @return {boolean}
+     */
+    drawJoin: (index, size) => {
+        // This implementation draws a separating line only after the first row
+        // and before the last row.
+        if (index === 1 || index === size - 1) {
+            return true;
+        }
+    }
+};
+
+output = table(data, options);
+
+console.log(output);
+```
+
+```
+╔════╤════╤════╗
+║ 0A │ 0B │ 0C ║
+╟────┼────┼────╢
+║ 1A │ 1B │ 1C ║
+║ 2A │ 2B │ 2C ║
+║ 3A │ 3B │ 3C ║
+╟────┼────┼────╢
+║ 4A │ 4B │ 4C ║
+╚════╧════╧════╝
+```
+
 <h3 id="table-usage-padding-cell-content">Padding Cell Content</h3>
 
-`config.columns[{number}].paddingLeft` and `config.columns[{number}].paddingRight` properties control content padding within a cell. Property value represents a number of whitespaces used to pad the content.
+`{number} config.columns[{number}].paddingLeft` and `{number} config.columns[{number}].paddingRight` properties control content padding within a cell. Property value represents a number of whitespaces used to pad the content.
 
 ```js
 let config,
