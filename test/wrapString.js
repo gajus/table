@@ -4,19 +4,24 @@ import {
 
 import _ from 'lodash';
 import chalk from 'chalk';
-import chunkString from './../src/chunkString';
+import wrapString from './../src/wrapString';
 
 
-describe(`chunkString`, () => {
+describe(`wrapString`, () => {
     context(`subject is a plain text string`, () => {
-        describe(`subject is lesser than the chunk size`, () => {
+        context(`subject is lesser than the chunk size`, () => {
             it(`returns subject in a single chunk`, () => {
-                expect(chunkString(`aaa`, 3)).to.deep.equal([`aaa`]);
+                expect(wrapString(`aaa`, 3)).to.deep.equal([`aaa`]);
             });
         });
-        describe(`subject is larger than the chunk size`, () => {
+        context(`subject is larger than the chunk size`, () => {
             it(`returns subject sliced into multiple chunks`, () => {
-                expect(chunkString(`aaabbbc`, 3)).to.deep.equal([`aaa`, `bbb`, `c`]);
+                expect(wrapString(`aaabbbc`, 3)).to.deep.equal([`aaa`, `bbb`, `c`]);
+            });
+        });
+        context(`a chunk starts with a space`, () => {
+            it(`adjusts chunks to offset the space`, () => {
+                expect(wrapString(`aaa   bbb   ccc`, 3)).to.deep.equal([`aaa`, `bbb`, `ccc`]);
             });
         });
     });
@@ -26,12 +31,12 @@ describe(`chunkString`, () => {
     xcontext(`subject string contains ANSI escape codes`, () => {
         describe(`subject is lesser than the chunk size`, () => {
             it(`returns subject in a single chunk`, () => {
-                expect(chunkString(chalk.red(`aaa`), 3)).to.deep.equal([chalk.red(`aaa`)]);
+                expect(wrapString(chalk.red(`aaa`), 3)).to.deep.equal([chalk.red(`aaa`)]);
             });
         });
         describe(`subject is larger than the chunk size`, () => {
             it(`returns subject sliced into multiple chunks`, () => {
-                expect(chunkString(chalk.red(`aaabbbc`), 3)).to.deep.equal([chalk.red(`aaa`), chalk.red(`bbb`), chalk.red(`c`)]);
+                expect(wrapString(chalk.red(`aaabbbc`), 3)).to.deep.equal([chalk.red(`aaa`), chalk.red(`bbb`), chalk.red(`c`)]);
             });
         });
     });

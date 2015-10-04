@@ -6,6 +6,10 @@ Object.defineProperty(exports, '__esModule', {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
+var _lodash = require('lodash');
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
 var _schemasConfigJson = require('./schemas/config.json');
 
 var _schemasConfigJson2 = _interopRequireDefault(_schemasConfigJson);

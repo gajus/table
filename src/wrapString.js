@@ -1,9 +1,13 @@
+import _ from 'lodash';
 import slice from 'ansi-slice';
 import stringWidth from 'string-width';
 
 /**
  * Creates an array of strings split into groups the length of size.
  * This function works with strings that contain ASCII characters.
+ *
+ * wrapText is different from would-be "chunk" implementation
+ * in that whitespace characters that occur on a chunk size limit are trimmed.
  *
  * @param {string} subject
  * @param {number} size
@@ -19,7 +23,7 @@ export default (subject, size) => {
     do {
         chunks.push(slice(subjectSlice, 0, size));
 
-        subjectSlice = slice(subjectSlice, size);
+        subjectSlice = _.trim(slice(subjectSlice, size));
     } while (stringWidth(subjectSlice));
 
     return chunks;

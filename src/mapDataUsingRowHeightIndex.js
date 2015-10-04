@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import chunkString from './chunkString';
+import wrapString from './wrapString';
 
 /**
  * @param {Array} unmappedRows
@@ -31,7 +31,7 @@ export default (unmappedRows, rowHeightIndex, config) => {
         _.forEach(cells, (value, index1) => {
             let chunkedValue;
 
-            chunkedValue = chunkString(value, config.columns[index1].width);
+            chunkedValue = wrapString(value, config.columns[index1].width);
 
             _.forEach(chunkedValue, (part, index2) => {
                 rowHeight[index2][index1] = part;

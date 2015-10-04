@@ -1,30 +1,18 @@
 'use strict';
 
-var _lodashStringRepeat2 = require('lodash/string/repeat');
-
-var _lodashStringRepeat3 = _interopRequireDefault(_lodashStringRepeat2);
-
-var _lodashMathFloor2 = require('lodash/math/floor');
-
-var _lodashMathFloor3 = _interopRequireDefault(_lodashMathFloor2);
-
-var _lodashLangIsString2 = require('lodash/lang/isString');
-
-var _lodashLangIsString3 = _interopRequireDefault(_lodashLangIsString2);
-
-var _lodashLangIsNumber2 = require('lodash/lang/isNumber');
-
-var _lodashLangIsNumber3 = _interopRequireDefault(_lodashLangIsNumber2);
-
 Object.defineProperty(exports, '__esModule', {
     value: true
 });
 
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _lodash = require('lodash');
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
 var _stringWidth = require('string-width');
 
 var _stringWidth2 = _interopRequireDefault(_stringWidth);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 var alignCenter = undefined,
     alignLeft = undefined,
@@ -39,7 +27,7 @@ alignments = ['left', 'right', 'center'];
  * @returns {string}
  */
 alignLeft = function (subject, width) {
-    return subject + (0, _lodashStringRepeat3['default'])(' ', width);
+    return subject + _lodash2['default'].repeat(' ', width);
 };
 
 /**
@@ -48,7 +36,7 @@ alignLeft = function (subject, width) {
  * @returns {string}
  */
 alignRight = function (subject, width) {
-    return (0, _lodashStringRepeat3['default'])(' ', width) + subject;
+    return _lodash2['default'].repeat(' ', width) + subject;
 };
 
 /**
@@ -62,11 +50,11 @@ alignCenter = function (subject, width) {
     halfWidth = width / 2;
 
     if (halfWidth % 2 === 0) {
-        return (0, _lodashStringRepeat3['default'])(' ', halfWidth) + subject + (0, _lodashStringRepeat3['default'])(' ', halfWidth);
+        return _lodash2['default'].repeat(' ', halfWidth) + subject + _lodash2['default'].repeat(' ', halfWidth);
     } else {
-        halfWidth = (0, _lodashMathFloor3['default'])(halfWidth);
+        halfWidth = _lodash2['default'].floor(halfWidth);
 
-        return (0, _lodashStringRepeat3['default'])(' ', halfWidth) + subject + (0, _lodashStringRepeat3['default'])(' ', halfWidth + 1);
+        return _lodash2['default'].repeat(' ', halfWidth) + subject + _lodash2['default'].repeat(' ', halfWidth + 1);
     }
 };
 
@@ -84,11 +72,11 @@ exports['default'] = function (subject, containerWidth, alignment) {
     var availableWidth = undefined,
         subjectWidth = undefined;
 
-    if (!(0, _lodashLangIsString3['default'])(subject)) {
+    if (!_lodash2['default'].isString(subject)) {
         throw new Error('Subject parameter value must be a string.');
     }
 
-    if (!(0, _lodashLangIsNumber3['default'])(containerWidth)) {
+    if (!_lodash2['default'].isNumber(containerWidth)) {
         throw new Error('Container width parameter value must be a number.');
     }
 
@@ -98,7 +86,7 @@ exports['default'] = function (subject, containerWidth, alignment) {
         throw new Error('Subject parameter value width cannot be greater than the container width.');
     }
 
-    if (!(0, _lodashLangIsString3['default'])(alignment)) {
+    if (!_lodash2['default'].isString(alignment)) {
         throw new Error('Alignment parameter value must be a string.');
     }
 

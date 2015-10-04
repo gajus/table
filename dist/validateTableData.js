@@ -1,18 +1,14 @@
 'use strict';
 
-var _lodashLangIsArray2 = require('lodash/lang/isArray');
-
-var _lodashLangIsArray3 = _interopRequireDefault(_lodashLangIsArray2);
-
-var _lodashCollectionForEach2 = require('lodash/collection/forEach');
-
-var _lodashCollectionForEach3 = _interopRequireDefault(_lodashCollectionForEach2);
-
 Object.defineProperty(exports, '__esModule', {
     value: true
 });
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _lodash = require('lodash');
+
+var _lodash2 = _interopRequireDefault(_lodash);
 
 /**
  * @typedef {string} cell
@@ -30,7 +26,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'd
 exports['default'] = function (rows) {
     var columnNumber = undefined;
 
-    if (!(0, _lodashLangIsArray3['default'])(rows)) {
+    if (!_lodash2['default'].isArray(rows)) {
         throw new Error('Table data must be an array.');
     }
 
@@ -44,8 +40,8 @@ exports['default'] = function (rows) {
 
     columnNumber = rows[0].length;
 
-    (0, _lodashCollectionForEach3['default'])(rows, function (cells) {
-        if (!(0, _lodashLangIsArray3['default'])(cells)) {
+    _lodash2['default'].forEach(rows, function (cells) {
+        if (!_lodash2['default'].isArray(cells)) {
             throw new Error('Table row data must be an array.');
         }
 
@@ -55,7 +51,7 @@ exports['default'] = function (rows) {
 
         // @todo Make an exception for newline characters.
         // @see https://github.com/gajus/table/issues/9
-        (0, _lodashCollectionForEach3['default'])(cells, function (cell) {
+        _lodash2['default'].forEach(cells, function (cell) {
             if (/[\x01-\x1A]/.test(cell)) {
                 throw new Error('Table data must not contain control characters.');
             }

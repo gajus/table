@@ -1,24 +1,14 @@
 'use strict';
 
-var _lodashObjectAssign2 = require('lodash/object/assign');
-
-var _lodashObjectAssign3 = _interopRequireDefault(_lodashObjectAssign2);
-
-var _lodashUtilityTimes2 = require('lodash/utility/times');
-
-var _lodashUtilityTimes3 = _interopRequireDefault(_lodashUtilityTimes2);
-
-var _lodashLangIsUndefined2 = require('lodash/lang/isUndefined');
-
-var _lodashLangIsUndefined3 = _interopRequireDefault(_lodashLangIsUndefined2);
-
-var _lodashLangCloneDeep2 = require('lodash/lang/cloneDeep');
-
-var _lodashLangCloneDeep3 = _interopRequireDefault(_lodashLangCloneDeep2);
-
 Object.defineProperty(exports, '__esModule', {
     value: true
 });
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _lodash = require('lodash');
+
+var _lodash2 = _interopRequireDefault(_lodash);
 
 var _getBorderCharacters = require('./getBorderCharacters');
 
@@ -32,8 +22,6 @@ var _calculateMaximumColumnWidthIndex = require('./calculateMaximumColumnWidthIn
 
 var _calculateMaximumColumnWidthIndex2 = _interopRequireDefault(_calculateMaximumColumnWidthIndex);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
 var makeBorder = undefined,
     makeColumns = undefined;
 
@@ -46,7 +34,7 @@ var makeBorder = undefined,
 makeBorder = function () {
     var border = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 
-    return (0, _lodashObjectAssign3['default'])({}, (0, _getBorderCharacters2['default'])('honeywell'), border);
+    return _lodash2['default'].assign({}, (0, _getBorderCharacters2['default'])('honeywell'), border);
 };
 
 /**
@@ -64,24 +52,24 @@ makeColumns = function (rows) {
 
     maximumColumnWidthIndex = (0, _calculateMaximumColumnWidthIndex2['default'])(rows);
 
-    (0, _lodashUtilityTimes3['default'])(rows[0].length, function (index) {
-        if ((0, _lodashLangIsUndefined3['default'])(columns[index])) {
+    _lodash2['default'].times(rows[0].length, function (index) {
+        if (_lodash2['default'].isUndefined(columns[index])) {
             columns[index] = {};
         }
 
-        if ((0, _lodashLangIsUndefined3['default'])(columns[index].alignment)) {
+        if (_lodash2['default'].isUndefined(columns[index].alignment)) {
             columns[index].alignment = 'left';
         }
 
-        if ((0, _lodashLangIsUndefined3['default'])(columns[index].width)) {
+        if (_lodash2['default'].isUndefined(columns[index].width)) {
             columns[index].width = maximumColumnWidthIndex[index];
         }
 
-        if ((0, _lodashLangIsUndefined3['default'])(columns[index].paddingLeft)) {
+        if (_lodash2['default'].isUndefined(columns[index].paddingLeft)) {
             columns[index].paddingLeft = 1;
         }
 
-        if ((0, _lodashLangIsUndefined3['default'])(columns[index].paddingRight)) {
+        if (_lodash2['default'].isUndefined(columns[index].paddingRight)) {
             columns[index].paddingRight = 1;
         }
     });
@@ -105,7 +93,7 @@ exports['default'] = function (rows) {
 
     (0, _validateConfig2['default'])(userConfig);
 
-    config = (0, _lodashLangCloneDeep3['default'])(userConfig);
+    config = _lodash2['default'].cloneDeep(userConfig);
 
     config.border = makeBorder(config.border);
     config.columns = makeColumns(rows, config.columns);

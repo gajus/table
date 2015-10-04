@@ -1,18 +1,14 @@
 'use strict';
 
-var _lodashCollectionMap2 = require('lodash/collection/map');
-
-var _lodashCollectionMap3 = _interopRequireDefault(_lodashCollectionMap2);
-
-var _lodashStringRepeat2 = require('lodash/string/repeat');
-
-var _lodashStringRepeat3 = _interopRequireDefault(_lodashStringRepeat2);
-
 Object.defineProperty(exports, '__esModule', {
     value: true
 });
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _lodash = require('lodash');
+
+var _lodash2 = _interopRequireDefault(_lodash);
 
 var drawBorder = undefined,
     drawBorderBottom = undefined,
@@ -35,8 +31,8 @@ var drawBorder = undefined,
 exports.drawBorder = drawBorder = function (columnSizeIndex, parts) {
     var columns = undefined;
 
-    columns = (0, _lodashCollectionMap3['default'])(columnSizeIndex, function (size) {
-        return (0, _lodashStringRepeat3['default'])(parts.body, size);
+    columns = _lodash2['default'].map(columnSizeIndex, function (size) {
+        return _lodash2['default'].repeat(parts.body, size);
     });
 
     columns = columns.join(parts.join);

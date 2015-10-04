@@ -1,12 +1,14 @@
 'use strict';
 
-var _lodashCollectionForEach2 = require('lodash/collection/forEach');
-
-var _lodashCollectionForEach3 = _interopRequireDefault(_lodashCollectionForEach2);
-
 Object.defineProperty(exports, '__esModule', {
     value: true
 });
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _lodash = require('lodash');
+
+var _lodash2 = _interopRequireDefault(_lodash);
 
 var _drawBorder = require('./drawBorder');
 
@@ -19,8 +21,6 @@ var _drawRow2 = _interopRequireDefault(_drawRow);
  * @param {Array} columnSizeIndex
  * @param {Array} rowSpanIndex
  */
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 exports['default'] = function (rows, border, columnSizeIndex, rowSpanIndex) {
     var output = undefined,
@@ -35,7 +35,7 @@ exports['default'] = function (rows, border, columnSizeIndex, rowSpanIndex) {
     output = '';
     output += (0, _drawBorder.drawBorderTop)(columnSizeIndex, border);
 
-    (0, _lodashCollectionForEach3['default'])(rows, function (row, i) {
+    _lodash2['default'].forEach(rows, function (row, i) {
         output += (0, _drawRow2['default'])(row, border);
 
         if (!rowHeight) {

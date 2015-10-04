@@ -1,16 +1,14 @@
 'use strict';
 
-var _lodashArrayFill2 = require('lodash/array/fill');
-
-var _lodashArrayFill3 = _interopRequireDefault(_lodashArrayFill2);
-
-var _lodashCollectionForEach2 = require('lodash/collection/forEach');
-
-var _lodashCollectionForEach3 = _interopRequireDefault(_lodashCollectionForEach2);
-
 Object.defineProperty(exports, '__esModule', {
     value: true
 });
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _lodash = require('lodash');
+
+var _lodash2 = _interopRequireDefault(_lodash);
 
 var _stringWidth = require('string-width');
 
@@ -27,8 +25,6 @@ var _calculateCellWidthIndex2 = _interopRequireDefault(_calculateCellWidthIndex)
  * @return {number[]}
  */
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
 exports['default'] = function (rows) {
     var columns = undefined;
 
@@ -36,14 +32,14 @@ exports['default'] = function (rows) {
         throw new Error('Dataset must have at least one row.');
     }
 
-    columns = (0, _lodashArrayFill3['default'])(Array(rows[0].length), 0);
+    columns = _lodash2['default'].fill(Array(rows[0].length), 0);
 
-    (0, _lodashCollectionForEach3['default'])(rows, function (row) {
+    _lodash2['default'].forEach(rows, function (row) {
         var columnWidthIndex = undefined;
 
         columnWidthIndex = (0, _calculateCellWidthIndex2['default'])(row);
 
-        (0, _lodashCollectionForEach3['default'])(columnWidthIndex, function (valueWidth, index0) {
+        _lodash2['default'].forEach(columnWidthIndex, function (valueWidth, index0) {
             if (columns[index0] < valueWidth) {
                 columns[index0] = valueWidth;
             }

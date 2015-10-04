@@ -1,12 +1,14 @@
 'use strict';
 
-var _lodashCollectionMap2 = require('lodash/collection/map');
-
-var _lodashCollectionMap3 = _interopRequireDefault(_lodashCollectionMap2);
-
 Object.defineProperty(exports, '__esModule', {
     value: true
 });
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _lodash = require('lodash');
+
+var _lodash2 = _interopRequireDefault(_lodash);
 
 var _alignString = require('./alignString');
 
@@ -22,11 +24,9 @@ var _stringWidth2 = _interopRequireDefault(_stringWidth);
  * @return {table~row[]}
  */
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
 exports['default'] = function (rows, config) {
-    return (0, _lodashCollectionMap3['default'])(rows, function (cells, index0) {
-        return (0, _lodashCollectionMap3['default'])(cells, function (value, index1) {
+    return _lodash2['default'].map(rows, function (cells, index0) {
+        return _lodash2['default'].map(cells, function (value, index1) {
             var column = undefined;
 
             column = config.columns[index1];

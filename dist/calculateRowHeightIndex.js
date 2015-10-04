@@ -1,24 +1,14 @@
 'use strict';
 
-var _lodashCollectionMap2 = require('lodash/collection/map');
-
-var _lodashCollectionMap3 = _interopRequireDefault(_lodashCollectionMap2);
-
-var _lodashArrayFill2 = require('lodash/array/fill');
-
-var _lodashArrayFill3 = _interopRequireDefault(_lodashArrayFill2);
-
-var _lodashCollectionForEach2 = require('lodash/collection/forEach');
-
-var _lodashCollectionForEach3 = _interopRequireDefault(_lodashCollectionForEach2);
-
-var _lodashCollectionMax2 = require('lodash/collection/max');
-
-var _lodashCollectionMax3 = _interopRequireDefault(_lodashCollectionMax2);
-
 Object.defineProperty(exports, '__esModule', {
     value: true
 });
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _lodash = require('lodash');
+
+var _lodash2 = _interopRequireDefault(_lodash);
 
 var _stringWidth = require('string-width');
 
@@ -36,8 +26,6 @@ var _calculateCellHeight2 = _interopRequireDefault(_calculateCellHeight);
  * @return {number[]}
  */
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
 exports['default'] = function (rows, config) {
     var rowSpanIndex = undefined,
         tableWidth = undefined;
@@ -46,16 +34,16 @@ exports['default'] = function (rows, config) {
 
     rowSpanIndex = [];
 
-    (0, _lodashCollectionMap3['default'])(rows, function (cells) {
+    _lodash2['default'].map(rows, function (cells) {
         var cellHeightIndex = undefined;
 
-        cellHeightIndex = (0, _lodashArrayFill3['default'])(Array(tableWidth), 1);
+        cellHeightIndex = _lodash2['default'].fill(Array(tableWidth), 1);
 
-        (0, _lodashCollectionForEach3['default'])(cells, function (value, index1) {
+        _lodash2['default'].forEach(cells, function (value, index1) {
             cellHeightIndex[index1] = (0, _calculateCellHeight2['default'])(value, config.columns[index1].width);
         });
 
-        rowSpanIndex.push((0, _lodashCollectionMax3['default'])(cellHeightIndex));
+        rowSpanIndex.push(_lodash2['default'].max(cellHeightIndex));
     });
 
     return rowSpanIndex;

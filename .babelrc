@@ -1,7 +1,4 @@
 {
     "breakConfig": true,
-    "stage": 0,
-    "plugins": [
-        "lodash"
-    ]
+    "stage": 0
 }
