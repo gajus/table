@@ -4,7 +4,9 @@ import {
 
 import {
     drawBorder,
-    drawBorderTop
+    drawBorderTop,
+    drawBorderJoin,
+    drawBorderBottom
 } from './../src/drawBorder';
 
 describe(`drawBorder`, () => {
@@ -38,5 +40,39 @@ describe(`drawBorderTop`, () => {
         expect(drawBorderTop([1], parts)).to.equal(`╔═╗\n`);
         expect(drawBorderTop([1, 1], parts)).to.equal(`╔═╤═╗\n`);
         expect(drawBorderTop([5, 10], parts)).to.equal(`╔═════╤══════════╗\n`);
+    });
+});
+
+describe(`drawBorderJoin`, () => {
+    it(`draws a border using parts`, () => {
+        let parts;
+
+        parts = {
+            joinBody: `─`,
+            joinLeft: `╟`,
+            joinRight: `╢`,
+            joinJoin: `┼`
+        };
+
+        expect(drawBorderJoin([1], parts)).to.equal(`╟─╢\n`);
+        expect(drawBorderJoin([1, 1], parts)).to.equal(`╟─┼─╢\n`);
+        expect(drawBorderJoin([5, 10], parts)).to.equal(`╟─────┼──────────╢\n`);
+    });
+});
+
+describe(`drawBorderBottom`, () => {
+    it(`draws a border using parts`, () => {
+        let parts;
+
+        parts = {
+            bottomBody: `═`,
+            bottomJoin: `╧`,
+            bottomLeft: `╚`,
+            bottomRight: `╝`
+        };
+
+        expect(drawBorderBottom([1], parts)).to.equal(`╚═╝\n`);
+        expect(drawBorderBottom([1, 1], parts)).to.equal(`╚═╧═╝\n`);
+        expect(drawBorderBottom([5, 10], parts)).to.equal(`╚═════╧══════════╝\n`);
     });
 });
