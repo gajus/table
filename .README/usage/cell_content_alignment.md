@@ -16,7 +16,7 @@ data = [
 ];
 
 config = {
-    column: {
+    columns: {
         0: {
             alignment: 'left',
             minWidth: 10

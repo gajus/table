@@ -4,7 +4,7 @@
         "border": {
             "$ref": "#/definitions/borders"
         },
-        "column": {
+        "columns": {
             "$ref": "#/definitions/columns"
         }
     },

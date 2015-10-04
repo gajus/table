@@ -14,7 +14,7 @@ data = [
 ];
 
 config = {
-    column: {
+    columns: {
         0: {
             paddingLeft: 3
         },

@@ -19,7 +19,7 @@ describe(`calculateRowHeightIndex`, () => {
                 ];
 
                 config = {
-                    column: {
+                    columns: {
                         0: {
                             width: 10
                         }
@@ -44,7 +44,7 @@ describe(`calculateRowHeightIndex`, () => {
                 ];
 
                 config = {
-                    column: {
+                    columns: {
                         0: {
                             width: 3
                         }
@@ -70,7 +70,7 @@ describe(`calculateRowHeightIndex`, () => {
                 ];
 
                 config = {
-                    column: {
+                    columns: {
                         0: {
                             width: 3
                         },

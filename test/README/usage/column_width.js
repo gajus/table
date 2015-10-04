@@ -29,7 +29,7 @@ describe(`README.md usage/`, () => {
         ];
 
         config = {
-            column: {
+            columns: {
                 1: {
                     width: 10
                 }

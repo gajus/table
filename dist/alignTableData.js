@@ -29,7 +29,7 @@ exports['default'] = function (rows, config) {
         return (0, _lodashCollectionMap3['default'])(cells, function (value, index1) {
             var column = undefined;
 
-            column = config.column[index1];
+            column = config.columns[index1];
 
             if ((0, _stringWidth2['default'])(value) === column.width) {
                 return value;

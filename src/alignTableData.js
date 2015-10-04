@@ -12,7 +12,7 @@ export default (rows, config) => {
         return _.map(cells, (value, index1) => {
             let column;
 
-            column = config.column[index1];
+            column = config.columns[index1];
 
             if (stringWidth(value) === column.width) {
                 return value;

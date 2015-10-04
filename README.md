@@ -126,7 +126,7 @@ data = [
 ];
 
 config = {
-    column: {
+    columns: {
         0: {
             alignment: 'left',
             minWidth: 10
@@ -159,7 +159,7 @@ console.log(output);
 
 <h3 id="table-usage-column-width">Column Width</h3>
 
-`width` property restrictions column width to a fixed width.
+`config.columns[{number}].width` property restrictions column width to a fixed width.
 
 ```js
 let data,
@@ -173,7 +173,7 @@ data = [
 ];
 
 options = {
-    column: {
+    columns: {
         1: {
             width: 10
         }
@@ -197,7 +197,7 @@ console.log(output);
 
 <h3 id="table-usage-custom-border">Custom Border</h3>
 
-`config.columns[{number}].border` property describes characters used to draw the table border.
+`config.border` property describes characters used to draw the table border.
 
 ```js
 let config,
@@ -264,7 +264,7 @@ data = [
 ];
 
 config = {
-    column: {
+    columns: {
         0: {
             paddingLeft: 3
         },

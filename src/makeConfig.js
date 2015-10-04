@@ -70,7 +70,7 @@ export default (rows, userConfig = {}) => {
     config = _.cloneDeep(userConfig);
 
     config.border = makeBorder(config.border);
-    config.column = makeColumns(rows, config.column);
+    config.columns = makeColumns(rows, config.columns);
 
     return config;
 };

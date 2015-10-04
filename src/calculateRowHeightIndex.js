@@ -23,7 +23,7 @@ export default (rows, config) => {
         cellHeightIndex = _.fill(Array(tableWidth), 1);
 
         _.forEach(cells, (value, index1) => {
-            cellHeightIndex[index1] = calculateCellHeight(value, config.column[index1].width);
+            cellHeightIndex[index1] = calculateCellHeight(value, config.columns[index1].width);
         });
 
         rowSpanIndex.push(_.max(cellHeightIndex));

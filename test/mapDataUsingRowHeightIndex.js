@@ -13,7 +13,7 @@ describe(`mapDataUsingRowHeightIndex`, () => {
                 mappedData;
 
             config = {
-                column: {
+                columns: {
                     0: {
                         width: 2
                     }
@@ -48,7 +48,7 @@ describe(`mapDataUsingRowHeightIndex`, () => {
                 mappedData;
 
             config = {
-                column: {
+                columns: {
                     0: {
                         width: 2
                     }
@@ -85,7 +85,7 @@ describe(`mapDataUsingRowHeightIndex`, () => {
                 mappedData;
 
             config = {
-                column: {
+                columns: {
                     0: {
                         width: 2
                     },

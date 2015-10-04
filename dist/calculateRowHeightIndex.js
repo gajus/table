@@ -52,7 +52,7 @@ exports['default'] = function (rows, config) {
         cellHeightIndex = (0, _lodashArrayFill3['default'])(Array(tableWidth), 1);
 
         (0, _lodashCollectionForEach3['default'])(cells, function (value, index1) {
-            cellHeightIndex[index1] = (0, _calculateCellHeight2['default'])(value, config.column[index1].width);
+            cellHeightIndex[index1] = (0, _calculateCellHeight2['default'])(value, config.columns[index1].width);
         });
 
         rowSpanIndex.push((0, _lodashCollectionMax3['default'])(cellHeightIndex));

@@ -35,7 +35,7 @@ describe(`makeConfig`, () => {
                         ]
                     ]);
 
-                    expect(config.column[0].alignment).to.equal(`left`);
+                    expect(config.columns[0].alignment).to.equal(`left`);
                 });
             });
         });
@@ -50,7 +50,7 @@ describe(`makeConfig`, () => {
                         ]
                     ]);
 
-                    expect(config.column[0].width).to.equal(5);
+                    expect(config.columns[0].width).to.equal(5);
                 });
             });
         });
@@ -65,7 +65,7 @@ describe(`makeConfig`, () => {
                         ]
                     ]);
 
-                    expect(config.column[0].paddingLeft).to.equal(1);
+                    expect(config.columns[0].paddingLeft).to.equal(1);
                 });
             });
         });
@@ -80,7 +80,7 @@ describe(`makeConfig`, () => {
                         ]
                     ]);
 
-                    expect(config.column[0].paddingRight).to.equal(1);
+                    expect(config.columns[0].paddingRight).to.equal(1);
                 });
             });
         });

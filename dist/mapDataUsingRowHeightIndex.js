@@ -57,7 +57,7 @@ exports['default'] = function (unmappedRows, rowHeightIndex, config) {
         (0, _lodashCollectionForEach3['default'])(cells, function (value, index1) {
             var chunkedValue = undefined;
 
-            chunkedValue = (0, _chunkString2['default'])(value, config.column[index1].width);
+            chunkedValue = (0, _chunkString2['default'])(value, config.columns[index1].width);
 
             (0, _lodashCollectionForEach3['default'])(chunkedValue, function (part, index2) {
                 rowHeight[index2][index1] = part;

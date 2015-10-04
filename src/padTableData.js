@@ -8,7 +8,11 @@ import _ from 'lodash';
 export default (rows, config) => {
     return _.map(rows, (cells, index0) => {
         return _.map(cells, (value, index1) => {
-            return _.repeat(` `, config.column[index1].paddingLeft) + value + _.repeat(` `, config.column[index1].paddingRight);
+            let column;
+
+            column = config.columns[index1];
+
+            return _.repeat(` `, column.paddingLeft) + value + _.repeat(` `, column.paddingRight);
         });
     });
 };

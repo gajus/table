@@ -76,7 +76,7 @@ describe(`README.md usage/`, () => {
 
         output = table(data, {
             border: tableBorder,
-            column: {
+            columns: {
                 4: {
                     width: 50
                 }

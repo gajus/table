@@ -23,7 +23,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'd
 exports['default'] = function (rows, config) {
     return (0, _lodashCollectionMap3['default'])(rows, function (cells, index0) {
         return (0, _lodashCollectionMap3['default'])(cells, function (value, index1) {
-            return (0, _lodashStringRepeat3['default'])(' ', config.column[index1].paddingLeft) + value + (0, _lodashStringRepeat3['default'])(' ', config.column[index1].paddingRight);
+            var column = undefined;
+
+            column = config.columns[index1];
+
+            return (0, _lodashStringRepeat3['default'])(' ', column.paddingLeft) + value + (0, _lodashStringRepeat3['default'])(' ', column.paddingRight);
         });
     });
 };

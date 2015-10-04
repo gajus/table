@@ -108,7 +108,7 @@ exports['default'] = function (rows) {
     config = (0, _lodashLangCloneDeep3['default'])(userConfig);
 
     config.border = makeBorder(config.border);
-    config.column = makeColumns(rows, config.column);
+    config.columns = makeColumns(rows, config.columns);
 
     return config;
 };
