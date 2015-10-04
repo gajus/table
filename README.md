@@ -13,6 +13,7 @@
         * [Draw Join](#table-usage-draw-join)
         * [Padding Cell Content](#table-usage-padding-cell-content)
         * [Predefined Border Templates](#table-usage-predefined-border-templates)
+        * [Text Truncation](#table-usage-text-truncation)
         * [Text Wrapping](#table-usage-text-wrapping)
 
 
@@ -58,6 +59,7 @@ data = [
  * @typedef {Object} table~columns
  * @property {string} alignment Cell content alignment (enum: left, center, right) (default: left).
  * @property {number} width Column width (default: auto).
+ * @property {number} truncate Number of characters are which the content will be truncated (default: Infinity).
  * @property {number} paddingLeft Cell content padding width left (default: 1).
  * @property {number} paddingRight Cell content padding width right (default: 1).
  */
@@ -454,6 +456,45 @@ console.log(output);
 0A 0B 0C
 1A 1B 1C
 2A 2B 2C
+```
+
+<h3 id="table-usage-text-truncation">Text Truncation</h3>
+
+To handle a content that overflows the container width, `table` package implements [text wrapping](#table-usage-text-wrapping). However, sometimes you may want to truncate content that is too long to be displayed in the table.
+
+`{number} config.columns[{number}].truncate` property (default: `Infinity`) truncates the text at the specified length.
+
+```js
+let config,
+    data,
+    output;
+
+data = [
+    ['Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pulvinar nibh sed mauris convallis dapibus. Nunc venenatis tempus nulla sit amet viverra.']
+];
+
+config = {
+    columns: {
+        0: {
+            width: 20,
+            truncate: 100
+        }
+    }
+};
+
+output = table(data, config);
+
+console.log(output);
+```
+
+```
+╔══════════════════════╗
+║ Lorem ipsum dolor si ║
+║ t amet, consectetur  ║
+║ adipiscing elit. Pha ║
+║ sellus pulvinar nibh ║
+║ sed mauris conva...  ║
+╚══════════════════════╝
 ```
 
 <h3 id="table-usage-text-wrapping">Text Wrapping</h3>

@@ -62,6 +62,7 @@ makeColumns = function (rows) {
         columns[index] = _lodash2['default'].assign({
             alignment: 'left',
             width: maximumColumnWidthIndex[index],
+            truncate: Infinity,
             paddingLeft: 1,
             paddingRight: 1
         }, columnDefault, columns[index]);

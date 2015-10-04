@@ -38,6 +38,7 @@ makeColumns = (rows, columns = {}, columnDefault = {}) => {
         columns[index] = _.assign({
             alignment: `left`,
             width: maximumColumnWidthIndex[index],
+            truncate: Infinity,
             paddingLeft: 1,
             paddingRight: 1
         }, columnDefault, columns[index]);

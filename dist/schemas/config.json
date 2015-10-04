@@ -39,6 +39,9 @@
                 "width": {
                     "type": "number"
                 },
+                "truncate": {
+                    "type": "number"
+                },
                 "paddingLeft": {
                     "type": "number"
                 },

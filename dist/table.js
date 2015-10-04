@@ -50,6 +50,10 @@ var _stringifyTableData = require('./stringifyTableData');
 
 var _stringifyTableData2 = _interopRequireDefault(_stringifyTableData);
 
+var _truncateTableData = require('./truncateTableData');
+
+var _truncateTableData2 = _interopRequireDefault(_truncateTableData);
+
 /**
  * @typedef {string} table~cell
  */
@@ -62,6 +66,7 @@ var _stringifyTableData2 = _interopRequireDefault(_stringifyTableData);
  * @typedef {Object} table~columns
  * @property {string} alignment Cell content alignment (enum: left, center, right) (default: left).
  * @property {number} width Column width (default: auto).
+ * @property {number} truncate Number of characters are which the content will be truncated (default: Infinity).
  * @property {number} paddingLeft Cell content padding width left (default: 1).
  * @property {number} paddingRight Cell content padding width right (default: 1).
  */
@@ -124,6 +129,8 @@ exports['default'] = function (data) {
   rows = (0, _stringifyTableData2['default'])(data);
 
   config = (0, _makeConfig2['default'])(rows, userConfig);
+
+  rows = (0, _truncateTableData2['default'])(data, config);
 
   rowHeightIndex = (0, _calculateRowHeightIndex2['default'])(rows, config);
 

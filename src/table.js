@@ -9,6 +9,7 @@ import alignTableData from './alignTableData';
 import padTableData from './padTableData';
 import validateTableData from './validateTableData';
 import stringifyTableData from './stringifyTableData';
+import truncateTableData from './truncateTableData';
 
 /**
  * @typedef {string} table~cell
@@ -22,6 +23,7 @@ import stringifyTableData from './stringifyTableData';
  * @typedef {Object} table~columns
  * @property {string} alignment Cell content alignment (enum: left, center, right) (default: left).
  * @property {number} width Column width (default: auto).
+ * @property {number} truncate Number of characters are which the content will be truncated (default: Infinity).
  * @property {number} paddingLeft Cell content padding width left (default: 1).
  * @property {number} paddingRight Cell content padding width right (default: 1).
  */
@@ -81,6 +83,8 @@ export default (data, userConfig = {}) => {
     rows = stringifyTableData(data);
 
     config = makeConfig(rows, userConfig);
+
+    rows = truncateTableData(data, config);
 
     rowHeightIndex = calculateRowHeightIndex(rows, config);
 
