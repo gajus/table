@@ -1,4 +1,4 @@
-#### Predefined Border Templates
+### Predefined Border Templates
 
 You can load one of the predefined border templates using `border` function.
 

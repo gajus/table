@@ -11,6 +11,7 @@
         * [Column Width](#table-usage-column-width)
         * [Custom Border](#table-usage-custom-border)
         * [Padding Cell Content](#table-usage-padding-cell-content)
+        * [Predefined Border Templates](#table-usage-predefined-border-templates)
 
 
 Produces a string that represents array data in a text table.
@@ -291,7 +292,7 @@ console.log(output);
 ╚══════╧══════╧════╝
 ```
 
-<h4 id="table-usage-padding-cell-content-predefined-border-templates">Predefined Border Templates</h4>
+<h3 id="table-usage-predefined-border-templates">Predefined Border Templates</h3>
 
 You can load one of the predefined border templates using `border` function.
 
