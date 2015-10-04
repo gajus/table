@@ -1,13 +1,13 @@
 ### Cell Content Alignment
 
-`alignment` property controls content horizontal alignment within a cell.
+`config.columns[{number}].alignment` property controls content horizontal alignment within a cell.
 
 Valid values are: "left", "right" and "center".
 
 ```js
-let data,
-    output,
-    options;
+let config,
+    data,
+    output;
 
 data = [
     ['0A', '0B', '0C'],
@@ -15,7 +15,7 @@ data = [
     ['2A', '2B', '2C']
 ];
 
-options = {
+config = {
     column: {
         0: {
             alignment: 'left',
@@ -32,7 +32,7 @@ options = {
     }
 };
 
-output = table(data, options);
+output = table(data, config);
 
 console.log(output);
 ```

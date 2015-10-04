@@ -59,7 +59,7 @@ data = [
  * Generates a text table.
  *
  * @param {table~row[]} rows
- * @param {table~config} config
+ * @param {table~config} userConfig
  * @return {String}
  */
 output = table(data);

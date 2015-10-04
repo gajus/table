@@ -1,11 +1,11 @@
 ### Padding Cell Content
 
-`paddingLeft` and `paddingRight` properties control content padding within a cell. Property value represents a number of whitespaces used to pad the content.
+`config.columns[{number}].paddingLeft` and `config.columns[{number}].paddingRight` properties control content padding within a cell. Property value represents a number of whitespaces used to pad the content.
 
 ```js
-let data,
-    output,
-    options;
+let config,
+    data,
+    output;
 
 data = [
     ['0A', 'AABBCC', '0C'],
@@ -13,7 +13,7 @@ data = [
     ['2A', '2B', '2C']
 ];
 
-options = {
+config = {
     column: {
         0: {
             paddingLeft: 3
@@ -25,7 +25,7 @@ options = {
     }
 };
 
-output = table(data, options);
+output = table(data, config);
 
 console.log(output);
 ```

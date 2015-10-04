@@ -1,11 +1,11 @@
 ### Custom Border
 
-`border` property describes the characters used to draw the table borders.
+`config.columns[{number}].border` property describes characters used to draw the table border.
 
 ```js
-let data,
-    output,
-    options;
+let config,
+    data,
+    output;
 
 data = [
     ['0A', '0B', '0C'],
@@ -13,7 +13,7 @@ data = [
     ['2A', '2B', '2C']
 ];
 
-options = {
+config = {
     border: {
         topBody: `─`,
         topJoin: `┬`,
@@ -36,7 +36,7 @@ options = {
     }
 };
 
-output = table(data, options);
+output = table(data, config);
 
 console.log(output);
 ```

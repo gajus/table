@@ -89,7 +89,7 @@ data = [
  * Generates a text table.
  *
  * @param {table~row[]} rows
- * @param {table~config} config
+ * @param {table~config} userConfig
  * @return {String}
  */
 output = table(data);
@@ -110,14 +110,14 @@ console.log(output);
 
 <h3 id="table-usage-cell-content-alignment">Cell Content Alignment</h3>
 
-`alignment` property controls content horizontal alignment within a cell.
+`config.columns[{number}].alignment` property controls content horizontal alignment within a cell.
 
 Valid values are: "left", "right" and "center".
 
 ```js
-let data,
-    output,
-    options;
+let config,
+    data,
+    output;
 
 data = [
     ['0A', '0B', '0C'],
@@ -125,7 +125,7 @@ data = [
     ['2A', '2B', '2C']
 ];
 
-options = {
+config = {
     column: {
         0: {
             alignment: 'left',
@@ -142,7 +142,7 @@ options = {
     }
 };
 
-output = table(data, options);
+output = table(data, config);
 
 console.log(output);
 ```
@@ -197,12 +197,12 @@ console.log(output);
 
 <h3 id="table-usage-custom-border">Custom Border</h3>
 
-`border` property describes the characters used to draw the table borders.
+`config.columns[{number}].border` property describes characters used to draw the table border.
 
 ```js
-let data,
-    output,
-    options;
+let config,
+    data,
+    output;
 
 data = [
     ['0A', '0B', '0C'],
@@ -210,7 +210,7 @@ data = [
     ['2A', '2B', '2C']
 ];
 
-options = {
+config = {
     border: {
         topBody: `─`,
         topJoin: `┬`,
@@ -233,7 +233,7 @@ options = {
     }
 };
 
-output = table(data, options);
+output = table(data, config);
 
 console.log(output);
 ```
@@ -250,12 +250,12 @@ console.log(output);
 
 <h3 id="table-usage-padding-cell-content">Padding Cell Content</h3>
 
-`paddingLeft` and `paddingRight` properties control content padding within a cell. Property value represents a number of whitespaces used to pad the content.
+`config.columns[{number}].paddingLeft` and `config.columns[{number}].paddingRight` properties control content padding within a cell. Property value represents a number of whitespaces used to pad the content.
 
 ```js
-let data,
-    output,
-    options;
+let config,
+    data,
+    output;
 
 data = [
     ['0A', 'AABBCC', '0C'],
@@ -263,7 +263,7 @@ data = [
     ['2A', '2B', '2C']
 ];
 
-options = {
+config = {
     column: {
         0: {
             paddingLeft: 3
@@ -275,7 +275,7 @@ options = {
     }
 };
 
-output = table(data, options);
+output = table(data, config);
 
 console.log(output);
 ```
@@ -301,7 +301,8 @@ import table, {
     getBorderCharacters
 } from 'table';
 
-let data;
+let config,
+    data;
 
 data = [
     ['0A', '0B', '0C'],
@@ -309,9 +310,11 @@ data = [
     ['2A', '2B', '2C']
 ];
 
-table(data, {
+config = {
     border: getBorderCharacters(`name of the template`)
-});
+};
+
+table(data, config);
 ```
 
 ```

@@ -7,7 +7,8 @@ import table, {
     getBorderCharacters
 } from 'table';
 
-let data;
+let config,
+    data;
 
 data = [
     ['0A', '0B', '0C'],
@@ -15,9 +16,11 @@ data = [
     ['2A', '2B', '2C']
 ];
 
-table(data, {
+config = {
     border: getBorderCharacters(`name of the template`)
-});
+};
+
+table(data, config);
 ```
 
 ```

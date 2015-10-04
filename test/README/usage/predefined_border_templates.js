@@ -6,7 +6,7 @@ import _ from 'lodash';
 
 import table, {
     getBorderCharacters
-} from './../../src';
+} from './../../../src';
 
 describe(`README.md usage/predefined_border_templates`, () => {
     let data,
@@ -24,7 +24,7 @@ describe(`README.md usage/predefined_border_templates`, () => {
         };
     });
 
-    it(`draws expected table (honeywell)`, () => {
+    it(`honeywell`, () => {
         let output;
 
         output = table(data, {
@@ -44,7 +44,7 @@ describe(`README.md usage/predefined_border_templates`, () => {
         `);
     });
 
-    it(`draws expected table (norc)`, () => {
+    it(`norc`, () => {
         let output;
 
         output = table(data, {
@@ -64,7 +64,7 @@ describe(`README.md usage/predefined_border_templates`, () => {
         `);
     });
 
-    it(`draws expected table (ramac)`, () => {
+    it(`ramac`, () => {
         let output;
 
         output = table(data, {
