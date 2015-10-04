@@ -43,10 +43,12 @@ makeBorder = function () {
  *
  * @param {Array[]} rows
  * @param {Object} columns
+ * @param {Object} columnDefault
  * @returns {Object}
  */
 makeColumns = function (rows) {
     var columns = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+    var columnDefault = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
 
     var maximumColumnWidthIndex = undefined;
 
@@ -57,21 +59,12 @@ makeColumns = function (rows) {
             columns[index] = {};
         }
 
-        if (_lodash2['default'].isUndefined(columns[index].alignment)) {
-            columns[index].alignment = 'left';
-        }
-
-        if (_lodash2['default'].isUndefined(columns[index].width)) {
-            columns[index].width = maximumColumnWidthIndex[index];
-        }
-
-        if (_lodash2['default'].isUndefined(columns[index].paddingLeft)) {
-            columns[index].paddingLeft = 1;
-        }
-
-        if (_lodash2['default'].isUndefined(columns[index].paddingRight)) {
-            columns[index].paddingRight = 1;
-        }
+        columns[index] = _lodash2['default'].assign({
+            alignment: 'left',
+            width: maximumColumnWidthIndex[index],
+            paddingLeft: 1,
+            paddingRight: 1
+        }, columnDefault, columns[index]);
     });
 
     return columns;
@@ -96,7 +89,7 @@ exports['default'] = function (rows) {
     config = _lodash2['default'].cloneDeep(userConfig);
 
     config.border = makeBorder(config.border);
-    config.columns = makeColumns(rows, config.columns);
+    config.columns = makeColumns(rows, config.columns, config.columnDefault);
 
     if (!config.drawJoin) {
         /**

@@ -22,9 +22,10 @@ makeBorder = (border = {}) => {
  *
  * @param {Array[]} rows
  * @param {Object} columns
+ * @param {Object} columnDefault
  * @returns {Object}
  */
-makeColumns = (rows, columns = {}) => {
+makeColumns = (rows, columns = {}, columnDefault = {}) => {
     let maximumColumnWidthIndex;
 
     maximumColumnWidthIndex = calculateMaximumColumnWidthIndex(rows);
@@ -34,21 +35,12 @@ makeColumns = (rows, columns = {}) => {
             columns[index] = {};
         }
 
-        if (_.isUndefined(columns[index].alignment)) {
-            columns[index].alignment = `left`;
-        }
-
-        if (_.isUndefined(columns[index].width)) {
-            columns[index].width = maximumColumnWidthIndex[index];
-        }
-
-        if (_.isUndefined(columns[index].paddingLeft)) {
-            columns[index].paddingLeft = 1;
-        }
-
-        if (_.isUndefined(columns[index].paddingRight)) {
-            columns[index].paddingRight = 1;
-        }
+        columns[index] = _.assign({
+            alignment: `left`,
+            width: maximumColumnWidthIndex[index],
+            paddingLeft: 1,
+            paddingRight: 1
+        }, columnDefault, columns[index]);
     });
 
     return columns;
@@ -70,7 +62,7 @@ export default (rows, userConfig = {}) => {
     config = _.cloneDeep(userConfig);
 
     config.border = makeBorder(config.border);
-    config.columns = makeColumns(rows, config.columns);
+    config.columns = makeColumns(rows, config.columns, config.columnDefault);
 
     if (!config.drawJoin) {
         /**

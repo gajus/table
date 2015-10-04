@@ -83,4 +83,35 @@ describe(`README.md usage/predefined_border_templates`, () => {
 +----+----+----+
         `);
     });
+
+    it(`void`, () => {
+        let output;
+
+        output = table(data, {
+            border: getBorderCharacters(`void`)
+        });
+
+        // console.log(output);
+
+        expectTable(_.trim(output) + `\n`, `0A  0B  0C \n\n 1A  1B  1C \n\n 2A  2B  2C`);
+    });
+
+    it(`borderless`, () => {
+        let output;
+
+        output = table(data, {
+            border: getBorderCharacters(`void`),
+            columnDefault: {
+                paddingLeft: 0,
+                paddingRight: 1
+            },
+            drawJoin: () => {
+                return false
+            }
+        });
+
+        // console.log(output);
+
+        expectTable(_.trim(output) + `\n`, `0A 0B 0C \n1A 1B 1C \n2A 2B 2C`);
+    });
 });

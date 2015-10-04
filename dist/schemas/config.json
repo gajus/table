@@ -7,6 +7,9 @@
         "columns": {
             "$ref": "#/definitions/columns"
         },
+        "columnDefault": {
+            "$ref": "#/definitions/column"
+        },
         "drawJoin": {
             "type": "function"
         }
@@ -17,27 +20,30 @@
             "type": "object",
             "patternProperties": {
                 "^[0-9]+$": {
-                    "type": "object",
-                    "properties": {
-                        "alignment": {
-                            "type": "string",
-                            "enum": [
-                                "left",
-                                "right",
-                                "center"
-                            ]
-                        },
-                        "width": {
-                            "type": "number"
-                        },
-                        "paddingLeft": {
-                            "type": "number"
-                        },
-                        "paddingRight": {
-                            "type": "number"
-                        }
-                    },
-                    "additionalProperties": false
+                    "$ref": "#/definitions/column"
+                }
+            },
+            "additionalProperties": false
+        },
+        "column": {
+            "type": "object",
+            "properties": {
+                "alignment": {
+                    "type": "string",
+                    "enum": [
+                        "left",
+                        "right",
+                        "center"
+                    ]
+                },
+                "width": {
+                    "type": "number"
+                },
+                "paddingLeft": {
+                    "type": "number"
+                },
+                "paddingRight": {
+                    "type": "number"
                 }
             },
             "additionalProperties": false
