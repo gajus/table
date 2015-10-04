@@ -94,6 +94,7 @@ data = [
  * @typedef {Object} table~config
  * @property {table~border} border
  * @property {table~columns[]} columns Column specific configuration.
+ * @property {table~columns} columnDefault Default values for all columns. Column specific settings overwrite the default values.
  * @property {table~drawJoin} drawJoin
  */
 
@@ -412,7 +413,45 @@ table(data, config);
 |----|----|----|
 | 2A | 2B | 2C |
 +----+----+----+
+
+# void (no borders; see "bordless table" section of the documentation)
+
+ 0A  0B  0C
+
+ 1A  1B  1C
+
+ 2A  2B  2C
+
 ```
 
 Raise [an issue](https://github.com/gajus/table/issues) if you'd like to contribute a new border template.
+
+<h4 id="table-usage-predefined-border-templates-borderless-table">Borderless Table</h4>
+
+Simply using "void" border character template creates a table with a lot of unnecessary spacing.
+
+To create a more plesant to the eye table, reset the padding and remove the joining rows, e.g.
+
+```js
+let output;
+
+output = table(data, {
+    border: getBorderCharacters(`void`),
+    columnDefault: {
+        paddingLeft: 0,
+        paddingRight: 1
+    },
+    drawJoin: () => {
+        return false
+    }
+});
+
+console.log(output);
+```
+
+```
+0A 0B 0C
+1A 1B 1C
+2A 2B 2C
+```
 
