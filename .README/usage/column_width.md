@@ -1,6 +1,6 @@
 ### Column Width
 
-`config.columns[{number}].width` property restrictions column width to a fixed width.
+`{number} config.columns[{number}].width` property restricts column width to a fixed width.
 
 ```js
 let data,

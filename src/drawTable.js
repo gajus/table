@@ -10,8 +10,9 @@ import drawRow from './drawRow';
  * @param {Array} rows
  * @param {Array} columnSizeIndex
  * @param {Array} rowSpanIndex
+ * @param {function} drawJoin
  */
-export default (rows, border, columnSizeIndex, rowSpanIndex) => {
+export default (rows, border, columnSizeIndex, rowSpanIndex, drawJoin) => {
     let output,
         rowCount,
         rowHeight,
@@ -35,7 +36,7 @@ export default (rows, border, columnSizeIndex, rowSpanIndex) => {
 
         rowHeight--;
 
-        if (rowHeight === 0 && i !== rowCount - 1) {
+        if (rowHeight === 0 && i !== rowCount - 1 && drawJoin(realRowIndex, rowCount)) {
             output += drawBorderJoin(columnSizeIndex, border);
         }
     });

@@ -1,6 +1,6 @@
 ### Custom Border
 
-`config.border` property describes characters used to draw the table border.
+`{object} config.border` property describes characters used to draw the table border.
 
 ```js
 let config,

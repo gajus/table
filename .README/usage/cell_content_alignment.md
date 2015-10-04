@@ -1,6 +1,6 @@
 ### Cell Content Alignment
 
-`config.columns[{number}].alignment` property controls content horizontal alignment within a cell.
+`{string} config.columns[{number}].alignment` property controls content horizontal alignment within a cell.
 
 Valid values are: "left", "right" and "center".
 

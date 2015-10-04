@@ -6,6 +6,9 @@
         },
         "columns": {
             "$ref": "#/definitions/columns"
+        },
+        "drawJoin": {
+            "type": "function"
         }
     },
     "additionalProperties": false,

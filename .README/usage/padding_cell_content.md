@@ -1,6 +1,6 @@
 ### Padding Cell Content
 
-`config.columns[{number}].paddingLeft` and `config.columns[{number}].paddingRight` properties control content padding within a cell. Property value represents a number of whitespaces used to pad the content.
+`{number} config.columns[{number}].paddingLeft` and `{number} config.columns[{number}].paddingRight` properties control content padding within a cell. Property value represents a number of whitespaces used to pad the content.
 
 ```js
 let config,

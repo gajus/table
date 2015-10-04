@@ -29,7 +29,7 @@ var makeBorder = undefined,
  * Merges user provided border characters with the default border ("honeywell") characters.
  *
  * @param {Object} border
- * @return {Object}
+ * @returns {Object}
  */
 makeBorder = function () {
     var border = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
@@ -43,7 +43,7 @@ makeBorder = function () {
  *
  * @param {Array[]} rows
  * @param {Object} columns
- * @return {Object}
+ * @returns {Object}
  */
 makeColumns = function (rows) {
     var columns = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
@@ -83,7 +83,7 @@ makeColumns = function (rows) {
  *
  * @param {Array[]} rows
  * @param {Object} userConfig
- * @return {Object}
+ * @returns {Object}
  */
 
 exports['default'] = function (rows) {
@@ -97,6 +97,15 @@ exports['default'] = function (rows) {
 
     config.border = makeBorder(config.border);
     config.columns = makeColumns(rows, config.columns);
+
+    if (!config.drawJoin) {
+        /**
+         * @returns {boolean}
+         */
+        config.drawJoin = function () {
+            return true;
+        };
+    }
 
     return config;
 };

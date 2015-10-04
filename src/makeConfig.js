@@ -10,7 +10,7 @@ let makeBorder,
  * Merges user provided border characters with the default border ("honeywell") characters.
  *
  * @param {Object} border
- * @return {Object}
+ * @returns {Object}
  */
 makeBorder = (border = {}) => {
     return _.assign({}, getBorderCharacters(`honeywell`), border);
@@ -22,7 +22,7 @@ makeBorder = (border = {}) => {
  *
  * @param {Array[]} rows
  * @param {Object} columns
- * @return {Object}
+ * @returns {Object}
  */
 makeColumns = (rows, columns = {}) => {
     let maximumColumnWidthIndex;
@@ -60,7 +60,7 @@ makeColumns = (rows, columns = {}) => {
  *
  * @param {Array[]} rows
  * @param {Object} userConfig
- * @return {Object}
+ * @returns {Object}
  */
 export default (rows, userConfig = {}) => {
     let config;
@@ -71,6 +71,15 @@ export default (rows, userConfig = {}) => {
 
     config.border = makeBorder(config.border);
     config.columns = makeColumns(rows, config.columns);
+
+    if (!config.drawJoin) {
+        /**
+         * @returns {boolean}
+         */
+        config.drawJoin = () => {
+            return true;
+        };
+    }
 
     return config;
 };

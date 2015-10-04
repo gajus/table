@@ -46,9 +46,20 @@ import stringifyTableData from './stringifyTableData';
  */
 
 /**
+ * Used to dynamically tell table whether to draw a line separating rows or not.
+ * The default behavior is to always return true.
+ *
+ * @typedef {function} drawJoin
+ * @param {number} index
+ * @param {number} size
+ * @return {boolean}
+ */
+
+/**
  * @typedef {Object} table~config
  * @property {table~border} border
  * @property {table~columns[]} columns Column specific configuration.
+ * @property {table~drawJoin} drawJoin
  */
 
 /**
@@ -78,5 +89,5 @@ export default (data, userConfig = {}) => {
 
     cellWidthIndex = calculateCellWidthIndex(rows[0]);
 
-    return drawTable(rows, config.border, cellWidthIndex, rowHeightIndex);
+    return drawTable(rows, config.border, cellWidthIndex, rowHeightIndex, config.drawJoin);
 };

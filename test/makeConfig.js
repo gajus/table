@@ -3,9 +3,7 @@
 import {
     expect
 } from 'chai';
-
 import _ from 'lodash';
-
 import makeConfig from './../src/makeConfig';
 
 describe(`makeConfig`, () => {

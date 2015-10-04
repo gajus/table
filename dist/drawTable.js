@@ -20,9 +20,10 @@ var _drawRow2 = _interopRequireDefault(_drawRow);
  * @param {Array} rows
  * @param {Array} columnSizeIndex
  * @param {Array} rowSpanIndex
+ * @param {function} drawJoin
  */
 
-exports['default'] = function (rows, border, columnSizeIndex, rowSpanIndex) {
+exports['default'] = function (rows, border, columnSizeIndex, rowSpanIndex, drawJoin) {
     var output = undefined,
         rowCount = undefined,
         rowHeight = undefined,
@@ -46,7 +47,7 @@ exports['default'] = function (rows, border, columnSizeIndex, rowSpanIndex) {
 
         rowHeight--;
 
-        if (rowHeight === 0 && i !== rowCount - 1) {
+        if (rowHeight === 0 && i !== rowCount - 1 && drawJoin(realRowIndex, rowCount)) {
             output += (0, _drawBorder.drawBorderJoin)(columnSizeIndex, border);
         }
     });
