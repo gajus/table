@@ -24,61 +24,9 @@ describe(`makeConfig`, () => {
     });
 
     context(`column`, () => {
-        context(`alignment is not provided`, () => {
-            it(`defaults to 'left'`, () => {
-                let config;
-
-                config = makeConfig([
-                    [
-                        `aaaaa`
-                    ]
-                ]);
-
-                expect(config.column[0].alignment).to.equal(`left`);
-            });
-        });
-        context(`maxWidth is not provided`, () => {
-            it(`defaults to Infinity`, () => {
-                let config;
-
-                config = makeConfig([
-                    [
-                        `aaaaa`
-                    ]
-                ]);
-
-                expect(config.column[0].maxWidth).to.equal(Infinity);
-            });
-        });
-        context(`paddingLeft is not provided`, () => {
-            it(`defaults to 0`, () => {
-                let config;
-
-                config = makeConfig([
-                    [
-                        `aaaaa`
-                    ]
-                ]);
-
-                expect(config.column[0].paddingLeft).to.equal(0);
-            });
-        });
-        context(`paddingRight is not provided`, () => {
-            it(`defaults to Infinity`, () => {
-                let config;
-
-                config = makeConfig([
-                    [
-                        `aaaaa`
-                    ]
-                ]);
-
-                expect(config.column[0].paddingRight).to.equal(0);
-            });
-        });
-        context(`minWidth is not provided`, () => {
-            context(`maxWidth is not set`, () => {
-                it(`uses the maximum value length`, () => {
+        context(`'alignment'`, () => {
+            context(`is not provided`, () => {
+                it(`defaults to 'left'`, () => {
                     let config;
 
                     config = makeConfig([
@@ -87,87 +35,52 @@ describe(`makeConfig`, () => {
                         ]
                     ]);
 
-                    expect(config.column[0].minWidth).to.equal(5);
-                });
-            });
-            context(`maxWidth is set`, () => {
-                context(`maxWidth is larger than maximum value length`, () => {
-                    it(`uses the maximum value length`, () => {
-                        let config;
-
-                        config = makeConfig([
-                            [
-                                `aaaaa`
-                            ]
-                        ], {
-                            column: {
-                                0: {
-                                    maxWidth: 10
-                                }
-                            }
-                        });
-
-                        expect(config.column[0].minWidth).to.equal(5);
-                    });
-                });
-                context(`maxWidth is lesser than maximum value length`, () => {
-                    it(`uses the maxWidth value`, () => {
-                        let config;
-
-                        config = makeConfig([
-                            [
-                                `aaaaaaaaaa`
-                            ]
-                        ], {
-                            column: {
-                                0: {
-                                    maxWidth: 5
-                                }
-                            }
-                        });
-
-                        expect(config.column[0].minWidth).to.equal(5);
-                    });
+                    expect(config.column[0].alignment).to.equal(`left`);
                 });
             });
         });
-        context(`minWidth is provided`, () => {
-            context(`minWidth is larger than maximum value length`, () => {
-                it(`uses the maximum value length`, () => {
+        context(`'width'`, () => {
+            context(`is not provided`, () => {
+                it(`defaults to the maximum column width`, () => {
                     let config;
 
                     config = makeConfig([
                         [
                             `aaaaa`
                         ]
-                    ], {
-                        column: {
-                            0: {
-                                minWidth: 10
-                            }
-                        }
-                    });
+                    ]);
 
-                    expect(config.column[0].minWidth).to.deep.equal(10);
+                    expect(config.column[0].width).to.equal(5);
                 });
             });
-            context(`minWidth is smaller than maximum value length`, () => {
-                it(`uses the maximum value length`, () => {
+        });
+        context(`'paddingLeft'`, () => {
+            context(`is not provided`, () => {
+                it(`defaults to 0`, () => {
                     let config;
 
                     config = makeConfig([
                         [
                             `aaaaa`
                         ]
-                    ], {
-                        column: {
-                            0: {
-                                minWidth: 2
-                            }
-                        }
-                    });
+                    ]);
 
-                    expect(config.column[0].minWidth).to.deep.equal(5);
+                    expect(config.column[0].paddingLeft).to.equal(0);
+                });
+            });
+        });
+        context(`'paddingRight'`, () => {
+            context(`is not provided`, () => {
+                it(`defaults to 0`, () => {
+                    let config;
+
+                    config = makeConfig([
+                        [
+                            `aaaaa`
+                        ]
+                    ]);
+
+                    expect(config.column[0].paddingRight).to.equal(0);
                 });
             });
         });

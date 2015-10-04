@@ -1,65 +1,76 @@
 import _ from 'lodash';
-
-import border from './border/';
+import getBorderCharacters from './getBorderCharacters';
 import validateConfig from './validateConfig';
-import calculateMaximumColumnValueIndex from './calculateMaximumColumnValueIndex';
+import calculateMaximumColumnWidthIndex from './calculateMaximumColumnWidthIndex';
+
+let makeBorder,
+    makeColumns;
 
 /**
- * @param {Array[]} rows
- * @param {Object} inputConfig
+ * Merges user provided border characters with the default border ("honeywell") characters.
+ *
+ * @param {Object} border
  * @return {Object}
  */
-export default (rows, inputConfig = {}) => {
-    let config,
-        maximumColumnValueIndex;
+makeBorder = (border = {}) => {
+    return _.assign({}, getBorderCharacters(`honeywell`), border);
+};
 
-    config = _.cloneDeep(inputConfig);
+/**
+ * Creates a configuration for every column using default
+ * values for the missing configuration properties.
+ *
+ * @param {Array[]} rows
+ * @param {Object} columns
+ * @return {Object}
+ */
+makeColumns = (rows, columns = {}) => {
+    let maximumColumnWidthIndex;
 
-    validateConfig(rows, config);
-
-    if (!config.border) {
-        config.border = {}
-    }
-
-    config.border = _.assign({}, border(`honeywell`), config.border);
-
-    maximumColumnValueIndex = calculateMaximumColumnValueIndex(rows);
-
-    if (!config.column) {
-        config.column = {};
-    }
+    maximumColumnWidthIndex = calculateMaximumColumnWidthIndex(rows);
 
     _.times(rows[0].length, (index) => {
-        if (_.isUndefined(config.column[index])) {
-            config.column[index] = {};
+        if (_.isUndefined(columns[index])) {
+            columns[index] = {};
+        }
+
+        if (_.isUndefined(columns[index].alignment)) {
+            columns[index].alignment = `left`;
+        }
+
+        if (_.isUndefined(columns[index].width)) {
+            columns[index].width = maximumColumnWidthIndex[index];
+        }
+
+        if (_.isUndefined(columns[index].paddingLeft)) {
+            columns[index].paddingLeft = 0;
+        }
+
+        if (_.isUndefined(columns[index].paddingRight)) {
+            columns[index].paddingRight = 0;
         }
     });
 
-    config.column = _.mapValues(config.column, (column, index0) => {
-        if (_.isUndefined(column.minWidth) || maximumColumnValueIndex[index0] > config.column[index0].minWidth) {
-            column.minWidth = maximumColumnValueIndex[index0];
-        }
+    return columns;
+};
 
-        if (_.isUndefined(column.alignment)) {
-            column.alignment = `left`;
-        }
+/**
+ * Makes a new configuration object out of the userConfig object
+ * using default values for the missing configuration properties.
+ *
+ * @param {Array[]} rows
+ * @param {Object} userConfig
+ * @return {Object}
+ */
+export default (rows, userConfig = {}) => {
+    let config;
 
-        if (_.isUndefined(column.maxWidth)) {
-            column.maxWidth = Infinity;
-        } else if (column.maxWidth < column.minWidth) {
-            column.minWidth = column.maxWidth;
-        }
+    validateConfig(userConfig);
 
-        if (_.isUndefined(column.paddingLeft)) {
-            column.paddingLeft = 0;
-        }
+    config = _.cloneDeep(userConfig);
 
-        if (_.isUndefined(column.paddingRight)) {
-            column.paddingRight = 0;
-        }
-
-        return column;
-    });
+    config.border = makeBorder(config.border);
+    config.column = makeColumns(rows, config.column);
 
     return config;
 };
