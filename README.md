@@ -294,13 +294,11 @@ console.log(output);
 
 <h3 id="table-usage-predefined-border-templates">Predefined Border Templates</h3>
 
-You can load one of the predefined border templates using `border` function.
+You can load one of the predefined border templates using `getBorderCharacters` function.
 
 ```js
-import table from 'table';
-
-import {
-    border
+import table, {
+    getBorderCharacters
 } from 'table';
 
 let data;
@@ -312,7 +310,7 @@ data = [
 ];
 
 table(data, {
-    border: border(`name of the template`)
+    border: getBorderCharacters(`name of the template`)
 });
 ```
 
