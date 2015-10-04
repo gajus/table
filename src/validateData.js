@@ -1,16 +1,16 @@
 import _ from 'lodash';
 
 /**
- * @typedef {String} validateData~cell
+ * @typedef {string} cell
  */
 
 /**
- * @typedef {validateData~cell[]} validateData~column
+ * @typedef {cell[]} validateData~column
  */
 
 /**
- * @param {validateData~column[]} rows
- * @return {undefined}
+ * @param {column[]} rows
+ * @returns {undefined}
  */
 export default (rows) => {
     let columnNumber;
@@ -29,16 +29,18 @@ export default (rows) => {
 
     columnNumber = rows[0].length;
 
-    _.forEach(rows, (columns) => {
-        if (!_.isArray(columns)) {
+    _.forEach(rows, (cells) => {
+        if (!_.isArray(cells)) {
             throw new Error(`Table row data must be an array.`);
         }
 
-        if (columns.length !== columnNumber) {
-            throw new Error(`Table must have a consistent number of columns.`);
+        if (cells.length !== columnNumber) {
+            throw new Error(`Table must have a consistent number of cells.`);
         }
 
-        _.forEach(columns, (cell) => {
+        // @todo Make an exception for newline characters.
+        // @see https://github.com/gajus/table/issues/9
+        _.forEach(cells, (cell) => {
             if (/[\x01-\x1A]/.test(cell)) {
                 throw new Error(`Table data must not contain control characters.`);
             }

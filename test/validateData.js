@@ -53,14 +53,14 @@ describe(`validateData`, () => {
         });
     });
 
-    context(`rows have inconsistent number of columns`, () => {
+    context(`rows have inconsistent number of cells`, () => {
         it(`throws an error`, () => {
             expect(() => {
                 validateData([
                     [`a`, `b`, `c`],
                     [`a`, `b`]
                 ]);
-            }).to.throw(Error, `Table must have a consistent number of columns.`);
+            }).to.throw(Error, `Table must have a consistent number of cells.`);
         });
     });
 });
