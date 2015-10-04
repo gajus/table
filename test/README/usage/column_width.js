@@ -17,7 +17,7 @@ describe(`README.md usage/`, () => {
         };
     });
 
-    it(`usage/column_width`, () => {
+    it(`column_width`, () => {
         let config,
             data,
             output;

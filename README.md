@@ -13,6 +13,7 @@
         * [Draw Join](#table-usage-draw-join)
         * [Padding Cell Content](#table-usage-padding-cell-content)
         * [Predefined Border Templates](#table-usage-predefined-border-templates)
+        * [Text Wrapping](#table-usage-text-wrapping)
 
 
 Produces a string that represents array data in a text table.
@@ -453,5 +454,44 @@ console.log(output);
 0A 0B 0C
 1A 1B 1C
 2A 2B 2C
+```
+
+<h3 id="table-usage-text-wrapping">Text Wrapping</h3>
+
+`table` package implements auto text wrapping, i.e. text that has width greater than the container width will be separated into multiple lines, e.g.
+
+```js
+let config,
+    data,
+    output;
+
+data = [
+    ['Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pulvinar nibh sed mauris convallis dapibus. Nunc venenatis tempus nulla sit amet viverra.']
+];
+
+config = {
+    columns: {
+        0: {
+            width: 20
+        }
+    }
+};
+
+output = table(data, config);
+
+console.log(output);
+```
+
+```
+╔══════════════════════╗
+║ Lorem ipsum dolor si ║
+║ t amet, consectetur  ║
+║ adipiscing elit. Pha ║
+║ sellus pulvinar nibh ║
+║ sed mauris convallis ║
+║ dapibus. Nunc venena ║
+║ tis tempus nulla sit ║
+║ amet viverra.        ║
+╚══════════════════════╝
 ```
 
