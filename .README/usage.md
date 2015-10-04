@@ -65,7 +65,7 @@ data = [
  * @property {table~border} border
  * @property {table~columns[]} columns Column specific configuration.
  * @property {table~columns} columnDefault Default values for all columns. Column specific settings overwrite the default values.
- * @property {table~drawJoin} drawJoin
+ * @property {table~drawJoin} drawHorizontalLine
  */
 
 /**

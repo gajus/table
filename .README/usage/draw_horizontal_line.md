@@ -1,6 +1,6 @@
-### Draw Join
+### Draw Horizontal Line
 
-`{function} config.drawJoin` property is a function that is called for every row in the table. The result of the function `{boolean}` determines whether a join/separating row is drawn.
+`{function} config.drawHorizontalLine` property is a function that is called for every non-content row in the table. The result of the function `{boolean}` determines whether a row is drawn.
 
 ```js
 let data,
@@ -17,20 +17,13 @@ data = [
 
 options = {
     /**
-     * Used to dynamically tell table whether to draw a line separating rows or not.
-     * The default behavior is to always return true.
-     *
      * @typedef {function} drawJoin
      * @param {number} index
      * @param {number} size
      * @return {boolean}
      */
-    drawJoin: (index, size) => {
-        // This implementation draws a separating line only after the first row
-        // and before the last row.
-        if (index === 1 || index === size - 1) {
-            return true;
-        }
+    drawHorizontalLine: (index, size) => {
+        return index === 0 || index === 1 || index === size - 1 || index === size;
     }
 };
 

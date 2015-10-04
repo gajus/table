@@ -65,11 +65,11 @@ export default (rows, userConfig = {}) => {
     config.border = makeBorder(config.border);
     config.columns = makeColumns(rows, config.columns, config.columnDefault);
 
-    if (!config.drawJoin) {
+    if (!config.drawHorizontalLine) {
         /**
          * @returns {boolean}
          */
-        config.drawJoin = () => {
+        config.drawHorizontalLine = () => {
             return true;
         };
     }

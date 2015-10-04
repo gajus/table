@@ -10,7 +10,7 @@
         * [Cell Content Alignment](#table-usage-cell-content-alignment)
         * [Column Width](#table-usage-column-width)
         * [Custom Border](#table-usage-custom-border)
-        * [Draw Join](#table-usage-draw-join)
+        * [Draw Horizontal Line](#table-usage-draw-horizontal-line)
         * [Padding Cell Content](#table-usage-padding-cell-content)
         * [Predefined Border Templates](#table-usage-predefined-border-templates)
         * [Text Truncation](#table-usage-text-truncation)
@@ -98,7 +98,7 @@ data = [
  * @property {table~border} border
  * @property {table~columns[]} columns Column specific configuration.
  * @property {table~columns} columnDefault Default values for all columns. Column specific settings overwrite the default values.
- * @property {table~drawJoin} drawJoin
+ * @property {table~drawJoin} drawHorizontalLine
  */
 
 /**
@@ -264,9 +264,9 @@ console.log(output);
 └────┴────┴────┘
 ```
 
-<h3 id="table-usage-draw-join">Draw Join</h3>
+<h3 id="table-usage-draw-horizontal-line">Draw Horizontal Line</h3>
 
-`{function} config.drawJoin` property is a function that is called for every row in the table. The result of the function `{boolean}` determines whether a join/separating row is drawn.
+`{function} config.drawHorizontalLine` property is a function that is called for every non-content row in the table. The result of the function `{boolean}` determines whether a row is drawn.
 
 ```js
 let data,
@@ -283,20 +283,13 @@ data = [
 
 options = {
     /**
-     * Used to dynamically tell table whether to draw a line separating rows or not.
-     * The default behavior is to always return true.
-     *
      * @typedef {function} drawJoin
      * @param {number} index
      * @param {number} size
      * @return {boolean}
      */
-    drawJoin: (index, size) => {
-        // This implementation draws a separating line only after the first row
-        // and before the last row.
-        if (index === 1 || index === size - 1) {
-            return true;
-        }
+    drawHorizontalLine: (index, size) => {
+        return index === 0 || index === 1 || index === size - 1 || index === size;
     }
 };
 

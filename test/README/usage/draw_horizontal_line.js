@@ -17,7 +17,7 @@ describe(`README.md usage/`, () => {
         };
     });
 
-    it(`usage/draw_join`, () => {
+    it(`usage/draw_horizontal_line`, () => {
         let data,
             output,
             options;
@@ -32,20 +32,13 @@ describe(`README.md usage/`, () => {
 
         options = {
             /**
-             * Used to dynamically tell table whether to draw a line separating rows or not.
-             * The default behavior is to always return true.
-             *
              * @typedef {function} drawJoin
              * @param {number} index
              * @param {number} size
              * @return {boolean}
              */
-            drawJoin: (index, size) => {
-                // This implementation draws a separating line only after the first row
-                // and before the last row.
-                if (index === 1 || index === size - 1) {
-                    return true;
-                }
+            drawHorizontalLine: (index, size) => {
+                return index === 0 || index === 1 || index === size - 1 || index === size;
             }
         };
 

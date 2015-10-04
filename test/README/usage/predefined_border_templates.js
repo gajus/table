@@ -105,7 +105,7 @@ describe(`README.md usage/predefined_border_templates`, () => {
                 paddingLeft: 0,
                 paddingRight: 1
             },
-            drawJoin: () => {
+            drawHorizontalLine: () => {
                 return false
             }
         });

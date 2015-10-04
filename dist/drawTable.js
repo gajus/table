@@ -20,10 +20,10 @@ var _drawRow2 = _interopRequireDefault(_drawRow);
  * @param {Array} rows
  * @param {Array} columnSizeIndex
  * @param {Array} rowSpanIndex
- * @param {function} drawJoin
+ * @param {function} drawHorizontalLine
  */
 
-exports['default'] = function (rows, border, columnSizeIndex, rowSpanIndex, drawJoin) {
+exports['default'] = function (rows, border, columnSizeIndex, rowSpanIndex, drawHorizontalLine) {
     var output = undefined,
         rowCount = undefined,
         rowHeight = undefined,
@@ -34,7 +34,10 @@ exports['default'] = function (rows, border, columnSizeIndex, rowSpanIndex, draw
     realRowIndex = 0;
 
     output = '';
-    output += (0, _drawBorder.drawBorderTop)(columnSizeIndex, border);
+
+    if (drawHorizontalLine(realRowIndex, rowCount)) {
+        output += (0, _drawBorder.drawBorderTop)(columnSizeIndex, border);
+    }
 
     _lodash2['default'].forEach(rows, function (row, i) {
         output += (0, _drawRow2['default'])(row, border);
@@ -47,12 +50,14 @@ exports['default'] = function (rows, border, columnSizeIndex, rowSpanIndex, draw
 
         rowHeight--;
 
-        if (rowHeight === 0 && i !== rowCount - 1 && drawJoin(realRowIndex, rowCount)) {
+        if (rowHeight === 0 && i !== rowCount - 1 && drawHorizontalLine(realRowIndex, rowCount)) {
             output += (0, _drawBorder.drawBorderJoin)(columnSizeIndex, border);
         }
     });
 
-    output += (0, _drawBorder.drawBorderBottom)(columnSizeIndex, border);
+    if (drawHorizontalLine(realRowIndex, rowCount)) {
+        output += (0, _drawBorder.drawBorderBottom)(columnSizeIndex, border);
+    }
 
     return output;
 };

@@ -48,10 +48,11 @@ import truncateTableData from './truncateTableData';
  */
 
 /**
- * Used to dynamically tell table whether to draw a line separating rows or not.
+ * Used to tell whether to draw a horizontal line.
+ * This callback is called for each non-content line of the table.
  * The default behavior is to always return true.
  *
- * @typedef {function} drawJoin
+ * @typedef {function} drawHorizontalLine
  * @param {number} index
  * @param {number} size
  * @return {boolean}
@@ -62,7 +63,7 @@ import truncateTableData from './truncateTableData';
  * @property {table~border} border
  * @property {table~columns[]} columns Column specific configuration.
  * @property {table~columns} columnDefault Default values for all columns. Column specific settings overwrite the default values.
- * @property {table~drawJoin} drawJoin
+ * @property {table~drawHorizontalLine} drawHorizontalLine
  */
 
 /**
@@ -94,5 +95,5 @@ export default (data, userConfig = {}) => {
 
     cellWidthIndex = calculateCellWidthIndex(rows[0]);
 
-    return drawTable(rows, config.border, cellWidthIndex, rowHeightIndex, config.drawJoin);
+    return drawTable(rows, config.border, cellWidthIndex, rowHeightIndex, config.drawHorizontalLine);
 };

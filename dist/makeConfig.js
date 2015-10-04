@@ -92,11 +92,11 @@ exports['default'] = function (rows) {
     config.border = makeBorder(config.border);
     config.columns = makeColumns(rows, config.columns, config.columnDefault);
 
-    if (!config.drawJoin) {
+    if (!config.drawHorizontalLine) {
         /**
          * @returns {boolean}
          */
-        config.drawJoin = function () {
+        config.drawHorizontalLine = function () {
             return true;
         };
     }

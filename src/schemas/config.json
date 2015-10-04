@@ -10,7 +10,7 @@
         "columnDefault": {
             "$ref": "#/definitions/column"
         },
-        "drawJoin": {
+        "drawHorizontalLine": {
             "type": "function"
         }
     },

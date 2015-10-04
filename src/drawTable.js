@@ -10,9 +10,9 @@ import drawRow from './drawRow';
  * @param {Array} rows
  * @param {Array} columnSizeIndex
  * @param {Array} rowSpanIndex
- * @param {function} drawJoin
+ * @param {function} drawHorizontalLine
  */
-export default (rows, border, columnSizeIndex, rowSpanIndex, drawJoin) => {
+export default (rows, border, columnSizeIndex, rowSpanIndex, drawHorizontalLine) => {
     let output,
         rowCount,
         rowHeight,
@@ -23,7 +23,10 @@ export default (rows, border, columnSizeIndex, rowSpanIndex, drawJoin) => {
     realRowIndex = 0;
 
     output = '';
-    output += drawBorderTop(columnSizeIndex, border);
+
+    if (drawHorizontalLine(realRowIndex, rowCount)) {
+        output += drawBorderTop(columnSizeIndex, border);
+    }
 
     _.forEach(rows, (row, i) => {
         output += drawRow(row, border);
@@ -36,12 +39,14 @@ export default (rows, border, columnSizeIndex, rowSpanIndex, drawJoin) => {
 
         rowHeight--;
 
-        if (rowHeight === 0 && i !== rowCount - 1 && drawJoin(realRowIndex, rowCount)) {
+        if (rowHeight === 0 && i !== rowCount - 1 && drawHorizontalLine(realRowIndex, rowCount)) {
             output += drawBorderJoin(columnSizeIndex, border);
         }
     });
 
-    output += drawBorderBottom(columnSizeIndex, border);
+    if (drawHorizontalLine(realRowIndex, rowCount)) {
+        output += drawBorderBottom(columnSizeIndex, border);
+    }
 
     return output;
 };
