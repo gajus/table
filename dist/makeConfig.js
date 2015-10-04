@@ -1,9 +1,5 @@
 'use strict';
 
-var _lodashLangCloneDeep2 = require('lodash/lang/cloneDeep');
-
-var _lodashLangCloneDeep3 = _interopRequireDefault(_lodashLangCloneDeep2);
-
 var _lodashObjectAssign2 = require('lodash/object/assign');
 
 var _lodashObjectAssign3 = _interopRequireDefault(_lodashObjectAssign2);
@@ -16,87 +12,103 @@ var _lodashLangIsUndefined2 = require('lodash/lang/isUndefined');
 
 var _lodashLangIsUndefined3 = _interopRequireDefault(_lodashLangIsUndefined2);
 
-var _lodashObjectMapValues2 = require('lodash/object/mapValues');
+var _lodashLangCloneDeep2 = require('lodash/lang/cloneDeep');
 
-var _lodashObjectMapValues3 = _interopRequireDefault(_lodashObjectMapValues2);
+var _lodashLangCloneDeep3 = _interopRequireDefault(_lodashLangCloneDeep2);
 
 Object.defineProperty(exports, '__esModule', {
     value: true
 });
 
-var _border = require('./border/');
+var _getBorderCharacters = require('./getBorderCharacters');
 
-var _border2 = _interopRequireDefault(_border);
+var _getBorderCharacters2 = _interopRequireDefault(_getBorderCharacters);
 
 var _validateConfig = require('./validateConfig');
 
 var _validateConfig2 = _interopRequireDefault(_validateConfig);
 
-var _calculateMaximumColumnValueIndex = require('./calculateMaximumColumnValueIndex');
+var _calculateMaximumColumnWidthIndex = require('./calculateMaximumColumnWidthIndex');
 
-var _calculateMaximumColumnValueIndex2 = _interopRequireDefault(_calculateMaximumColumnValueIndex);
-
-/**
- * @param {Array[]} rows
- * @param {Object} inputConfig
- * @return {Object}
- */
+var _calculateMaximumColumnWidthIndex2 = _interopRequireDefault(_calculateMaximumColumnWidthIndex);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-exports['default'] = function (rows) {
-    var inputConfig = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+var makeBorder = undefined,
+    makeColumns = undefined;
 
-    var config = undefined,
-        maximumColumnValueIndex = undefined;
+/**
+ * Merges user provided border characters with the default border ("honeywell") characters.
+ *
+ * @param {Object} border
+ * @return {Object}
+ */
+makeBorder = function () {
+    var border = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 
-    config = (0, _lodashLangCloneDeep3['default'])(inputConfig);
+    return (0, _lodashObjectAssign3['default'])({}, (0, _getBorderCharacters2['default'])('honeywell'), border);
+};
 
-    (0, _validateConfig2['default'])(rows, config);
+/**
+ * Creates a configuration for every column using default
+ * values for the missing configuration properties.
+ *
+ * @param {Array[]} rows
+ * @param {Object} columns
+ * @return {Object}
+ */
+makeColumns = function (rows) {
+    var columns = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
 
-    if (!config.border) {
-        config.border = {};
-    }
+    var maximumColumnWidthIndex = undefined;
 
-    config.border = (0, _lodashObjectAssign3['default'])({}, (0, _border2['default'])('honeywell'), config.border);
-
-    maximumColumnValueIndex = (0, _calculateMaximumColumnValueIndex2['default'])(rows);
-
-    if (!config.column) {
-        config.column = {};
-    }
+    maximumColumnWidthIndex = (0, _calculateMaximumColumnWidthIndex2['default'])(rows);
 
     (0, _lodashUtilityTimes3['default'])(rows[0].length, function (index) {
-        if ((0, _lodashLangIsUndefined3['default'])(config.column[index])) {
-            config.column[index] = {};
+        if ((0, _lodashLangIsUndefined3['default'])(columns[index])) {
+            columns[index] = {};
+        }
+
+        if ((0, _lodashLangIsUndefined3['default'])(columns[index].alignment)) {
+            columns[index].alignment = 'left';
+        }
+
+        if ((0, _lodashLangIsUndefined3['default'])(columns[index].width)) {
+            columns[index].width = maximumColumnWidthIndex[index];
+        }
+
+        if ((0, _lodashLangIsUndefined3['default'])(columns[index].paddingLeft)) {
+            columns[index].paddingLeft = 1;
+        }
+
+        if ((0, _lodashLangIsUndefined3['default'])(columns[index].paddingRight)) {
+            columns[index].paddingRight = 1;
         }
     });
 
-    config.column = (0, _lodashObjectMapValues3['default'])(config.column, function (column, index0) {
-        if ((0, _lodashLangIsUndefined3['default'])(column.minWidth) || maximumColumnValueIndex[index0] > config.column[index0].minWidth) {
-            column.minWidth = maximumColumnValueIndex[index0];
-        }
+    return columns;
+};
 
-        if ((0, _lodashLangIsUndefined3['default'])(column.alignment)) {
-            column.alignment = 'left';
-        }
+/**
+ * Makes a new configuration object out of the userConfig object
+ * using default values for the missing configuration properties.
+ *
+ * @param {Array[]} rows
+ * @param {Object} userConfig
+ * @return {Object}
+ */
 
-        if ((0, _lodashLangIsUndefined3['default'])(column.maxWidth)) {
-            column.maxWidth = Infinity;
-        } else if (column.maxWidth < column.minWidth) {
-            column.minWidth = column.maxWidth;
-        }
+exports['default'] = function (rows) {
+    var userConfig = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
 
-        if ((0, _lodashLangIsUndefined3['default'])(column.paddingLeft)) {
-            column.paddingLeft = 0;
-        }
+    var config = undefined;
 
-        if ((0, _lodashLangIsUndefined3['default'])(column.paddingRight)) {
-            column.paddingRight = 0;
-        }
+    (0, _validateConfig2['default'])(userConfig);
 
-        return column;
-    });
+    config = (0, _lodashLangCloneDeep3['default'])(userConfig);
+
+    config.border = makeBorder(config.border);
+    config.column = makeColumns(rows, config.column);
 
     return config;
 };

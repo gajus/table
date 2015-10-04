@@ -1,51 +1,53 @@
 'use strict';
 
-var _lodashCollectionMap2 = require('lodash/collection/map');
-
-var _lodashCollectionMap3 = _interopRequireDefault(_lodashCollectionMap2);
-
-var _lodashStringRepeat2 = require('lodash/string/repeat');
-
-var _lodashStringRepeat3 = _interopRequireDefault(_lodashStringRepeat2);
-
 Object.defineProperty(exports, '__esModule', {
-    value: true
+  value: true
 });
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 var _drawTable = require('./drawTable');
 
 var _drawTable2 = _interopRequireDefault(_drawTable);
 
-var _calculateColumnSizeIndex = require('./calculateColumnSizeIndex');
+var _calculateCellWidthIndex = require('./calculateCellWidthIndex');
 
-var _calculateColumnSizeIndex2 = _interopRequireDefault(_calculateColumnSizeIndex);
+var _calculateCellWidthIndex2 = _interopRequireDefault(_calculateCellWidthIndex);
 
 var _makeConfig = require('./makeConfig');
 
 var _makeConfig2 = _interopRequireDefault(_makeConfig);
 
-var _calculateRowSpanIndex = require('./calculateRowSpanIndex');
+var _calculateRowHeightIndex = require('./calculateRowHeightIndex');
 
-var _calculateRowSpanIndex2 = _interopRequireDefault(_calculateRowSpanIndex);
+var _calculateRowHeightIndex2 = _interopRequireDefault(_calculateRowHeightIndex);
 
-var _mapDataUsingRowSpanIndex = require('./mapDataUsingRowSpanIndex');
+var _mapDataUsingRowHeightIndex = require('./mapDataUsingRowHeightIndex');
 
-var _mapDataUsingRowSpanIndex2 = _interopRequireDefault(_mapDataUsingRowSpanIndex);
+var _mapDataUsingRowHeightIndex2 = _interopRequireDefault(_mapDataUsingRowHeightIndex);
 
 var _stringWidth = require('string-width');
 
 var _stringWidth2 = _interopRequireDefault(_stringWidth);
 
-var _align = require('./align');
+var _alignTableData = require('./alignTableData');
 
-var _align2 = _interopRequireDefault(_align);
+var _alignTableData2 = _interopRequireDefault(_alignTableData);
 
-var _validateData = require('./validateData');
+var _padTableData = require('./padTableData');
 
-var _validateData2 = _interopRequireDefault(_validateData);
+var _padTableData2 = _interopRequireDefault(_padTableData);
+
+var _validateTableData = require('./validateTableData');
+
+var _validateTableData2 = _interopRequireDefault(_validateTableData);
+
+var _stringifyTableData = require('./stringifyTableData');
+
+var _stringifyTableData2 = _interopRequireDefault(_stringifyTableData);
 
 /**
- * @typedef {String} table~cell
+ * @typedef {string} table~cell
  */
 
 /**
@@ -53,112 +55,69 @@ var _validateData2 = _interopRequireDefault(_validateData);
  */
 
 /**
- * @typedef {Object} table~configColumn
- * @property {String} alignment Cell content alignment (enum: left, center, right) (default: left).
- * @property {Number} minWidth Minimum column width (default: 0).
- * @property {Number} maxWidth Maximum column width (default: Infinity).
- * @property {Number} paddingLeft Cell content padding width left (default: 0).
- * @property {Number} paddingRight Cell content padding width right (default: 0).
+ * @typedef {Object} table~columns
+ * @property {string} alignment Cell content alignment (enum: left, center, right) (default: left).
+ * @property {number} width Column width (default: auto).
+ * @property {number} paddingLeft Cell content padding width left (default: 1).
+ * @property {number} paddingRight Cell content padding width right (default: 1).
  */
 
 /**
- * @typedef {Object} table~configBorder
- * @property {String} topBody
- * @property {String} topJoin
- * @property {String} topLeft
- * @property {String} topRight
- * @property {String} bottomBody
- * @property {String} bottomJoin
- * @property {String} bottomLeft
- * @property {String} bottomRight
- * @property {String} bodyLeft
- * @property {String} bodyRight
- * @property {String} bodyJoin
- * @property {String} joinBody
- * @property {String} joinLeft
- * @property {String} joinRight
- * @property {String} joinJoin
+ * @typedef {Object} table~border
+ * @property {string} topBody
+ * @property {string} topJoin
+ * @property {string} topLeft
+ * @property {string} topRight
+ * @property {string} bottomBody
+ * @property {string} bottomJoin
+ * @property {string} bottomLeft
+ * @property {string} bottomRight
+ * @property {string} bodyLeft
+ * @property {string} bodyRight
+ * @property {string} bodyJoin
+ * @property {string} joinBody
+ * @property {string} joinLeft
+ * @property {string} joinRight
+ * @property {string} joinJoin
  */
 
 /**
  * @typedef {Object} table~config
- * @property {table~configBorder}
- * @property {table~configColumn[]} column Column specific configuration.
+ * @property {table~border} border
+ * @property {table~columns[]} columns Column specific configuration.
  */
 
 /**
  * Generates a text table.
  *
- * @param {table~row[]} rows
- * @param {table~config} config
+ * @param {table~row[]} data
+ * @param {table~config} userConfig
  * @return {String}
  */
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+exports['default'] = function (data) {
+  var userConfig = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
 
-exports['default'] = function (rows) {
-    var config = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+  var config = undefined,
+      rowHeightIndex = undefined,
+      cellWidthIndex = undefined,
+      rows = undefined;
 
-    var derivedConfig = undefined,
-        safeData = undefined,
-        rowSpanIndex = undefined,
-        columnSizeIndex = undefined,
-        dataMappedUsingRowSpanIndex = undefined,
-        tableBorder = undefined;
+  (0, _validateTableData2['default'])(data);
 
-    (0, _validateData2['default'])(rows);
+  rows = (0, _stringifyTableData2['default'])(data);
 
-    safeData = (0, _lodashCollectionMap3['default'])(rows, function (columns) {
-        return (0, _lodashCollectionMap3['default'])(columns, String);
-    });
+  config = (0, _makeConfig2['default'])(rows, userConfig);
 
-    // console.log(`safeData`, safeData);
+  rowHeightIndex = (0, _calculateRowHeightIndex2['default'])(rows, config);
 
-    derivedConfig = (0, _makeConfig2['default'])(safeData, config);
+  rows = (0, _mapDataUsingRowHeightIndex2['default'])(rows, rowHeightIndex, config);
+  rows = (0, _alignTableData2['default'])(rows, config);
+  rows = (0, _padTableData2['default'])(rows, config);
 
-    // console.log(`derivedConfig`, derivedConfig);
+  cellWidthIndex = (0, _calculateCellWidthIndex2['default'])(rows[0]);
 
-    rowSpanIndex = (0, _calculateRowSpanIndex2['default'])(safeData, derivedConfig);
-
-    // console.log(`rowSpanIndex`, rowSpanIndex);
-
-    dataMappedUsingRowSpanIndex = (0, _mapDataUsingRowSpanIndex2['default'])(safeData, rowSpanIndex, derivedConfig);
-
-    // console.log(`dataMappedUsingRowSpanIndex`, dataMappedUsingRowSpanIndex);
-
-    dataMappedUsingRowSpanIndex = (0, _lodashCollectionMap3['default'])(dataMappedUsingRowSpanIndex, function (cells, index0) {
-        return (0, _lodashCollectionMap3['default'])(cells, function (value, index1) {
-            var column = undefined;
-
-            column = derivedConfig.column[index1];
-
-            // console.log(column);
-
-            if ((0, _stringWidth2['default'])(value) === column.maxWidth) {
-                return value;
-            } else {
-                return (0, _align2['default'])(value, column.minWidth, column.alignment);
-            }
-        });
-    });
-
-    dataMappedUsingRowSpanIndex = (0, _lodashCollectionMap3['default'])(dataMappedUsingRowSpanIndex, function (cells, index0) {
-        return (0, _lodashCollectionMap3['default'])(cells, function (value, index1) {
-            var column = undefined;
-
-            column = derivedConfig.column[index1];
-
-            return (0, _lodashStringRepeat3['default'])(' ', column.paddingLeft) + value + (0, _lodashStringRepeat3['default'])(' ', column.paddingRight);
-        });
-    });
-
-    //_.times(config.column[index1].paddingLeft, ` `)
-
-    columnSizeIndex = (0, _calculateColumnSizeIndex2['default'])(dataMappedUsingRowSpanIndex[0]);
-
-    // console.log(`columnSizeIndex`, columnSizeIndex);
-
-    return (0, _drawTable2['default'])(dataMappedUsingRowSpanIndex, derivedConfig.border, columnSizeIndex, rowSpanIndex);
+  return (0, _drawTable2['default'])(rows, config.border, cellWidthIndex, rowHeightIndex);
 };
 
 module.exports = exports['default'];

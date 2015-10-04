@@ -1,41 +1,38 @@
 'use strict';
 
-var _lodashCollectionForEach2 = require('lodash/collection/forEach');
-
-var _lodashCollectionForEach3 = _interopRequireDefault(_lodashCollectionForEach2);
-
-var _lodashLangIsUndefined2 = require('lodash/lang/isUndefined');
-
-var _lodashLangIsUndefined3 = _interopRequireDefault(_lodashLangIsUndefined2);
-
 Object.defineProperty(exports, '__esModule', {
     value: true
 });
 
-// To accomodate for the ./dist/ package.
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var _srcSchemasConfigJson = require('./../src/schemas/config.json');
+var _schemasConfigJson = require('./schemas/config.json');
 
-var _srcSchemasConfigJson2 = _interopRequireDefault(_srcSchemasConfigJson);
+var _schemasConfigJson2 = _interopRequireDefault(_schemasConfigJson);
 
 var _tv4 = require('tv4');
 
 var _tv42 = _interopRequireDefault(_tv4);
 
 /**
- * @param {row[]} rows
- * @param {formatData~config} config
- * @return {undefined}
+ * @typedef {string} cell
  */
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+/**
+ * @typedef {cell[]} validateData~column
+ */
 
-exports['default'] = function (rows) {
-    var config = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+/**
+ * @param {formatData~config} config
+ * @returns {undefined}
+ */
+
+exports['default'] = function () {
+    var config = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 
     var result = undefined;
 
-    result = _tv42['default'].validateResult(config, _srcSchemasConfigJson2['default']);
+    result = _tv42['default'].validateResult(config, _schemasConfigJson2['default']);
 
     if (!result.valid) {
         console.log('config', config);
@@ -47,14 +44,6 @@ exports['default'] = function (rows) {
         });
 
         throw new Error('Invalid config.');
-    }
-
-    if (config.column) {
-        (0, _lodashCollectionForEach3['default'])(config.column, function (column) {
-            if (!(0, _lodashLangIsUndefined3['default'])(column.minWidth) && !(0, _lodashLangIsUndefined3['default'])(column.maxWidth) && column.minWidth > column.maxWidth) {
-                throw new Error('Column minWidth cannot be greater than maxWidth.');
-            }
-        });
     }
 };
 

@@ -1,11 +1,9 @@
 import _ from 'lodash';
-
 import {
     drawBorderTop,
     drawBorderJoin,
     drawBorderBottom
 } from './drawBorder';
-
 import drawRow from './drawRow';
 
 /**

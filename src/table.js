@@ -1,15 +1,17 @@
 import _ from 'lodash';
 import drawTable from './drawTable';
-import calculateColumnSizeIndex from './calculateColumnSizeIndex';
+import calculateCellWidthIndex from './calculateCellWidthIndex';
 import makeConfig from './makeConfig';
-import calculateRowSpanIndex from './calculateRowSpanIndex';
-import mapDataUsingRowSpanIndex from './mapDataUsingRowSpanIndex';
+import calculateRowHeightIndex from './calculateRowHeightIndex';
+import mapDataUsingRowHeightIndex from './mapDataUsingRowHeightIndex';
 import stringWidth from 'string-width';
-import align from './align';
-import validateData from './validateData';
+import alignTableData from './alignTableData';
+import padTableData from './padTableData';
+import validateTableData from './validateTableData';
+import stringifyTableData from './stringifyTableData';
 
 /**
- * @typedef {String} table~cell
+ * @typedef {string} table~cell
  */
 
 /**
@@ -17,105 +19,64 @@ import validateData from './validateData';
  */
 
 /**
- * @typedef {Object} table~configColumn
- * @property {String} alignment Cell content alignment (enum: left, center, right) (default: left).
- * @property {Number} minWidth Minimum column width (default: 0).
- * @property {Number} maxWidth Maximum column width (default: Infinity).
- * @property {Number} paddingLeft Cell content padding width left (default: 0).
- * @property {Number} paddingRight Cell content padding width right (default: 0).
+ * @typedef {Object} table~columns
+ * @property {string} alignment Cell content alignment (enum: left, center, right) (default: left).
+ * @property {number} width Column width (default: auto).
+ * @property {number} paddingLeft Cell content padding width left (default: 1).
+ * @property {number} paddingRight Cell content padding width right (default: 1).
  */
 
 /**
- * @typedef {Object} table~configBorder
- * @property {String} topBody
- * @property {String} topJoin
- * @property {String} topLeft
- * @property {String} topRight
- * @property {String} bottomBody
- * @property {String} bottomJoin
- * @property {String} bottomLeft
- * @property {String} bottomRight
- * @property {String} bodyLeft
- * @property {String} bodyRight
- * @property {String} bodyJoin
- * @property {String} joinBody
- * @property {String} joinLeft
- * @property {String} joinRight
- * @property {String} joinJoin
+ * @typedef {Object} table~border
+ * @property {string} topBody
+ * @property {string} topJoin
+ * @property {string} topLeft
+ * @property {string} topRight
+ * @property {string} bottomBody
+ * @property {string} bottomJoin
+ * @property {string} bottomLeft
+ * @property {string} bottomRight
+ * @property {string} bodyLeft
+ * @property {string} bodyRight
+ * @property {string} bodyJoin
+ * @property {string} joinBody
+ * @property {string} joinLeft
+ * @property {string} joinRight
+ * @property {string} joinJoin
  */
 
 /**
  * @typedef {Object} table~config
- * @property {table~configBorder}
- * @property {table~configColumn[]} column Column specific configuration.
+ * @property {table~border} border
+ * @property {table~columns[]} columns Column specific configuration.
  */
 
 /**
  * Generates a text table.
  *
- * @param {table~row[]} rows
- * @param {table~config} config
+ * @param {table~row[]} data
+ * @param {table~config} userConfig
  * @return {String}
  */
-export default (rows, config = {}) => {
-    let derivedConfig,
-        safeData,
-        rowSpanIndex,
-        columnSizeIndex,
-        dataMappedUsingRowSpanIndex,
-        tableBorder;
+export default (data, userConfig = {}) => {
+    let config,
+        rowHeightIndex,
+        cellWidthIndex,
+        rows;
 
-    validateData(rows);
+    validateTableData(data);
 
-    safeData = _.map(rows, (columns) => {
-        return _.map(columns, String);
-    });
+    rows = stringifyTableData(data);
 
-    // console.log(`safeData`, safeData);
+    config = makeConfig(rows, userConfig);
 
-    derivedConfig = makeConfig(safeData, config);
+    rowHeightIndex = calculateRowHeightIndex(rows, config);
 
-    // console.log(`derivedConfig`, derivedConfig);
+    rows = mapDataUsingRowHeightIndex(rows, rowHeightIndex, config);
+    rows = alignTableData(rows, config);
+    rows = padTableData(rows, config);
 
-    rowSpanIndex = calculateRowSpanIndex(safeData, derivedConfig);
+    cellWidthIndex = calculateCellWidthIndex(rows[0]);
 
-    // console.log(`rowSpanIndex`, rowSpanIndex);
-
-    dataMappedUsingRowSpanIndex = mapDataUsingRowSpanIndex(safeData, rowSpanIndex, derivedConfig);
-
-    // console.log(`dataMappedUsingRowSpanIndex`, dataMappedUsingRowSpanIndex);
-
-    dataMappedUsingRowSpanIndex = _.map(dataMappedUsingRowSpanIndex, (cells, index0) => {
-        return _.map(cells, (value, index1) => {
-            let column;
-
-            column = derivedConfig.column[index1];
-
-            // console.log(column);
-
-            if (stringWidth(value) === column.maxWidth) {
-                return value;
-            } else {
-                return align(value, column.minWidth, column.alignment);
-            }
-        });
-    });
-
-    dataMappedUsingRowSpanIndex = _.map(dataMappedUsingRowSpanIndex, (cells, index0) => {
-        return _.map(cells, (value, index1) => {
-            let column;
-
-            column = derivedConfig.column[index1];
-
-            return _.repeat(` `, column.paddingLeft) + value + _.repeat(` `, column.paddingRight);
-        });
-    });
-
-    //_.times(config.column[index1].paddingLeft, ` `)
-
-    columnSizeIndex = calculateColumnSizeIndex(dataMappedUsingRowSpanIndex[0]);
-
-    // console.log(`columnSizeIndex`, columnSizeIndex);
-
-    return drawTable(dataMappedUsingRowSpanIndex, derivedConfig.border, columnSizeIndex, rowSpanIndex);
+    return drawTable(rows, config.border, cellWidthIndex, rowHeightIndex);
 };

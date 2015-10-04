@@ -2,6 +2,44 @@
     "type": "object",
     "properties": {
         "border": {
+            "$ref": "#/definitions/borders"
+        },
+        "column": {
+            "$ref": "#/definitions/columns"
+        }
+    },
+    "additionalProperties": false,
+    "definitions": {
+        "columns": {
+            "type": "object",
+            "patternProperties": {
+                "^[0-9]+$": {
+                    "type": "object",
+                    "properties": {
+                        "alignment": {
+                            "type": "string",
+                            "enum": [
+                                "left",
+                                "right",
+                                "center"
+                            ]
+                        },
+                        "width": {
+                            "type": "number"
+                        },
+                        "paddingLeft": {
+                            "type": "number"
+                        },
+                        "paddingRight": {
+                            "type": "number"
+                        }
+                    },
+                    "additionalProperties": false
+                }
+            },
+            "additionalProperties": false
+        },
+        "borders": {
             "type": "object",
             "properties": {
                 "topBody": {
@@ -52,41 +90,6 @@
             },
             "additionalProperties": false
         },
-        "column": {
-            "type": "object",
-            "patternProperties": {
-                "^[0-9]+$": {
-                    "type": "object",
-                    "properties": {
-                        "alignment": {
-                            "type": "string",
-                            "enum": [
-                                "left",
-                                "right",
-                                "center"
-                            ]
-                        },
-                        "minWidth": {
-                            "type": "number"
-                        },
-                        "maxWidth": {
-                            "type": "number"
-                        },
-                        "paddingLeft": {
-                            "type": "number"
-                        },
-                        "paddingRight": {
-                            "type": "number"
-                        }
-                    },
-                    "additionalProperties": false
-                }
-            },
-            "additionalProperties": false
-        }
-    },
-    "additionalProperties": false,
-    "definitions": {
         "border": {
             "type": "string"
         }

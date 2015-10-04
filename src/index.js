@@ -1,8 +1,8 @@
-import border from './border/';
 import table from './table';
+import getBorderCharacters from './getBorderCharacters';
 
 export {
-    border
+    getBorderCharacters
 };
 
 export default table;

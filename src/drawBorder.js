@@ -14,9 +14,9 @@ let drawBorder,
  */
 
 /**
- * @param {Number[]} columnSizeIndex
+ * @param {number[]} columnSizeIndex
  * @param {drawBorder~parts} parts
- * @return {String}
+ * @return {string}
  */
 drawBorder = (columnSizeIndex, parts) => {
     let columns;
@@ -32,16 +32,16 @@ drawBorder = (columnSizeIndex, parts) => {
 
 /**
  * @typedef drawBorderTop~parts
- * @property {String} topLeft
- * @property {String} topRight
- * @property {String} topBody
- * @property {String} topJoin
+ * @property {string} topLeft
+ * @property {string} topRight
+ * @property {string} topBody
+ * @property {string} topJoin
  */
 
 /**
- * @param {Number[]} columnSizeIndex
+ * @param {number[]} columnSizeIndex
  * @param {drawBorderTop~parts} parts
- * @return {String}
+ * @return {string}
  */
 drawBorderTop = (columnSizeIndex, parts) => {
     return drawBorder(columnSizeIndex, {
@@ -54,16 +54,16 @@ drawBorderTop = (columnSizeIndex, parts) => {
 
 /**
  * @typedef drawBorderJoin~parts
- * @property {String} joinLeft
- * @property {String} joinRight
- * @property {String} joinBody
- * @property {String} joinJoin
+ * @property {string} joinLeft
+ * @property {string} joinRight
+ * @property {string} joinBody
+ * @property {string} joinJoin
  */
 
 /**
- * @param {Number[]} columnSizeIndex
+ * @param {number[]} columnSizeIndex
  * @param {drawBorderJoin~parts} parts
- * @return {String}
+ * @return {string}
  */
 drawBorderJoin = (columnSizeIndex, parts) => {
     return drawBorder(columnSizeIndex, {
@@ -76,16 +76,16 @@ drawBorderJoin = (columnSizeIndex, parts) => {
 
 /**
  * @typedef drawBorderBottom~parts
- * @property {String} topLeft
- * @property {String} topRight
- * @property {String} topBody
- * @property {String} topJoin
+ * @property {string} topLeft
+ * @property {string} topRight
+ * @property {string} topBody
+ * @property {string} topJoin
  */
 
 /**
- * @param {Number[]} columnSizeIndex
+ * @param {number[]} columnSizeIndex
  * @param {drawBorderBottom~parts} parts
- * @return {String}
+ * @return {string}
  */
 drawBorderBottom = (columnSizeIndex, parts) => {
     return drawBorder(columnSizeIndex, {

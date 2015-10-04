@@ -6,14 +6,14 @@ Object.defineProperty(exports, '__esModule', {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var _border = require('./border/');
-
-var _border2 = _interopRequireDefault(_border);
-
 var _table = require('./table');
 
 var _table2 = _interopRequireDefault(_table);
 
-exports.border = _border2['default'];
+var _getBorderCharacters = require('./getBorderCharacters');
+
+var _getBorderCharacters2 = _interopRequireDefault(_getBorderCharacters);
+
+exports.getBorderCharacters = _getBorderCharacters2['default'];
 exports['default'] = _table2['default'];
 //# sourceMappingURL=index.js.map

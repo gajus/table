@@ -43,11 +43,11 @@ makeColumns = (rows, columns = {}) => {
         }
 
         if (_.isUndefined(columns[index].paddingLeft)) {
-            columns[index].paddingLeft = 0;
+            columns[index].paddingLeft = 1;
         }
 
         if (_.isUndefined(columns[index].paddingRight)) {
-            columns[index].paddingRight = 0;
+            columns[index].paddingRight = 1;
         }
     });
 

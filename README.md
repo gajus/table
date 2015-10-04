@@ -1,31 +1,33 @@
-# Table
+<h1 id="table">Table</h1>
 
 [![Travis build status](http://img.shields.io/travis/gajus/table/master.svg?style=flat)](https://travis-ci.org/gajus/table)
 [![NPM version](http://img.shields.io/npm/v/table.svg?style=flat)](https://www.npmjs.com/package/table)
 [![js-canonical-style](https://img.shields.io/badge/code%20style-canonical-brightgreen.svg?style=flat)](https://github.com/gajus/canonical)
 
-* [Features](#features)
-* [Usage](#usage)
-    * [Custom Border](#custom-border)
-        * [Predefined Border Templates](#predefined-border-templates)
-    * [Column Width](#column-width)
-    * [Cell Content Alignment](#cell-content-alignment)
+* [Table](#table)
+    * [Features](#table-features)
+    * [Usage](#table-usage)
+        * [Cell Content Alignment](#table-usage-cell-content-alignment)
+        * [Column Width](#table-usage-column-width)
+        * [Custom Border](#table-usage-custom-border)
+        * [Padding Cell Content](#table-usage-padding-cell-content)
+
 
 Produces a string that represents array data in a text table.
 
-![Demo of Table displaying a list of missions to Moon](./.README/demo.png)
+![Demo of table displaying a list of missions to the Moon.](./.README/demo.png)
 
-## Features
+<h2 id="table-features">Features</h2>
 
 * Works with strings containing [fullwidth](https://en.wikipedia.org/wiki/Halfwidth_and_fullwidth_forms) characters.
 * Works with strings containing [ANSI escape codes](https://en.wikipedia.org/wiki/ANSI_escape_code).
-* Custom border characters.
-* Content alignment.
-* Content padding.
-* Column width.
-* Expanding long cell values into multiple rows.
+* Configurable border characters.
+* Configurable content alignment per column.
+* Configurable content padding per column.
+* Configurable column width.
+* Text wrapping.
 
-## Usage
+<h2 id="table-usage">Usage</h2>
 
 Table data is described using an array (rows) of array (cells).
 
@@ -42,7 +44,7 @@ data = [
 ];
 
 /**
- * @typedef {String} table~cell
+ * @typedef {string} table~cell
  */
 
 /**
@@ -50,36 +52,36 @@ data = [
  */
 
 /**
- * @typedef {Object} table~configColumn
- * @property {String} alignment Cell content alignment (enum: left, center, right) (default: left).
- * @property {Number} width Column width (default: auto).
- * @property {Number} paddingLeft Cell content padding width left (default: 0).
- * @property {Number} paddingRight Cell content padding width right (default: 0).
+ * @typedef {Object} table~columns
+ * @property {string} alignment Cell content alignment (enum: left, center, right) (default: left).
+ * @property {number} width Column width (default: auto).
+ * @property {number} paddingLeft Cell content padding width left (default: 1).
+ * @property {number} paddingRight Cell content padding width right (default: 1).
  */
 
 /**
- * @typedef {Object} table~configBorder
- * @property {String} topBody
- * @property {String} topJoin
- * @property {String} topLeft
- * @property {String} topRight
- * @property {String} bottomBody
- * @property {String} bottomJoin
- * @property {String} bottomLeft
- * @property {String} bottomRight
- * @property {String} bodyLeft
- * @property {String} bodyRight
- * @property {String} bodyJoin
- * @property {String} joinBody
- * @property {String} joinLeft
- * @property {String} joinRight
- * @property {String} joinJoin
+ * @typedef {Object} table~border
+ * @property {string} topBody
+ * @property {string} topJoin
+ * @property {string} topLeft
+ * @property {string} topRight
+ * @property {string} bottomBody
+ * @property {string} bottomJoin
+ * @property {string} bottomLeft
+ * @property {string} bottomRight
+ * @property {string} bodyLeft
+ * @property {string} bodyRight
+ * @property {string} bodyJoin
+ * @property {string} joinBody
+ * @property {string} joinLeft
+ * @property {string} joinRight
+ * @property {string} joinJoin
  */
 
 /**
  * @typedef {Object} table~config
- * @property {table~configBorder}
- * @property {table~configColumn[]} column Column specific configuration.
+ * @property {table~border} border
+ * @property {table~columns[]} columns Column specific configuration.
  */
 
 /**
@@ -95,16 +97,104 @@ console.log(output);
 ```
 
 ```
-╔══╤══╤══╗
-║0A│0B│0C║
-╟──┼──┼──╢
-║1A│1B│1C║
-╟──┼──┼──╢
-║2A│2B│2C║
-╚══╧══╧══╝
+╔════╤════╤════╗
+║ 0A │ 0B │ 0C ║
+╟────┼────┼────╢
+║ 1A │ 1B │ 1C ║
+╟────┼────┼────╢
+║ 2A │ 2B │ 2C ║
+╚════╧════╧════╝
 ```
 
-### Custom Border
+
+<h3 id="table-usage-cell-content-alignment">Cell Content Alignment</h3>
+
+`alignment` property controls content horizontal alignment within a cell.
+
+Valid values are: "left", "right" and "center".
+
+```js
+let data,
+    output,
+    options;
+
+data = [
+    ['0A', '0B', '0C'],
+    ['1A', '1B', '1C'],
+    ['2A', '2B', '2C']
+];
+
+options = {
+    column: {
+        0: {
+            alignment: 'left',
+            minWidth: 10
+        },
+        1: {
+            alignment: 'center',
+            minWidth: 10
+        },
+        2: {
+            alignment: 'right',
+            minWidth: 10
+        }
+    }
+};
+
+output = table(data, options);
+
+console.log(output);
+```
+
+```
+╔════════════╤════════════╤════════════╗
+║ 0A         │     0B     │         0C ║
+╟────────────┼────────────┼────────────╢
+║ 1A         │     1B     │         1C ║
+╟────────────┼────────────┼────────────╢
+║ 2A         │     2B     │         2C ║
+╚════════════╧════════════╧════════════╝
+```
+
+<h3 id="table-usage-column-width">Column Width</h3>
+
+`width` property restrictions column width to a fixed width.
+
+```js
+let data,
+    output,
+    options;
+
+data = [
+    ['0A', '0B', '0C'],
+    ['1A', '1B', '1C'],
+    ['2A', '2B', '2C']
+];
+
+options = {
+    column: {
+        1: {
+            width: 10
+        }
+    }
+};
+
+output = table(data, options);
+
+console.log(output);
+```
+
+```
+╔════╤════════════╤════╗
+║ 0A │ 0B         │ 0C ║
+╟────┼────────────┼────╢
+║ 1A │ 1B         │ 1C ║
+╟────┼────────────┼────╢
+║ 2A │ 2B         │ 2C ║
+╚════╧════════════╧════╝
+```
+
+<h3 id="table-usage-custom-border">Custom Border</h3>
 
 `border` property describes the characters used to draw the table borders.
 
@@ -148,161 +238,16 @@ console.log(output);
 ```
 
 ```
-┌──┬──┬──┐
-│0A│0B│0C│
-├──┼──┼──┤
-│1A│1B│1C│
-├──┼──┼──┤
-│2A│2B│2C│
-└──┴──┴──┘
+┌────┬────┬────┐
+│ 0A │ 0B │ 0C │
+├────┼────┼────┤
+│ 1A │ 1B │ 1C │
+├────┼────┼────┤
+│ 2A │ 2B │ 2C │
+└────┴────┴────┘
 ```
 
-#### Predefined Border Templates
-
-You can load one of the predefined border templates using `border` function.
-
-```js
-import table from 'table';
-
-import {
-    border
-} from 'table';
-
-let data;
-
-data = [
-    ['0A', '0B', '0C'],
-    ['1A', '1B', '1C'],
-    ['2A', '2B', '2C']
-];
-
-table(data, {
-    border: border(`name of the template`)
-});
-```
-
-```
-# honeywell
-
-╔══╤══╤══╗
-║0A│0B│0C║
-╟──┼──┼──╢
-║1A│1B│1C║
-╟──┼──┼──╢
-║2A│2B│2C║
-╚══╧══╧══╝
-
-# norc
-
-┌──┬──┬──┐
-│0A│0B│0C│
-├──┼──┼──┤
-│1A│1B│1C│
-├──┼──┼──┤
-│2A│2B│2C│
-└──┴──┴──┘
-
-# ramac (ASCII; for use in terminals that do not support Unicode characters)
-
-+--+--+--+
-|0A|0B|0C|
-|--|--|--|
-|1A|1B|1C|
-|--|--|--|
-|2A|2B|2C|
-+--+--+--+
-```
-
-Raise [an issue](https://github.com/gajus/table/issues) if you'd like to contribute a new border template.
-
-### Column Width
-
-`width` property restrictions column width to a fixed width.
-
-```js
-let data,
-    output,
-    options;
-
-data = [
-    ['0A', '0B', '0C'],
-    ['1A', '1B', '1C'],
-    ['2A', '2B', '2C']
-];
-
-options = {
-    column: {
-        1: {
-            width: 10
-        }
-    }
-};
-
-output = table(data, options);
-
-console.log(output);
-```
-
-```
-╔══╤══════════╤══╗
-║0A│0B        │0C║
-╟──┼──────────┼──╢
-║1A│1B        │1C║
-╟──┼──────────┼──╢
-║2A│2B        │2C║
-╚══╧══════════╧══╝
-```
-
-### Cell Content Alignment
-
-`alignment` property controls content horizontal alignment within a cell.
-
-Valid values are: "left", "right" and "center".
-
-```js
-let data,
-    output,
-    options;
-
-data = [
-    ['0A', '0B', '0C'],
-    ['1A', '1B', '1C'],
-    ['2A', '2B', '2C']
-];
-
-options = {
-    column: {
-        0: {
-            alignment: 'left',
-            minWidth: 10
-        },
-        1: {
-            alignment: 'center',
-            minWidth: 10
-        },
-        2: {
-            alignment: 'right',
-            minWidth: 10
-        }
-    }
-};
-
-output = table(data, options);
-
-console.log(output);
-```
-
-```
-╔══════════╤══════════╤══════════╗
-║0A        │    0B    │        0C║
-╟──────────┼──────────┼──────────╢
-║1A        │    1B    │        1C║
-╟──────────┼──────────┼──────────╢
-║2A        │    2B    │        2C║
-╚══════════╧══════════╧══════════╝
-```
-
-### Padding Cell Content
+<h3 id="table-usage-padding-cell-content">Padding Cell Content</h3>
 
 `paddingLeft` and `paddingRight` properties control content padding within a cell. Property value represents a number of whitespaces used to pad the content.
 
@@ -335,13 +280,72 @@ console.log(output);
 ```
 
 ```
-╔═════╤═════╤══╗
-║   0A│AA   │0C║
-║     │BB   │  ║
-║     │CC   │  ║
-╟─────┼─────┼──╢
-║   1A│1B   │1C║
-╟─────┼─────┼──╢
-║   2A│2B   │2C║
-╚═════╧═════╧══╝
+╔══════╤══════╤════╗
+║   0A │ AA   │ 0C ║
+║      │ BB   │    ║
+║      │ CC   │    ║
+╟──────┼──────┼────╢
+║   1A │ 1B   │ 1C ║
+╟──────┼──────┼────╢
+║   2A │ 2B   │ 2C ║
+╚══════╧══════╧════╝
 ```
+
+<h4 id="table-usage-padding-cell-content-predefined-border-templates">Predefined Border Templates</h4>
+
+You can load one of the predefined border templates using `border` function.
+
+```js
+import table from 'table';
+
+import {
+    border
+} from 'table';
+
+let data;
+
+data = [
+    ['0A', '0B', '0C'],
+    ['1A', '1B', '1C'],
+    ['2A', '2B', '2C']
+];
+
+table(data, {
+    border: border(`name of the template`)
+});
+```
+
+```
+# honeywell
+
+╔════╤════╤════╗
+║ 0A │ 0B │ 0C ║
+╟────┼────┼────╢
+║ 1A │ 1B │ 1C ║
+╟────┼────┼────╢
+║ 2A │ 2B │ 2C ║
+╚════╧════╧════╝
+
+# norc
+
+┌────┬────┬────┐
+│ 0A │ 0B │ 0C │
+├────┼────┼────┤
+│ 1A │ 1B │ 1C │
+├────┼────┼────┤
+│ 2A │ 2B │ 2C │
+└────┴────┴────┘
+
+# ramac (ASCII; for use in terminals that do not support Unicode characters)
+
++----+----+----+
+| 0A | 0B | 0C |
+|----|----|----|
+| 1A | 1B | 1C |
+|----|----|----|
+| 2A | 2B | 2C |
++----+----+----+
+```
+
+Raise [an issue](https://github.com/gajus/table/issues) if you'd like to contribute a new border template.
+

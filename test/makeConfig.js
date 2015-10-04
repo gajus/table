@@ -56,7 +56,7 @@ describe(`makeConfig`, () => {
         });
         context(`'paddingLeft'`, () => {
             context(`is not provided`, () => {
-                it(`defaults to 0`, () => {
+                it(`defaults to 1`, () => {
                     let config;
 
                     config = makeConfig([
@@ -65,13 +65,13 @@ describe(`makeConfig`, () => {
                         ]
                     ]);
 
-                    expect(config.column[0].paddingLeft).to.equal(0);
+                    expect(config.column[0].paddingLeft).to.equal(1);
                 });
             });
         });
         context(`'paddingRight'`, () => {
             context(`is not provided`, () => {
-                it(`defaults to 0`, () => {
+                it(`defaults to 1`, () => {
                     let config;
 
                     config = makeConfig([
@@ -80,7 +80,7 @@ describe(`makeConfig`, () => {
                         ]
                     ]);
 
-                    expect(config.column[0].paddingRight).to.equal(0);
+                    expect(config.column[0].paddingRight).to.equal(1);
                 });
             });
         });

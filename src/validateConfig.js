@@ -11,11 +11,10 @@ import tv4 from 'tv4';
  */
 
 /**
- * @param {column[]} rows
  * @param {formatData~config} config
  * @returns {undefined}
  */
-export default (rows, config = {}) => {
+export default (config = {}) => {
     let result;
 
     result = tv4.validateResult(config, schema);
@@ -30,13 +29,5 @@ export default (rows, config = {}) => {
         });
 
         throw new Error(`Invalid config.`);
-    }
-
-    if (config.column) {
-        _.forEach(config.column, (column) => {
-            if (!_.isUndefined(column.minWidth) && !_.isUndefined(column.maxWidth) && column.minWidth > column.maxWidth) {
-                throw new Error(`Column minWidth cannot be greater than maxWidth.`);
-            }
-        });
     }
 };

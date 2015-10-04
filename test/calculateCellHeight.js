@@ -4,7 +4,7 @@ import {
 
 import calculateCellHeight from './../src/calculateCellHeight';
 
-describe.only(`calculateCellHeight`, () => {
+describe(`calculateCellHeight`, () => {
     describe(`value`, () => {
         context(`is not a string`, () => {
             it(`throws an error`, () => {

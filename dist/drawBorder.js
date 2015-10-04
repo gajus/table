@@ -28,9 +28,9 @@ var drawBorder = undefined,
  */
 
 /**
- * @param {Number[]} columnSizeIndex
+ * @param {number[]} columnSizeIndex
  * @param {drawBorder~parts} parts
- * @return {String}
+ * @return {string}
  */
 exports.drawBorder = drawBorder = function (columnSizeIndex, parts) {
     var columns = undefined;
@@ -46,16 +46,16 @@ exports.drawBorder = drawBorder = function (columnSizeIndex, parts) {
 
 /**
  * @typedef drawBorderTop~parts
- * @property {String} topLeft
- * @property {String} topRight
- * @property {String} topBody
- * @property {String} topJoin
+ * @property {string} topLeft
+ * @property {string} topRight
+ * @property {string} topBody
+ * @property {string} topJoin
  */
 
 /**
- * @param {Number[]} columnSizeIndex
+ * @param {number[]} columnSizeIndex
  * @param {drawBorderTop~parts} parts
- * @return {String}
+ * @return {string}
  */
 exports.drawBorderTop = drawBorderTop = function (columnSizeIndex, parts) {
     return drawBorder(columnSizeIndex, {
@@ -68,16 +68,16 @@ exports.drawBorderTop = drawBorderTop = function (columnSizeIndex, parts) {
 
 /**
  * @typedef drawBorderJoin~parts
- * @property {String} joinLeft
- * @property {String} joinRight
- * @property {String} joinBody
- * @property {String} joinJoin
+ * @property {string} joinLeft
+ * @property {string} joinRight
+ * @property {string} joinBody
+ * @property {string} joinJoin
  */
 
 /**
- * @param {Number[]} columnSizeIndex
+ * @param {number[]} columnSizeIndex
  * @param {drawBorderJoin~parts} parts
- * @return {String}
+ * @return {string}
  */
 exports.drawBorderJoin = drawBorderJoin = function (columnSizeIndex, parts) {
     return drawBorder(columnSizeIndex, {
@@ -90,16 +90,16 @@ exports.drawBorderJoin = drawBorderJoin = function (columnSizeIndex, parts) {
 
 /**
  * @typedef drawBorderBottom~parts
- * @property {String} topLeft
- * @property {String} topRight
- * @property {String} topBody
- * @property {String} topJoin
+ * @property {string} topLeft
+ * @property {string} topRight
+ * @property {string} topBody
+ * @property {string} topJoin
  */
 
 /**
- * @param {Number[]} columnSizeIndex
+ * @param {number[]} columnSizeIndex
  * @param {drawBorderBottom~parts} parts
- * @return {String}
+ * @return {string}
  */
 exports.drawBorderBottom = drawBorderBottom = function (columnSizeIndex, parts) {
     return drawBorder(columnSizeIndex, {
