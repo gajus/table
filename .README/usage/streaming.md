@@ -28,4 +28,6 @@ setInterval(() => {
 
 ![Streaming current date.](./.README/streaming.gif)
 
-`table` package uses ANSI escape codes to overwrite the output of the last line when a new row is printed. The underlying logic is explained in this [Stack Overflow answer](http://stackoverflow.com/a/32938658/368691). 
+`table` package uses ANSI escape codes to overwrite the output of the last line when a new row is printed.
+
+The underlying implementation is explained in this [Stack Overflow answer](http://stackoverflow.com/a/32938658/368691). 
