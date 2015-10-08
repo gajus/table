@@ -1,4 +1,4 @@
-import createStream from './src/createStream';
+import createStream from './../src/createStream';
 
 let stream;
 
