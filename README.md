@@ -13,6 +13,7 @@
         * [Draw Horizontal Line](#table-usage-draw-horizontal-line)
         * [Padding Cell Content](#table-usage-padding-cell-content)
         * [Predefined Border Templates](#table-usage-predefined-border-templates)
+        * [Streaming](#table-usage-streaming)
         * [Text Truncation](#table-usage-text-truncation)
         * [Text Wrapping](#table-usage-text-wrapping)
 
@@ -451,6 +452,37 @@ console.log(output);
 2A 2B 2C
 ```
 
+<h3 id="table-usage-streaming">Streaming</h3>
+
+`table` package exports `createStream` function used to draw a table and append rows.
+
+`createStream` requires `{number} columnDefault.width` and `{number} columnCount` configuration properties.
+
+```js
+import {
+    createStream
+} from 'table';
+
+let config,
+    stream;
+
+config = {
+    columnDefault: {
+        width: 50
+    },
+    columnCount: 1
+};
+
+stream = createStream(config);
+
+setInterval(() => {
+    stream.write([new Date()]);
+}, 500);
+```
+
+![Streaming current date.](./.README/streaming.gif)
+
+`table` package uses ANSI escape codes to overwrite the output of the last line when a new row is printed. The underlying logic is explained in this [Stack Overflow answer](http://stackoverflow.com/a/32938658/368691). 
 <h3 id="table-usage-text-truncation">Text Truncation</h3>
 
 To handle a content that overflows the container width, `table` package implements [text wrapping](#table-usage-text-wrapping). However, sometimes you may want to truncate content that is too long to be displayed in the table.
