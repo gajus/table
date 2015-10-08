@@ -22,7 +22,7 @@
   "scripts": {
     "gulp": "node ./node_modules/.bin/babel-node ./node_modules/.bin/gulp",
     "test": "npm run gulp test",
-    "build": "npm run gulp build",
+    "build": "rm -fr ./dist; npm run gulp build",
     "watch": "npm run gulp watch",
     "readme": "node ./node_modules/.bin/gitdown ./.README/README.md --output-file ./README.md"
   },
@@ -40,10 +40,10 @@
     "gulp-babel": "^5.2.1",
     "gulp-mocha": "^2.1.3",
     "gulp-sourcemaps": "^1.6.0",
-    "gulp-util": "^3.0.6"
+    "gulp-util": "^3.0.6",
+    "sinon": "^1.17.1"
   },
   "dependencies": {
-    "ansi": "^0.3.0",
     "ansi-slice": "^1.2.0",
     "bluebird": "^2.10.2",
     "chalk": "^1.1.1",
