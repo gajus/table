@@ -43,6 +43,13 @@ describe(`alignString`, () => {
         });
     });
     context(`subject parameter value`, () => {
+        context(`0 width`, () => {
+            it(`produces a string consisting of container width number of whitespace characters`, () => {
+                expect(alignString(``, 5, `left`)).to.equal(`     `, `left`);
+                expect(alignString(``, 5, `center`)).to.equal(`     `, `center`);
+                expect(alignString(``, 5, `right`)).to.equal(`     `, `right`);
+            });
+        });
         context(`plain text`, () => {
             context(`alignment`, () => {
                 context(`left`, () => {
