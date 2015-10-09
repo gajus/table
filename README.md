@@ -486,7 +486,7 @@ setInterval(() => {
 
 The underlying implementation is explained in this [Stack Overflow answer](http://stackoverflow.com/a/32938658/368691). 
 
-Streaming supports all of the configuration properties and functionality of a static table, e.g.
+Streaming supports all of the configuration properties and functionality of a static table (such as auto text wrapping, alignment and padding), e.g.
 
 ```js
 import {
