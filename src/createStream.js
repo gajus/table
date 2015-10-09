@@ -34,7 +34,7 @@ create = (row, columnWidthIndex, config) => {
 
     body = _.map(rows, (row) => {
         return drawRow(row, config.border);
-    }).join("\n");
+    }).join('');
 
     output = '';
     output += drawBorderTop(columnWidthIndex, config.border);
@@ -59,9 +59,11 @@ append = (row, columnWidthIndex, config) => {
 
     rows = prepareData([row], config);
 
+    // console.log('rows', rows);
+
     body = _.map(rows, (row) => {
         return drawRow(row, config.border);
-    }).join("\n");
+    }).join('');
 
     output = "\r\x1b[K";
     output += drawBorderJoin(columnWidthIndex, config.border);

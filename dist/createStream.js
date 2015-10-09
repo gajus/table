@@ -64,7 +64,7 @@ create = function (row, columnWidthIndex, config) {
 
     body = _lodash2['default'].map(rows, function (row) {
         return (0, _drawRow2['default'])(row, config.border);
-    }).join("\n");
+    }).join('');
 
     output = '';
     output += (0, _drawBorder.drawBorderTop)(columnWidthIndex, config.border);
@@ -89,9 +89,11 @@ append = function (row, columnWidthIndex, config) {
 
     rows = prepareData([row], config);
 
+    // console.log('rows', rows);
+
     body = _lodash2['default'].map(rows, function (row) {
         return (0, _drawRow2['default'])(row, config.border);
-    }).join("\n");
+    }).join('');
 
     output = "\r\x1b[K";
     output += (0, _drawBorder.drawBorderJoin)(columnWidthIndex, config.border);
