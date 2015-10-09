@@ -94,6 +94,10 @@ exports['default'] = function (subject, containerWidth, alignment) {
         throw new Error('Alignment parameter value must be a known alignment parameter value (left, right, center).');
     }
 
+    if (subjectWidth === 0) {
+        return _lodash2['default'].repeat(' ', containerWidth);
+    }
+
     availableWidth = containerWidth - subjectWidth;
 
     if (alignment === 'left') {
