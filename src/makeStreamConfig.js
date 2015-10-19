@@ -12,7 +12,7 @@ let makeBorder,
  * @returns {Object}
  */
 makeBorder = (border = {}) => {
-    return _.assign({}, getBorderCharacters(`honeywell`), border);
+    return _.assign({}, getBorderCharacters('honeywell'), border);
 };
 
 /**
@@ -31,8 +31,9 @@ makeColumns = (columnCount, columns = {}, columnDefault = {}) => {
         }
 
         columns[index] = _.assign({
-            alignment: `left`,
+            alignment: 'left',
             // width: columnDefault.width,
+            wrapWord: false,
             truncate: Infinity,
             paddingLeft: 1,
             paddingRight: 1
@@ -74,11 +75,11 @@ export default (userConfig = {}) => {
     config = _.cloneDeep(userConfig);
 
     if (!config.columnDefault || !config.columnDefault.width) {
-        throw new Error(`Must provide config.columnDefault.width when creating a stream.`);
+        throw new Error('Must provide config.columnDefault.width when creating a stream.');
     }
 
     if (!config.columnCount) {
-        throw new Error(`Must provide config.columnCount.`);
+        throw new Error('Must provide config.columnCount.');
     }
 
     config.border = makeBorder(config.border);

@@ -11,6 +11,7 @@ import stringWidth from 'string-width';
  *
  * @param {string} subject
  * @param {number} size
+ * @returns {Array}
  */
 export default (subject, size) => {
     let chunks,

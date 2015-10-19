@@ -1,5 +1,4 @@
 import _ from 'lodash';
-import stringWidth from 'string-width';
 import calculateCellHeight from './calculateCellHeight';
 
 /**
@@ -23,7 +22,7 @@ export default (rows, config) => {
         cellHeightIndex = _.fill(Array(tableWidth), 1);
 
         _.forEach(cells, (value, index1) => {
-            cellHeightIndex[index1] = calculateCellHeight(value, config.columns[index1].width);
+            cellHeightIndex[index1] = calculateCellHeight(value, config.columns[index1].width, config.columns[index1].wrapWord);
         });
 
         rowSpanIndex.push(_.max(cellHeightIndex));

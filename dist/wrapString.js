@@ -27,6 +27,7 @@ var _stringWidth2 = _interopRequireDefault(_stringWidth);
  *
  * @param {string} subject
  * @param {number} size
+ * @returns {Array}
  */
 
 exports['default'] = function (subject, size) {

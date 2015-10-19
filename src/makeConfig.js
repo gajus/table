@@ -13,7 +13,7 @@ let makeBorder,
  * @returns {Object}
  */
 makeBorder = (border = {}) => {
-    return _.assign({}, getBorderCharacters(`honeywell`), border);
+    return _.assign({}, getBorderCharacters('honeywell'), border);
 };
 
 /**
@@ -36,8 +36,9 @@ makeColumns = (rows, columns = {}, columnDefault = {}) => {
         }
 
         columns[index] = _.assign({
-            alignment: `left`,
+            alignment: 'left',
             width: maximumColumnWidthIndex[index],
+            wrapWord: false,
             truncate: Infinity,
             paddingLeft: 1,
             paddingRight: 1

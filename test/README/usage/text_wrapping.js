@@ -8,7 +8,7 @@ import table, {
     getBorderCharacters
 } from './../../../src';
 
-describe(`README.md usage/`, () => {
+describe('README.md usage/', () => {
     let expectTable;
 
     before(() => {
@@ -17,7 +17,7 @@ describe(`README.md usage/`, () => {
         };
     });
 
-    it(`text_wrapping`, () => {
+    it(`text_wrapping (no wrap word)`, () => {
         let config,
             data,
             output;
@@ -47,6 +47,44 @@ describe(`README.md usage/`, () => {
 ║ sed mauris convallis ║
 ║ dapibus. Nunc venena ║
 ║ tis tempus nulla sit ║
+║ amet viverra.        ║
+╚══════════════════════╝
+        `);
+    });
+
+    it(`text_wrapping (wrap word)`, () => {
+        let config,
+            data,
+            output;
+
+        data = [
+            ['Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pulvinar nibh sed mauris convallis dapibus. Nunc venenatis tempus nulla sit amet viverra.']
+        ];
+
+        config = {
+            columns: {
+                0: {
+                    width: 20,
+                    wrapWord: true
+                }
+            }
+        };
+
+        output = table(data, config);
+
+        // console.log(output);
+
+        expectTable(output, `
+╔══════════════════════╗
+║ Lorem ipsum dolor    ║
+║ sit amet,            ║
+║ consectetur          ║
+║ adipiscing elit.     ║
+║ Phasellus pulvinar   ║
+║ nibh sed mauris      ║
+║ convallis dapibus.   ║
+║ Nunc venenatis       ║
+║ tempus nulla sit     ║
 ║ amet viverra.        ║
 ╚══════════════════════╝
         `);

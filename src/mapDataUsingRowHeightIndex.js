@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import wrapString from './wrapString';
+import wrapWord from './wrapWord';
 
 /**
  * @param {Array} unmappedRows
@@ -22,7 +23,7 @@ export default (unmappedRows, rowHeightIndex, config) => {
             return _.fill(Array(tableWidth), '');
         });
 
-        // console.log(`rowHeight`, rowHeight);
+        // console.log('rowHeight', rowHeight);
 
         // rowHeight
         //     [{row index within rowSaw; index2}]
@@ -31,9 +32,17 @@ export default (unmappedRows, rowHeightIndex, config) => {
         _.forEach(cells, (value, index1) => {
             let chunkedValue;
 
-            chunkedValue = wrapString(value, config.columns[index1].width);
+            if (config.columns[index1].wrapWord) {
+                chunkedValue = wrapWord(value, config.columns[index1].width);
+            } else {
+                chunkedValue = wrapString(value, config.columns[index1].width);
+            }
+
+            // console.log('chunkedValue', chunkedValue.length, 'rowHeight', rowHeight.length);
 
             _.forEach(chunkedValue, (part, index2) => {
+                // console.log(rowHeight[index2]);
+
                 rowHeight[index2][index1] = part;
             });
         });

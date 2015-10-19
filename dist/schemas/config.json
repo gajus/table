@@ -39,6 +39,9 @@
                 "width": {
                     "type": "number"
                 },
+                "wrapWord": {
+                    "type": "boolean"
+                },
                 "truncate": {
                     "type": "number"
                 },

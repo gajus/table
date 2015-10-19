@@ -10,10 +10,6 @@ var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
-var _stringWidth = require('string-width');
-
-var _stringWidth2 = _interopRequireDefault(_stringWidth);
-
 var _calculateCellHeight = require('./calculateCellHeight');
 
 var _calculateCellHeight2 = _interopRequireDefault(_calculateCellHeight);
@@ -40,7 +36,7 @@ exports['default'] = function (rows, config) {
         cellHeightIndex = _lodash2['default'].fill(Array(tableWidth), 1);
 
         _lodash2['default'].forEach(cells, function (value, index1) {
-            cellHeightIndex[index1] = (0, _calculateCellHeight2['default'])(value, config.columns[index1].width);
+            cellHeightIndex[index1] = (0, _calculateCellHeight2['default'])(value, config.columns[index1].width, config.columns[index1].wrapWord);
         });
 
         rowSpanIndex.push(_lodash2['default'].max(cellHeightIndex));

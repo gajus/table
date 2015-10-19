@@ -14,13 +14,20 @@ var _stringWidth = require('string-width');
 
 var _stringWidth2 = _interopRequireDefault(_stringWidth);
 
+var _wrapWord = require('./wrapWord');
+
+var _wrapWord2 = _interopRequireDefault(_wrapWord);
+
 /**
  * @param {string} value
  * @param {number} columnWidth
+ * @param {boolean} useWrapWord
  * @returns {number}
  */
 
 exports['default'] = function (value, columnWidth) {
+    var useWrapWord = arguments.length <= 2 || arguments[2] === undefined ? false : arguments[2];
+
     if (!_lodash2['default'].isString(value)) {
         throw new Error('Value must be a string.');
     }
@@ -32,6 +39,10 @@ exports['default'] = function (value, columnWidth) {
 
     if (columnWidth < 1) {
         throw new Error('Column width must be greater than 0.');
+    }
+
+    if (useWrapWord) {
+        return (0, _wrapWord2['default'])(value, columnWidth).length;
     }
 
     return _lodash2['default'].ceil((0, _stringWidth2['default'])(value) / columnWidth);
