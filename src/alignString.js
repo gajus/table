@@ -73,6 +73,8 @@ export default (subject, containerWidth, alignment) => {
     subjectWidth = stringWidth(subject);
 
     if (subjectWidth > containerWidth) {
+        // console.log('subjectWidth', subjectWidth, 'containerWidth', containerWidth, 'subject', subject);
+
         throw new Error(`Subject parameter value width cannot be greater than the container width.`);
     }
 

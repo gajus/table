@@ -17,7 +17,8 @@ export default (input, size) => {
 
     chunks = [];
 
-    re = new RegExp('^.{1,' + size + '}(\\s+|$|\\\\|/|,|\\.|;|\-|_)');
+    // https://regex101.com/r/gY5kZ1/1
+    re = new RegExp('(^.{1,' + size + '}(\\s+|$))|(^.{1,' + (size - 1) + '}(\\\\|/|_|\\.|,|;|\-))')
 
     do {
         chunk = subject.match(re);

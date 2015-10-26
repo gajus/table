@@ -83,6 +83,8 @@ exports['default'] = function (subject, containerWidth, alignment) {
     subjectWidth = (0, _stringWidth2['default'])(subject);
 
     if (subjectWidth > containerWidth) {
+        // console.log('subjectWidth', subjectWidth, 'containerWidth', containerWidth, 'subject', subject);
+
         throw new Error('Subject parameter value width cannot be greater than the container width.');
     }
 

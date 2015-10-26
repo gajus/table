@@ -27,4 +27,9 @@ describe('wrapWord', () => {
             expect(wrapWord('aaa;bbb', 5)).to.deep.equal(['aaa;', 'bbb']);
         });
     });
+    context('a special character after the length of a container', () => {
+        it('does not include special character', () => {
+            expect(wrapWord('aa-bbbbb-cccc', 5)).to.deep.equal(['aa-', 'bbbbb', '-cccc']);
+        });
+    });
 });
