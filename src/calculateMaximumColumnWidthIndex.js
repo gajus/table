@@ -1,5 +1,4 @@
 import _ from 'lodash';
-import stringWidth from 'string-width';
 import calculateCellWidthIndex from './calculateCellWidthIndex';
 
 /**
@@ -12,7 +11,7 @@ export default (rows) => {
     let columns;
 
     if (!rows[0]) {
-        throw new Error(`Dataset must have at least one row.`);
+        throw new Error('Dataset must have at least one row.');
     }
 
     columns = _.fill(Array(rows[0].length), 0);

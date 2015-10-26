@@ -4,17 +4,17 @@ import wrapWord from './wrapWord';
 
 /**
  * @param {Array} unmappedRows
- * @param {Number[]} rowHeightIndex
+ * @param {number[]} rowHeightIndex
  * @param {Object} config
  * @return {Array}
  */
 export default (unmappedRows, rowHeightIndex, config) => {
-    let tableWidth,
-        mappedRows;
+    let mappedRows,
+        tableWidth;
 
     tableWidth = unmappedRows[0].length;
 
-    // console.log(`unmappedRows`, unmappedRows, `rowHeightIndex`, rowHeightIndex, `config`, config, `tableWidth`, tableWidth);
+    // console.log('unmappedRows', unmappedRows, 'rowHeightIndex', rowHeightIndex, 'config', config, 'tableWidth', tableWidth);
 
     mappedRows = _.map(unmappedRows, (cells, index0) => {
         let rowHeight;

@@ -8,7 +8,7 @@ import stringWidth from 'string-width';
  * @return {table~row[]}
  */
 export default (rows, config) => {
-    return _.map(rows, (cells, index0) => {
+    return _.map(rows, (cells) => {
         return _.map(cells, (value, index1) => {
             let column;
 

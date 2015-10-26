@@ -1,10 +1,8 @@
-import _ from 'lodash';
 import drawTable from './drawTable';
 import calculateCellWidthIndex from './calculateCellWidthIndex';
 import makeConfig from './makeConfig';
 import calculateRowHeightIndex from './calculateRowHeightIndex';
 import mapDataUsingRowHeightIndex from './mapDataUsingRowHeightIndex';
-import stringWidth from 'string-width';
 import alignTableData from './alignTableData';
 import padTableData from './padTableData';
 import validateTableData from './validateTableData';
@@ -52,7 +50,7 @@ import truncateTableData from './truncateTableData';
  * This callback is called for each non-content line of the table.
  * The default behavior is to always return true.
  *
- * @typedef {function} drawHorizontalLine
+ * @typedef {Function} drawHorizontalLine
  * @param {number} index
  * @param {number} size
  * @return {boolean}
@@ -71,12 +69,12 @@ import truncateTableData from './truncateTableData';
  *
  * @param {table~row[]} data
  * @param {table~config} userConfig
- * @return {String}
+ * @return {string}
  */
 export default (data, userConfig = {}) => {
-    let config,
+    let cellWidthIndex,
+        config,
         rowHeightIndex,
-        cellWidthIndex,
         rows;
 
     validateTableData(data);

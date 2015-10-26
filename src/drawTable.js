@@ -8,15 +8,17 @@ import drawRow from './drawRow';
 
 /**
  * @param {Array} rows
+ * @param {Object} border
  * @param {Array} columnSizeIndex
  * @param {Array} rowSpanIndex
- * @param {function} drawHorizontalLine
+ * @param {Function} drawHorizontalLine
+ * @returns {string}
  */
 export default (rows, border, columnSizeIndex, rowSpanIndex, drawHorizontalLine) => {
     let output,
+        realRowIndex,
         rowCount,
-        rowHeight,
-        realRowIndex;
+        rowHeight;
 
     rowCount = rows.length;
 
@@ -28,7 +30,7 @@ export default (rows, border, columnSizeIndex, rowSpanIndex, drawHorizontalLine)
         output += drawBorderTop(columnSizeIndex, border);
     }
 
-    _.forEach(rows, (row, i) => {
+    _.forEach(rows, (row, index0) => {
         output += drawRow(row, border);
 
         if (!rowHeight) {
@@ -39,7 +41,7 @@ export default (rows, border, columnSizeIndex, rowSpanIndex, drawHorizontalLine)
 
         rowHeight--;
 
-        if (rowHeight === 0 && i !== rowCount - 1 && drawHorizontalLine(realRowIndex, rowCount)) {
+        if (rowHeight === 0 && index0 !== rowCount - 1 && drawHorizontalLine(realRowIndex, rowCount)) {
             output += drawBorderJoin(columnSizeIndex, border);
         }
     });

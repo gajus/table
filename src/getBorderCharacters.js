@@ -1,118 +1,118 @@
 /**
  * @typedef border
- * @property {String} topBody
- * @property {String} topJoin
- * @property {String} topLeft
- * @property {String} topRight
- * @property {String} bottomBody
- * @property {String} bottomJoin
- * @property {String} bottomLeft
- * @property {String} bottomRight
- * @property {String} bodyLeft
- * @property {String} bodyRight
- * @property {String} bodyJoin
- * @property {String} joinBody
- * @property {String} joinLeft
- * @property {String} joinRight
- * @property {String} joinJoin
+ * @property {string} topBody
+ * @property {string} topJoin
+ * @property {string} topLeft
+ * @property {string} topRight
+ * @property {string} bottomBody
+ * @property {string} bottomJoin
+ * @property {string} bottomLeft
+ * @property {string} bottomRight
+ * @property {string} bodyLeft
+ * @property {string} bodyRight
+ * @property {string} bodyJoin
+ * @property {string} joinBody
+ * @property {string} joinLeft
+ * @property {string} joinRight
+ * @property {string} joinJoin
  */
 
 /**
- * @param {String} name
+ * @param {string} name
  * @returns {border}
  */
 export default (name) => {
-    if (name === `honeywell`) {
+    if (name === 'honeywell') {
         return {
-            topBody: `═`,
-            topJoin: `╤`,
-            topLeft: `╔`,
-            topRight: `╗`,
+            topBody: '═',
+            topJoin: '╤',
+            topLeft: '╔',
+            topRight: '╗',
 
-            bottomBody: `═`,
-            bottomJoin: `╧`,
-            bottomLeft: `╚`,
-            bottomRight: `╝`,
+            bottomBody: '═',
+            bottomJoin: '╧',
+            bottomLeft: '╚',
+            bottomRight: '╝',
 
-            bodyLeft: `║`,
-            bodyRight: `║`,
-            bodyJoin: `│`,
+            bodyLeft: '║',
+            bodyRight: '║',
+            bodyJoin: '│',
 
-            joinBody: `─`,
-            joinLeft: `╟`,
-            joinRight: `╢`,
-            joinJoin: `┼`
+            joinBody: '─',
+            joinLeft: '╟',
+            joinRight: '╢',
+            joinJoin: '┼'
         };
     }
 
-    if (name === `norc`) {
+    if (name === 'norc') {
         return {
-            topBody: `─`,
-            topJoin: `┬`,
-            topLeft: `┌`,
-            topRight: `┐`,
+            topBody: '─',
+            topJoin: '┬',
+            topLeft: '┌',
+            topRight: '┐',
 
-            bottomBody: `─`,
-            bottomJoin: `┴`,
-            bottomLeft: `└`,
-            bottomRight: `┘`,
+            bottomBody: '─',
+            bottomJoin: '┴',
+            bottomLeft: '└',
+            bottomRight: '┘',
 
-            bodyLeft: `│`,
-            bodyRight: `│`,
-            bodyJoin: `│`,
+            bodyLeft: '│',
+            bodyRight: '│',
+            bodyJoin: '│',
 
-            joinBody: `─`,
-            joinLeft: `├`,
-            joinRight: `┤`,
-            joinJoin: `┼`
+            joinBody: '─',
+            joinLeft: '├',
+            joinRight: '┤',
+            joinJoin: '┼'
         };
     }
 
-    if (name === `ramac`) {
+    if (name === 'ramac') {
         return {
-            topBody: `-`,
-            topJoin: `+`,
-            topLeft: `+`,
-            topRight: `+`,
+            topBody: '-',
+            topJoin: '+',
+            topLeft: '+',
+            topRight: '+',
 
-            bottomBody: `-`,
-            bottomJoin: `+`,
-            bottomLeft: `+`,
-            bottomRight: `+`,
+            bottomBody: '-',
+            bottomJoin: '+',
+            bottomLeft: '+',
+            bottomRight: '+',
 
-            bodyLeft: `|`,
-            bodyRight: `|`,
-            bodyJoin: `|`,
+            bodyLeft: '|',
+            bodyRight: '|',
+            bodyJoin: '|',
 
-            joinBody: `-`,
-            joinLeft: `|`,
-            joinRight: `|`,
-            joinJoin: `|`
+            joinBody: '-',
+            joinLeft: '|',
+            joinRight: '|',
+            joinJoin: '|'
         };
     }
 
-    if (name === `void`) {
+    if (name === 'void') {
         return {
-            topBody: ``,
-            topJoin: ``,
-            topLeft: ``,
-            topRight: ``,
+            topBody: '',
+            topJoin: '',
+            topLeft: '',
+            topRight: '',
 
-            bottomBody: ``,
-            bottomJoin: ``,
-            bottomLeft: ``,
-            bottomRight: ``,
+            bottomBody: '',
+            bottomJoin: '',
+            bottomLeft: '',
+            bottomRight: '',
 
-            bodyLeft: ``,
-            bodyRight: ``,
-            bodyJoin: ``,
+            bodyLeft: '',
+            bodyRight: '',
+            bodyJoin: '',
 
-            joinBody: ``,
-            joinLeft: ``,
-            joinRight: ``,
-            joinJoin: ``
+            joinBody: '',
+            joinLeft: '',
+            joinRight: '',
+            joinJoin: ''
         };
     }
 
-    throw new Error(`Unknown border template "${name}".`);
+    throw new Error('Unknown border template "${name}".');
 };

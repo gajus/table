@@ -14,9 +14,8 @@ import alignTableData from './alignTableData';
 import padTableData from './padTableData';
 import calculateRowHeightIndex from './calculateRowHeightIndex';
 
-let create,
-    append,
-    calculateColumnWidthIndex,
+let append,
+    create,
     prepareData;
 
 /**
@@ -26,14 +25,14 @@ let create,
  * @returns {undefined}
  */
 create = (row, columnWidthIndex, config) => {
-    let output,
-        rows,
-        body;
+    let body,
+        output,
+        rows;
 
     rows = prepareData([row], config);
 
-    body = _.map(rows, (row) => {
-        return drawRow(row, config.border);
+    body = _.map(rows, (literalRow) => {
+        return drawRow(literalRow, config.border);
     }).join('');
 
     output = '';
@@ -53,19 +52,19 @@ create = (row, columnWidthIndex, config) => {
  * @returns {undefined}
  */
 append = (row, columnWidthIndex, config) => {
-    let output,
-        rows,
-        body;
+    let body,
+        output,
+        rows;
 
     rows = prepareData([row], config);
 
     // console.log('rows', rows);
 
-    body = _.map(rows, (row) => {
-        return drawRow(row, config.border);
+    body = _.map(rows, (literalRow) => {
+        return drawRow(literalRow, config.border);
     }).join('');
 
-    output = "\r\x1b[K";
+    output = '\r\x1b[K';
     output += drawBorderJoin(columnWidthIndex, config.border);
     output += body;
     output += drawBorderBottom(columnWidthIndex, config.border);
@@ -76,13 +75,13 @@ append = (row, columnWidthIndex, config) => {
 };
 
 /**
- * @param {string[][]} data
+ * @param {Array} data
  * @param {Object} config
- * @returns {string[][]}
+ * @returns {Array}
  */
 prepareData = (data, config) => {
-    let rows,
-        rowHeightIndex;
+    let rowHeightIndex,
+        rows;
 
     rows = stringifyTableData(data);
 
@@ -102,8 +101,8 @@ prepareData = (data, config) => {
  * @return {Object}
  */
 export default (userConfig = {}) => {
-    let config,
-        columnWidthIndex,
+    let columnWidthIndex,
+        config,
         empty;
 
     config = makeStreamConfig(userConfig);
@@ -116,12 +115,12 @@ export default (userConfig = {}) => {
 
     return {
         /**
-         * @param {string[]}
+         * @param {string[]} row
          * @returns {undefined}
          */
         write: (row) => {
             if (row.length !== config.columnCount) {
-                throw new Error(`Row cell count does not match the config.columnCount.`);
+                throw new Error('Row cell count does not match the config.columnCount.');
             }
 
             if (empty) {

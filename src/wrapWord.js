@@ -8,8 +8,8 @@ import stringWidth from 'string-width';
  * @returns {Array}
  */
 export default (input, size) => {
-    let chunks,
-        chunk,
+    let chunk,
+        chunks,
         re,
         subject;
 
@@ -18,7 +18,7 @@ export default (input, size) => {
     chunks = [];
 
     // https://regex101.com/r/gY5kZ1/1
-    re = new RegExp('(^.{1,' + size + '}(\\s+|$))|(^.{1,' + (size - 1) + '}(\\\\|/|_|\\.|,|;|\-))')
+    re = new RegExp('(^.{1,' + size + '}(\\s+|$))|(^.{1,' + (size - 1) + '}(\\\\|/|_|\\.|,|;|\-))');
 
     do {
         chunk = subject.match(re);

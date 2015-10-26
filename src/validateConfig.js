@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import schema from './schemas/config.json';
 import tv4 from 'tv4';
 
@@ -20,14 +19,16 @@ export default (config = {}) => {
     result = tv4.validateResult(config, schema);
 
     if (!result.valid) {
-        console.log(`config`, config);
-        console.log(`error`, {
+        /* eslint-disable no-console */
+        console.log('config', config);
+        console.log('error', {
             message: result.error.message,
             params: result.error.params,
             dataPath: result.error.dataPath,
             schemaPath: result.error.schemaPath
         });
+        /* eslint-enable no-console */
 
-        throw new Error(`Invalid config.`);
+        throw new Error('Invalid config.');
     }
 };

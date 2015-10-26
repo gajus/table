@@ -7,10 +7,10 @@ let drawBorder,
 
 /**
  * @typedef drawBorder~parts
- * @property {String} left
- * @property {String} right
- * @property {String} body
- * @property {String} join
+ * @property {string} left
+ * @property {string} right
+ * @property {string} body
+ * @property {string} join
  */
 
 /**
@@ -27,7 +27,7 @@ drawBorder = (columnSizeIndex, parts) => {
 
     columns = columns.join(parts.join);
 
-    return `${parts.left}${columns}${parts.right}\n`;
+    return parts.left + columns + parts.right + '\n';
 };
 
 /**

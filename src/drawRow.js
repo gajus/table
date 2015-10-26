@@ -1,15 +1,15 @@
 /**
  * @typedef {Object} drawRow~border
- * @property {String} bodyLeft
- * @property {String} bodyRight
- * @property {String} bodyJoin
+ * @property {string} bodyLeft
+ * @property {string} bodyRight
+ * @property {string} bodyJoin
  */
 
 /**
- * @param {Number[]} columns
+ * @param {number[]} columns
  * @param {drawRow~border} border
- * @return {String}
+ * @return {string}
  */
 export default (columns, border) => {
-    return `${border.bodyLeft}${columns.join(border.bodyJoin)}${border.bodyRight}\n`;
+    return border.bodyLeft + columns.join(border.bodyJoin) + border.bodyRight + '\n';
 };

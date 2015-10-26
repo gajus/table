@@ -22,6 +22,14 @@ export default (rows, config) => {
         cellHeightIndex = _.fill(Array(tableWidth), 1);
 
         _.forEach(cells, (value, index1) => {
+            if (!_.isNumber(config.columns[index1].width)) {
+                throw new Error('column[index].width must be a number.');
+            }
+
+            if (!_.isBoolean(config.columns[index1].wrapWord)) {
+                throw new Error('column[index].wrapWord must be a boolean.');
+            }
+
             cellHeightIndex[index1] = calculateCellHeight(value, config.columns[index1].width, config.columns[index1].wrapWord);
         });
 
