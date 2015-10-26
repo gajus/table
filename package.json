@@ -1,6 +1,6 @@
 {
   "name": "table",
-  "version": "3.7.1",
+  "version": "3.7.2",
   "description": "Formats data into a string table.",
   "main": "./dist/index.js",
   "author": {
@@ -20,11 +20,11 @@
     "ansi"
   ],
   "scripts": {
-      "pragmatist": "node ./node_modules/.bin/pragmatist",
-      "build": "npm run pragmatist build",
-      "lint": "npm run pragmatist lint",
-      "test": "npm run pragmatist test",
-      "readme": "node ./node_modules/.bin/gitdown ./.README/README.md --output-file ./README.md"
+    "pragmatist": "node ./node_modules/.bin/pragmatist",
+    "build": "npm run pragmatist build",
+    "lint": "npm run pragmatist lint",
+    "test": "npm run pragmatist test",
+    "readme": "node ./node_modules/.bin/gitdown ./.README/README.md --output-file ./README.md"
   },
   "devDependencies": {
     "chai": "^3.3.0",
