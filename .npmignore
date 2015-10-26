@@ -1,0 +1,6 @@
+src
+tests
+coverage
+.travis.yml
+.eslintrc
+*.log

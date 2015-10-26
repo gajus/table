@@ -1,5 +1,3 @@
-/bower_components
-/node_modules
-/sandbox
-.npmrc
-npm-debug.log
+node_modules
+coverage
+*.log
