@@ -32,6 +32,7 @@ describe('README.md usage/', () => {
 
         // console.log(output);
 
+        /* eslint-disable no-restricted-syntax */
         expectTable(output, `
 ╔════╤════╤════╗
 ║ 0A │ 0B │ 0C ║
@@ -43,5 +44,6 @@ describe('README.md usage/', () => {
 ║ 4A │ 4B │ 4C ║
 ╚════╧════╧════╝
         `);
+        /* eslint-enable no-restricted-syntax */
     });
 });

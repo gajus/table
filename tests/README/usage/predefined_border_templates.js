@@ -26,6 +26,7 @@ describe('README.md usage/predefined_border_templates', () => {
 
         // console.log(output);
 
+/* eslint-disable no-restricted-syntax */
         expectTable(output, `
 ╔════╤════╤════╗
 ║ 0A │ 0B │ 0C ║
@@ -35,6 +36,7 @@ describe('README.md usage/predefined_border_templates', () => {
 ║ 2A │ 2B │ 2C ║
 ╚════╧════╧════╝
         `);
+/* eslint-enable no-restricted-syntax */
     });
 
     it('norc', () => {
@@ -46,6 +48,7 @@ describe('README.md usage/predefined_border_templates', () => {
 
         // console.log(output);
 
+/* eslint-disable no-restricted-syntax */
         expectTable(output, `
 ┌────┬────┬────┐
 │ 0A │ 0B │ 0C │
@@ -55,6 +58,7 @@ describe('README.md usage/predefined_border_templates', () => {
 │ 2A │ 2B │ 2C │
 └────┴────┴────┘
         `);
+/* eslint-enable no-restricted-syntax */
     });
 
     it('ramac', () => {
@@ -66,6 +70,7 @@ describe('README.md usage/predefined_border_templates', () => {
 
         // console.log(output);
 
+/* eslint-disable no-restricted-syntax */
         expectTable(output, `
 +----+----+----+
 | 0A | 0B | 0C |
@@ -76,6 +81,7 @@ describe('README.md usage/predefined_border_templates', () => {
 +----+----+----+
         `);
     });
+/* eslint-enable no-restricted-syntax */
 
     it('void', () => {
         let output;

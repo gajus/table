@@ -24,6 +24,7 @@ describe('README.md usage/', () => {
 
         // console.log(output);
 
+/* eslint-disable no-restricted-syntax */
         expectTable(output, `
 ╔══════════════════════╗
 ║ Lorem ipsum dolor si ║
@@ -37,6 +38,7 @@ describe('README.md usage/', () => {
 ╚══════════════════════╝
         `);
     });
+/* eslint-enable no-restricted-syntax */
 
     it('text_wrapping (wrap word)', () => {
         let config,
@@ -60,6 +62,7 @@ describe('README.md usage/', () => {
 
         // console.log(output);
 
+/* eslint-disable no-restricted-syntax */
         expectTable(output, `
 ╔══════════════════════╗
 ║ Lorem ipsum dolor    ║
@@ -74,5 +77,6 @@ describe('README.md usage/', () => {
 ║ amet viverra.        ║
 ╚══════════════════════╝
         `);
+/* eslint-enable no-restricted-syntax */
     });
 });

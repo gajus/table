@@ -9,7 +9,9 @@ import chalk from 'chalk';
 describe('README.md usage/', () => {
     it('moon_mission', () => {
         let data,
+            /* eslint-disable no-unused-vars */
             output,
+            /* eslint-enable no-unused-vars */
             tableBorder;
 
         data = [
