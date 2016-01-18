@@ -1,45 +1,48 @@
 {
-  "name": "table",
-  "version": "3.7.3",
-  "description": "Formats data into a string table.",
-  "main": "./dist/index.js",
-  "author": {
-    "name": "Gajus Kuizinas",
-    "email": "gajus@gajus.com",
-    "url": "http://gajus.com"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/gajus/table"
-  },
-  "keywords": [
-    "ascii",
-    "text",
-    "table",
-    "align",
-    "ansi"
-  ],
-  "scripts": {
-    "pragmatist": "node ./node_modules/.bin/pragmatist",
-    "build": "npm run pragmatist build",
-    "lint": "npm run pragmatist lint",
-    "test": "npm run pragmatist test",
-    "readme": "node ./node_modules/.bin/gitdown ./.README/README.md --output-file ./README.md"
-  },
-  "devDependencies": {
-    "chai": "^3.4.1",
-    "gitdown": "^2.4.0",
-    "pragmatist": "^1.4.4",
-    "sinon": "^1.17.2"
-  },
-  "dependencies": {
-    "ansi-slice": "^1.2.0",
-    "bluebird": "^3.0.5",
-    "chalk": "^1.1.1",
-    "lodash": "^3.10.1",
-    "string-width": "^1.0.1",
-    "strip-ansi": "^3.0.0",
-    "tv4": "^1.2.7",
-    "xregexp": "^3.0.0"
-  }
+    "author": {
+        "email": "gajus@gajus.com",
+        "name": "Gajus Kuizinas",
+        "url": "http://gajus.com"
+    },
+    "dependencies": {
+        "ansi-slice": "^1.2.0",
+        "bluebird": "^3.1.1",
+        "chalk": "^1.1.1",
+        "lodash": "^4.0.0",
+        "string-width": "^1.0.1",
+        "strip-ansi": "^3.0.0",
+        "tv4": "^1.2.7",
+        "xregexp": "^3.0.0"
+    },
+    "description": "Formats data into a string table.",
+    "devDependencies": {
+        "chai": "^3.4.1",
+        "gitdown": "^2.4.0",
+        "jsonlint": "^1.6.2",
+        "pragmatist": "^2.3.74",
+        "sinon": "^1.17.2"
+    },
+    "keywords": [
+        "ascii",
+        "text",
+        "table",
+        "align",
+        "ansi"
+    ],
+    "main": "./dist/index.js",
+    "name": "table",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/gajus/table"
+    },
+    "scripts": {
+        "build": "npm run pragmatist build",
+        "format-config": "npm run format-json ./package.json",
+        "format-json": "jsonlint --sort-keys --in-place --indent '    '",
+        "lint": "npm run pragmatist lint",
+        "pragmatist": "node ./node_modules/.bin/pragmatist",
+        "readme": "node ./node_modules/.bin/gitdown ./.README/README.md --output-file ./README.md",
+        "test": "npm run pragmatist test"
+    },
+    "version": "3.7.3"
 }
