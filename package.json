@@ -36,11 +36,11 @@
         "url": "https://github.com/gajus/table"
     },
     "scripts": {
-        "build": "npm run pragmatist build",
+        "build": "npm run pragmatist build -- --es5",
         "format-config": "npm run format-json ./package.json",
         "format-json": "jsonlint --sort-keys --in-place --indent '    '",
         "lint": "npm run pragmatist lint",
-        "pragmatist": "node ./node_modules/.bin/pragmatist",
+        "pragmatist": "pragmatist",
         "readme": "node ./node_modules/.bin/gitdown ./.README/README.md --output-file ./README.md",
         "test": "npm run pragmatist test"
     },
