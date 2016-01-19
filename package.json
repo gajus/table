@@ -45,5 +45,5 @@
     "readme": "node ./node_modules/.bin/gitdown ./.README/README.md --output-file ./README.md",
     "test": "npm run pragmatist test"
   },
-  "version": "3.7.4"
+  "version": "3.7.5"
 }
