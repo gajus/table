@@ -9,7 +9,7 @@ import _ from 'lodash';
 export default (rows, config) => {
     return _.map(rows, (cells) => {
         return _.map(cells, (content, index) => {
-            return _.trunc(content, {
+            return _.truncate(content, {
                 length: config.columns[index].truncate
             });
         });

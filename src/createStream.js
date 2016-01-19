@@ -40,7 +40,7 @@ create = (row, columnWidthIndex, config) => {
     output += body;
     output += drawBorderBottom(columnWidthIndex, config.border);
 
-    output = _.trimRight(output);
+    output = _.trimEnd(output);
 
     process.stdout.write(output);
 };
@@ -69,7 +69,7 @@ append = (row, columnWidthIndex, config) => {
     output += body;
     output += drawBorderBottom(columnWidthIndex, config.border);
 
-    output = _.trimRight(output);
+    output = _.trimEnd(output);
 
     process.stdout.write(output);
 };

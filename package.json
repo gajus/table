@@ -19,7 +19,7 @@
         "chai": "^3.4.1",
         "gitdown": "^2.4.0",
         "jsonlint": "^1.6.2",
-        "pragmatist": "^2.3.74",
+        "pragmatist": "^3.0.2",
         "sinon": "^1.17.2"
     },
     "keywords": [
@@ -29,6 +29,7 @@
         "align",
         "ansi"
     ],
+    "license": "BSD-3-Clause",
     "main": "./dist/index.js",
     "name": "table",
     "repository": {

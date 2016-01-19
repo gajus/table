@@ -13,8 +13,7 @@ export default (value, columnWidth, useWrapWord = false) => {
         throw new Error('Value must be a string.');
     }
 
-    // @todo Replace with _.isString (https://github.com/lodash/lodash/issues/1503).
-    if (!Number.isInteger(columnWidth)) {
+    if (!_.isInteger(columnWidth)) {
         throw new Error('Column width must be an integer.');
     }
 
