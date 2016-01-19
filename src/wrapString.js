@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import slice from 'ansi-slice';
+import slice from 'slice-ansi';
 import stringWidth from 'string-width';
 
 /**
