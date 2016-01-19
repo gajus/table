@@ -1,49 +1,49 @@
 {
-    "author": {
-        "email": "gajus@gajus.com",
-        "name": "Gajus Kuizinas",
-        "url": "http://gajus.com"
-    },
-    "dependencies": {
-        "bluebird": "^3.1.1",
-        "chalk": "^1.1.1",
-        "lodash": "^4.0.0",
-        "slice-ansi": "0.0.4",
-        "string-width": "^1.0.1",
-        "strip-ansi": "^3.0.0",
-        "tv4": "^1.2.7",
-        "xregexp": "^3.0.0"
-    },
-    "description": "Formats data into a string table.",
-    "devDependencies": {
-        "chai": "^3.4.1",
-        "gitdown": "^2.4.0",
-        "jsonlint": "^1.6.2",
-        "pragmatist": "^3.0.2",
-        "sinon": "^1.17.2"
-    },
-    "keywords": [
-        "ascii",
-        "text",
-        "table",
-        "align",
-        "ansi"
-    ],
-    "license": "BSD-3-Clause",
-    "main": "./dist/index.js",
-    "name": "table",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/gajus/table"
-    },
-    "scripts": {
-        "build": "npm run pragmatist build -- --es5",
-        "format-config": "npm run format-json ./package.json",
-        "format-json": "jsonlint --sort-keys --in-place --indent '    '",
-        "lint": "npm run pragmatist lint",
-        "pragmatist": "pragmatist",
-        "readme": "node ./node_modules/.bin/gitdown ./.README/README.md --output-file ./README.md",
-        "test": "npm run pragmatist test"
-    },
-    "version": "3.7.6"
+  "author": {
+    "email": "gajus@gajus.com",
+    "name": "Gajus Kuizinas",
+    "url": "http://gajus.com"
+  },
+  "dependencies": {
+    "bluebird": "^3.1.1",
+    "chalk": "^1.1.1",
+    "lodash": "^4.0.0",
+    "slice-ansi": "0.0.4",
+    "string-width": "^1.0.1",
+    "strip-ansi": "^3.0.0",
+    "tv4": "^1.2.7",
+    "xregexp": "^3.0.0"
+  },
+  "description": "Formats data into a string table.",
+  "devDependencies": {
+    "chai": "^3.4.1",
+    "gitdown": "^2.4.0",
+    "jsonlint": "^1.6.2",
+    "pragmatist": "^3.0.2",
+    "sinon": "^1.17.2"
+  },
+  "keywords": [
+    "ascii",
+    "text",
+    "table",
+    "align",
+    "ansi"
+  ],
+  "license": "BSD-3-Clause",
+  "main": "./dist/index.js",
+  "name": "table",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gajus/table"
+  },
+  "scripts": {
+    "build": "npm run pragmatist build -- --es5",
+    "format-config": "npm run format-json ./package.json",
+    "format-json": "jsonlint --sort-keys --in-place --indent '    '",
+    "lint": "npm run pragmatist lint",
+    "pragmatist": "pragmatist",
+    "readme": "node ./node_modules/.bin/gitdown ./.README/README.md --output-file ./README.md",
+    "test": "npm run pragmatist test"
+  },
+  "version": "3.7.7"
 }
