@@ -16,7 +16,7 @@ export default (rows, config) => {
 
     rowSpanIndex = [];
 
-    _.map(rows, (cells) => {
+    _.forEach(rows, (cells) => {
         let cellHeightIndex;
 
         cellHeightIndex = _.fill(Array(tableWidth), 1);

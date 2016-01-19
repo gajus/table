@@ -55,7 +55,7 @@ alignCenter = (subject, width) => {
  *
  * @param {string} subject
  * @param {number} containerWidth
- * @param {string} alignment (left, right, center)
+ * @param {string} alignment One of the valid options (left, right, center).
  * @returns {string}
  */
 export default (subject, containerWidth, alignment) => {

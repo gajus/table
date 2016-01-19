@@ -1,3 +1,5 @@
+/* eslint-disable sorting/sort-object-props */
+
 /**
  * @typedef border
  * @property {string} topBody

@@ -16,7 +16,7 @@ let drawBorder,
 /**
  * @param {number[]} columnSizeIndex
  * @param {drawBorder~parts} parts
- * @return {string}
+ * @returns {string}
  */
 drawBorder = (columnSizeIndex, parts) => {
     let columns;
@@ -63,7 +63,7 @@ drawBorderTop = (columnSizeIndex, parts) => {
 /**
  * @param {number[]} columnSizeIndex
  * @param {drawBorderJoin~parts} parts
- * @return {string}
+ * @returns {string}
  */
 drawBorderJoin = (columnSizeIndex, parts) => {
     return drawBorder(columnSizeIndex, {
@@ -85,7 +85,7 @@ drawBorderJoin = (columnSizeIndex, parts) => {
 /**
  * @param {number[]} columnSizeIndex
  * @param {drawBorderBottom~parts} parts
- * @return {string}
+ * @returns {string}
  */
 drawBorderBottom = (columnSizeIndex, parts) => {
     return drawBorder(columnSizeIndex, {
