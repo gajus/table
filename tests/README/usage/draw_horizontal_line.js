@@ -1,5 +1,4 @@
 import table from './../../../src';
-
 import expectTable from './expectTable';
 
 describe('README.md usage/', () => {
@@ -21,7 +20,7 @@ describe('README.md usage/', () => {
              * @typedef {Function} drawJoin
              * @param {number} index
              * @param {number} size
-             * @return {boolean}
+             * @returns {boolean}
              */
             drawHorizontalLine: (index, size) => {
                 return index === 0 || index === 1 || index === size - 1 || index === size;

@@ -15,8 +15,8 @@ describe('README.md usage/', () => {
         config = {
             columns: {
                 0: {
-                    width: 20,
-                    truncate: 100
+                    truncate: 100,
+                    width: 20
                 }
             }
         };

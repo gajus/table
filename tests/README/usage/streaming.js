@@ -42,10 +42,10 @@ describe('README.md usage/', () => {
                 stream;
 
             config = {
+                columnCount: 3,
                 columnDefault: {
                     width: 2
-                },
-                columnCount: 3
+                }
             };
 
             stream = createStream(config);

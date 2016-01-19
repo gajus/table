@@ -20,8 +20,8 @@ describe('README.md usage/', () => {
                     paddingLeft: 3
                 },
                 1: {
-                    width: 2,
-                    paddingRight: 3
+                    paddingRight: 3,
+                    width: 2
                 }
             }
         };
