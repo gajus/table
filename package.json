@@ -39,7 +39,7 @@
     "format-json": "jsonlint --sort-keys --in-place --indent '    '",
     "lint": "npm run pragmatist lint",
     "pragmatist": "pragmatist",
-    "readme": "node ./node_modules/.bin/gitdown ./.README/README.md --output-file ./README.md",
+    "readme": "gitdown ./.README/README.md --output-file ./README.md",
     "test": "npm run pragmatist test"
   },
   "version": "3.7.8"
