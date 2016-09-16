@@ -5,14 +5,11 @@
     "url": "http://gajus.com"
   },
   "dependencies": {
-    "bluebird": "^3.1.1",
     "chalk": "^1.1.1",
     "lodash": "^4.0.0",
     "slice-ansi": "0.0.4",
     "string-width": "^1.0.1",
-    "strip-ansi": "^3.0.0",
-    "tv4": "^1.2.7",
-    "xregexp": "^3.0.0"
+    "tv4": "^1.2.7"
   },
   "description": "Formats data into a string table.",
   "devDependencies": {
