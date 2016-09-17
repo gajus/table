@@ -41,7 +41,7 @@
     "url": "https://github.com/gajus/table"
   },
   "scripts": {
-    "build": "npm run pragmatist build -- --es5",
+    "build": "babel --copy-files ./src --out-dir ./dist",
     "lint": "eslint ./src ./tests",
     "readme": "gitdown ./.README/README.md --output-file ./README.md",
     "test": "mocha --compilers js:babel-register"
