@@ -17,7 +17,6 @@
     "chai": "^3.4.1",
     "gitdown": "^2.4.0",
     "jsonlint": "^1.6.2",
-    "pragmatist": "^3.0.2",
     "sinon": "^1.17.2"
   },
   "keywords": [
@@ -38,10 +37,7 @@
     "build": "npm run pragmatist build -- --es5",
     "format-config": "npm run format-json ./package.json",
     "format-json": "jsonlint --sort-keys --in-place --indent '    '",
-    "lint": "npm run pragmatist lint",
-    "pragmatist": "pragmatist",
     "readme": "gitdown ./.README/README.md --output-file ./README.md",
-    "test": "npm run pragmatist test"
   },
   "version": "3.7.9"
 }
