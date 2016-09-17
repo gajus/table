@@ -1,32 +1,29 @@
-import schema from './schemas/config.json';
-import tv4 from 'tv4';
+import Ajv from 'ajv';
+import addKeywords from 'ajv-keywords';
+import configSchema from './schemas/config.json';
+import streamConfigSchema from './schemas/streamConfig.json';
+
+
+var ajv = new Ajv({allErrors: true});
+addKeywords(ajv, 'typeof');
+ajv.addSchema(configSchema);
+ajv.addSchema(streamConfigSchema);
 
 /**
- * @typedef {string} cell
- */
-
-/**
- * @typedef {cell[]} validateData~column
- */
-
-/**
+ * @param {String} schemaId
  * @param {formatData~config} config
  * @returns {undefined}
  */
-export default (config = {}) => {
-    let result;
-
-    result = tv4.validateResult(config, schema);
-
-    if (!result.valid) {
+export default (schemaId, config = {}) => {
+    if (!ajv.validate(schemaId, config)) {
         /* eslint-disable no-console */
         console.log('config', config);
-        console.log('error', {
-            message: result.error.message,
-            params: result.error.params,
-            dataPath: result.error.dataPath,
-            schemaPath: result.error.schemaPath
-        });
+        console.log('errors', ajv.errors.map(err => ({
+            message: err.message,
+            params: err.params,
+            dataPath: err.dataPath,
+            schemaPath: err.schemaPath
+        })));
         /* eslint-enable no-console */
 
         throw new Error('Invalid config.');
