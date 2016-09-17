@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import getBorderCharacters from './getBorderCharacters';
-import validateStreamConfig from './validateStreamConfig';
+import validateConfig from './validateConfig';
 
 let makeBorder,
     makeColumns;
@@ -70,7 +70,7 @@ makeColumns = (columnCount, columns = {}, columnDefault = {}) => {
 export default (userConfig = {}) => {
     let config;
 
-    validateStreamConfig(userConfig);
+    validateConfig('streamConfig.json', userConfig);
 
     config = _.cloneDeep(userConfig);
 
