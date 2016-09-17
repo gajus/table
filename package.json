@@ -21,6 +21,7 @@
     "babel-register": "^6.14.0",
     "chai": "^3.4.1",
     "gitdown": "^2.4.0",
+    "mocha": "^3.0.2",
     "sinon": "^1.17.2"
   },
   "keywords": [
@@ -40,6 +41,7 @@
   "scripts": {
     "build": "npm run pragmatist build -- --es5",
     "readme": "gitdown ./.README/README.md --output-file ./README.md",
+    "test": "mocha --compilers js:babel-register"
   },
   "version": "3.7.9"
 }
