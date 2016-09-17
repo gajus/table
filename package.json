@@ -23,6 +23,7 @@
     "eslint": "^3.5.0",
     "eslint-config-canonical": "^1.8.6",
     "gitdown": "^2.4.0",
+    "husky": "^0.11.7",
     "mocha": "^3.0.2",
     "sinon": "^1.17.2"
   },
@@ -43,6 +44,7 @@
   "scripts": {
     "build": "babel --copy-files ./src --out-dir ./dist",
     "lint": "eslint ./src ./tests",
+    "precommit": "npm run lint && npm run test",
     "readme": "gitdown ./.README/README.md --output-file ./README.md",
     "test": "mocha --compilers js:babel-register"
   },
