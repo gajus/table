@@ -11,7 +11,7 @@
             "$ref": "#/definitions/column"
         },
         "drawHorizontalLine": {
-            "type": "function"
+            "typeof": "function"
         }
     },
     "additionalProperties": false,
