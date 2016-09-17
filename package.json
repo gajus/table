@@ -46,5 +46,5 @@
     "readme": "gitdown ./.README/README.md --output-file ./README.md",
     "test": "mocha --compilers js:babel-register"
   },
-  "version": "3.7.10"
+  "version": "3.8.0"
 }
