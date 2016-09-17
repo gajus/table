@@ -16,7 +16,6 @@
   "devDependencies": {
     "chai": "^3.4.1",
     "gitdown": "^2.4.0",
-    "jsonlint": "^1.6.2",
     "sinon": "^1.17.2"
   },
   "keywords": [
@@ -35,8 +34,6 @@
   },
   "scripts": {
     "build": "npm run pragmatist build -- --es5",
-    "format-config": "npm run format-json ./package.json",
-    "format-json": "jsonlint --sort-keys --in-place --indent '    '",
     "readme": "gitdown ./.README/README.md --output-file ./README.md",
   },
   "version": "3.7.9"
