@@ -1,135 +1,119 @@
 import {
     expect
 } from 'chai';
-
 import mapDataUsingRowHeightIndex from './../src/mapDataUsingRowHeightIndex';
 
 describe('mapDataUsingRowHeightIndex', () => {
-    context('no data spans multiple rows', () => {
-        it('maps data to a single cell', () => {
-            let config,
-                data,
-                mappedData,
-                rowSpanIndex;
+  context('no data spans multiple rows', () => {
+    it('maps data to a single cell', () => {
+      const config = {
+        columns: {
+          0: {
+            width: 2
+          }
+        }
+      };
 
-            config = {
-                columns: {
-                    0: {
-                        width: 2
-                    }
-                }
-            };
+      const rowSpanIndex = [
+        1
+      ];
 
-            rowSpanIndex = [
-                1
-            ];
+      const data = [
+        [
+          'aa'
+        ]
+      ];
 
-            data = [
-                [
-                    'aa'
-                ]
-            ];
+      const mappedData = mapDataUsingRowHeightIndex(data, rowSpanIndex, config);
 
-            mappedData = mapDataUsingRowHeightIndex(data, rowSpanIndex, config);
-
-            expect(mappedData).to.deep.equal([
-                [
-                    'aa'
-                ]
-            ]);
-        });
+      expect(mappedData).to.deep.equal([
+        [
+          'aa'
+        ]
+      ]);
     });
+  });
 
-    context('single cell spans multiple rows', () => {
-        it('maps data to multiple rows', () => {
-            let config,
-                data,
-                mappedData,
-                rowSpanIndex;
+  context('single cell spans multiple rows', () => {
+    it('maps data to multiple rows', () => {
+      const config = {
+        columns: {
+          0: {
+            width: 2
+          }
+        }
+      };
 
-            config = {
-                columns: {
-                    0: {
-                        width: 2
-                    }
-                }
-            };
+      const rowSpanIndex = [
+        5
+      ];
 
-            rowSpanIndex = [
-                5
-            ];
+      const data = [
+        [
+          'aabbccddee'
+        ]
+      ];
 
-            data = [
-                [
-                    'aabbccddee'
-                ]
-            ];
+      const mappedData = mapDataUsingRowHeightIndex(data, rowSpanIndex, config);
 
-            mappedData = mapDataUsingRowHeightIndex(data, rowSpanIndex, config);
-
-            expect(mappedData).to.deep.equal([
-                ['aa'],
-                ['bb'],
-                ['cc'],
-                ['dd'],
-                ['ee']
-            ]);
-        });
+      expect(mappedData).to.deep.equal([
+        ['aa'],
+        ['bb'],
+        ['cc'],
+        ['dd'],
+        ['ee']
+      ]);
     });
+  });
 
-    context('multiple cells spans multiple rows', () => {
-        it('maps data to multiple rows', () => {
-            let config,
-                data,
-                mappedData,
-                rowSpanIndex;
+  context('multiple cells spans multiple rows', () => {
+    it('maps data to multiple rows', () => {
+      const config = {
+        columns: {
+          0: {
+            width: 2
+          },
+          1: {
+            width: 4
+          }
+        }
+      };
 
-            config = {
-                columns: {
-                    0: {
-                        width: 2
-                    },
-                    1: {
-                        width: 4
-                    }
-                }
-            };
+      const rowSpanIndex = [
+        5
+      ];
 
-            rowSpanIndex = [
-                5
-            ];
+      const data = [
+        [
+          'aabbccddee',
+          '00001111'
+        ]
+      ];
 
-            data = [
-                [
-                    'aabbccddee',
-                    '00001111'
-                ]
-            ];
+      const mappedData = mapDataUsingRowHeightIndex(data, rowSpanIndex, config);
 
-            mappedData = mapDataUsingRowHeightIndex(data, rowSpanIndex, config);
-
-            expect(mappedData).to.deep.equal([
-                [
-                    'aa',
-                    '0000'
-                ],
-                [
-                    'bb',
-                    '1111'
-                ],
-                [
-                    'cc',
-                    ''
-                ],
-                [
-                    'dd',
-                    ''
-                ],
-                [
-                    'ee',
-                    ''
-                ]
-            ]);
-        });
+      expect(mappedData).to.deep.equal([
+        [
+          'aa',
+          '0000'
+        ],
+        [
+          'bb',
+          '1111'
+        ],
+        [
+          'cc',
+          ''
+        ],
+        [
+          'dd',
+          ''
+        ],
+        [
+          'ee',
+          ''
+        ]
+      ]);
     });
+  });
 });

@@ -15,40 +15,39 @@ import drawRow from './drawRow';
  * @returns {string}
  */
 export default (rows, border, columnSizeIndex, rowSpanIndex, drawHorizontalLine) => {
-    let output,
-        realRowIndex,
-        rowCount,
-        rowHeight;
+  let output,
+    realRowIndex,
+    rowHeight;
 
-    rowCount = rows.length;
+  const rowCount = rows.length;
 
-    realRowIndex = 0;
+  realRowIndex = 0;
 
-    output = '';
+  output = '';
 
-    if (drawHorizontalLine(realRowIndex, rowCount)) {
-        output += drawBorderTop(columnSizeIndex, border);
+  if (drawHorizontalLine(realRowIndex, rowCount)) {
+    output += drawBorderTop(columnSizeIndex, border);
+  }
+
+  _.forEach(rows, (row, index0) => {
+    output += drawRow(row, border);
+
+    if (!rowHeight) {
+      rowHeight = rowSpanIndex[realRowIndex];
+
+      realRowIndex++;
     }
 
-    _.forEach(rows, (row, index0) => {
-        output += drawRow(row, border);
+    rowHeight--;
 
-        if (!rowHeight) {
-            rowHeight = rowSpanIndex[realRowIndex];
-
-            realRowIndex++;
-        }
-
-        rowHeight--;
-
-        if (rowHeight === 0 && index0 !== rowCount - 1 && drawHorizontalLine(realRowIndex, rowCount)) {
-            output += drawBorderJoin(columnSizeIndex, border);
-        }
-    });
-
-    if (drawHorizontalLine(realRowIndex, rowCount)) {
-        output += drawBorderBottom(columnSizeIndex, border);
+    if (rowHeight === 0 && index0 !== rowCount - 1 && drawHorizontalLine(realRowIndex, rowCount)) {
+      output += drawBorderJoin(columnSizeIndex, border);
     }
+  });
 
-    return output;
+  if (drawHorizontalLine(realRowIndex, rowCount)) {
+    output += drawBorderBottom(columnSizeIndex, border);
+  }
+
+  return output;
 };

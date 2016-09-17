@@ -1,48 +1,43 @@
 import table from './../../../src';
-
 import expectTable from './expectTable';
 
 describe('README.md usage/', () => {
-    it('usage/custom_border', () => {
-        let config,
-            data,
-            output;
+  it('usage/custom_border', () => {
+    const data = [
+      ['0A', '0B', '0C'],
+      ['1A', '1B', '1C'],
+      ['2A', '2B', '2C']
+    ];
 
-        data = [
-            ['0A', '0B', '0C'],
-            ['1A', '1B', '1C'],
-            ['2A', '2B', '2C']
-        ];
+    /* eslint-disable sort-keys */
+    const config = {
+      border: {
+        topBody: '─',
+        topJoin: '┬',
+        topLeft: '┌',
+        topRight: '┐',
 
-        config = {
-            border: {
-                topBody: '─',
-                topJoin: '┬',
-                topLeft: '┌',
-                topRight: '┐',
+        bottomBody: '─',
+        bottomJoin: '┴',
+        bottomLeft: '└',
+        bottomRight: '┘',
 
-                bottomBody: '─',
-                bottomJoin: '┴',
-                bottomLeft: '└',
-                bottomRight: '┘',
+        bodyLeft: '│',
+        bodyRight: '│',
+        bodyJoin: '│',
 
-                bodyLeft: '│',
-                bodyRight: '│',
-                bodyJoin: '│',
+        joinBody: '─',
+        joinLeft: '├',
+        joinRight: '┤',
+        joinJoin: '┼'
+      }
+    };
+    /* eslint-enable */
 
-                joinBody: '─',
-                joinLeft: '├',
-                joinRight: '┤',
-                joinJoin: '┼'
-            }
-        };
+    const output = table(data, config);
 
-        output = table(data, config);
-
-        // console.log(output);
-
-        /* eslint-disable no-restricted-syntax */
-        expectTable(output, `
+    // eslint-disable-next-line no-restricted-syntax
+    expectTable(output, `
 ┌────┬────┬────┐
 │ 0A │ 0B │ 0C │
 ├────┼────┼────┤
@@ -51,6 +46,5 @@ describe('README.md usage/', () => {
 │ 2A │ 2B │ 2C │
 └────┴────┴────┘
         `);
-        /* eslint-enable no-restricted-syntax */
-    });
+  });
 });

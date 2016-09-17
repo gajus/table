@@ -8,8 +8,8 @@
 /**
  * @param {number[]} columns
  * @param {drawRow~border} border
- * @return {string}
+ * @returns {string}
  */
 export default (columns, border) => {
-    return border.bodyLeft + columns.join(border.bodyJoin) + border.bodyRight + '\n';
+  return border.bodyLeft + columns.join(border.bodyJoin) + border.bodyRight + '\n';
 };

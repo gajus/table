@@ -2,17 +2,14 @@ import _ from 'lodash';
 import getBorderCharacters from './getBorderCharacters';
 import validateConfig from './validateConfig';
 
-let makeBorder,
-    makeColumns;
-
 /**
  * Merges user provided border characters with the default border ("honeywell") characters.
  *
  * @param {Object} border
  * @returns {Object}
  */
-makeBorder = (border = {}) => {
-    return _.assign({}, getBorderCharacters('honeywell'), border);
+const makeBorder = (border = {}) => {
+  return _.assign({}, getBorderCharacters('honeywell'), border);
 };
 
 /**
@@ -24,23 +21,22 @@ makeBorder = (border = {}) => {
  * @param {Object} columnDefault
  * @returns {Object}
  */
-makeColumns = (columnCount, columns = {}, columnDefault = {}) => {
-    _.times(columnCount, (index) => {
-        if (_.isUndefined(columns[index])) {
-            columns[index] = {};
-        }
+const makeColumns = (columnCount, columns = {}, columnDefault = {}) => {
+  _.times(columnCount, (index) => {
+    if (_.isUndefined(columns[index])) {
+      columns[index] = {};
+    }
 
-        columns[index] = _.assign({
-            alignment: 'left',
-            // width: columnDefault.width,
-            wrapWord: false,
-            truncate: Infinity,
-            paddingLeft: 1,
-            paddingRight: 1
-        }, columnDefault, columns[index]);
-    });
+    columns[index] = _.assign({
+      alignment: 'left',
+      paddingLeft: 1,
+      paddingRight: 1,
+      truncate: Infinity,
+      wrapWord: false
+    }, columnDefault, columns[index]);
+  });
 
-    return columns;
+  return columns;
 };
 
 /**
@@ -68,22 +64,20 @@ makeColumns = (columnCount, columns = {}, columnDefault = {}) => {
  * @returns {Object}
  */
 export default (userConfig = {}) => {
-    let config;
+  validateConfig('streamConfig.json', userConfig);
 
-    validateConfig('streamConfig.json', userConfig);
+  const config = _.cloneDeep(userConfig);
 
-    config = _.cloneDeep(userConfig);
+  if (!config.columnDefault || !config.columnDefault.width) {
+    throw new Error('Must provide config.columnDefault.width when creating a stream.');
+  }
 
-    if (!config.columnDefault || !config.columnDefault.width) {
-        throw new Error('Must provide config.columnDefault.width when creating a stream.');
-    }
+  if (!config.columnCount) {
+    throw new Error('Must provide config.columnCount.');
+  }
 
-    if (!config.columnCount) {
-        throw new Error('Must provide config.columnCount.');
-    }
+  config.border = makeBorder(config.border);
+  config.columns = makeColumns(config.columnCount, config.columns, config.columnDefault);
 
-    config.border = makeBorder(config.border);
-    config.columns = makeColumns(config.columnCount, config.columns, config.columnDefault);
-
-    return config;
+  return config;
 };

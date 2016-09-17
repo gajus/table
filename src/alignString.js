@@ -1,15 +1,10 @@
 import _ from 'lodash';
 import stringWidth from 'string-width';
 
-let alignCenter,
-    alignLeft,
-    alignRight,
-    alignments;
-
-alignments = [
-    'left',
-    'right',
-    'center'
+const alignments = [
+  'left',
+  'right',
+  'center'
 ];
 
 /**
@@ -17,8 +12,8 @@ alignments = [
  * @param {number} width
  * @returns {string}
  */
-alignLeft = (subject, width) => {
-    return subject + _.repeat(' ', width);
+const alignLeft = (subject, width) => {
+  return subject + _.repeat(' ', width);
 };
 
 /**
@@ -26,8 +21,8 @@ alignLeft = (subject, width) => {
  * @param {number} width
  * @returns {string}
  */
-alignRight = (subject, width) => {
-    return _.repeat(' ', width) + subject;
+const alignRight = (subject, width) => {
+  return _.repeat(' ', width) + subject;
 };
 
 /**
@@ -35,18 +30,18 @@ alignRight = (subject, width) => {
  * @param {number} width
  * @returns {string}
  */
-alignCenter = (subject, width) => {
-    let halfWidth;
+const alignCenter = (subject, width) => {
+  let halfWidth;
 
-    halfWidth = width / 2;
+  halfWidth = width / 2;
 
-    if (halfWidth % 2 === 0) {
-        return _.repeat(' ', halfWidth) + subject + _.repeat(' ', halfWidth);
-    } else {
-        halfWidth = _.floor(halfWidth);
+  if (halfWidth % 2 === 0) {
+    return _.repeat(' ', halfWidth) + subject + _.repeat(' ', halfWidth);
+  } else {
+    halfWidth = _.floor(halfWidth);
 
-        return _.repeat(' ', halfWidth) + subject + _.repeat(' ', halfWidth + 1);
-    }
+    return _.repeat(' ', halfWidth) + subject + _.repeat(' ', halfWidth + 1);
+  }
 };
 
 /**
@@ -59,46 +54,43 @@ alignCenter = (subject, width) => {
  * @returns {string}
  */
 export default (subject, containerWidth, alignment) => {
-    let availableWidth,
-        subjectWidth;
+  if (!_.isString(subject)) {
+    throw new Error('Subject parameter value must be a string.');
+  }
 
-    if (!_.isString(subject)) {
-        throw new Error('Subject parameter value must be a string.');
-    }
+  if (!_.isNumber(containerWidth)) {
+    throw new Error('Container width parameter value must be a number.');
+  }
 
-    if (!_.isNumber(containerWidth)) {
-        throw new Error('Container width parameter value must be a number.');
-    }
+  const subjectWidth = stringWidth(subject);
 
-    subjectWidth = stringWidth(subject);
-
-    if (subjectWidth > containerWidth) {
+  if (subjectWidth > containerWidth) {
         // console.log('subjectWidth', subjectWidth, 'containerWidth', containerWidth, 'subject', subject);
 
-        throw new Error('Subject parameter value width cannot be greater than the container width.');
-    }
+    throw new Error('Subject parameter value width cannot be greater than the container width.');
+  }
 
-    if (!_.isString(alignment)) {
-        throw new Error('Alignment parameter value must be a string.');
-    }
+  if (!_.isString(alignment)) {
+    throw new Error('Alignment parameter value must be a string.');
+  }
 
-    if (alignments.indexOf(alignment) === -1) {
-        throw new Error('Alignment parameter value must be a known alignment parameter value (left, right, center).');
-    }
+  if (alignments.indexOf(alignment) === -1) {
+    throw new Error('Alignment parameter value must be a known alignment parameter value (left, right, center).');
+  }
 
-    if (subjectWidth === 0) {
-        return _.repeat(' ', containerWidth);
-    }
+  if (subjectWidth === 0) {
+    return _.repeat(' ', containerWidth);
+  }
 
-    availableWidth = containerWidth - subjectWidth;
+  const availableWidth = containerWidth - subjectWidth;
 
-    if (alignment === 'left') {
-        return alignLeft(subject, availableWidth);
-    }
+  if (alignment === 'left') {
+    return alignLeft(subject, availableWidth);
+  }
 
-    if (alignment === 'right') {
-        return alignRight(subject, availableWidth);
-    }
+  if (alignment === 'right') {
+    return alignRight(subject, availableWidth);
+  }
 
-    return alignCenter(subject, availableWidth);
+  return alignCenter(subject, availableWidth);
 };

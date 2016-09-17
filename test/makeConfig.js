@@ -3,84 +3,73 @@
 import {
     expect
 } from 'chai';
-
 import makeConfig from './../src/makeConfig';
 
 describe('makeConfig', () => {
-    it('does not affect the parameter configuration object', () => {
-        let config;
+  it('does not affect the parameter configuration object', () => {
+    const config = {};
 
-        config = {};
+    makeConfig([
+      [
+        'aaaaa'
+      ]
+    ], config);
 
-        makeConfig([
+    expect(config).to.deep.equal({});
+  });
+
+  context('column', () => {
+    context('"alignment"', () => {
+      context('is not provided', () => {
+        it('defaults to "left"', () => {
+          const config = makeConfig([
             [
-                'aaaaa'
+              'aaaaa'
             ]
-        ], config);
+          ]);
 
-        expect(config).to.deep.equal({});
+          expect(config.columns[0].alignment).to.equal('left');
+        });
+      });
     });
+    context('"width"', () => {
+      context('is not provided', () => {
+        it('defaults to the maximum column width', () => {
+          const config = makeConfig([
+            [
+              'aaaaa'
+            ]
+          ]);
 
-    context('column', () => {
-        context('"alignment"', () => {
-            context('is not provided', () => {
-                it('defaults to "left"', () => {
-                    let config;
-
-                    config = makeConfig([
-                        [
-                            'aaaaa'
-                        ]
-                    ]);
-
-                    expect(config.columns[0].alignment).to.equal('left');
-                });
-            });
+          expect(config.columns[0].width).to.equal(5);
         });
-        context('"width"', () => {
-            context('is not provided', () => {
-                it('defaults to the maximum column width', () => {
-                    let config;
-
-                    config = makeConfig([
-                        [
-                            'aaaaa'
-                        ]
-                    ]);
-
-                    expect(config.columns[0].width).to.equal(5);
-                });
-            });
-        });
-        context('"paddingLeft"', () => {
-            context('is not provided', () => {
-                it('defaults to 1', () => {
-                    let config;
-
-                    config = makeConfig([
-                        [
-                            'aaaaa'
-                        ]
-                    ]);
-
-                    expect(config.columns[0].paddingLeft).to.equal(1);
-                });
-            });
-        });
-        context('"paddingRight"', () => {
-            context('is not provided', () => {
-                it('defaults to 1', () => {
-                    let config;
-
-                    config = makeConfig([
-                        [
-                            'aaaaa'
-                        ]
-                    ]);
-
-                    expect(config.columns[0].paddingRight).to.equal(1);
-                });
-            });
-        });
+      });
     });
+    context('"paddingLeft"', () => {
+      context('is not provided', () => {
+        it('defaults to 1', () => {
+          const config = makeConfig([
+            [
+              'aaaaa'
+            ]
+          ]);
+
+          expect(config.columns[0].paddingLeft).to.equal(1);
+        });
+      });
+    });
+    context('"paddingRight"', () => {
+      context('is not provided', () => {
+        it('defaults to 1', () => {
+          const config = makeConfig([
+            [
+              'aaaaa'
+            ]
+          ]);
+
+          expect(config.columns[0].paddingRight).to.equal(1);
+        });
+      });
+    });
+  });
 });

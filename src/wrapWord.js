@@ -8,36 +8,33 @@ import stringWidth from 'string-width';
  * @returns {Array}
  */
 export default (input, size) => {
-    let chunk,
-        chunks,
-        re,
-        subject;
+  let subject;
 
-    subject = input;
+  subject = input;
 
-    chunks = [];
+  const chunks = [];
 
-    // https://regex101.com/r/gY5kZ1/1
-    re = new RegExp('(^.{1,' + size + '}(\\s+|$))|(^.{1,' + (size - 1) + '}(\\\\|/|_|\\.|,|;|\-))');
+  // https://regex101.com/r/gY5kZ1/1
+  const re = new RegExp('(^.{1,' + size + '}(\\s+|$))|(^.{1,' + (size - 1) + '}(\\\\|/|_|\\.|,|;|-))');
 
-    do {
-        chunk = subject.match(re);
+  do {
+    let chunk;
 
-        // console.log('chunk', chunk, re);
+    chunk = subject.match(re);
 
-        if (chunk) {
-            chunk = chunk[0];
+    if (chunk) {
+      chunk = chunk[0];
 
-            subject = slice(subject, stringWidth(chunk));
+      subject = slice(subject, stringWidth(chunk));
 
-            chunk = _.trim(chunk);
-        } else {
-            chunk = slice(subject, 0, size);
-            subject = slice(subject, size);
-        }
+      chunk = _.trim(chunk);
+    } else {
+      chunk = slice(subject, 0, size);
+      subject = slice(subject, size);
+    }
 
-        chunks.push(chunk);
-    } while (stringWidth(subject));
+    chunks.push(chunk);
+  } while (stringWidth(subject));
 
-    return chunks;
+  return chunks;
 };

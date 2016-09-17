@@ -1,10 +1,5 @@
 import _ from 'lodash';
 
-let drawBorder,
-    drawBorderBottom,
-    drawBorderJoin,
-    drawBorderTop;
-
 /**
  * @typedef drawBorder~parts
  * @property {string} left
@@ -18,16 +13,14 @@ let drawBorder,
  * @param {drawBorder~parts} parts
  * @returns {string}
  */
-drawBorder = (columnSizeIndex, parts) => {
-    let columns;
+const drawBorder = (columnSizeIndex, parts) => {
+  const columns = _
+    .map(columnSizeIndex, (size) => {
+      return _.repeat(parts.body, size);
+    })
+    .join(parts.join);
 
-    columns = _.map(columnSizeIndex, (size) => {
-        return _.repeat(parts.body, size);
-    });
-
-    columns = columns.join(parts.join);
-
-    return parts.left + columns + parts.right + '\n';
+  return parts.left + columns + parts.right + '\n';
 };
 
 /**
@@ -41,15 +34,15 @@ drawBorder = (columnSizeIndex, parts) => {
 /**
  * @param {number[]} columnSizeIndex
  * @param {drawBorderTop~parts} parts
- * @return {string}
+ * @returns {string}
  */
-drawBorderTop = (columnSizeIndex, parts) => {
-    return drawBorder(columnSizeIndex, {
-        left: parts.topLeft,
-        right: parts.topRight,
-        body: parts.topBody,
-        join: parts.topJoin
-    });
+const drawBorderTop = (columnSizeIndex, parts) => {
+  return drawBorder(columnSizeIndex, {
+    body: parts.topBody,
+    join: parts.topJoin,
+    left: parts.topLeft,
+    right: parts.topRight
+  });
 };
 
 /**
@@ -65,13 +58,13 @@ drawBorderTop = (columnSizeIndex, parts) => {
  * @param {drawBorderJoin~parts} parts
  * @returns {string}
  */
-drawBorderJoin = (columnSizeIndex, parts) => {
-    return drawBorder(columnSizeIndex, {
-        left: parts.joinLeft,
-        right: parts.joinRight,
-        body: parts.joinBody,
-        join: parts.joinJoin
-    });
+const drawBorderJoin = (columnSizeIndex, parts) => {
+  return drawBorder(columnSizeIndex, {
+    body: parts.joinBody,
+    join: parts.joinJoin,
+    left: parts.joinLeft,
+    right: parts.joinRight
+  });
 };
 
 /**
@@ -87,18 +80,18 @@ drawBorderJoin = (columnSizeIndex, parts) => {
  * @param {drawBorderBottom~parts} parts
  * @returns {string}
  */
-drawBorderBottom = (columnSizeIndex, parts) => {
-    return drawBorder(columnSizeIndex, {
-        left: parts.bottomLeft,
-        right: parts.bottomRight,
-        body: parts.bottomBody,
-        join: parts.bottomJoin
-    });
+const drawBorderBottom = (columnSizeIndex, parts) => {
+  return drawBorder(columnSizeIndex, {
+    body: parts.bottomBody,
+    join: parts.bottomJoin,
+    left: parts.bottomLeft,
+    right: parts.bottomRight
+  });
 };
 
 export {
-    drawBorder,
-    drawBorderTop,
-    drawBorderJoin,
-    drawBorderBottom
+  drawBorder,
+  drawBorderBottom,
+  drawBorderJoin,
+  drawBorderTop
 };

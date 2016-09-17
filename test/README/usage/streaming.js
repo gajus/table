@@ -1,66 +1,56 @@
 import {
     createStream
 } from './../../../src';
-
 import expectTable from './expectTable';
 
 describe('README.md usage/', () => {
-    describe('process.stdout.write', () => {
-        let overwriteProcessStdoutWrite,
-            processStdoutWrite,
-            processStdoutWriteBuffer,
-            resetProcessStdoudWrite;
+  describe('process.stdout.write', () => {
+    let processStdoutWriteBuffer;
 
-        /**
-         * @var {Function} Reference to the original process.stdout.write function.
-         */
-        processStdoutWrite = process.stdout.write;
+    /**
+     * @var {Function} Reference to the original process.stdout.write function.
+     */
+    const processStdoutWrite = process.stdout.write;
 
-        /**
-         * @returns {undefined}
-         */
-        overwriteProcessStdoutWrite = () => {
-            processStdoutWriteBuffer = '';
+    /**
+     * @returns {undefined}
+     */
+    const overwriteProcessStdoutWrite = () => {
+      processStdoutWriteBuffer = '';
 
-            process.stdout.write = (text) => {
-                processStdoutWriteBuffer += text;
-            };
-        };
+      process.stdout.write = (text) => {
+        processStdoutWriteBuffer += text;
+      };
+    };
 
-        /**
-         * @returns {string}
-         */
-        resetProcessStdoudWrite = () => {
-            process.stdout.write = processStdoutWrite;
+    /**
+     * @returns {string}
+     */
+    const resetProcessStdoudWrite = () => {
+      process.stdout.write = processStdoutWrite;
 
-            return processStdoutWriteBuffer;
-        };
+      return processStdoutWriteBuffer;
+    };
 
-        it('streaming', () => {
-            let config,
-                output,
-                stream;
+    it('streaming', () => {
+      const config = {
+        columnCount: 3,
+        columnDefault: {
+          width: 2
+        }
+      };
 
-            config = {
-                columnCount: 3,
-                columnDefault: {
-                    width: 2
-                }
-            };
+      const stream = createStream(config);
 
-            stream = createStream(config);
+      overwriteProcessStdoutWrite();
 
-            overwriteProcessStdoutWrite();
+      stream.write(['0A', '0B', '0C']);
+      stream.write(['1A', '1B', '1C']);
+      stream.write(['2A', '2B', '2C']);
 
-            stream.write(['0A', '0B', '0C']);
-            stream.write(['1A', '1B', '1C']);
-            stream.write(['2A', '2B', '2C']);
+      const output = resetProcessStdoudWrite();
 
-            output = resetProcessStdoudWrite();
-
-            // console.log(output);
-
-            expectTable(output + '\n', '╔════╤════╤════╗\n║ 0A │ 0B │ 0C ║\n╚════╧════╧════╝\r\u001b[K╟────┼────┼────╢\n║ 1A │ 1B │ 1C ║\n╚════╧════╧════╝\r\u001b[K╟────┼────┼────╢\n║ 2A │ 2B │ 2C ║\n╚════╧════╧════╝');
-        });
+      expectTable(output + '\n', '╔════╤════╤════╗\n║ 0A │ 0B │ 0C ║\n╚════╧════╧════╝\r\u001b[K╟────┼────┼────╢\n║ 1A │ 1B │ 1C ║\n╚════╧════╧════╝\r\u001b[K╟────┼────┼────╢\n║ 2A │ 2B │ 2C ║\n╚════╧════╧════╝');
     });
+  });
 });

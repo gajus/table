@@ -14,18 +14,17 @@ import stringWidth from 'string-width';
  * @returns {Array}
  */
 export default (subject, size) => {
-    let chunks,
-        subjectSlice;
+  let subjectSlice;
 
-    subjectSlice = subject;
+  subjectSlice = subject;
 
-    chunks = [];
+  const chunks = [];
 
-    do {
-        chunks.push(slice(subjectSlice, 0, size));
+  do {
+    chunks.push(slice(subjectSlice, 0, size));
 
-        subjectSlice = _.trim(slice(subjectSlice, size));
-    } while (stringWidth(subjectSlice));
+    subjectSlice = _.trim(slice(subjectSlice, size));
+  } while (stringWidth(subjectSlice));
 
-    return chunks;
+  return chunks;
 };

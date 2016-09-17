@@ -53,7 +53,7 @@ import truncateTableData from './truncateTableData';
  * @typedef {Function} drawHorizontalLine
  * @param {number} index
  * @param {number} size
- * @return {boolean}
+ * @returns {boolean}
  */
 
 /**
@@ -69,29 +69,26 @@ import truncateTableData from './truncateTableData';
  *
  * @param {table~row[]} data
  * @param {table~config} userConfig
- * @return {string}
+ * @returns {string}
  */
 export default (data, userConfig = {}) => {
-    let cellWidthIndex,
-        config,
-        rowHeightIndex,
-        rows;
+  let rows;
 
-    validateTableData(data);
+  validateTableData(data);
 
-    rows = stringifyTableData(data);
+  rows = stringifyTableData(data);
 
-    config = makeConfig(rows, userConfig);
+  const config = makeConfig(rows, userConfig);
 
-    rows = truncateTableData(data, config);
+  rows = truncateTableData(data, config);
 
-    rowHeightIndex = calculateRowHeightIndex(rows, config);
+  const rowHeightIndex = calculateRowHeightIndex(rows, config);
 
-    rows = mapDataUsingRowHeightIndex(rows, rowHeightIndex, config);
-    rows = alignTableData(rows, config);
-    rows = padTableData(rows, config);
+  rows = mapDataUsingRowHeightIndex(rows, rowHeightIndex, config);
+  rows = alignTableData(rows, config);
+  rows = padTableData(rows, config);
 
-    cellWidthIndex = calculateCellWidthIndex(rows[0]);
+  const cellWidthIndex = calculateCellWidthIndex(rows[0]);
 
-    return drawTable(rows, config.border, cellWidthIndex, rowHeightIndex, config.drawHorizontalLine);
+  return drawTable(rows, config.border, cellWidthIndex, rowHeightIndex, config.drawHorizontalLine);
 };

@@ -3,17 +3,14 @@ import getBorderCharacters from './getBorderCharacters';
 import validateConfig from './validateConfig';
 import calculateMaximumColumnWidthIndex from './calculateMaximumColumnWidthIndex';
 
-let makeBorder,
-    makeColumns;
-
 /**
  * Merges user provided border characters with the default border ("honeywell") characters.
  *
  * @param {Object} border
  * @returns {Object}
  */
-makeBorder = (border = {}) => {
-    return _.assign({}, getBorderCharacters('honeywell'), border);
+const makeBorder = (border = {}) => {
+  return _.assign({}, getBorderCharacters('honeywell'), border);
 };
 
 /**
@@ -25,27 +22,25 @@ makeBorder = (border = {}) => {
  * @param {Object} columnDefault
  * @returns {Object}
  */
-makeColumns = (rows, columns = {}, columnDefault = {}) => {
-    let maximumColumnWidthIndex;
+const makeColumns = (rows, columns = {}, columnDefault = {}) => {
+  const maximumColumnWidthIndex = calculateMaximumColumnWidthIndex(rows);
 
-    maximumColumnWidthIndex = calculateMaximumColumnWidthIndex(rows);
+  _.times(rows[0].length, (index) => {
+    if (_.isUndefined(columns[index])) {
+      columns[index] = {};
+    }
 
-    _.times(rows[0].length, (index) => {
-        if (_.isUndefined(columns[index])) {
-            columns[index] = {};
-        }
+    columns[index] = _.assign({
+      alignment: 'left',
+      paddingLeft: 1,
+      paddingRight: 1,
+      truncate: Infinity,
+      width: maximumColumnWidthIndex[index],
+      wrapWord: false
+    }, columnDefault, columns[index]);
+  });
 
-        columns[index] = _.assign({
-            alignment: 'left',
-            width: maximumColumnWidthIndex[index],
-            wrapWord: false,
-            truncate: Infinity,
-            paddingLeft: 1,
-            paddingRight: 1
-        }, columnDefault, columns[index]);
-    });
-
-    return columns;
+  return columns;
 };
 
 /**
@@ -57,23 +52,21 @@ makeColumns = (rows, columns = {}, columnDefault = {}) => {
  * @returns {Object}
  */
 export default (rows, userConfig = {}) => {
-    let config;
+  validateConfig('config.json', userConfig);
 
-    validateConfig('config.json', userConfig);
+  const config = _.cloneDeep(userConfig);
 
-    config = _.cloneDeep(userConfig);
+  config.border = makeBorder(config.border);
+  config.columns = makeColumns(rows, config.columns, config.columnDefault);
 
-    config.border = makeBorder(config.border);
-    config.columns = makeColumns(rows, config.columns, config.columnDefault);
-
-    if (!config.drawHorizontalLine) {
+  if (!config.drawHorizontalLine) {
         /**
          * @returns {boolean}
          */
-        config.drawHorizontalLine = () => {
-            return true;
-        };
-    }
+    config.drawHorizontalLine = () => {
+      return true;
+    };
+  }
 
-    return config;
+  return config;
 };

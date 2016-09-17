@@ -9,21 +9,21 @@ import wrapWord from './wrapWord';
  * @returns {number}
  */
 export default (value, columnWidth, useWrapWord = false) => {
-    if (!_.isString(value)) {
-        throw new Error('Value must be a string.');
-    }
+  if (!_.isString(value)) {
+    throw new Error('Value must be a string.');
+  }
 
-    if (!_.isInteger(columnWidth)) {
-        throw new Error('Column width must be an integer.');
-    }
+  if (!_.isInteger(columnWidth)) {
+    throw new Error('Column width must be an integer.');
+  }
 
-    if (columnWidth < 1) {
-        throw new Error('Column width must be greater than 0.');
-    }
+  if (columnWidth < 1) {
+    throw new Error('Column width must be greater than 0.');
+  }
 
-    if (useWrapWord) {
-        return wrapWord(value, columnWidth).length;
-    }
+  if (useWrapWord) {
+    return wrapWord(value, columnWidth).length;
+  }
 
-    return _.ceil(stringWidth(value) / columnWidth);
+  return _.ceil(stringWidth(value) / columnWidth);
 };

@@ -1,4 +1,4 @@
-/* eslint-disable sorting/sort-object-props */
+/* eslint-disable sort-keys */
 
 /**
  * @typedef border
@@ -24,97 +24,97 @@
  * @returns {border}
  */
 export default (name) => {
-    if (name === 'honeywell') {
-        return {
-            topBody: '═',
-            topJoin: '╤',
-            topLeft: '╔',
-            topRight: '╗',
+  if (name === 'honeywell') {
+    return {
+      topBody: '═',
+      topJoin: '╤',
+      topLeft: '╔',
+      topRight: '╗',
 
-            bottomBody: '═',
-            bottomJoin: '╧',
-            bottomLeft: '╚',
-            bottomRight: '╝',
+      bottomBody: '═',
+      bottomJoin: '╧',
+      bottomLeft: '╚',
+      bottomRight: '╝',
 
-            bodyLeft: '║',
-            bodyRight: '║',
-            bodyJoin: '│',
+      bodyLeft: '║',
+      bodyRight: '║',
+      bodyJoin: '│',
 
-            joinBody: '─',
-            joinLeft: '╟',
-            joinRight: '╢',
-            joinJoin: '┼'
-        };
-    }
+      joinBody: '─',
+      joinLeft: '╟',
+      joinRight: '╢',
+      joinJoin: '┼'
+    };
+  }
 
-    if (name === 'norc') {
-        return {
-            topBody: '─',
-            topJoin: '┬',
-            topLeft: '┌',
-            topRight: '┐',
+  if (name === 'norc') {
+    return {
+      topBody: '─',
+      topJoin: '┬',
+      topLeft: '┌',
+      topRight: '┐',
 
-            bottomBody: '─',
-            bottomJoin: '┴',
-            bottomLeft: '└',
-            bottomRight: '┘',
+      bottomBody: '─',
+      bottomJoin: '┴',
+      bottomLeft: '└',
+      bottomRight: '┘',
 
-            bodyLeft: '│',
-            bodyRight: '│',
-            bodyJoin: '│',
+      bodyLeft: '│',
+      bodyRight: '│',
+      bodyJoin: '│',
 
-            joinBody: '─',
-            joinLeft: '├',
-            joinRight: '┤',
-            joinJoin: '┼'
-        };
-    }
+      joinBody: '─',
+      joinLeft: '├',
+      joinRight: '┤',
+      joinJoin: '┼'
+    };
+  }
 
-    if (name === 'ramac') {
-        return {
-            topBody: '-',
-            topJoin: '+',
-            topLeft: '+',
-            topRight: '+',
+  if (name === 'ramac') {
+    return {
+      topBody: '-',
+      topJoin: '+',
+      topLeft: '+',
+      topRight: '+',
 
-            bottomBody: '-',
-            bottomJoin: '+',
-            bottomLeft: '+',
-            bottomRight: '+',
+      bottomBody: '-',
+      bottomJoin: '+',
+      bottomLeft: '+',
+      bottomRight: '+',
 
-            bodyLeft: '|',
-            bodyRight: '|',
-            bodyJoin: '|',
+      bodyLeft: '|',
+      bodyRight: '|',
+      bodyJoin: '|',
 
-            joinBody: '-',
-            joinLeft: '|',
-            joinRight: '|',
-            joinJoin: '|'
-        };
-    }
+      joinBody: '-',
+      joinLeft: '|',
+      joinRight: '|',
+      joinJoin: '|'
+    };
+  }
 
-    if (name === 'void') {
-        return {
-            topBody: '',
-            topJoin: '',
-            topLeft: '',
-            topRight: '',
+  if (name === 'void') {
+    return {
+      topBody: '',
+      topJoin: '',
+      topLeft: '',
+      topRight: '',
 
-            bottomBody: '',
-            bottomJoin: '',
-            bottomLeft: '',
-            bottomRight: '',
+      bottomBody: '',
+      bottomJoin: '',
+      bottomLeft: '',
+      bottomRight: '',
 
-            bodyLeft: '',
-            bodyRight: '',
-            bodyJoin: '',
+      bodyLeft: '',
+      bodyRight: '',
+      bodyJoin: '',
 
-            joinBody: '',
-            joinLeft: '',
-            joinRight: '',
-            joinJoin: ''
-        };
-    }
+      joinBody: '',
+      joinLeft: '',
+      joinRight: '',
+      joinJoin: ''
+    };
+  }
 
-    throw new Error('Unknown border template "${name}".');
+  throw new Error('Unknown border template "' + name + '".');
 };
