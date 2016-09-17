@@ -59,7 +59,7 @@ makeColumns = (rows, columns = {}, columnDefault = {}) => {
 export default (rows, userConfig = {}) => {
     let config;
 
-    validateConfig(userConfig);
+    validateConfig('config.json', userConfig);
 
     config = _.cloneDeep(userConfig);
 
