@@ -17,6 +17,8 @@
     "ajv-cli": "^1.1.0",
     "babel": "^6.5.2",
     "babel-cli": "^6.14.0",
+    "babel-core": "^6.14.0",
+    "babel-istanbul": "^0.11.0",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-preset-es2015-node4": "^2.1.0",
     "babel-register": "^6.14.0",
@@ -48,7 +50,9 @@
     "lint": "eslint ./src ./tests",
     "precommit": "npm run lint && npm run test",
     "readme": "gitdown ./.README/README.md --output-file ./README.md",
-    "test": "npm run schemas && mocha --compilers js:babel-register"
+    "test": "npm run schemas && npm run test-cov",
+    "test-spec": "mocha --compilers js:babel-register",
+    "test-cov": "babel-node node_modules/.bin/babel-istanbul cover _mocha -- --compilers js:babel-register"
   },
   "version": "3.8.0"
 }
