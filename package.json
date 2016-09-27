@@ -14,6 +14,7 @@
   },
   "description": "Formats data into a string table.",
   "devDependencies": {
+    "ajv-cli": "^1.1.0",
     "babel": "^6.5.2",
     "babel-cli": "^6.14.0",
     "babel-plugin-add-module-exports": "^0.2.1",
@@ -43,10 +44,11 @@
   },
   "scripts": {
     "build": "babel --copy-files ./src --out-dir ./dist",
+    "schemas": "mkdir -p dist && ajv compile --all-errors --inline-refs=false -s src/schemas/config -c ajv-keywords/keywords/typeof -o dist/validate_config.js && ajv compile --all-errors --inline-refs=false -s src/schemas/streamConfig -c ajv-keywords/keywords/typeof -o dist/validate_streamConfig.js",
     "lint": "eslint ./src ./tests",
     "precommit": "npm run lint && npm run test",
     "readme": "gitdown ./.README/README.md --output-file ./README.md",
-    "test": "mocha --compilers js:babel-register"
+    "test": "npm run schemas && mocha --compilers js:babel-register"
   },
   "version": "3.8.0"
 }

@@ -1,16 +1,10 @@
-import Ajv from 'ajv';
-import addKeywords from 'ajv-keywords';
-import configSchema from './schemas/config.json';
-import streamConfigSchema from './schemas/streamConfig.json';
+import validate_config from '../dist/validate_config';
+import validate_streamConfig from '../dist/validate_streamConfig';
 
-const ajv = new Ajv({
-  allErrors: true
-});
-
-addKeywords(ajv, 'typeof');
-
-ajv.addSchema(configSchema);
-ajv.addSchema(streamConfigSchema);
+const validate = {
+  'config.json': validate_config,
+  'streamConfig.json': validate_streamConfig
+};
 
 /**
  * @param {string} schemaId
@@ -18,8 +12,8 @@ ajv.addSchema(streamConfigSchema);
  * @returns {undefined}
  */
 export default (schemaId, config = {}) => {
-  if (!ajv.validate(schemaId, config)) {
-    const errors = ajv.errors.map((error) => {
+  if (!validate[schemaId](config)) {
+    const errors = validate[schemaId].errors.map((error) => {
       return {
         dataPath: error.dataPath,
         message: error.message,
