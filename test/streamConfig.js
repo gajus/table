@@ -1,13 +1,13 @@
 import {
     expect
 } from 'chai';
-import configSamples from './configSamples';
-import validate_config from '../dist/validate_config';
-import configSchema from '../src/schemas/config.json';
+import configSamples from './streamConfigSamples';
+import validate_config from '../dist/validate_streamConfig';
+import configSchema from '../src/schemas/streamConfig.json';
 import Ajv from 'ajv';
 import ajvKeywords from 'ajv-keywords';
 
-describe('config.json schema', () => {
+describe('streamConfig.json schema', () => {
   var validate;
 
   before(() => {
@@ -16,7 +16,7 @@ describe('config.json schema', () => {
     validate = ajv.compile(configSchema);
   });
 
-  it('should pass validation of valid config samples', () => {
+  it('should pass validation of valid streamConfig samples', () => {
     configSamples.valid.forEach((sample, i) => {
       testValid(sample, validate);
       testValid(sample, validate_config);
@@ -29,7 +29,7 @@ describe('config.json schema', () => {
     }
   });
 
-  it('should fail validation of invalid config samples', () => {
+  it('should fail validation of invalid streamConfig samples', () => {
     configSamples.invalid.forEach((sample, i) => {
       testInvalid(sample, validate);
       testInvalid(sample, validate_config);

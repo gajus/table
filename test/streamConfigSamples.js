@@ -79,7 +79,7 @@ export default {
                     width: 10
                 }
             }
-        },
+        },        
         { border: { topBody: '-' } },
         { border: { topJoin: '-' } },
         { border: { topLeft: '-' } },
@@ -106,8 +106,7 @@ export default {
         { columnDefault: { wrapWord: true } },
         { columnDefault: { truncate: 1 } },
         { columnDefault: { paddingLeft: 1 } },
-        { columnDefault: { paddingRight: 1 } },
-        { drawHorizontalLine: function(){} }
+        { columnDefault: { paddingRight: 1 } }
     ],
     invalid: [
         { border: 1 },
@@ -147,7 +146,6 @@ export default {
         { columnDefault: { truncate: '1' } },
         { columnDefault: { paddingLeft: '1' } },
         { columnDefault: { paddingRight: '1' } },
-        { drawHorizontalLine: 1 },
         { unknown: 1 }
     ]
 };
