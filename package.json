@@ -51,8 +51,7 @@
     "precommit": "npm run lint && npm run test",
     "readme": "gitdown ./.README/README.md --output-file ./README.md",
     "test": "npm run build && npm run test-with-coverage",
-    "test-with-coverage": "babel-node node_modules/.bin/babel-istanbul cover _mocha -- --compilers js:babel-register",
-    "test-spec": "mocha --compilers js:babel-register"
+    "test-with-coverage": "babel-node node_modules/.bin/babel-istanbul cover _mocha -- --compilers js:babel-register"
   },
   "version": "3.8.0"
 }
