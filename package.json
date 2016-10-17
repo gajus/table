@@ -59,9 +59,9 @@
   "scripts": {
     "build": "rm -fr ./dist && babel --copy-files ./src --out-dir ./dist && npm run make-validators",
     "lint": "npm run build && eslint ./src ./tests",
+    "make-readme": "gitdown ./.README/README.md --output-file ./README.md",
     "make-validators": "ajv compile --all-errors --inline-refs=false -s src/schemas/config -c ajv-keywords/keywords/typeof -o dist/validateConfig.js && ajv compile --all-errors --inline-refs=false -s src/schemas/streamConfig -c ajv-keywords/keywords/typeof -o dist/validateStreamConfig.js",
     "precommit": "npm run lint && npm run test",
-    "readme": "gitdown ./.README/README.md --output-file ./README.md",
     "test": "npm run build && nyc --check-coverage mocha"
   },
   "version": "3.8.0"
