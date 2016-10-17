@@ -1,4 +1,6 @@
+// eslint-disable-next-line import/default
 import validateConfig from '../dist/validateConfig';
+// eslint-disable-next-line import/default
 import validateStreamConfig from '../dist/validateStreamConfig';
 
 const validate = {
