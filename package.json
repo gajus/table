@@ -46,11 +46,11 @@
   },
   "scripts": {
     "build": "babel --copy-files ./src --out-dir ./dist",
-    "schemas": "mkdir -p dist && ajv compile --all-errors --inline-refs=false -s src/schemas/config -c ajv-keywords/keywords/typeof -o dist/validateConfig.js && ajv compile --all-errors --inline-refs=false -s src/schemas/streamConfig -c ajv-keywords/keywords/typeof -o dist/validateStreamConfig.js",
+    "make-validators": "mkdir -p dist && ajv compile --all-errors --inline-refs=false -s src/schemas/config -c ajv-keywords/keywords/typeof -o dist/validateConfig.js && ajv compile --all-errors --inline-refs=false -s src/schemas/streamConfig -c ajv-keywords/keywords/typeof -o dist/validateStreamConfig.js",
     "lint": "eslint ./src ./tests",
     "precommit": "npm run lint && npm run test",
     "readme": "gitdown ./.README/README.md --output-file ./README.md",
-    "test": "npm run schemas && npm run test-cov",
+    "test": "npm run make-validators && npm run test-cov",
     "test-spec": "mocha --compilers js:babel-register",
     "test-cov": "babel-node node_modules/.bin/babel-istanbul cover _mocha -- --compilers js:babel-register"
   },
