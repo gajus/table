@@ -46,7 +46,7 @@
   },
   "scripts": {
     "build": "babel --copy-files ./src --out-dir ./dist",
-    "schemas": "mkdir -p dist && ajv compile --all-errors --inline-refs=false -s src/schemas/config -c ajv-keywords/keywords/typeof -o dist/validate_config.js && ajv compile --all-errors --inline-refs=false -s src/schemas/streamConfig -c ajv-keywords/keywords/typeof -o dist/validate_streamConfig.js",
+    "schemas": "mkdir -p dist && ajv compile --all-errors --inline-refs=false -s src/schemas/config -c ajv-keywords/keywords/typeof -o dist/validateConfig.js && ajv compile --all-errors --inline-refs=false -s src/schemas/streamConfig -c ajv-keywords/keywords/typeof -o dist/validateStreamConfig.js",
     "lint": "eslint ./src ./tests",
     "precommit": "npm run lint && npm run test",
     "readme": "gitdown ./.README/README.md --output-file ./README.md",
