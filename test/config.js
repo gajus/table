@@ -2,7 +2,7 @@ import {
     expect
 } from 'chai';
 import configSamples from './configSamples';
-import validate_config from '../dist/validate_config';
+import validateConfig from '../dist/validateConfig';
 import configSchema from '../src/schemas/config.json';
 import Ajv from 'ajv';
 import ajvKeywords from 'ajv-keywords';
@@ -19,7 +19,7 @@ describe('config.json schema', () => {
   it('should pass validation of valid config samples', () => {
     configSamples.valid.forEach((sample, i) => {
       testValid(sample, validate);
-      testValid(sample, validate_config);
+      testValid(sample, validateConfig);
     });
 
     function testValid(sample, validate) {
@@ -32,7 +32,7 @@ describe('config.json schema', () => {
   it('should fail validation of invalid config samples', () => {
     configSamples.invalid.forEach((sample, i) => {
       testInvalid(sample, validate);
-      testInvalid(sample, validate_config);
+      testInvalid(sample, validateConfig);
     });
 
     function testInvalid(sample, validate) {

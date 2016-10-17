@@ -1,9 +1,9 @@
-import validate_config from '../dist/validate_config';
-import validate_streamConfig from '../dist/validate_streamConfig';
+import validateConfig from '../dist/validateConfig';
+import validateStreamConfig from '../dist/validateStreamConfig';
 
 const validate = {
-  'config.json': validate_config,
-  'streamConfig.json': validate_streamConfig
+  'config.json': validateConfig,
+  'streamConfig.json': validateStreamConfig
 };
 
 /**
