@@ -62,6 +62,7 @@
     "make-readme": "gitdown ./.README/README.md --output-file ./README.md",
     "make-validators": "ajv compile --all-errors --inline-refs=false -s src/schemas/config -c ajv-keywords/keywords/typeof -o dist/validateConfig.js && ajv compile --all-errors --inline-refs=false -s src/schemas/streamConfig -c ajv-keywords/keywords/typeof -o dist/validateStreamConfig.js",
     "precommit": "npm run lint && npm run test",
+    "prepublish": "NODE_ENV=production npm run build",
     "test": "npm run build && nyc --check-coverage mocha"
   },
   "version": "3.8.2"
