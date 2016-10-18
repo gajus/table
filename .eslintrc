@@ -1,3 +1,6 @@
 {
-	"extends": "canonical"
+  "extends": "canonical",
+  "rules": {
+    "max-len": 0
+  }
 }

@@ -1,16 +1,12 @@
-import Ajv from 'ajv';
-import addKeywords from 'ajv-keywords';
-import configSchema from './schemas/config.json';
-import streamConfigSchema from './schemas/streamConfig.json';
+// eslint-disable-next-line import/default
+import validateConfig from '../dist/validateConfig';
+// eslint-disable-next-line import/default
+import validateStreamConfig from '../dist/validateStreamConfig';
 
-const ajv = new Ajv({
-  allErrors: true
-});
-
-addKeywords(ajv, 'typeof');
-
-ajv.addSchema(configSchema);
-ajv.addSchema(streamConfigSchema);
+const validate = {
+  'config.json': validateConfig,
+  'streamConfig.json': validateStreamConfig
+};
 
 /**
  * @param {string} schemaId
@@ -18,8 +14,8 @@ ajv.addSchema(streamConfigSchema);
  * @returns {undefined}
  */
 export default (schemaId, config = {}) => {
-  if (!ajv.validate(schemaId, config)) {
-    const errors = ajv.errors.map((error) => {
+  if (!validate[schemaId](config)) {
+    const errors = validate[schemaId].errors.map((error) => {
       return {
         dataPath: error.dataPath,
         message: error.message,

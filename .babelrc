@@ -4,5 +4,12 @@
   ],
   "presets": [
     "es2015-node4"
-  ]
+  ],
+  "env": {
+    "development": {
+      "plugins": [
+        "istanbul"
+      ]
+    }
+  }
 }
