@@ -10,7 +10,7 @@
     "chalk": "^1.1.1",
     "lodash": "^4.0.0",
     "slice-ansi": "0.0.4",
-    "string-width": "^1.0.1"
+    "string-width": "^2.0.0"
   },
   "description": "Formats data into a string table.",
   "devDependencies": {
