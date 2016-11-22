@@ -64,5 +64,5 @@
     "prepublish": "NODE_ENV=production npm run build",
     "test": "npm run build && nyc --check-coverage mocha"
   },
-  "version": "4.0.0"
+  "version": "4.0.1"
 }
