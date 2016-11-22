@@ -1,7 +1,8 @@
 import _ from 'lodash';
 import chalk from 'chalk';
-import table, {
-    getBorderCharacters
+import {
+  table,
+  getBorderCharacters
 } from './../../../src';
 
 describe('README.md usage/', () => {

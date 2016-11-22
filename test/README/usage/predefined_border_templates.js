@@ -1,6 +1,7 @@
 import _ from 'lodash';
-import table, {
-    getBorderCharacters
+import {
+  table,
+  getBorderCharacters
 } from './../../../src';
 import expectTable from './expectTable';
 

@@ -1,7 +1,4 @@
 {
-  "plugins": [
-    "add-module-exports"
-  ],
   "presets": [
     "es2015-node4"
   ],

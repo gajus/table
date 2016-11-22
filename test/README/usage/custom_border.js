@@ -1,4 +1,6 @@
-import table from './../../../src';
+import {
+  table
+} from './../../../src';
 import expectTable from './expectTable';
 
 describe('README.md usage/', () => {

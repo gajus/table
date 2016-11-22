@@ -3,7 +3,8 @@
 You can load one of the predefined border templates using `getBorderCharacters` function.
 
 ```js
-import table, {
+import {
+    table,
     getBorderCharacters
 } from 'table';
 

@@ -3,7 +3,12 @@
 Table data is described using an array (rows) of array (cells).
 
 ```js
-import table from 'table';
+import {
+  table
+} from 'table';
+
+// Using commonjs?
+// const {table} = require('table');
 
 let data,
     output;
