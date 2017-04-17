@@ -5,8 +5,8 @@
     "url": "http://gajus.com"
   },
   "dependencies": {
-    "ajv": "^4.7.0",
-    "ajv-keywords": "^1.0.0",
+    "ajv": "^5.0.0",
+    "ajv-keywords": "^2.0.0",
     "chalk": "^1.1.1",
     "lodash": "^4.0.0",
     "slice-ansi": "0.0.4",
@@ -14,7 +14,7 @@
   },
   "description": "Formats data into a string table.",
   "devDependencies": {
-    "ajv-cli": "^1.1.0",
+    "ajv-cli": "^2.0.0",
     "babel": "^6.5.2",
     "babel-cli": "^6.14.0",
     "babel-core": "^6.14.0",
