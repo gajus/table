@@ -11,7 +11,7 @@ import wrapWord from './wrapWord';
 export default (unmappedRows, rowHeightIndex, config) => {
   const tableWidth = unmappedRows[0].length;
 
-  const mappedRows = _.map(unmappedRows, (cells, index0) => {
+  const mappedRows = unmappedRows.map((cells, index0) => {
     const rowHeight = _.times(rowHeightIndex[index0], () => {
       return _.fill(Array(tableWidth), '');
     });
