@@ -10,7 +10,7 @@ import calculateMaximumColumnWidthIndex from './calculateMaximumColumnWidthIndex
  * @returns {Object}
  */
 const makeBorder = (border = {}) => {
-  return _.assign({}, getBorderCharacters('honeywell'), border);
+  return Object.assign({}, getBorderCharacters('honeywell'), border);
 };
 
 /**
