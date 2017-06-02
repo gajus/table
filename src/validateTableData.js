@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 /**
  * @typedef {string} cell
  */
@@ -13,7 +11,7 @@ import _ from 'lodash';
  * @returns {undefined}
  */
 export default (rows) => {
-  if (!_.isArray(rows)) {
+  if (!Array.isArray(rows)) {
     throw new Error('Table data must be an array.');
   }
 
@@ -28,7 +26,7 @@ export default (rows) => {
   const columnNumber = rows[0].length;
 
   _.forEach(rows, (cells) => {
-    if (!_.isArray(cells)) {
+    if (!Array.isArray(cells)) {
       throw new Error('Table row data must be an array.');
     }
 
