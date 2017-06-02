@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import stringWidth from 'string-width';
 
 /**
@@ -8,7 +7,7 @@ import stringWidth from 'string-width';
  * @returns {number[]}
  */
 export default (cells) => {
-  return _.map(cells, (value) => {
+  return cells.map((value) => {
     return stringWidth(value);
   });
 };
