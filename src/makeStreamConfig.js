@@ -9,7 +9,7 @@ import validateConfig from './validateConfig';
  * @returns {Object}
  */
 const makeBorder = (border = {}) => {
-  return _.assign({}, getBorderCharacters('honeywell'), border);
+  return Object.assign({}, getBorderCharacters('honeywell'), border);
 };
 
 /**
@@ -27,7 +27,7 @@ const makeColumns = (columnCount, columns = {}, columnDefault = {}) => {
       columns[index] = {};
     }
 
-    columns[index] = _.assign({
+    columns[index] = Object.assign({
       alignment: 'left',
       paddingLeft: 1,
       paddingRight: 1,
