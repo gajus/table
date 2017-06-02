@@ -1,5 +1,6 @@
 import stringWidth from 'string-width';
 import alignString from './alignString';
+
 /**
  * @param {table~row[]} rows
  * @param {Object} config

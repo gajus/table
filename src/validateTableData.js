@@ -25,7 +25,7 @@ export default (rows) => {
 
   const columnNumber = rows[0].length;
 
-  _.forEach(rows, (cells) => {
+  for (const cells of rows) {
     if (!Array.isArray(cells)) {
       throw new Error('Table row data must be an array.');
     }
@@ -36,10 +36,10 @@ export default (rows) => {
 
     // @todo Make an exception for newline characters.
     // @see https://github.com/gajus/table/issues/9
-    _.forEach(cells, (cell) => {
+    for (const cell of cells) {
       if (/[\x01-\x1A]/.test(cell)) {
         throw new Error('Table data must not contain control characters.');
       }
-    });
-  });
+    }
+  }
 };
