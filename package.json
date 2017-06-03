@@ -64,5 +64,6 @@
     "prepublish": "NODE_ENV=production npm run build",
     "test": "npm run build && nyc --check-coverage mocha"
   },
+  "typings": "table.d.ts",
   "version": "4.0.1"
 }
