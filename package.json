@@ -24,7 +24,7 @@
     "chai": "^3.4.1",
     "eslint": "^3.5.0",
     "eslint-config-canonical": "^1.8.6",
-    "gitdown": "^2.4.0",
+    "gitdown": "^2.5.0",
     "husky": "^0.11.7",
     "mocha": "^3.0.2",
     "nyc": "^8.3.1",
