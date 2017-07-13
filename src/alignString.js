@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import {repeat, floor, isString, isNumber} from 'lodash';
 import stringWidth from 'string-width';
 
 const alignments = [
@@ -13,7 +13,7 @@ const alignments = [
  * @returns {string}
  */
 const alignLeft = (subject, width) => {
-  return subject + _.repeat(' ', width);
+  return subject + repeat(' ', width);
 };
 
 /**
@@ -22,7 +22,7 @@ const alignLeft = (subject, width) => {
  * @returns {string}
  */
 const alignRight = (subject, width) => {
-  return _.repeat(' ', width) + subject;
+  return repeat(' ', width) + subject;
 };
 
 /**
@@ -36,11 +36,11 @@ const alignCenter = (subject, width) => {
   halfWidth = width / 2;
 
   if (halfWidth % 2 === 0) {
-    return _.repeat(' ', halfWidth) + subject + _.repeat(' ', halfWidth);
+    return repeat(' ', halfWidth) + subject + repeat(' ', halfWidth);
   } else {
-    halfWidth = _.floor(halfWidth);
+    halfWidth = floor(halfWidth);
 
-    return _.repeat(' ', halfWidth) + subject + _.repeat(' ', halfWidth + 1);
+    return repeat(' ', halfWidth) + subject + repeat(' ', halfWidth + 1);
   }
 };
 
@@ -54,11 +54,11 @@ const alignCenter = (subject, width) => {
  * @returns {string}
  */
 export default (subject, containerWidth, alignment) => {
-  if (!_.isString(subject)) {
+  if (!isString(subject)) {
     throw new Error('Subject parameter value must be a string.');
   }
 
-  if (!_.isNumber(containerWidth)) {
+  if (!isNumber(containerWidth)) {
     throw new Error('Container width parameter value must be a number.');
   }
 
@@ -70,7 +70,7 @@ export default (subject, containerWidth, alignment) => {
     throw new Error('Subject parameter value width cannot be greater than the container width.');
   }
 
-  if (!_.isString(alignment)) {
+  if (!isString(alignment)) {
     throw new Error('Alignment parameter value must be a string.');
   }
 
@@ -79,7 +79,7 @@ export default (subject, containerWidth, alignment) => {
   }
 
   if (subjectWidth === 0) {
-    return _.repeat(' ', containerWidth);
+    return repeat(' ', containerWidth);
   }
 
   const availableWidth = containerWidth - subjectWidth;

@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import {isString, isInteger, ceil} from 'lodash';
 import stringWidth from 'string-width';
 import wrapWord from './wrapWord';
 
@@ -9,11 +9,11 @@ import wrapWord from './wrapWord';
  * @returns {number}
  */
 export default (value, columnWidth, useWrapWord = false) => {
-  if (!_.isString(value)) {
+  if (!isString(value)) {
     throw new Error('Value must be a string.');
   }
 
-  if (!_.isInteger(columnWidth)) {
+  if (!isInteger(columnWidth)) {
     throw new Error('Column width must be an integer.');
   }
 
@@ -25,5 +25,5 @@ export default (value, columnWidth, useWrapWord = false) => {
     return wrapWord(value, columnWidth).length;
   }
 
-  return _.ceil(stringWidth(value) / columnWidth);
+  return ceil(stringWidth(value) / columnWidth);
 };

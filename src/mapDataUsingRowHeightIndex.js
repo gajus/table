@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import {times, fill, forEach, flatten} from 'lodash';
 import wrapString from './wrapString';
 import wrapWord from './wrapWord';
 
@@ -12,15 +12,15 @@ export default (unmappedRows, rowHeightIndex, config) => {
   const tableWidth = unmappedRows[0].length;
 
   const mappedRows = unmappedRows.map((cells, index0) => {
-    const rowHeight = _.times(rowHeightIndex[index0], () => {
-      return _.fill(Array(tableWidth), '');
+    const rowHeight = times(rowHeightIndex[index0], () => {
+      return fill(Array(tableWidth), '');
     });
 
     // rowHeight
     //     [{row index within rowSaw; index2}]
     //     [{cell index within a virtual row; index1}]
 
-    _.forEach(cells, (value, index1) => {
+    forEach(cells, (value, index1) => {
       let chunkedValue;
 
       if (config.columns[index1].wrapWord) {
@@ -29,7 +29,7 @@ export default (unmappedRows, rowHeightIndex, config) => {
         chunkedValue = wrapString(value, config.columns[index1].width);
       }
 
-      _.forEach(chunkedValue, (part, index2) => {
+      forEach(chunkedValue, (part, index2) => {
         rowHeight[index2][index1] = part;
       });
     });
@@ -37,5 +37,5 @@ export default (unmappedRows, rowHeightIndex, config) => {
     return rowHeight;
   });
 
-  return _.flatten(mappedRows);
+  return flatten(mappedRows);
 };

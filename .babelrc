@@ -2,6 +2,9 @@
   "presets": [
     "es2015-node4"
   ],
+  "plugins": [
+    "lodash"
+  ],
   "env": {
     "development": {
       "plugins": [

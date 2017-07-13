@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import {map, truncate} from 'lodash';
 
 /**
  * @todo Make it work with ASCII content.
@@ -7,9 +7,9 @@ import _ from 'lodash';
  * @returns {table~row[]}
  */
 export default (rows, config) => {
-  return _.map(rows, (cells) => {
-    return _.map(cells, (content, index) => {
-      return _.truncate(content, {
+  return map(rows, (cells) => {
+    return map(cells, (content, index) => {
+      return truncate(content, {
         length: config.columns[index].truncate
       });
     });
