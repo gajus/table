@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import {map, trimEnd, mapValues} from 'lodash';
 import makeStreamConfig from './makeStreamConfig';
 import drawRow from './drawRow';
 import {
@@ -43,7 +43,7 @@ const prepareData = (data, config) => {
 const create = (row, columnWidthIndex, config) => {
   const rows = prepareData([row], config);
 
-  const body = _.map(rows, (literalRow) => {
+  const body = map(rows, (literalRow) => {
     return drawRow(literalRow, config.border);
   }).join('');
 
@@ -55,7 +55,7 @@ const create = (row, columnWidthIndex, config) => {
   output += body;
   output += drawBorderBottom(columnWidthIndex, config.border);
 
-  output = _.trimEnd(output);
+  output = trimEnd(output);
 
   process.stdout.write(output);
 };
@@ -69,7 +69,7 @@ const create = (row, columnWidthIndex, config) => {
 const append = (row, columnWidthIndex, config) => {
   const rows = prepareData([row], config);
 
-  const body = _.map(rows, (literalRow) => {
+  const body = map(rows, (literalRow) => {
     return drawRow(literalRow, config.border);
   }).join('');
 
@@ -81,7 +81,7 @@ const append = (row, columnWidthIndex, config) => {
   output += body;
   output += drawBorderBottom(columnWidthIndex, config.border);
 
-  output = _.trimEnd(output);
+  output = trimEnd(output);
 
   process.stdout.write(output);
 };
@@ -93,7 +93,7 @@ const append = (row, columnWidthIndex, config) => {
 export default (userConfig = {}) => {
   const config = makeStreamConfig(userConfig);
 
-  const columnWidthIndex = _.mapValues(config.columns, (column) => {
+  const columnWidthIndex = mapValues(config.columns, (column) => {
     return column.width + column.paddingLeft + column.paddingRight;
   });
 

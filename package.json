@@ -15,10 +15,10 @@
   "description": "Formats data into a string table.",
   "devDependencies": {
     "ajv-cli": "^2.0.0",
-    "babel": "^6.5.2",
-    "babel-cli": "^6.14.0",
+    "babel-cli": "^6.24.1",
     "babel-core": "^6.14.0",
     "babel-plugin-istanbul": "^2.0.3",
+    "babel-plugin-lodash": "^3.2.11",
     "babel-preset-es2015-node4": "^2.1.0",
     "babel-register": "^6.14.0",
     "chai": "^3.4.1",

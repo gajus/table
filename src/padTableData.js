@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import {map, repeat} from 'lodash';
 
 /**
  * @param {table~row[]} rows
@@ -6,11 +6,11 @@ import _ from 'lodash';
  * @returns {table~row[]}
  */
 export default (rows, config) => {
-  return _.map(rows, (cells) => {
-    return _.map(cells, (value, index1) => {
+  return map(rows, (cells) => {
+    return map(cells, (value, index1) => {
       const column = config.columns[index1];
 
-      return _.repeat(' ', column.paddingLeft) + value + _.repeat(' ', column.paddingRight);
+      return repeat(' ', column.paddingLeft) + value + repeat(' ', column.paddingRight);
     });
   });
 };

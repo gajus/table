@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import {trim} from 'lodash';
 import slice from 'slice-ansi';
 import stringWidth from 'string-width';
 
@@ -23,7 +23,7 @@ export default (subject, size) => {
   do {
     chunks.push(slice(subjectSlice, 0, size));
 
-    subjectSlice = _.trim(slice(subjectSlice, size));
+    subjectSlice = trim(slice(subjectSlice, size));
   } while (stringWidth(subjectSlice));
 
   return chunks;
