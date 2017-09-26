@@ -1,5 +1,5 @@
 import {
-    createStream
+  createStream
 } from './../../../src';
 import expectTable from './expectTable';
 
@@ -50,7 +50,7 @@ describe('README.md usage/', () => {
 
       const output = resetProcessStdoudWrite();
 
-      expectTable(output + '\n', '╔════╤════╤════╗\n║ 0A │ 0B │ 0C ║\n╚════╧════╧════╝\r\u001b[K╟────┼────┼────╢\n║ 1A │ 1B │ 1C ║\n╚════╧════╧════╝\r\u001b[K╟────┼────┼────╢\n║ 2A │ 2B │ 2C ║\n╚════╧════╧════╝');
+      expectTable(output + '\n', '╔════╤════╤════╗\n║ 0A │ 0B │ 0C ║\n╚════╧════╧════╝\r\u001B[K╟────┼────┼────╢\n║ 1A │ 1B │ 1C ║\n╚════╧════╧════╝\r\u001B[K╟────┼────┼────╢\n║ 2A │ 2B │ 2C ║\n╚════╧════╧════╝');
     });
   });
 });

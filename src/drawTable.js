@@ -1,8 +1,8 @@
 import _ from 'lodash';
 import {
-    drawBorderTop,
-    drawBorderJoin,
-    drawBorderBottom
+  drawBorderTop,
+  drawBorderJoin,
+  drawBorderBottom
 } from './drawBorder';
 import drawRow from './drawRow';
 
@@ -15,9 +15,9 @@ import drawRow from './drawRow';
  * @returns {string}
  */
 export default (rows, border, columnSizeIndex, rowSpanIndex, drawHorizontalLine) => {
-  let output,
-    realRowIndex,
-    rowHeight;
+  let output;
+  let realRowIndex;
+  let rowHeight;
 
   const rowCount = rows.length;
 

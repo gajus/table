@@ -1,7 +1,7 @@
 /* eslint-disable max-nested-callbacks */
 
 import {
-    expect
+  expect
 } from 'chai';
 import chalk from 'chalk';
 import wrapString from './../src/wrapString';
@@ -28,16 +28,16 @@ describe('wrapString', () => {
     describe('subject is lesser than the chunk size', () => {
       it.skip('returns subject in a single chunk', () => {
         expect(wrapString(chalk.red('aaa'), 3)).to.deep.equal([
-          '\u001b[31m\u001b[31m\u001b[31m\u001b[31m\u001b[31maaa\u001b[39m'
+          '\u001B[31m\u001B[31m\u001B[31m\u001B[31m\u001B[31maaa\u001B[39m'
         ]);
       });
     });
     describe('subject is larger than the chunk size', () => {
       it.skip('returns subject sliced into multiple chunks', () => {
         expect(wrapString(chalk.red('aaabbbc'), 3)).to.deep.equal([
-          '\u001b[31m\u001b[31m\u001b[31m\u001b[31m\u001b[31maaa\u001b[39m',
-          '\u001b[31m\u001b[31m\u001b[31m\u001b[31m\u001b[31mbbb\u001b[39m',
-          '\u001b[31m\u001b[31m\u001b[31m\u001b[31m\u001b[31mc\u001b[39m'
+          '\u001B[31m\u001B[31m\u001B[31m\u001B[31m\u001B[31maaa\u001B[39m',
+          '\u001B[31m\u001B[31m\u001B[31m\u001B[31m\u001B[31mbbb\u001B[39m',
+          '\u001B[31m\u001B[31m\u001B[31m\u001B[31m\u001B[31mc\u001B[39m'
         ]);
       });
     });

@@ -10,11 +10,11 @@ import wrapWord from './wrapWord';
  */
 export default (value, columnWidth, useWrapWord = false) => {
   if (!_.isString(value)) {
-    throw new Error('Value must be a string.');
+    throw new TypeError('Value must be a string.');
   }
 
   if (!_.isInteger(columnWidth)) {
-    throw new Error('Column width must be an integer.');
+    throw new TypeError('Column width must be an integer.');
   }
 
   if (columnWidth < 1) {

@@ -1,5 +1,5 @@
 import {
-    expect
+  expect
 } from 'chai';
 import chalk from 'chalk';
 import calculateMaximumColumnWidthIndex from './../src/calculateMaximumColumnWidthIndex';

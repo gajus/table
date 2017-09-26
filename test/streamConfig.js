@@ -1,43 +1,36 @@
 import {
-    expect
+  expect
 } from 'chai';
-import configSamples from './streamConfigSamples';
-import validateConfig from '../dist/validateStreamConfig';
-import configSchema from '../src/schemas/streamConfig.json';
 import Ajv from 'ajv';
 import ajvKeywords from 'ajv-keywords';
+import validateConfig from '../dist/validateStreamConfig';
+import configSchema from '../src/schemas/streamConfig.json';
+import configSamples from './streamConfigSamples';
 
 describe('streamConfig.json schema', () => {
-  var validate;
+  let validate;
 
   before(() => {
-    var ajv = new Ajv({allErrors: true});
+    const ajv = new Ajv({
+      allErrors: true
+    });
+
     ajvKeywords(ajv, 'typeof');
+
     validate = ajv.compile(configSchema);
   });
 
-  it('should pass validation of valid streamConfig samples', () => {
-    configSamples.valid.forEach((sample, i) => {
-      testValid(sample, validate);
-      testValid(sample, validateConfig);
-    });
-
-    function testValid(sample, validate) {
-      var valid = validate(sample);
-      if (!valid) console.log(validate.errors);
-      expect(valid).to.equal(true);
+  it('passes validation of valid streamConfig samples', () => {
+    for (const sample of configSamples.valid) {
+      expect(validate(sample)).to.equal(true);
+      expect(validateConfig(sample)).to.equal(true);
     }
   });
 
-  it('should fail validation of invalid streamConfig samples', () => {
-    configSamples.invalid.forEach((sample, i) => {
-      testInvalid(sample, validate);
-      testInvalid(sample, validateConfig);
-    });
-
-    function testInvalid(sample, validate) {
-      var valid = validate(sample);
-      expect(valid).to.equal(false);
+  it('fails validation of invalid streamConfig samples', () => {
+    for (const sample of configSamples.invalid) {
+      expect(validate(sample)).to.equal(false);
+      expect(validateConfig(sample)).to.equal(false);
     }
   });
 });

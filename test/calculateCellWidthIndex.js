@@ -1,5 +1,5 @@
 import {
-    expect
+  expect
 } from 'chai';
 import calculateCellWidthIndex from './../src/calculateCellWidthIndex';
 

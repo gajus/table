@@ -75,7 +75,7 @@ const append = (row, columnWidthIndex, config) => {
 
   let output;
 
-  output = '\r\x1b[K';
+  output = '\r\u001B[K';
 
   output += drawBorderJoin(columnWidthIndex, config.border);
   output += body;

@@ -1,13 +1,13 @@
 /* eslint-disable sort-keys */
 
 import {
-    expect
+  expect
 } from 'chai';
 import {
-    drawBorder,
-    drawBorderTop,
-    drawBorderJoin,
-    drawBorderBottom
+  drawBorder,
+  drawBorderTop,
+  drawBorderJoin,
+  drawBorderBottom
 } from './../src/drawBorder';
 
 describe('drawBorder', () => {

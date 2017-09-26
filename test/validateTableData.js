@@ -1,7 +1,7 @@
 /* eslint-disable max-nested-callbacks */
 
 import {
-    expect
+  expect
 } from 'chai';
 import validateTableData from './../src/validateTableData';
 
@@ -56,8 +56,8 @@ describe('validateTableData', () => {
     it('throws an error', () => {
       expect(() => {
         validateTableData([
-                    ['a', 'b', 'c'],
-                    ['a', 'b']
+          ['a', 'b', 'c'],
+          ['a', 'b']
         ]);
       }).to.throw(Error, 'Table must have a consistent number of cells.');
     });

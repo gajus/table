@@ -60,7 +60,7 @@ export default (rows, userConfig = {}) => {
   config.columns = makeColumns(rows, config.columns, config.columnDefault);
 
   if (!config.drawHorizontalLine) {
-        /**
+    /**
          * @returns {boolean}
          */
     config.drawHorizontalLine = () => {

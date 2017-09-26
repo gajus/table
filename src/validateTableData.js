@@ -12,7 +12,7 @@
  */
 export default (rows) => {
   if (!Array.isArray(rows)) {
-    throw new Error('Table data must be an array.');
+    throw new TypeError('Table data must be an array.');
   }
 
   if (rows.length === 0) {
@@ -27,7 +27,7 @@ export default (rows) => {
 
   for (const cells of rows) {
     if (!Array.isArray(cells)) {
-      throw new Error('Table row data must be an array.');
+      throw new TypeError('Table row data must be an array.');
     }
 
     if (cells.length !== columnNumber) {
@@ -37,7 +37,7 @@ export default (rows) => {
     // @todo Make an exception for newline characters.
     // @see https://github.com/gajus/table/issues/9
     for (const cell of cells) {
-      if (/[\x01-\x1A]/.test(cell)) {
+      if (/[\u0001-\u001A]/.test(cell)) {
         throw new Error('Table data must not contain control characters.');
       }
     }

@@ -55,23 +55,23 @@ const alignCenter = (subject, width) => {
  */
 export default (subject, containerWidth, alignment) => {
   if (!_.isString(subject)) {
-    throw new Error('Subject parameter value must be a string.');
+    throw new TypeError('Subject parameter value must be a string.');
   }
 
   if (!_.isNumber(containerWidth)) {
-    throw new Error('Container width parameter value must be a number.');
+    throw new TypeError('Container width parameter value must be a number.');
   }
 
   const subjectWidth = stringWidth(subject);
 
   if (subjectWidth > containerWidth) {
-        // console.log('subjectWidth', subjectWidth, 'containerWidth', containerWidth, 'subject', subject);
+    // console.log('subjectWidth', subjectWidth, 'containerWidth', containerWidth, 'subject', subject);
 
     throw new Error('Subject parameter value width cannot be greater than the container width.');
   }
 
   if (!_.isString(alignment)) {
-    throw new Error('Alignment parameter value must be a string.');
+    throw new TypeError('Alignment parameter value must be a string.');
   }
 
   if (alignments.indexOf(alignment) === -1) {

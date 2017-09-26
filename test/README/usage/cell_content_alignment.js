@@ -6,9 +6,9 @@ import expectTable from './expectTable';
 describe('README.md usage/', () => {
   it('cell_content_alignment', () => {
     const data = [
-            ['0A', '0B', '0C'],
-            ['1A', '1B', '1C'],
-            ['2A', '2B', '2C']
+      ['0A', '0B', '0C'],
+      ['1A', '1B', '1C'],
+      ['2A', '2B', '2C']
     ];
 
     const config = {
@@ -30,9 +30,9 @@ describe('README.md usage/', () => {
 
     const output = table(data, config);
 
-        // console.log(output);
+    // console.log(output);
 
-        /* eslint-disable no-restricted-syntax */
+    /* eslint-disable no-restricted-syntax */
     expectTable(output, `
 ╔════════════╤════════════╤════════════╗
 ║ 0A         │     0B     │         0C ║
@@ -42,6 +42,6 @@ describe('README.md usage/', () => {
 ║ 2A         │     2B     │         2C ║
 ╚════════════╧════════════╧════════════╝
         `);
-        /* eslint-enable no-restricted-syntax */
+    /* eslint-enable no-restricted-syntax */
   });
 });
