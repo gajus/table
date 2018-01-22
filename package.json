@@ -30,6 +30,9 @@
     "nyc": "^11.2.1",
     "sinon": "^4.0.0"
   },
+  "engines": {
+    "node": ">=4.0.0"
+  },
   "keywords": [
     "ascii",
     "text",
