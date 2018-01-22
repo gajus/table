@@ -12,9 +12,9 @@
   },
   "description": "Formats data into a string table.",
   "devDependencies": {
-    "ajv": "^5.5.2",
-    "ajv-cli": "^2.1.0",
-    "ajv-keywords": "^2.1.1",
+    "ajv": "^6.0.1",
+    "ajv-cli": "^3.0.0",
+    "ajv-keywords": "^3.0.0",
     "babel": "^6.23.0",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
