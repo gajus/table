@@ -30,7 +30,7 @@ const makeColumns = (rows, columns = {}, columnDefault = {}) => {
       columns[index] = {};
     }
 
-    columns[index] = _.assign({
+    columns[index] = Object.assign({
       alignment: 'left',
       paddingLeft: 1,
       paddingRight: 1,
