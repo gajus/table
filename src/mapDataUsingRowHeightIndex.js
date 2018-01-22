@@ -13,7 +13,7 @@ export default (unmappedRows, rowHeightIndex, config) => {
 
   const mappedRows = unmappedRows.map((cells, index0) => {
     const rowHeight = _.times(rowHeightIndex[index0], () => {
-      return _.fill(Array(tableWidth), '');
+      return Array(tableWidth).fill('');
     });
 
     // rowHeight

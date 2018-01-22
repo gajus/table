@@ -12,7 +12,7 @@ export default (rows) => {
     throw new Error('Dataset must have at least one row.');
   }
 
-  const columns = _.fill(Array(rows[0].length), 0);
+  const columns = Array(rows[0].length).fill(0);
 
   _.forEach(rows, (row) => {
     const columnWidthIndex = calculateCellWidthIndex(row);
