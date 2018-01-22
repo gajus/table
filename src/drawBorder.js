@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 /**
  * @typedef drawBorder~parts
  * @property {string} left
@@ -14,8 +12,8 @@ import _ from 'lodash';
  * @returns {string}
  */
 const drawBorder = (columnSizeIndex, parts) => {
-  const columns = _
-    .map(columnSizeIndex, (size) => {
+  const columns = columnSizeIndex
+    .map((size) => {
       return parts.body.repeat(size);
     })
     .join(parts.join);

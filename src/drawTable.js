@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import {
   drawBorderTop,
   drawBorderJoin,
@@ -29,7 +28,7 @@ export default (rows, border, columnSizeIndex, rowSpanIndex, drawHorizontalLine)
     output += drawBorderTop(columnSizeIndex, border);
   }
 
-  _.forEach(rows, (row, index0) => {
+  rows.forEach((row, index0) => {
     output += drawRow(row, border);
 
     if (!rowHeight) {
