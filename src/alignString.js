@@ -13,7 +13,7 @@ const alignments = [
  * @returns {string}
  */
 const alignLeft = (subject, width) => {
-  return subject + _.repeat(' ', width);
+  return subject + ' '.repeat(width);
 };
 
 /**
@@ -22,7 +22,7 @@ const alignLeft = (subject, width) => {
  * @returns {string}
  */
 const alignRight = (subject, width) => {
-  return _.repeat(' ', width) + subject;
+  return ' '.repeat(width) + subject;
 };
 
 /**
@@ -36,11 +36,11 @@ const alignCenter = (subject, width) => {
   halfWidth = width / 2;
 
   if (halfWidth % 2 === 0) {
-    return _.repeat(' ', halfWidth) + subject + _.repeat(' ', halfWidth);
+    return ' '.repeat(halfWidth) + subject + ' '.repeat(halfWidth);
   } else {
     halfWidth = _.floor(halfWidth);
 
-    return _.repeat(' ', halfWidth) + subject + _.repeat(' ', halfWidth + 1);
+    return ' '.repeat(halfWidth) + subject + ' '.repeat(halfWidth + 1);
   }
 };
 
@@ -79,7 +79,7 @@ export default (subject, containerWidth, alignment) => {
   }
 
   if (subjectWidth === 0) {
-    return _.repeat(' ', containerWidth);
+    return ' '.repeat(containerWidth);
   }
 
   const availableWidth = containerWidth - subjectWidth;

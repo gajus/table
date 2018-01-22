@@ -16,7 +16,7 @@ import _ from 'lodash';
 const drawBorder = (columnSizeIndex, parts) => {
   const columns = _
     .map(columnSizeIndex, (size) => {
-      return _.repeat(parts.body, size);
+      return parts.body.repeat(size);
     })
     .join(parts.join);
 

@@ -10,7 +10,7 @@ export default (rows, config) => {
     return _.map(cells, (value, index1) => {
       const column = config.columns[index1];
 
-      return _.repeat(' ', column.paddingLeft) + value + _.repeat(' ', column.paddingRight);
+      return ' '.repeat(column.paddingLeft) + value + ' '.repeat(column.paddingRight);
     });
   });
 };
