@@ -3,6 +3,8 @@ import {
 } from 'chai';
 import Ajv from 'ajv';
 import ajvKeywords from 'ajv-keywords';
+import ajvSchemaDraft06 from 'ajv/lib/refs/json-schema-draft-06.json';
+
 import validateConfig from '../dist/validateConfig';
 import configSchema from '../src/schemas/config.json';
 import configSamples from './configSamples';
@@ -12,6 +14,7 @@ describe('config.json schema', () => {
 
   before(() => {
     const ajv = new Ajv({allErrors: true});
+    ajv.addMetaSchema(ajvSchemaDraft06);
 
     ajvKeywords(ajv, 'typeof');
     validate = ajv.compile(configSchema);
