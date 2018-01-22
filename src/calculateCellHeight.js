@@ -25,5 +25,5 @@ export default (value, columnWidth, useWrapWord = false) => {
     return wrapWord(value, columnWidth).length;
   }
 
-  return _.ceil(stringWidth(value) / columnWidth);
+  return Math.ceil(stringWidth(value) / columnWidth);
 };

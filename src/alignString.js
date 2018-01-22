@@ -38,7 +38,7 @@ const alignCenter = (subject, width) => {
   if (halfWidth % 2 === 0) {
     return ' '.repeat(halfWidth) + subject + ' '.repeat(halfWidth);
   } else {
-    halfWidth = _.floor(halfWidth);
+    halfWidth = Math.floor(halfWidth);
 
     return ' '.repeat(halfWidth) + subject + ' '.repeat(halfWidth + 1);
   }
