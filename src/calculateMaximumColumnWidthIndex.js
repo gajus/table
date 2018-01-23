@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import calculateCellWidthIndex from './calculateCellWidthIndex';
 
 /**
@@ -12,12 +11,12 @@ export default (rows) => {
     throw new Error('Dataset must have at least one row.');
   }
 
-  const columns = _.fill(Array(rows[0].length), 0);
+  const columns = Array(rows[0].length).fill(0);
 
-  _.forEach(rows, (row) => {
+  rows.forEach((row) => {
     const columnWidthIndex = calculateCellWidthIndex(row);
 
-    _.forEach(columnWidthIndex, (valueWidth, index0) => {
+    columnWidthIndex.forEach((valueWidth, index0) => {
       if (columns[index0] < valueWidth) {
         columns[index0] = valueWidth;
       }

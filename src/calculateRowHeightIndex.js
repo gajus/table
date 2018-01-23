@@ -13,10 +13,10 @@ export default (rows, config) => {
 
   const rowSpanIndex = [];
 
-  _.forEach(rows, (cells) => {
-    const cellHeightIndex = _.fill(Array(tableWidth), 1);
+  rows.forEach((cells) => {
+    const cellHeightIndex = Array(tableWidth).fill(1);
 
-    _.forEach(cells, (value, index1) => {
+    cells.forEach((value, index1) => {
       if (!_.isNumber(config.columns[index1].width)) {
         throw new TypeError('column[index].width must be a number.');
       }

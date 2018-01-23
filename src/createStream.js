@@ -43,7 +43,7 @@ const prepareData = (data, config) => {
 const create = (row, columnWidthIndex, config) => {
   const rows = prepareData([row], config);
 
-  const body = _.map(rows, (literalRow) => {
+  const body = rows.map((literalRow) => {
     return drawRow(literalRow, config.border);
   }).join('');
 
@@ -69,7 +69,7 @@ const create = (row, columnWidthIndex, config) => {
 const append = (row, columnWidthIndex, config) => {
   const rows = prepareData([row], config);
 
-  const body = _.map(rows, (literalRow) => {
+  const body = rows.map((literalRow) => {
     return drawRow(literalRow, config.border);
   }).join('');
 

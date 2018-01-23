@@ -13,14 +13,14 @@ export default (unmappedRows, rowHeightIndex, config) => {
 
   const mappedRows = unmappedRows.map((cells, index0) => {
     const rowHeight = _.times(rowHeightIndex[index0], () => {
-      return _.fill(Array(tableWidth), '');
+      return Array(tableWidth).fill('');
     });
 
     // rowHeight
     //     [{row index within rowSaw; index2}]
     //     [{cell index within a virtual row; index1}]
 
-    _.forEach(cells, (value, index1) => {
+    cells.forEach((value, index1) => {
       let chunkedValue;
 
       if (config.columns[index1].wrapWord) {
@@ -29,7 +29,7 @@ export default (unmappedRows, rowHeightIndex, config) => {
         chunkedValue = wrapString(value, config.columns[index1].width);
       }
 
-      _.forEach(chunkedValue, (part, index2) => {
+      chunkedValue.forEach((part, index2) => {
         rowHeight[index2][index1] = part;
       });
     });

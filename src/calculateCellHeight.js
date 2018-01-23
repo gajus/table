@@ -13,7 +13,7 @@ export default (value, columnWidth, useWrapWord = false) => {
     throw new TypeError('Value must be a string.');
   }
 
-  if (!_.isInteger(columnWidth)) {
+  if (!Number.isInteger(columnWidth)) {
     throw new TypeError('Column width must be an integer.');
   }
 
@@ -25,5 +25,5 @@ export default (value, columnWidth, useWrapWord = false) => {
     return wrapWord(value, columnWidth).length;
   }
 
-  return _.ceil(stringWidth(value) / columnWidth);
+  return Math.ceil(stringWidth(value) / columnWidth);
 };
