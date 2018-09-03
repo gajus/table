@@ -37,6 +37,7 @@ export default (rows) => {
     // @todo Make an exception for newline characters.
     // @see https://github.com/gajus/table/issues/9
     for (const cell of cells) {
+      // eslint-disable-next-line no-control-regex
       if (/[\u0001-\u001A]/.test(cell)) {
         throw new Error('Table data must not contain control characters.');
       }
