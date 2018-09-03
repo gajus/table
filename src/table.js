@@ -22,6 +22,7 @@ import truncateTableData from './truncateTableData';
  * @property {string} alignment Cell content alignment (enum: left, center, right) (default: left).
  * @property {number} width Column width (default: auto).
  * @property {number} truncate Number of characters are which the content will be truncated (default: Infinity).
+ * @property {boolean} wrapWord When true the text is broken at the nearest space or one of the special characters
  * @property {number} paddingLeft Cell content padding width left (default: 1).
  * @property {number} paddingRight Cell content padding width right (default: 1).
  */
