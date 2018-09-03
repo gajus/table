@@ -6,8 +6,9 @@ script:
   - npm run lint
   - npm run test
 node_js:
+  - 10
+  - 8
   - 6
-  - 5
   - 4
 notifications:
   email: false
