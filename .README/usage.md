@@ -59,7 +59,7 @@ data = [
  * Used to dynamically tell table whether to draw a line separating rows or not.
  * The default behavior is to always return true.
  *
- * @typedef {function} drawJoin
+ * @typedef {function} drawHorizontalLine
  * @param {number} index
  * @param {number} size
  * @return {boolean}
@@ -70,7 +70,7 @@ data = [
  * @property {table~border} border
  * @property {table~columns[]} columns Column specific configuration.
  * @property {table~columns} columnDefault Default values for all columns. Column specific settings overwrite the default values.
- * @property {table~drawJoin} drawHorizontalLine
+ * @property {table~drawHorizontalLine} drawHorizontalLine
  */
 
 /**

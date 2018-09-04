@@ -15,7 +15,7 @@ describe('README.md usage/', () => {
 
     const options = {
       /**
-       * @typedef {Function} drawJoin
+       * @typedef {Function} drawHorizontalLine
        * @param {number} index
        * @param {number} size
        * @returns {boolean}

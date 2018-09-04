@@ -17,7 +17,7 @@ data = [
 
 options = {
     /**
-     * @typedef {function} drawJoin
+     * @typedef {function} drawHorizontalLine
      * @param {number} index
      * @param {number} size
      * @return {boolean}
@@ -30,6 +30,7 @@ options = {
 output = table(data, options);
 
 console.log(output);
+
 ```
 
 ```
@@ -42,4 +43,5 @@ console.log(output);
 ╟────┼────┼────╢
 ║ 4A │ 4B │ 4C ║
 ╚════╧════╧════╝
+
 ```

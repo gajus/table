@@ -99,7 +99,7 @@ export default {
         paddingRight: 1
       }
 
-      // drawJoin: () => {
+      // drawHorizontalLine: () => {
       //     return false
       // }
     },
