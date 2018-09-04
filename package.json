@@ -77,7 +77,7 @@
     "create-readme": "gitdown ./.README/README.md --output-file ./README.md",
     "create-validators": "ajv compile --all-errors --inline-refs=false -s src/schemas/config -c ajv-keywords/keywords/typeof -o dist/validateConfig.js && ajv compile --all-errors --inline-refs=false -s src/schemas/streamConfig -c ajv-keywords/keywords/typeof -o dist/validateStreamConfig.js",
     "lint": "npm run build && eslint ./src ./test && flow",
-    "test": "nyc --check-coverage mocha"
+    "test": "mocha --require @babel/register"
   },
   "version": "1.0.0"
 }
