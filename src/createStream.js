@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import values from 'object.values';
 import makeStreamConfig from './makeStreamConfig';
 import drawRow from './drawRow';
 import {
@@ -12,7 +13,6 @@ import mapDataUsingRowHeightIndex from './mapDataUsingRowHeightIndex';
 import alignTableData from './alignTableData';
 import padTableData from './padTableData';
 import calculateRowHeightIndex from './calculateRowHeightIndex';
-import values from 'object.values';
 
 /**
  * @param {Array} data
