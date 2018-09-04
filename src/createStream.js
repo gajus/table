@@ -1,5 +1,4 @@
 import _ from 'lodash';
-import values from 'object.values';
 import makeStreamConfig from './makeStreamConfig';
 import drawRow from './drawRow';
 import {
@@ -94,8 +93,8 @@ const append = (row, columnWidthIndex, config) => {
 export default (userConfig = {}) => {
   const config = makeStreamConfig(userConfig);
 
-  // @todo Drop 'object.values' dependency when Node.js v6 support is dropped.
-  const columnWidthIndex = values(_.mapValues(config.columns, (column) => {
+  // @todo Use 'Object.values' when Node.js v6 support is dropped.
+  const columnWidthIndex = _.values(_.mapValues(config.columns, (column) => {
     return column.width + column.paddingLeft + column.paddingRight;
   }));
 

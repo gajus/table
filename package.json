@@ -7,7 +7,6 @@
   "dependencies": {
     "ajv": "^6.5.3",
     "lodash": "^4.17.10",
-    "object.values": "^1.0.4",
     "slice-ansi": "1.0.0",
     "string-width": "^2.1.1"
   },
