@@ -93,9 +93,9 @@ const append = (row, columnWidthIndex, config) => {
 export default (userConfig = {}) => {
   const config = makeStreamConfig(userConfig);
 
-  const columnWidthIndex = _.mapValues(config.columns, (column) => {
+  const columnWidthIndex = Object.values(_.mapValues(config.columns, (column) => {
     return column.width + column.paddingLeft + column.paddingRight;
-  });
+  }));
 
   let empty;
 
