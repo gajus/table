@@ -14,7 +14,7 @@ export default (rows, config) => {
   const rowSpanIndex = [];
 
   rows.forEach((cells) => {
-    const cellHeightIndex = Array(tableWidth).fill(1);
+    const cellHeightIndex = new Array(tableWidth).fill(1);
 
     cells.forEach((value, index1) => {
       if (!_.isNumber(config.columns[index1].width)) {

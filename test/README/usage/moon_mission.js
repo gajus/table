@@ -3,7 +3,7 @@ import chalk from 'chalk';
 import {
   table,
   getBorderCharacters
-} from './../../../src';
+} from '../../../src';
 
 describe('README.md usage/', () => {
   it('moon_mission', () => {

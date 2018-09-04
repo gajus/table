@@ -4,7 +4,7 @@ import {
   expect
 } from 'chai';
 import chalk from 'chalk';
-import alignString from './../src/alignString';
+import alignString from '../src/alignString';
 
 describe('alignString', () => {
   context('subject parameter value is not a string', () => {

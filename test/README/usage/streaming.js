@@ -1,6 +1,6 @@
 import {
   createStream
-} from './../../../src';
+} from '../../../src';
 import expectTable from './expectTable';
 
 describe('README.md usage/', () => {

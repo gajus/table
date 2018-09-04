@@ -2,7 +2,7 @@ import {
   expect
 } from 'chai';
 import chalk from 'chalk';
-import calculateMaximumColumnWidthIndex from './../src/calculateMaximumColumnWidthIndex';
+import calculateMaximumColumnWidthIndex from '../src/calculateMaximumColumnWidthIndex';
 
 describe('calculateMaximumColumnWidthIndex', () => {
   it('throws an error when attempting to calculate maximum column value index for an empty data set', () => {

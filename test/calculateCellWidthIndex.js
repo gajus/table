@@ -1,7 +1,7 @@
 import {
   expect
 } from 'chai';
-import calculateCellWidthIndex from './../src/calculateCellWidthIndex';
+import calculateCellWidthIndex from '../src/calculateCellWidthIndex';
 
 describe('calculateCellWidthIndex', () => {
   context('all cells have different width', () => {

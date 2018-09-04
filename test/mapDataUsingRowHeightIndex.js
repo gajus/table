@@ -1,7 +1,7 @@
 import {
   expect
 } from 'chai';
-import mapDataUsingRowHeightIndex from './../src/mapDataUsingRowHeightIndex';
+import mapDataUsingRowHeightIndex from '../src/mapDataUsingRowHeightIndex';
 
 describe('mapDataUsingRowHeightIndex', () => {
   context('no data spans multiple rows', () => {

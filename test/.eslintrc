@@ -1,0 +1,8 @@
+{
+  "env": {
+    "mocha": true
+  },
+  "rules": {
+    "filenames/match-regex": 0
+  }
+}

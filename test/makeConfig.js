@@ -3,7 +3,7 @@
 import {
   expect
 } from 'chai';
-import makeConfig from './../src/makeConfig';
+import makeConfig from '../src/makeConfig';
 
 describe('makeConfig', () => {
   it('does not affect the parameter configuration object', () => {

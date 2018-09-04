@@ -3,7 +3,7 @@
 import {
   expect
 } from 'chai';
-import calculateRowHeightIndex from './../src/calculateRowHeightIndex';
+import calculateRowHeightIndex from '../src/calculateRowHeightIndex';
 
 describe('calculateRowHeightIndex', () => {
   context('single column', () => {

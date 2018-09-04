@@ -4,7 +4,7 @@ import {
   expect
 } from 'chai';
 import chalk from 'chalk';
-import wrapString from './../src/wrapString';
+import wrapString from '../src/wrapString';
 
 describe('wrapString', () => {
   context('subject is a plain text string', () => {

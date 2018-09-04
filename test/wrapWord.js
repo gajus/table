@@ -1,7 +1,7 @@
 import {
   expect
 } from 'chai';
-import wrapWord from './../src/wrapWord';
+import wrapWord from '../src/wrapWord';
 
 describe('wrapWord', () => {
   it('wraps a string at a nearest whitespace', () => {

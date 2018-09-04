@@ -8,7 +8,7 @@ import {
   drawBorderTop,
   drawBorderJoin,
   drawBorderBottom
-} from './../src/drawBorder';
+} from '../src/drawBorder';
 
 describe('drawBorder', () => {
   it('draws a border using parts', () => {

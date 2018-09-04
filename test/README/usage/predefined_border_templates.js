@@ -2,7 +2,7 @@ import _ from 'lodash';
 import {
   table,
   getBorderCharacters
-} from './../../../src';
+} from '../../../src';
 import expectTable from './expectTable';
 
 describe('README.md usage/predefined_border_templates', () => {

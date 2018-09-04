@@ -1,12 +1,22 @@
 {
-  "presets": [
-    ["env", {"targets": {"node": "4"}}]
-  ],
   "env": {
-    "development": {
+    "test": {
       "plugins": [
         "istanbul"
       ]
     }
-  }
+  },
+  "plugins": [
+    "transform-export-default-name"
+  ],
+  "presets": [
+    [
+      "@babel/env",
+      {
+        "targets": {
+          "node": 6
+        }
+      }
+    ]
+  ]
 }

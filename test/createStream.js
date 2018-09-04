@@ -3,7 +3,7 @@
 import {
   expect
 } from 'chai';
-import createStream from './../src/createStream';
+import createStream from '../src/createStream';
 
 describe('createStream', () => {
   context('"config.columnDefault.width" property is not provided', () => {

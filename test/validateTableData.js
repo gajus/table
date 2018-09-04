@@ -3,7 +3,7 @@
 import {
   expect
 } from 'chai';
-import validateTableData from './../src/validateTableData';
+import validateTableData from '../src/validateTableData';
 
 describe('validateTableData', () => {
   context('table does not have a row', () => {
