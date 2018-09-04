@@ -6,9 +6,8 @@ script:
   - npm run lint
   - npm run test
 node_js:
-  - 6
-  - 5
-  - 4
+  - 10
+  - 8
 notifications:
   email: false
 sudo: false
