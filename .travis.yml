@@ -8,6 +8,7 @@ script:
 node_js:
   - 10
   - 8
+  - 6
 notifications:
   email: false
 sudo: false
