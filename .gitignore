@@ -3,8 +3,9 @@ coverage
 dist
 *.log
 .*
+!.babelrc
+!.eslintrc
+!.flowconfig
 !.gitignore
 !.npmignore
-!.babelrc
 !.travis.yml
-!.eslintrc

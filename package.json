@@ -15,6 +15,7 @@
     "@babel/cli": "^7.0.0",
     "@babel/core": "^7.0.0",
     "@babel/node": "^7.0.0",
+    "@babel/plugin-transform-flow-strip-types": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
     "@babel/register": "^7.0.0",
     "ajv-cli": "^3.0.0",
@@ -26,6 +27,8 @@
     "coveralls": "^3.0.2",
     "eslint": "^5.5.0",
     "eslint-config-canonical": "^12.0.0",
+    "flow-bin": "^0.80.0",
+    "flow-copy-source": "^2.0.2",
     "gitdown": "^2.5.3",
     "husky": "^1.0.0-rc.13",
     "mocha": "^5.2.0",
@@ -70,10 +73,10 @@
     "url": "https://github.com/gajus/table"
   },
   "scripts": {
-    "build": "rm -fr ./dist && NODE_ENV=production babel --copy-files ./src --out-dir ./dist && npm run create-validators",
+    "build": "rm -fr ./dist && NODE_ENV=production babel ./src --out-dir ./dist --copy-files --source-maps && npm run create-validators && flow-copy-source src dist",
     "create-readme": "gitdown ./.README/README.md --output-file ./README.md",
     "create-validators": "ajv compile --all-errors --inline-refs=false -s src/schemas/config -c ajv-keywords/keywords/typeof -o dist/validateConfig.js && ajv compile --all-errors --inline-refs=false -s src/schemas/streamConfig -c ajv-keywords/keywords/typeof -o dist/validateStreamConfig.js",
-    "lint": "npm run build && eslint ./src ./test",
+    "lint": "npm run build && eslint ./src ./test && flow",
     "test": "nyc --check-coverage mocha"
   },
   "version": "1.0.0"
