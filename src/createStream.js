@@ -12,6 +12,7 @@ import mapDataUsingRowHeightIndex from './mapDataUsingRowHeightIndex';
 import alignTableData from './alignTableData';
 import padTableData from './padTableData';
 import calculateRowHeightIndex from './calculateRowHeightIndex';
+import values from 'object.values';
 
 /**
  * @param {Array} data
@@ -93,7 +94,8 @@ const append = (row, columnWidthIndex, config) => {
 export default (userConfig = {}) => {
   const config = makeStreamConfig(userConfig);
 
-  const columnWidthIndex = Object.values(_.mapValues(config.columns, (column) => {
+  // @todo Drop 'object.values' dependency when Node.js v6 support is dropped.
+  const columnWidthIndex = values(_.mapValues(config.columns, (column) => {
     return column.width + column.paddingLeft + column.paddingRight;
   }));
 
