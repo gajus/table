@@ -5,9 +5,8 @@
     "url": "http://gajus.com"
   },
   "dependencies": {
-    "ajv": "^6.5.4",
-    "lodash": "^4.17.11",
-    "object.values": "^1.0.4",
+    "ajv": "^6.5.3",
+    "lodash": "^4.17.10",
     "slice-ansi": "1.0.0",
     "string-width": "^2.1.1"
   },
@@ -38,7 +37,7 @@
     "sinon": "^6.3.4"
   },
   "engines": {
-    "node": ">=8.0.0"
+    "node": ">=6.0.0"
   },
   "husky": {
     "hooks": {
