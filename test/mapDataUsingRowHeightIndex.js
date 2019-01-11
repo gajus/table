@@ -1,6 +1,7 @@
 import {
   expect
 } from 'chai';
+import chalk from 'chalk';
 import mapDataUsingRowHeightIndex from '../src/mapDataUsingRowHeightIndex';
 
 describe('mapDataUsingRowHeightIndex', () => {
@@ -94,6 +95,39 @@ describe('mapDataUsingRowHeightIndex', () => {
         ['cc'],
         ['dd'],
         ['ee']
+      ]);
+    });
+
+    it('maps data with color coding to multiple rows', () => {
+      const config = {
+        columns: {
+          0: {
+            width: 100
+          }
+        }
+      };
+
+      const rowSpanIndex = [
+        5
+      ];
+
+      const data = [
+        [
+          chalk.red('aa\nbb\ncc\ndd\nee')
+        ]
+      ];
+
+      const mappedData = mapDataUsingRowHeightIndex(data, rowSpanIndex, config);
+
+      const before = '\u001b[31m';
+      const after = '\u001B[39m';
+
+      expect(mappedData).to.deep.equal([
+        [before + 'aa' + after],
+        [before + 'bb' + after],
+        [before + 'cc' + after],
+        [before + 'dd' + after],
+        [before + 'ee' + after]
       ]);
     });
   });
