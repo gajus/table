@@ -119,15 +119,12 @@ describe('mapDataUsingRowHeightIndex', () => {
 
       const mappedData = mapDataUsingRowHeightIndex(data, rowSpanIndex, config);
 
-      const before = '\u001b[31m';
-      const after = '\u001B[39m';
-
       expect(mappedData).to.deep.equal([
-        [before + 'aa' + after],
-        [before + 'bb' + after],
-        [before + 'cc' + after],
-        [before + 'dd' + after],
-        [before + 'ee' + after]
+        [chalk.red('aa')],
+        [chalk.red('bb')],
+        [chalk.red('cc')],
+        [chalk.red('dd')],
+        [chalk.red('ee')]
       ]);
     });
   });
