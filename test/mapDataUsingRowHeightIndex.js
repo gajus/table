@@ -66,6 +66,38 @@ describe('mapDataUsingRowHeightIndex', () => {
     });
   });
 
+  context('single cell contains newlines', () => {
+    it('maps data to multiple rows', () => {
+      const config = {
+        columns: {
+          0: {
+            width: 100
+          }
+        }
+      };
+
+      const rowSpanIndex = [
+        5
+      ];
+
+      const data = [
+        [
+          'aa\nbb\ncc\ndd\nee'
+        ]
+      ];
+
+      const mappedData = mapDataUsingRowHeightIndex(data, rowSpanIndex, config);
+
+      expect(mappedData).to.deep.equal([
+        ['aa'],
+        ['bb'],
+        ['cc'],
+        ['dd'],
+        ['ee']
+      ]);
+    });
+  });
+
   context('multiple cells spans multiple rows', () => {
     it('maps data to multiple rows', () => {
       const config = {
