@@ -1,6 +1,7 @@
 import {
   expect
 } from 'chai';
+import chalk from 'chalk';
 import mapDataUsingRowHeightIndex from '../src/mapDataUsingRowHeightIndex';
 
 describe('mapDataUsingRowHeightIndex', () => {
@@ -62,6 +63,68 @@ describe('mapDataUsingRowHeightIndex', () => {
         ['cc'],
         ['dd'],
         ['ee']
+      ]);
+    });
+  });
+
+  context('single cell contains newlines', () => {
+    it('maps data to multiple rows', () => {
+      const config = {
+        columns: {
+          0: {
+            width: 100
+          }
+        }
+      };
+
+      const rowSpanIndex = [
+        5
+      ];
+
+      const data = [
+        [
+          'aa\nbb\ncc\ndd\nee'
+        ]
+      ];
+
+      const mappedData = mapDataUsingRowHeightIndex(data, rowSpanIndex, config);
+
+      expect(mappedData).to.deep.equal([
+        ['aa'],
+        ['bb'],
+        ['cc'],
+        ['dd'],
+        ['ee']
+      ]);
+    });
+
+    it('maps data with color coding to multiple rows', () => {
+      const config = {
+        columns: {
+          0: {
+            width: 100
+          }
+        }
+      };
+
+      const rowSpanIndex = [
+        5
+      ];
+
+      const data = [
+        [
+          chalk.red('aa\nbb\ncc\ndd\nee')
+        ]
+      ];
+
+      const mappedData = mapDataUsingRowHeightIndex(data, rowSpanIndex, config);
+
+      expect(mappedData).to.deep.equal([
+        [chalk.red('aa')],
+        [chalk.red('bb')],
+        [chalk.red('cc')],
+        [chalk.red('dd')],
+        [chalk.red('ee')]
       ]);
     });
   });

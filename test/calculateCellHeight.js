@@ -14,6 +14,12 @@ describe('calculateCellHeight', () => {
         }).to.throw(Error, 'Value must be a string.');
       });
     });
+    it('contains newlines', () => {
+      expect(calculateCellHeight('a\nb\nc', 10)).to.equal(3);
+    });
+    it('contains newlines and will be wrapped', () => {
+      expect(calculateCellHeight('aa\nbbb\nc', 2)).to.equal(4);
+    });
   });
   describe('context width', () => {
     context('is not an integer', () => {
