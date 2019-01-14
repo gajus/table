@@ -52,6 +52,12 @@ describe('validateTableData', () => {
     });
   });
 
+  context('cell data contains newlines', () => {
+    it('does not throw', () => {
+      validateTableData([['ab\nc']]);
+    });
+  });
+
   context('rows have inconsistent number of cells', () => {
     it('throws an error', () => {
       expect(() => {
