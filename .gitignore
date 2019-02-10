@@ -3,6 +3,7 @@ coverage
 dist
 *.log
 .*
+!.editorconfig
 !.babelrc
 !.eslintrc
 !.flowconfig
