@@ -17,4 +17,13 @@ describe('calculateCellWidthIndex', () => {
       expect(cellWidthIndex[2]).to.equal(6, 'third column');
     });
   });
+  context('cell contains newline characters', () => {
+    it('picks the longest line length', () => {
+      const cellWidthIndex = calculateCellWidthIndex([
+        'aaaa\naa'
+      ]);
+
+      expect(cellWidthIndex[0]).to.equal(4);
+    });
+  });
 });
