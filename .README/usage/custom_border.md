@@ -4,36 +4,36 @@
 
 ```js
 let config,
-    data,
-    output;
+  data,
+  output;
 
 data = [
-    ['0A', '0B', '0C'],
-    ['1A', '1B', '1C'],
-    ['2A', '2B', '2C']
+  ['0A', '0B', '0C'],
+  ['1A', '1B', '1C'],
+  ['2A', '2B', '2C']
 ];
 
 config = {
-    border: {
-        topBody: `─`,
-        topJoin: `┬`,
-        topLeft: `┌`,
-        topRight: `┐`,
+  border: {
+    topBody: `─`,
+    topJoin: `┬`,
+    topLeft: `┌`,
+    topRight: `┐`,
 
-        bottomBody: `─`,
-        bottomJoin: `┴`,
-        bottomLeft: `└`,
-        bottomRight: `┘`,
+    bottomBody: `─`,
+    bottomJoin: `┴`,
+    bottomLeft: `└`,
+    bottomRight: `┘`,
 
-        bodyLeft: `│`,
-        bodyRight: `│`,
-        bodyJoin: `│`,
+    bodyLeft: `│`,
+    bodyRight: `│`,
+    bodyJoin: `│`,
 
-        joinBody: `─`,
-        joinLeft: `├`,
-        joinRight: `┤`,
-        joinJoin: `┼`
-    }
+    joinBody: `─`,
+    joinLeft: `├`,
+    joinRight: `┤`,
+    joinJoin: `┼`
+  }
 };
 
 output = table(data, config);

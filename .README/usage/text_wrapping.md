@@ -4,19 +4,19 @@
 
 ```js
 let config,
-    data,
-    output;
+  data,
+  output;
 
 data = [
     ['Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pulvinar nibh sed mauris convallis dapibus. Nunc venenatis tempus nulla sit amet viverra.']
 ];
 
 config = {
-    columns: {
-        0: {
-            width: 20
-        }
+  columns: {
+    0: {
+      width: 20
     }
+  }
 };
 
 output = table(data, config);
@@ -41,20 +41,20 @@ When `wrapWord` is `true` the text is broken at the nearest space or one of the 
 
 ```js
 let config,
-    data,
-    output;
+  data,
+  output;
 
 data = [
-    ['Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pulvinar nibh sed mauris convallis dapibus. Nunc venenatis tempus nulla sit amet viverra.']
+  ['Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pulvinar nibh sed mauris convallis dapibus. Nunc venenatis tempus nulla sit amet viverra.']
 ];
 
 config = {
-    columns: {
-        0: {
-            width: 20,
-            wrapWord: true
-        }
+  columns: {
+    0: {
+      width: 20,
+      wrapWord: true
     }
+  }
 };
 
 output = table(data, config);
@@ -75,4 +75,5 @@ console.log(output);
 ║ tempus nulla sit     ║
 ║ amet viverra.        ║
 ╚══════════════════════╝
+
 ```

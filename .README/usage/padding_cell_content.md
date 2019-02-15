@@ -4,25 +4,25 @@
 
 ```js
 let config,
-    data,
-    output;
+  data,
+  output;
 
 data = [
-    ['0A', 'AABBCC', '0C'],
-    ['1A', '1B', '1C'],
-    ['2A', '2B', '2C']
+  ['0A', 'AABBCC', '0C'],
+  ['1A', '1B', '1C'],
+  ['2A', '2B', '2C']
 ];
 
 config = {
-    columns: {
-        0: {
-            paddingLeft: 3
-        },
-        1: {
-            width: 2,
-            paddingRight: 3
-        }
+  columns: {
+    0: {
+      paddingLeft: 3
+    },
+    1: {
+      width: 2,
+      paddingRight: 3
     }
+  }
 };
 
 output = table(data, config);

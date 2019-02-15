@@ -6,20 +6,20 @@ To handle a content that overflows the container width, `table` package implemen
 
 ```js
 let config,
-    data,
-    output;
+  data,
+  output;
 
 data = [
-    ['Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pulvinar nibh sed mauris convallis dapibus. Nunc venenatis tempus nulla sit amet viverra.']
+  ['Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pulvinar nibh sed mauris convallis dapibus. Nunc venenatis tempus nulla sit amet viverra.']
 ];
 
 config = {
-    columns: {
-        0: {
-            width: 20,
-            truncate: 100
-        }
+  columns: {
+    0: {
+      width: 20,
+      truncate: 100
     }
+  }
 };
 
 output = table(data, config);

@@ -4,27 +4,27 @@
 
 ```js
 let data,
-    output,
-    options;
+  output,
+  options;
 
 data = [
-    ['0A', '0B', '0C'],
-    ['1A', '1B', '1C'],
-    ['2A', '2B', '2C'],
-    ['3A', '3B', '3C'],
-    ['4A', '4B', '4C']
+  ['0A', '0B', '0C'],
+  ['1A', '1B', '1C'],
+  ['2A', '2B', '2C'],
+  ['3A', '3B', '3C'],
+  ['4A', '4B', '4C']
 ];
 
 options = {
-    /**
-     * @typedef {function} drawHorizontalLine
-     * @param {number} index
-     * @param {number} size
-     * @return {boolean}
-     */
-    drawHorizontalLine: (index, size) => {
-        return index === 0 || index === 1 || index === size - 1 || index === size;
-    }
+  /**
+    * @typedef {function} drawHorizontalLine
+    * @param {number} index
+    * @param {number} size
+    * @return {boolean}
+    */
+  drawHorizontalLine: (index, size) => {
+    return index === 0 || index === 1 || index === size - 1 || index === size;
+  }
 };
 
 output = table(data, options);
