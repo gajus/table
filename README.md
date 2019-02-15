@@ -9,6 +9,7 @@
 
 * [Table](#table)
     * [Features](#table-features)
+    * [Install](#table-install)
     * [Usage](#table-usage)
         * [Cell Content Alignment](#table-usage-cell-content-alignment)
         * [Column Width](#table-usage-column-width)
@@ -35,6 +36,17 @@ Produces a string that represents array data in a text table.
 * Configurable content padding per column.
 * Configurable column width.
 * Text wrapping.
+
+<a name="table-install"></a>
+## Install
+
+```bash
+npm install table
+
+```
+
+[![Buy Me A Coffee](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/gajus)
+[![Become a Patron](https://c5.patreon.com/external/logo/become_a_patron_button.png)](https://www.patreon.com/gajus)
 
 <a name="table-usage"></a>
 ## Usage
@@ -132,6 +144,7 @@ console.log(output);
 ╟────┼────┼────╢
 ║ 2A │ 2B │ 2C ║
 ╚════╧════╧════╝
+
 ```
 
 
@@ -144,30 +157,30 @@ Valid values are: "left", "right" and "center".
 
 ```js
 let config,
-    data,
-    output;
+  data,
+  output;
 
 data = [
-    ['0A', '0B', '0C'],
-    ['1A', '1B', '1C'],
-    ['2A', '2B', '2C']
+  ['0A', '0B', '0C'],
+  ['1A', '1B', '1C'],
+  ['2A', '2B', '2C']
 ];
 
 config = {
-    columns: {
-        0: {
-            alignment: 'left',
-            minWidth: 10
-        },
-        1: {
-            alignment: 'center',
-            minWidth: 10
-        },
-        2: {
-            alignment: 'right',
-            minWidth: 10
-        }
+  columns: {
+    0: {
+      alignment: 'left',
+      minWidth: 10
+    },
+    1: {
+      alignment: 'center',
+      minWidth: 10
+    },
+    2: {
+      alignment: 'right',
+      minWidth: 10
     }
+  }
 };
 
 output = table(data, config);
@@ -192,21 +205,21 @@ console.log(output);
 
 ```js
 let data,
-    output,
-    options;
+  output,
+  options;
 
 data = [
-    ['0A', '0B', '0C'],
-    ['1A', '1B', '1C'],
-    ['2A', '2B', '2C']
+  ['0A', '0B', '0C'],
+  ['1A', '1B', '1C'],
+  ['2A', '2B', '2C']
 ];
 
 options = {
-    columns: {
-        1: {
-            width: 10
-        }
+  columns: {
+    1: {
+      width: 10
     }
+  }
 };
 
 output = table(data, options);
@@ -231,36 +244,36 @@ console.log(output);
 
 ```js
 let config,
-    data,
-    output;
+  data,
+  output;
 
 data = [
-    ['0A', '0B', '0C'],
-    ['1A', '1B', '1C'],
-    ['2A', '2B', '2C']
+  ['0A', '0B', '0C'],
+  ['1A', '1B', '1C'],
+  ['2A', '2B', '2C']
 ];
 
 config = {
-    border: {
-        topBody: `─`,
-        topJoin: `┬`,
-        topLeft: `┌`,
-        topRight: `┐`,
+  border: {
+    topBody: `─`,
+    topJoin: `┬`,
+    topLeft: `┌`,
+    topRight: `┐`,
 
-        bottomBody: `─`,
-        bottomJoin: `┴`,
-        bottomLeft: `└`,
-        bottomRight: `┘`,
+    bottomBody: `─`,
+    bottomJoin: `┴`,
+    bottomLeft: `└`,
+    bottomRight: `┘`,
 
-        bodyLeft: `│`,
-        bodyRight: `│`,
-        bodyJoin: `│`,
+    bodyLeft: `│`,
+    bodyRight: `│`,
+    bodyJoin: `│`,
 
-        joinBody: `─`,
-        joinLeft: `├`,
-        joinRight: `┤`,
-        joinJoin: `┼`
-    }
+    joinBody: `─`,
+    joinLeft: `├`,
+    joinRight: `┤`,
+    joinJoin: `┼`
+  }
 };
 
 output = table(data, config);
@@ -285,27 +298,27 @@ console.log(output);
 
 ```js
 let data,
-    output,
-    options;
+  output,
+  options;
 
 data = [
-    ['0A', '0B', '0C'],
-    ['1A', '1B', '1C'],
-    ['2A', '2B', '2C'],
-    ['3A', '3B', '3C'],
-    ['4A', '4B', '4C']
+  ['0A', '0B', '0C'],
+  ['1A', '1B', '1C'],
+  ['2A', '2B', '2C'],
+  ['3A', '3B', '3C'],
+  ['4A', '4B', '4C']
 ];
 
 options = {
-    /**
-     * @typedef {function} drawHorizontalLine
-     * @param {number} index
-     * @param {number} size
-     * @return {boolean}
-     */
-    drawHorizontalLine: (index, size) => {
-        return index === 0 || index === 1 || index === size - 1 || index === size;
-    }
+  /**
+    * @typedef {function} drawHorizontalLine
+    * @param {number} index
+    * @param {number} size
+    * @return {boolean}
+    */
+  drawHorizontalLine: (index, size) => {
+    return index === 0 || index === 1 || index === size - 1 || index === size;
+  }
 };
 
 output = table(data, options);
@@ -334,25 +347,25 @@ console.log(output);
 
 ```js
 let config,
-    data,
-    output;
+  data,
+  output;
 
 data = [
-    ['0A', 'AABBCC', '0C'],
-    ['1A', '1B', '1C'],
-    ['2A', '2B', '2C']
+  ['0A', 'AABBCC', '0C'],
+  ['1A', '1B', '1C'],
+  ['2A', '2B', '2C']
 ];
 
 config = {
-    columns: {
-        0: {
-            paddingLeft: 3
-        },
-        1: {
-            width: 2,
-            paddingRight: 3
-        }
+  columns: {
+    0: {
+      paddingLeft: 3
+    },
+    1: {
+      width: 2,
+      paddingRight: 3
     }
+  }
 };
 
 output = table(data, config);
@@ -379,21 +392,21 @@ You can load one of the predefined border templates using `getBorderCharacters` 
 
 ```js
 import {
-    table,
-    getBorderCharacters
+  table,
+  getBorderCharacters
 } from 'table';
 
 let config,
-    data;
+  data;
 
 data = [
-    ['0A', '0B', '0C'],
-    ['1A', '1B', '1C'],
-    ['2A', '2B', '2C']
+  ['0A', '0B', '0C'],
+  ['1A', '1B', '1C'],
+  ['2A', '2B', '2C']
 ];
 
 config = {
-    border: getBorderCharacters(`name of the template`)
+  border: getBorderCharacters(`name of the template`)
 };
 
 table(data, config);
@@ -481,23 +494,23 @@ console.log(output);
 
 ```js
 import {
-    createStream
+  createStream
 } from 'table';
 
 let config,
-    stream;
+  stream;
 
 config = {
-    columnDefault: {
-        width: 50
-    },
-    columnCount: 1
+  columnDefault: {
+    width: 50
+  },
+  columnCount: 1
 };
 
 stream = createStream(config);
 
 setInterval(() => {
-    stream.write([new Date()]);
+  stream.write([new Date()]);
 }, 500);
 ```
 
@@ -505,38 +518,38 @@ setInterval(() => {
 
 `table` package uses ANSI escape codes to overwrite the output of the last line when a new row is printed.
 
-The underlying implementation is explained in this [Stack Overflow answer](http://stackoverflow.com/a/32938658/368691). 
+The underlying implementation is explained in this [Stack Overflow answer](http://stackoverflow.com/a/32938658/368691).
 
 Streaming supports all of the configuration properties and functionality of a static table (such as auto text wrapping, alignment and padding), e.g.
 
 ```js
 import {
-    createStream
+  createStream
 } from 'table';
 
 import _ from 'lodash';
 
 let config,
-    stream,
-    i;
+  stream,
+  i;
 
 config = {
-    columnDefault: {
-        width: 50
+  columnDefault: {
+    width: 50
+  },
+  columnCount: 3,
+  columns: {
+    0: {
+      width: 10,
+      alignment: 'right'
     },
-    columnCount: 3,
-    columns: {
-        0: {
-            width: 10,
-            alignment: 'right'
-        },
-        1: {
-            alignment: 'center',
-        },
-        2: {
-            width: 10
-        }
+    1: {
+      alignment: 'center',
+    },
+    2: {
+      width: 10
     }
+  }
 };
 
 stream = createStream(config);
@@ -544,15 +557,16 @@ stream = createStream(config);
 i = 0;
 
 setInterval(() => {
-    let random;
+  let random;
 
-    random = _.sample('abcdefghijklmnopqrstuvwxyz', _.random(1, 30)).join('');
+  random = _.sample('abcdefghijklmnopqrstuvwxyz', _.random(1, 30)).join('');
 
-    stream.write([i++, new Date(), random]);
+  stream.write([i++, new Date(), random]);
 }, 500);
 ```
 
 ![Streaming random data.](./.README/streaming-random.gif)
+
 <a name="table-usage-text-truncation"></a>
 ### Text Truncation
 
@@ -562,20 +576,20 @@ To handle a content that overflows the container width, `table` package implemen
 
 ```js
 let config,
-    data,
-    output;
+  data,
+  output;
 
 data = [
-    ['Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pulvinar nibh sed mauris convallis dapibus. Nunc venenatis tempus nulla sit amet viverra.']
+  ['Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pulvinar nibh sed mauris convallis dapibus. Nunc venenatis tempus nulla sit amet viverra.']
 ];
 
 config = {
-    columns: {
-        0: {
-            width: 20,
-            truncate: 100
-        }
+  columns: {
+    0: {
+      width: 20,
+      truncate: 100
     }
+  }
 };
 
 output = table(data, config);
@@ -600,19 +614,19 @@ console.log(output);
 
 ```js
 let config,
-    data,
-    output;
+  data,
+  output;
 
 data = [
     ['Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pulvinar nibh sed mauris convallis dapibus. Nunc venenatis tempus nulla sit amet viverra.']
 ];
 
 config = {
-    columns: {
-        0: {
-            width: 20
-        }
+  columns: {
+    0: {
+      width: 20
     }
+  }
 };
 
 output = table(data, config);
@@ -637,20 +651,20 @@ When `wrapWord` is `true` the text is broken at the nearest space or one of the 
 
 ```js
 let config,
-    data,
-    output;
+  data,
+  output;
 
 data = [
-    ['Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pulvinar nibh sed mauris convallis dapibus. Nunc venenatis tempus nulla sit amet viverra.']
+  ['Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pulvinar nibh sed mauris convallis dapibus. Nunc venenatis tempus nulla sit amet viverra.']
 ];
 
 config = {
-    columns: {
-        0: {
-            width: 20,
-            wrapWord: true
-        }
+  columns: {
+    0: {
+      width: 20,
+      wrapWord: true
     }
+  }
 };
 
 output = table(data, config);
@@ -671,5 +685,6 @@ console.log(output);
 ║ tempus nulla sit     ║
 ║ amet viverra.        ║
 ╚══════════════════════╝
+
 ```
 
