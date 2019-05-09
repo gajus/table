@@ -58,6 +58,33 @@ describe('validateTableData', () => {
     });
   });
 
+  context('cell data contains hyperlinks', () => {
+    const OSC = '\u001B]';
+    const BEL = '\u0007';
+    const SEP = ';';
+    const url = 'https://example.com';
+    const text = 'This is a link to example.com';
+
+    const link = [
+      OSC,
+      '8',
+      SEP,
+      SEP,
+      url,
+      BEL,
+      text,
+      OSC,
+      '8',
+      SEP,
+      SEP,
+      BEL
+    ].join('');
+
+    it('does not throw', () => {
+      validateTableData([[link]]);
+    });
+  });
+
   context('rows have inconsistent number of cells', () => {
     it('throws an error', () => {
       expect(() => {
