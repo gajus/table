@@ -1,6 +1,6 @@
 # Table
 
-![[GitSpo Mentions](https://gitspo.com/mentions/gajus/slonik)](https://gitspo.com/badges/gajus/swing?style=flat-square)
+![[GitSpo Mentions](https://gitspo.com/mentions/gajus/table)](https://gitspo.com/badges/gajus/table?style=flat-square)
 [![Travis build status](http://img.shields.io/travis/gajus/table/master.svg?style=flat-square)](https://travis-ci.org/gajus/table)
 [![Coveralls](https://img.shields.io/coveralls/gajus/table.svg?style=flat-square)](https://coveralls.io/github/gajus/table)
 [![NPM version](http://img.shields.io/npm/v/table.svg?style=flat-square)](https://www.npmjs.org/package/table)
