@@ -10,3 +10,4 @@ dist
 !.gitignore
 !.npmignore
 !.travis.yml
+!.README
