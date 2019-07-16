@@ -8,7 +8,7 @@
     "ajv": "^6.10.2",
     "lodash": "^4.17.14",
     "slice-ansi": "^2.1.0",
-    "string-width": "^4.1.0"
+    "string-width": "^3.0.0"
   },
   "description": "Formats data into a string table.",
   "devDependencies": {
