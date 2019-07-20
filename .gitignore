@@ -10,3 +10,6 @@ dist
 !.gitignore
 !.npmignore
 !.travis.yml
+
+yarn.lock
+package-lock.json
