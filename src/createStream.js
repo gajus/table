@@ -74,9 +74,9 @@ const append = (row, columnWidthIndex, config) => {
   }).join('');
 
   let output = '';
-  let bottom = drawBorderBottom(columnWidthIndex, config.border);
+  const bottom = drawBorderBottom(columnWidthIndex, config.border);
 
-  if(bottom !== "\n") {
+  if (bottom !== '\n') {
     output = '\r\u001B[K';
   }
 
