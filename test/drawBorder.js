@@ -38,6 +38,19 @@ describe('drawBorderTop', () => {
     expect(drawBorderTop([1, 1], parts)).to.equal('╔═╤═╗\n');
     expect(drawBorderTop([5, 10], parts)).to.equal('╔═════╤══════════╗\n');
   });
+
+  it('no leading new line if borderless', () => {
+    const parts = {
+      topLeft: '',
+      topRight: '',
+      topBody: '',
+      topJoin: ''
+    };
+
+    expect(drawBorderTop([1], parts)).to.equal('');
+    expect(drawBorderTop([1, 1], parts)).to.equal('');
+    expect(drawBorderTop([5, 10], parts)).to.equal('');
+  });
 });
 
 describe('drawBorderJoin', () => {
