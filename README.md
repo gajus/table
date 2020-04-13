@@ -56,9 +56,8 @@ npm install table
 Table data is described using an array (rows) of array (cells).
 
 ```js
-import {
-  table
-} from 'table';
+import tableImport from 'table';
+const { table } = tableImport;
 
 // Using commonjs?
 // const {table} = require('table');
