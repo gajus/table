@@ -6,7 +6,7 @@
   },
   "dependencies": {
     "ajv": "^6.10.2",
-    "lodash": "^4.17.14",
+    "lodash": "^4.17.19",
     "slice-ansi": "^2.1.0",
     "string-width": "^3.0.0"
   },
