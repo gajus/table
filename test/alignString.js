@@ -64,7 +64,7 @@ describe('alignString', () => {
         });
         context('center', () => {
           it('pads the string on both sides using a whitespace character', () => {
-            expect(alignString('aa', 6, 'center')).to.equal('  aa  ');
+            expect(alignString('aa', 8, 'center')).to.equal('   aa   ');
           });
           context('uneven number of available with', () => {
             it('floors the available width; adds extra space to the end of the string', () => {
