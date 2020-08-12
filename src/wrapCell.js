@@ -10,11 +10,17 @@ import wrapWord from './wrapWord';
  * @param {string} cellValue
  * @param {number} columnWidth
  * @param {boolean} useWrapWord
+ * @param {boolean} disableWrap
  * @returns {Array}
  */
-export default (cellValue, columnWidth, useWrapWord) => {
+export default (cellValue, columnWidth, useWrapWord, disableWrap) => {
   // First split on literal newlines
   const cellLines = cellValue.split('\n');
+
+  // early exit if wrapping of words is disabled
+  if (disableWrap) {
+    return cellLines;
+  }
 
   // Then iterate over the list and word-wrap every remaining line if necessary.
   for (let lineNr = 0; lineNr < cellLines.length;) {

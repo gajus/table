@@ -33,6 +33,7 @@ const makeColumns = (columnCount, columns = {}, columnDefault = {}) => {
       paddingRight: 1,
       truncate: Number.POSITIVE_INFINITY,
       wrapWord: false,
+      disableWrap: false
     }, columnDefault, columns[index]);
   });
 

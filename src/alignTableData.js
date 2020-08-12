@@ -14,7 +14,7 @@ export default (rows, config) => {
       if (stringWidth(value) === column.width) {
         return value;
       } else {
-        return alignString(value, column.width, column.alignment);
+        return alignString(value, column.width, column.alignment, column.disableWrap);
       }
     });
   });

@@ -37,6 +37,7 @@ const makeColumns = (rows, columns = {}, columnDefault = {}) => {
       truncate: Number.POSITIVE_INFINITY,
       width: maximumColumnWidthIndex[index],
       wrapWord: false,
+      disableWrap: false
     }, columnDefault, columns[index]);
   });
 

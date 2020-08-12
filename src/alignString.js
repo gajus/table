@@ -53,7 +53,7 @@ const alignCenter = (subject, width) => {
  * @param {string} alignment One of the valid options (left, right, center).
  * @returns {string}
  */
-export default (subject, containerWidth, alignment) => {
+export default (subject, containerWidth, alignment, disableWrap) => {
   if (!_.isString(subject)) {
     throw new TypeError('Subject parameter value must be a string.');
   }
@@ -64,7 +64,7 @@ export default (subject, containerWidth, alignment) => {
 
   const subjectWidth = stringWidth(subject);
 
-  if (subjectWidth > containerWidth) {
+  if (!disableWrap && subjectWidth > containerWidth) {
     // console.log('subjectWidth', subjectWidth, 'containerWidth', containerWidth, 'subject', subject);
 
     throw new Error('Subject parameter value width cannot be greater than the container width.');
@@ -82,7 +82,7 @@ export default (subject, containerWidth, alignment) => {
     return ' '.repeat(containerWidth);
   }
 
-  const availableWidth = containerWidth - subjectWidth;
+  const availableWidth = Math.max(containerWidth - subjectWidth, 0);
 
   if (alignment === 'left') {
     return alignLeft(subject, availableWidth);

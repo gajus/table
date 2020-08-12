@@ -5,9 +5,10 @@ import wrapCell from './wrapCell';
  * @param {string} value
  * @param {number} columnWidth
  * @param {boolean} useWrapWord
+ * @param {boolean} disableWrap
  * @returns {number}
  */
-export default (value, columnWidth, useWrapWord = false) => {
+export default (value, columnWidth, useWrapWord = false, disableWrap = false) => {
   if (!_.isString(value)) {
     throw new TypeError('Value must be a string.');
   }
@@ -20,5 +21,5 @@ export default (value, columnWidth, useWrapWord = false) => {
     throw new Error('Column width must be greater than 0.');
   }
 
-  return wrapCell(value, columnWidth, useWrapWord).length;
+  return wrapCell(value, columnWidth, useWrapWord, disableWrap).length;
 };

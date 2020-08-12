@@ -24,8 +24,16 @@ export default (rows, config) => {
       if (!_.isBoolean(config.columns[index1].wrapWord)) {
         throw new TypeError('column[index].wrapWord must be a boolean.');
       }
+      if (!_.isBoolean(config.columns[index1].disableWrap)) {
+        throw new TypeError('column[index].disableWrap must be a boolean.');
+      }
 
-      cellHeightIndex[index1] = calculateCellHeight(value, config.columns[index1].width, config.columns[index1].wrapWord);
+      cellHeightIndex[index1] = calculateCellHeight(
+        value,
+        config.columns[index1].width,
+        config.columns[index1].wrapWord,
+        config.columns[index1].disableWrap
+      );
     });
 
     rowSpanIndex.push(_.max(cellHeightIndex));

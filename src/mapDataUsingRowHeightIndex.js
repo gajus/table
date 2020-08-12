@@ -20,7 +20,12 @@ export default (unmappedRows, rowHeightIndex, config) => {
     //     [{cell index within a virtual row; index1}]
 
     cells.forEach((value, index1) => {
-      const cellLines = wrapCell(value, config.columns[index1].width, config.columns[index1].wrapWord);
+      const cellLines = wrapCell(
+        value,
+        config.columns[index1].width,
+        config.columns[index1].wrapWord,
+        config.columns[index1].disableWrap
+      );
 
       cellLines.forEach((cellLine, index2) => {
         rowHeight[index2][index1] = cellLine;
