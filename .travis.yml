@@ -7,7 +7,7 @@ script:
   - export NODE_ENV=test
   - npm run build
   - npm run test
-  - npm run lint
+#   - npm run lint
   - nyc --silent npm run test
   - nyc report --reporter=text-lcov | coveralls
   - nyc check-coverage --lines 70
