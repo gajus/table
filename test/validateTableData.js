@@ -1,7 +1,7 @@
 /* eslint-disable max-nested-callbacks */
 
 import {
-  expect
+  expect,
 } from 'chai';
 import validateTableData from '../src/validateTableData';
 
@@ -44,9 +44,9 @@ describe('validateTableData', () => {
         validateTableData([
           [
             [
-              String.fromCodePoint(0x01)
-            ]
-          ]
+              String.fromCodePoint(0x01),
+            ],
+          ],
         ]);
       }).to.throw(Error, 'Table data must not contain control characters.');
     });
@@ -77,7 +77,7 @@ describe('validateTableData', () => {
       '8',
       SEP,
       SEP,
-      BEL
+      BEL,
     ].join('');
 
     it('does not throw', () => {
@@ -90,7 +90,7 @@ describe('validateTableData', () => {
       expect(() => {
         validateTableData([
           ['a', 'b', 'c'],
-          ['a', 'b']
+          ['a', 'b'],
         ]);
       }).to.throw(Error, 'Table must have a consistent number of cells.');
     });

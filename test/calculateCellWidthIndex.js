@@ -1,5 +1,5 @@
 import {
-  expect
+  expect,
 } from 'chai';
 import calculateCellWidthIndex from '../src/calculateCellWidthIndex';
 
@@ -9,7 +9,7 @@ describe('calculateCellWidthIndex', () => {
       const cellWidthIndex = calculateCellWidthIndex([
         'a',
         'aaa',
-        'aaaaaa'
+        'aaaaaa',
       ]);
 
       expect(cellWidthIndex[0]).to.equal(1, 'first column');
@@ -20,7 +20,7 @@ describe('calculateCellWidthIndex', () => {
   context('cell contains newline characters', () => {
     it('picks the longest line length', () => {
       const cellWidthIndex = calculateCellWidthIndex([
-        'aaaa\naa'
+        'aaaa\naa',
       ]);
 
       expect(cellWidthIndex[0]).to.equal(4);

@@ -1,21 +1,21 @@
 import _ from 'lodash';
-import makeStreamConfig from './makeStreamConfig';
-import drawRow from './drawRow';
+import alignTableData from './alignTableData';
+import calculateRowHeightIndex from './calculateRowHeightIndex';
 import {
   drawBorderBottom,
   drawBorderJoin,
-  drawBorderTop
+  drawBorderTop,
 } from './drawBorder';
+import drawRow from './drawRow';
+import makeStreamConfig from './makeStreamConfig';
+import mapDataUsingRowHeightIndex from './mapDataUsingRowHeightIndex';
+import padTableData from './padTableData';
 import stringifyTableData from './stringifyTableData';
 import truncateTableData from './truncateTableData';
-import mapDataUsingRowHeightIndex from './mapDataUsingRowHeightIndex';
-import alignTableData from './alignTableData';
-import padTableData from './padTableData';
-import calculateRowHeightIndex from './calculateRowHeightIndex';
 
 /**
  * @param {Array} data
- * @param {Object} config
+ * @param {object} config
  * @returns {Array}
  */
 const prepareData = (data, config) => {
@@ -37,7 +37,7 @@ const prepareData = (data, config) => {
 /**
  * @param {string[]} row
  * @param {number[]} columnWidthIndex
- * @param {Object} config
+ * @param {object} config
  * @returns {undefined}
  */
 const create = (row, columnWidthIndex, config) => {
@@ -63,7 +63,7 @@ const create = (row, columnWidthIndex, config) => {
 /**
  * @param {string[]} row
  * @param {number[]} columnWidthIndex
- * @param {Object} config
+ * @param {object} config
  * @returns {undefined}
  */
 const append = (row, columnWidthIndex, config) => {
@@ -90,8 +90,8 @@ const append = (row, columnWidthIndex, config) => {
 };
 
 /**
- * @param {Object} userConfig
- * @returns {Object}
+ * @param {object} userConfig
+ * @returns {object}
  */
 export default (userConfig = {}) => {
   const config = makeStreamConfig(userConfig);
@@ -122,6 +122,6 @@ export default (userConfig = {}) => {
       } else {
         return append(row, columnWidthIndex, config);
       }
-    }
+    },
   };
 };

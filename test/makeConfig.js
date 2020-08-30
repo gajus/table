@@ -1,7 +1,7 @@
 /* eslint-disable max-nested-callbacks */
 
 import {
-  expect
+  expect,
 } from 'chai';
 import makeConfig from '../src/makeConfig';
 
@@ -11,8 +11,8 @@ describe('makeConfig', () => {
 
     makeConfig([
       [
-        'aaaaa'
-      ]
+        'aaaaa',
+      ],
     ], config);
 
     expect(config).to.deep.equal({});
@@ -24,8 +24,8 @@ describe('makeConfig', () => {
         it('defaults to "left"', () => {
           const config = makeConfig([
             [
-              'aaaaa'
-            ]
+              'aaaaa',
+            ],
           ]);
 
           expect(config.columns[0].alignment).to.equal('left');
@@ -37,8 +37,8 @@ describe('makeConfig', () => {
         it('defaults to the maximum column width', () => {
           const config = makeConfig([
             [
-              'aaaaa'
-            ]
+              'aaaaa',
+            ],
           ]);
 
           expect(config.columns[0].width).to.equal(5);
@@ -50,8 +50,8 @@ describe('makeConfig', () => {
         it('defaults to 1', () => {
           const config = makeConfig([
             [
-              'aaaaa'
-            ]
+              'aaaaa',
+            ],
           ]);
 
           expect(config.columns[0].paddingLeft).to.equal(1);
@@ -63,8 +63,8 @@ describe('makeConfig', () => {
         it('defaults to 1', () => {
           const config = makeConfig([
             [
-              'aaaaa'
-            ]
+              'aaaaa',
+            ],
           ]);
 
           expect(config.columns[0].paddingRight).to.equal(1);

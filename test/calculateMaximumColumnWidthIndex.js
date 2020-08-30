@@ -1,5 +1,5 @@
 import {
-  expect
+  expect,
 } from 'chai';
 import chalk from 'chalk';
 import calculateMaximumColumnWidthIndex from '../src/calculateMaximumColumnWidthIndex';
@@ -16,20 +16,20 @@ describe('calculateMaximumColumnWidthIndex', () => {
         '',
         'a',
         'b',
-        'c'
+        'c',
       ],
       [
         '',
         'a',
         'bbbbbbbbbb',
-        'c'
+        'c',
       ],
       [
         '',
         '',
         'b',
-        'ccccc'
-      ]
+        'ccccc',
+      ],
     ]);
 
     expect(maximumColumnValueIndex).to.deep.equal([0, 1, 10, 5]);
@@ -38,8 +38,8 @@ describe('calculateMaximumColumnWidthIndex', () => {
     it('uses visual width of the string', () => {
       const maximumColumnValueIndex = calculateMaximumColumnWidthIndex([
         [
-          chalk.red('aaaaa')
-        ]
+          chalk.red('aaaaa'),
+        ],
       ]);
 
       expect(maximumColumnValueIndex[0]).to.equal(5);
@@ -49,8 +49,8 @@ describe('calculateMaximumColumnWidthIndex', () => {
     it('uses visual width of the string', () => {
       const maximumColumnValueIndex = calculateMaximumColumnWidthIndex([
         [
-          chalk.red('古')
-        ]
+          chalk.red('古'),
+        ],
       ]);
 
       expect(maximumColumnValueIndex[0]).to.equal(2);

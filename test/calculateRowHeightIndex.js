@@ -1,7 +1,7 @@
 /* eslint-disable max-nested-callbacks */
 
 import {
-  expect
+  expect,
 } from 'chai';
 import calculateRowHeightIndex from '../src/calculateRowHeightIndex';
 
@@ -11,17 +11,17 @@ describe('calculateRowHeightIndex', () => {
       it('is equal to 1', () => {
         const data = [
           [
-            'aaa'
-          ]
+            'aaa',
+          ],
         ];
 
         const config = {
           columns: {
             0: {
               width: 10,
-              wrapWord: false
-            }
-          }
+              wrapWord: false,
+            },
+          },
         };
 
         const rowSpanIndex = calculateRowHeightIndex(data, config);
@@ -33,17 +33,17 @@ describe('calculateRowHeightIndex', () => {
       it('is equal to 2', () => {
         const data = [
           [
-            'aaabbb'
-          ]
+            'aaabbb',
+          ],
         ];
 
         const config = {
           columns: {
             0: {
               width: 3,
-              wrapWord: false
-            }
-          }
+              wrapWord: false,
+            },
+          },
         };
 
         const rowSpanIndex = calculateRowHeightIndex(data, config);
@@ -57,16 +57,16 @@ describe('calculateRowHeightIndex', () => {
       it('uses the largest height', () => {
         const data = [
           ['aaabbb'],
-          ['aaabbb']
+          ['aaabbb'],
         ];
 
         const config = {
           columns: {
             0: {
               width: 2,
-              wrapWord: false
-            }
-          }
+              wrapWord: false,
+            },
+          },
         };
 
         const rowSpanIndex = calculateRowHeightIndex(data, config);

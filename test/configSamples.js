@@ -38,24 +38,24 @@ export default {
     {columnDefault: {paddingLeft: '1'}},
     {columnDefault: {paddingRight: '1'}},
     {drawHorizontalLine: 1},
-    {unknown: 1}
+    {unknown: 1},
   ],
   valid: [
     {
       columns: {
         0: {
           alignment: 'left',
-          width: 10
+          width: 10,
         },
         1: {
           alignment: 'center',
-          width: 10
+          width: 10,
         },
         2: {
           alignment: 'right',
-          width: 10
-        }
-      }
+          width: 10,
+        },
+      },
     },
     {
       border: {
@@ -73,26 +73,26 @@ export default {
         topBody: '─',
         topJoin: '┬',
         topLeft: '┌',
-        topRight: '┐'
-      }
+        topRight: '┐',
+      },
     },
     {
       columns: {
         0: {
-          paddingLeft: 3
+          paddingLeft: 3,
         },
         1: {
           paddingRight: 3,
-          width: 2
-        }
-      }
+          width: 2,
+        },
+      },
     },
     {
       border: {},
       columnDefault: {
         paddingLeft: 0,
-        paddingRight: 1
-      }
+        paddingRight: 1,
+      },
 
       // drawHorizontalLine: () => {
       //     return false
@@ -100,22 +100,22 @@ export default {
     },
     {
       columnDefault: {
-        width: 50
+        width: 50,
       },
 
       // columnCount: 3,
       columns: {
         0: {
           alignment: 'right',
-          width: 10
+          width: 10,
         },
         1: {
-          alignment: 'center'
+          alignment: 'center',
         },
         2: {
-          width: 10
-        }
-      }
+          width: 10,
+        },
+      },
     },
     {border: {topBody: '-'}},
     {border: {topJoin: '-'}},
@@ -144,6 +144,6 @@ export default {
     {columnDefault: {truncate: 1}},
     {columnDefault: {paddingLeft: 1}},
     {columnDefault: {paddingRight: 1}},
-    {drawHorizontalLine () {}}
-  ]
+    {drawHorizontalLine () {}},
+  ],
 };

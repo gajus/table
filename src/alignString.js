@@ -4,7 +4,7 @@ import stringWidth from 'string-width';
 const alignments = [
   'left',
   'right',
-  'center'
+  'center',
 ];
 
 /**

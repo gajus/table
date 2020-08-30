@@ -1,13 +1,13 @@
-/* eslint-disable sort-keys */
+/* eslint-disable sort-keys-fix/sort-keys-fix */
 
 import {
-  expect
+  expect,
 } from 'chai';
 import {
   drawBorder,
   drawBorderTop,
   drawBorderJoin,
-  drawBorderBottom
+  drawBorderBottom,
 } from '../src/drawBorder';
 
 describe('drawBorder', () => {
@@ -16,7 +16,7 @@ describe('drawBorder', () => {
       left: '╔',
       right: '╗',
       body: '═',
-      join: '╤'
+      join: '╤',
     };
 
     expect(drawBorder([1], parts)).to.equal('╔═╗\n');
@@ -31,7 +31,7 @@ describe('drawBorderTop', () => {
       topLeft: '╔',
       topRight: '╗',
       topBody: '═',
-      topJoin: '╤'
+      topJoin: '╤',
     };
 
     expect(drawBorderTop([1], parts)).to.equal('╔═╗\n');
@@ -44,7 +44,7 @@ describe('drawBorderTop', () => {
       topLeft: '',
       topRight: '',
       topBody: '',
-      topJoin: ''
+      topJoin: '',
     };
 
     expect(drawBorderTop([1], parts)).to.equal('');
@@ -59,7 +59,7 @@ describe('drawBorderJoin', () => {
       joinBody: '─',
       joinLeft: '╟',
       joinRight: '╢',
-      joinJoin: '┼'
+      joinJoin: '┼',
     };
 
     expect(drawBorderJoin([1], parts)).to.equal('╟─╢\n');
@@ -74,7 +74,7 @@ describe('drawBorderBottom', () => {
       bottomBody: '═',
       bottomJoin: '╧',
       bottomLeft: '╚',
-      bottomRight: '╝'
+      bottomRight: '╝',
     };
 
     expect(drawBorderBottom([1], parts)).to.equal('╚═╝\n');

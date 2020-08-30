@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import {
   table,
-  getBorderCharacters
+  getBorderCharacters,
 } from '../../../src';
 import expectTable from './expectTable';
 
@@ -12,13 +12,13 @@ describe('README.md usage/predefined_border_templates', () => {
     data = [
       ['0A', '0B', '0C'],
       ['1A', '1B', '1C'],
-      ['2A', '2B', '2C']
+      ['2A', '2B', '2C'],
     ];
   });
 
   it('honeywell', () => {
     const output = table(data, {
-      border: getBorderCharacters('honeywell')
+      border: getBorderCharacters('honeywell'),
     });
 
     // eslint-disable-next-line no-restricted-syntax
@@ -35,7 +35,7 @@ describe('README.md usage/predefined_border_templates', () => {
 
   it('norc', () => {
     const output = table(data, {
-      border: getBorderCharacters('norc')
+      border: getBorderCharacters('norc'),
     });
 
     // eslint-disable-next-line no-restricted-syntax
@@ -52,7 +52,7 @@ describe('README.md usage/predefined_border_templates', () => {
 
   it('ramac', () => {
     const output = table(data, {
-      border: getBorderCharacters('ramac')
+      border: getBorderCharacters('ramac'),
     });
 
     // eslint-disable-next-line no-restricted-syntax
@@ -69,7 +69,7 @@ describe('README.md usage/predefined_border_templates', () => {
 
   it('void', () => {
     const output = table(data, {
-      border: getBorderCharacters('void')
+      border: getBorderCharacters('void'),
     });
 
     expectTable(_.trim(output) + '\n', '0A  0B  0C \n\n 1A  1B  1C \n\n 2A  2B  2C');
@@ -80,11 +80,11 @@ describe('README.md usage/predefined_border_templates', () => {
       border: getBorderCharacters('void'),
       columnDefault: {
         paddingLeft: 0,
-        paddingRight: 1
+        paddingRight: 1,
       },
       drawHorizontalLine: () => {
         return false;
-      }
+      },
     });
 
     expectTable(_.trim(output) + '\n', '0A 0B 0C \n1A 1B 1C \n2A 2B 2C');

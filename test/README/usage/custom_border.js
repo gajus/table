@@ -1,5 +1,5 @@
 import {
-  table
+  table,
 } from '../../../src';
 import expectTable from './expectTable';
 
@@ -8,10 +8,10 @@ describe('README.md usage/', () => {
     const data = [
       ['0A', '0B', '0C'],
       ['1A', '1B', '1C'],
-      ['2A', '2B', '2C']
+      ['2A', '2B', '2C'],
     ];
 
-    /* eslint-disable sort-keys */
+    /* eslint-disable sort-keys-fix/sort-keys-fix */
     const config = {
       border: {
         topBody: '─',
@@ -31,8 +31,8 @@ describe('README.md usage/', () => {
         joinBody: '─',
         joinLeft: '├',
         joinRight: '┤',
-        joinJoin: '┼'
-      }
+        joinJoin: '┼',
+      },
     };
     /* eslint-enable */
 

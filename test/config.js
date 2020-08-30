@@ -1,8 +1,8 @@
-import {
-  expect
-} from 'chai';
 import Ajv from 'ajv';
 import ajvKeywords from 'ajv-keywords';
+import {
+  expect,
+} from 'chai';
 import validateConfig from '../dist/validateConfig';
 import configSchema from '../src/schemas/config.json';
 import configSamples from './configSamples';

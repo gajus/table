@@ -1,5 +1,5 @@
 import {
-  createStream
+  createStream,
 } from '../../../src';
 import expectTable from './expectTable';
 
@@ -8,7 +8,7 @@ describe('README.md usage/', () => {
     let processStdoutWriteBuffer;
 
     /**
-     * @var {Function} Reference to the original process.stdout.write function.
+     * @member {Function} Reference to the original process.stdout.write function.
      */
     const processStdoutWrite = process.stdout.write;
 
@@ -36,8 +36,8 @@ describe('README.md usage/', () => {
       const config = {
         columnCount: 3,
         columnDefault: {
-          width: 2
-        }
+          width: 2,
+        },
       };
 
       const stream = createStream(config);

@@ -1,5 +1,5 @@
 import {
-  table
+  table,
 } from '../../../src';
 import expectTable from './expectTable';
 
@@ -13,11 +13,11 @@ describe('README.md usage/', () => {
       ['-rw-r--r--', '1,', 'pandorym', 'staff', '525688', 'May 23 11:52', 'package-lock.json'],
       ['-rw-r--r--@', '1', 'pandorym', 'staff', '2440', 'May 23 11:25', 'package.json'],
       ['drwxr-xr-x', '27', 'pandorym', 'staff', '864', 'May 23 11:25', 'src'],
-      ['drwxr-xr-x', '20', 'pandorym', 'staff', '640', 'May 23 11:25', 'test']
+      ['drwxr-xr-x', '20', 'pandorym', 'staff', '640', 'May 23 11:25', 'test'],
     ];
 
     const config = {
-      singleLine: true
+      singleLine: true,
     };
 
     const output = table(data, config);

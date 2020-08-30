@@ -1,7 +1,7 @@
 /* eslint-disable max-nested-callbacks */
 
 import {
-  expect
+  expect,
 } from 'chai';
 import calculateCellHeight from '../src/calculateCellHeight';
 

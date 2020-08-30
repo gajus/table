@@ -1,7 +1,7 @@
 /* eslint-disable max-nested-callbacks */
 
 import {
-  expect
+  expect,
 } from 'chai';
 import createStream from '../src/createStream';
 
@@ -18,8 +18,8 @@ describe('createStream', () => {
       expect(() => {
         createStream({
           columnDefault: {
-            width: 10
-          }
+            width: 10,
+          },
         });
       }).to.throw(Error, 'Must provide config.columnCount.');
     });
@@ -30,8 +30,8 @@ describe('createStream', () => {
         const stream = createStream({
           columnCount: 10,
           columnDefault: {
-            width: 10
-          }
+            width: 10,
+          },
         });
 
         stream.write(['foo']);

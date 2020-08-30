@@ -1,5 +1,5 @@
 import {
-  expect
+  expect,
 } from 'chai';
 import chalk from 'chalk';
 import mapDataUsingRowHeightIndex from '../src/mapDataUsingRowHeightIndex';
@@ -10,27 +10,27 @@ describe('mapDataUsingRowHeightIndex', () => {
       const config = {
         columns: {
           0: {
-            width: 2
-          }
-        }
+            width: 2,
+          },
+        },
       };
 
       const rowSpanIndex = [
-        1
+        1,
       ];
 
       const data = [
         [
-          'aa'
-        ]
+          'aa',
+        ],
       ];
 
       const mappedData = mapDataUsingRowHeightIndex(data, rowSpanIndex, config);
 
       expect(mappedData).to.deep.equal([
         [
-          'aa'
-        ]
+          'aa',
+        ],
       ]);
     });
   });
@@ -40,19 +40,19 @@ describe('mapDataUsingRowHeightIndex', () => {
       const config = {
         columns: {
           0: {
-            width: 2
-          }
-        }
+            width: 2,
+          },
+        },
       };
 
       const rowSpanIndex = [
-        5
+        5,
       ];
 
       const data = [
         [
-          'aabbccddee'
-        ]
+          'aabbccddee',
+        ],
       ];
 
       const mappedData = mapDataUsingRowHeightIndex(data, rowSpanIndex, config);
@@ -62,7 +62,7 @@ describe('mapDataUsingRowHeightIndex', () => {
         ['bb'],
         ['cc'],
         ['dd'],
-        ['ee']
+        ['ee'],
       ]);
     });
   });
@@ -72,19 +72,19 @@ describe('mapDataUsingRowHeightIndex', () => {
       const config = {
         columns: {
           0: {
-            width: 100
-          }
-        }
+            width: 100,
+          },
+        },
       };
 
       const rowSpanIndex = [
-        5
+        5,
       ];
 
       const data = [
         [
-          'aa\nbb\ncc\ndd\nee'
-        ]
+          'aa\nbb\ncc\ndd\nee',
+        ],
       ];
 
       const mappedData = mapDataUsingRowHeightIndex(data, rowSpanIndex, config);
@@ -94,7 +94,7 @@ describe('mapDataUsingRowHeightIndex', () => {
         ['bb'],
         ['cc'],
         ['dd'],
-        ['ee']
+        ['ee'],
       ]);
     });
 
@@ -102,19 +102,19 @@ describe('mapDataUsingRowHeightIndex', () => {
       const config = {
         columns: {
           0: {
-            width: 100
-          }
-        }
+            width: 100,
+          },
+        },
       };
 
       const rowSpanIndex = [
-        5
+        5,
       ];
 
       const data = [
         [
-          chalk.red('aa\nbb\ncc\ndd\nee')
-        ]
+          chalk.red('aa\nbb\ncc\ndd\nee'),
+        ],
       ];
 
       const mappedData = mapDataUsingRowHeightIndex(data, rowSpanIndex, config);
@@ -124,7 +124,7 @@ describe('mapDataUsingRowHeightIndex', () => {
         [chalk.red('bb')],
         [chalk.red('cc')],
         [chalk.red('dd')],
-        [chalk.red('ee')]
+        [chalk.red('ee')],
       ]);
     });
   });
@@ -134,23 +134,23 @@ describe('mapDataUsingRowHeightIndex', () => {
       const config = {
         columns: {
           0: {
-            width: 2
+            width: 2,
           },
           1: {
-            width: 4
-          }
-        }
+            width: 4,
+          },
+        },
       };
 
       const rowSpanIndex = [
-        5
+        5,
       ];
 
       const data = [
         [
           'aabbccddee',
-          '00001111'
-        ]
+          '00001111',
+        ],
       ];
 
       const mappedData = mapDataUsingRowHeightIndex(data, rowSpanIndex, config);
@@ -158,24 +158,24 @@ describe('mapDataUsingRowHeightIndex', () => {
       expect(mappedData).to.deep.equal([
         [
           'aa',
-          '0000'
+          '0000',
         ],
         [
           'bb',
-          '1111'
+          '1111',
         ],
         [
           'cc',
-          ''
+          '',
         ],
         [
           'dd',
-          ''
+          '',
         ],
         [
           'ee',
-          ''
-        ]
+          '',
+        ],
       ]);
     });
   });

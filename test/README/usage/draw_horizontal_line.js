@@ -1,5 +1,5 @@
 import {
-  table
+  table,
 } from '../../../src';
 import expectTable from './expectTable';
 
@@ -10,7 +10,7 @@ describe('README.md usage/', () => {
       ['1A', '1B', '1C'],
       ['2A', '2B', '2C'],
       ['3A', '3B', '3C'],
-      ['4A', '4B', '4C']
+      ['4A', '4B', '4C'],
     ];
 
     const options = {
@@ -22,7 +22,7 @@ describe('README.md usage/', () => {
        */
       drawHorizontalLine: (index, size) => {
         return index === 0 || index === 1 || index === size - 1 || index === size;
-      }
+      },
     };
 
     const output = table(data, options);
