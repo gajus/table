@@ -1,7 +1,7 @@
 language: node_js
 node_js:
   - node
-  - 8
+  - 10
 script:
   - export NODE_ENV=test
   - npm run build
