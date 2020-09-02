@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import wrapCell from './wrapCell';
 
 /**
@@ -11,7 +10,7 @@ export default (unmappedRows, rowHeightIndex, config) => {
   const tableWidth = unmappedRows[0].length;
 
   const mappedRows = unmappedRows.map((cells, index0) => {
-    const rowHeight = _.times(rowHeightIndex[index0], () => {
+    const rowHeight = Array.from({length: rowHeightIndex[index0]}, () => {
       return new Array(tableWidth).fill('');
     });
 
@@ -30,5 +29,5 @@ export default (unmappedRows, rowHeightIndex, config) => {
     return rowHeight;
   });
 
-  return _.flatten(mappedRows);
+  return mappedRows.flat();
 };
