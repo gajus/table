@@ -29,5 +29,6 @@ export default (unmappedRows, rowHeightIndex, config) => {
     return rowHeight;
   });
 
-  return mappedRows.flat();
+  // flat array
+  return [].concat(...mappedRows);
 };
