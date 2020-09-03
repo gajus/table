@@ -1,5 +1,4 @@
 import chalk from 'chalk';
-import _ from 'lodash';
 import {
   table,
   getBorderCharacters,
@@ -52,7 +51,7 @@ describe('README.md usage/', () => {
       ],
     ];
 
-    const tableBorder = _.mapValues(getBorderCharacters('honeywell'), (char) => {
+    const tableBorder = Object.values(getBorderCharacters('honeywell')).map((char) => {
       return chalk.gray(char);
     });
 

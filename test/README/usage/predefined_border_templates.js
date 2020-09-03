@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import {
   table,
   getBorderCharacters,
@@ -72,7 +71,7 @@ describe('README.md usage/predefined_border_templates', () => {
       border: getBorderCharacters('void'),
     });
 
-    expectTable(_.trim(output) + '\n', '0A  0B  0C \n\n 1A  1B  1C \n\n 2A  2B  2C');
+    expectTable(output.trim() + '\n', '0A  0B  0C \n\n 1A  1B  1C \n\n 2A  2B  2C');
   });
 
   it('borderless', () => {
@@ -87,6 +86,6 @@ describe('README.md usage/predefined_border_templates', () => {
       },
     });
 
-    expectTable(_.trim(output) + '\n', '0A 0B 0C \n1A 1B 1C \n2A 2B 2C');
+    expectTable(output.trim() + '\n', '0A 0B 0C \n1A 1B 1C \n2A 2B 2C');
   });
 });

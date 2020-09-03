@@ -1,7 +1,6 @@
 import {
   expect,
 } from 'chai';
-import _ from 'lodash';
 
 /**
  * @param {string} result
@@ -9,5 +8,5 @@ import _ from 'lodash';
  * @returns {undefined}
  */
 export default (result, expectedResult) => {
-  expect(result).to.equal(_.trim(expectedResult) + '\n');
+  expect(result).to.equal(expectedResult.trim() + '\n');
 };
