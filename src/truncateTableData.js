@@ -1,6 +1,4 @@
-const truncate = (string, length) => {
-  return string.length > length ? string.slice(0, Math.max(0, length - 3)) + '...' : string;
-};
+import _ from 'lodash';
 
 /**
  * @todo Make it work with ASCII content.
@@ -11,7 +9,9 @@ const truncate = (string, length) => {
 export default (rows, config) => {
   return rows.map((cells) => {
     return cells.map((content, index) => {
-      return truncate(content, config.columns[index].truncate);
+      return _.truncate(content, {
+        length: config.columns[index].truncate,
+      });
     });
   });
 };
