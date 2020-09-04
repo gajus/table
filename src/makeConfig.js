@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import calculateMaximumColumnWidthIndex from './calculateMaximumColumnWidthIndex';
 import getBorderCharacters from './getBorderCharacters';
 import validateConfig from './validateConfig';
@@ -24,8 +25,8 @@ const makeBorder = (border = {}) => {
 const makeColumns = (rows, columns = {}, columnDefault = {}) => {
   const maximumColumnWidthIndex = calculateMaximumColumnWidthIndex(rows);
 
-  for (let index = rows[0].length; index--;) {
-    if (!columns[index]) {
+  _.times(rows[0].length, (index) => {
+    if (_.isUndefined(columns[index])) {
       columns[index] = {};
     }
 
@@ -37,7 +38,7 @@ const makeColumns = (rows, columns = {}, columnDefault = {}) => {
       width: maximumColumnWidthIndex[index],
       wrapWord: false,
     }, columnDefault, columns[index]);
-  }
+  });
 
   return columns;
 };
@@ -53,7 +54,7 @@ const makeColumns = (rows, columns = {}, columnDefault = {}) => {
 export default (rows, userConfig = {}) => {
   validateConfig('config.json', userConfig);
 
-  const config = {...userConfig};
+  const config = _.cloneDeep(userConfig);
 
   config.border = makeBorder(config.border);
   config.columns = makeColumns(rows, config.columns, config.columnDefault);

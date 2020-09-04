@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import calculateCellHeight from './calculateCellHeight';
 
 /**
@@ -16,18 +17,18 @@ export default (rows, config) => {
     const cellHeightIndex = new Array(tableWidth).fill(1);
 
     cells.forEach((value, index1) => {
-      if (typeof config.columns[index1].width !== 'number') {
+      if (!_.isNumber(config.columns[index1].width)) {
         throw new TypeError('column[index].width must be a number.');
       }
 
-      if (typeof config.columns[index1].wrapWord !== 'boolean') {
+      if (!_.isBoolean(config.columns[index1].wrapWord)) {
         throw new TypeError('column[index].wrapWord must be a boolean.');
       }
 
       cellHeightIndex[index1] = calculateCellHeight(value, config.columns[index1].width, config.columns[index1].wrapWord);
     });
 
-    rowSpanIndex.push(Math.max(...cellHeightIndex));
+    rowSpanIndex.push(_.max(cellHeightIndex));
   });
 
   return rowSpanIndex;

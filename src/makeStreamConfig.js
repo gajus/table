@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import getBorderCharacters from './getBorderCharacters';
 import validateConfig from './validateConfig';
 
@@ -21,10 +22,8 @@ const makeBorder = (border = {}) => {
  * @returns {object}
  */
 const makeColumns = (columnCount, columns = {}, columnDefault = {}) => {
-  let index = columnCount;
-
-  while (index--) {
-    if (!columns[index]) {
+  _.times(columnCount, (index) => {
+    if (_.isUndefined(columns[index])) {
       columns[index] = {};
     }
 
@@ -35,7 +34,7 @@ const makeColumns = (columnCount, columns = {}, columnDefault = {}) => {
       truncate: Infinity,
       wrapWord: false,
     }, columnDefault, columns[index]);
-  }
+  });
 
   return columns;
 };
@@ -67,7 +66,7 @@ const makeColumns = (columnCount, columns = {}, columnDefault = {}) => {
 export default (userConfig = {}) => {
   validateConfig('streamConfig.json', userConfig);
 
-  const config = {...userConfig};
+  const config = _.cloneDeep(userConfig);
 
   if (!config.columnDefault || !config.columnDefault.width) {
     throw new Error('Must provide config.columnDefault.width when creating a stream.');
