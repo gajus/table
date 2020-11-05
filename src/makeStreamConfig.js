@@ -1,4 +1,6 @@
-import _ from 'lodash';
+import cloneDeep from 'lodash/cloneDeep';
+import isUndefined from 'lodash/isUndefined';
+import times from 'lodash/times';
 import getBorderCharacters from './getBorderCharacters';
 import validateConfig from './validateConfig';
 
@@ -22,8 +24,8 @@ const makeBorder = (border = {}) => {
  * @returns {object}
  */
 const makeColumns = (columnCount, columns = {}, columnDefault = {}) => {
-  _.times(columnCount, (index) => {
-    if (_.isUndefined(columns[index])) {
+  times(columnCount, (index) => {
+    if (isUndefined(columns[index])) {
       columns[index] = {};
     }
 
@@ -66,7 +68,7 @@ const makeColumns = (columnCount, columns = {}, columnDefault = {}) => {
 export default (userConfig = {}) => {
   validateConfig('streamConfig.json', userConfig);
 
-  const config = _.cloneDeep(userConfig);
+  const config = cloneDeep(userConfig);
 
   if (!config.columnDefault || !config.columnDefault.width) {
     throw new Error('Must provide config.columnDefault.width when creating a stream.');
