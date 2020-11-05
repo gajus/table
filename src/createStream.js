@@ -1,5 +1,4 @@
 import mapValues from 'lodash/mapValues';
-import trimEnd from 'lodash/trimEnd';
 import values from 'lodash/values';
 import alignTableData from './alignTableData';
 import calculateRowHeightIndex from './calculateRowHeightIndex';
@@ -57,7 +56,7 @@ const create = (row, columnWidthIndex, config) => {
   output += body;
   output += drawBorderBottom(columnWidthIndex, config.border);
 
-  output = trimEnd(output);
+  output = output.trimEnd();
 
   process.stdout.write(output);
 };
@@ -86,7 +85,7 @@ const append = (row, columnWidthIndex, config) => {
   output += body;
   output += bottom;
 
-  output = trimEnd(output);
+  output = output.trimEnd();
 
   process.stdout.write(output);
 };
