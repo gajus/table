@@ -96,8 +96,7 @@ const append = (row, columnWidthIndex, config) => {
 export default (userConfig = {}) => {
   const config = makeStreamConfig(userConfig);
 
-  // @todo Use 'Object.values' when Node.js v6 support is dropped.
-  const columnWidthIndex = _.values(_.mapValues(config.columns, (column) => {
+  const columnWidthIndex = Object.values(_.mapValues(config.columns, (column) => {
     return column.width + column.paddingLeft + column.paddingRight;
   }));
 
