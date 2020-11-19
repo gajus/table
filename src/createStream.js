@@ -55,7 +55,7 @@ const create = (row, columnWidthIndex, config) => {
   output += body;
   output += drawBorderBottom(columnWidthIndex, config.border);
 
-  output = _.trimEnd(output);
+  output = output.trimEnd();
 
   process.stdout.write(output);
 };
@@ -84,7 +84,7 @@ const append = (row, columnWidthIndex, config) => {
   output += body;
   output += bottom;
 
-  output = _.trimEnd(output);
+  output = output.trimEnd();
 
   process.stdout.write(output);
 };
@@ -96,8 +96,7 @@ const append = (row, columnWidthIndex, config) => {
 export default (userConfig = {}) => {
   const config = makeStreamConfig(userConfig);
 
-  // @todo Use 'Object.values' when Node.js v6 support is dropped.
-  const columnWidthIndex = _.values(_.mapValues(config.columns, (column) => {
+  const columnWidthIndex = Object.values(_.mapValues(config.columns, (column) => {
     return column.width + column.paddingLeft + column.paddingRight;
   }));
 
