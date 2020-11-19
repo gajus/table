@@ -55,7 +55,7 @@ const create = (row, columnWidthIndex, config) => {
   output += body;
   output += drawBorderBottom(columnWidthIndex, config.border);
 
-  output = _.trimEnd(output);
+  output = output.trimEnd();
 
   process.stdout.write(output);
 };
@@ -84,7 +84,7 @@ const append = (row, columnWidthIndex, config) => {
   output += body;
   output += bottom;
 
-  output = _.trimEnd(output);
+  output = output.trimEnd();
 
   process.stdout.write(output);
 };
