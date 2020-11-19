@@ -3,7 +3,7 @@ import ajvKeywords from 'ajv-keywords';
 import {
   expect,
 } from 'chai';
-import validateConfig from '../dist/validateConfig';
+import validateConfig from '../src/compiled_schema/validateConfig';
 import configSchema from '../src/schemas/config.json';
 import configSamples from './configSamples';
 

@@ -8,8 +8,7 @@
   },
   "plugins": [
     "babel-plugin-lodash",
-    "transform-export-default-name",
-    "@babel/transform-flow-strip-types"
+    "transform-export-default-name"
   ],
   "presets": [
     [

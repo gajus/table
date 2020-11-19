@@ -1,8 +1,10 @@
 node_modules
 coverage
 dist
+src/compiled_schema
 *.log
 .*
+package-lock.json
 !.editorconfig
 !.babelrc
 !.eslintrc

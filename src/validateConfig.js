@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/default
-import validateConfig from '../dist/validateConfig';
+import validateConfig from './compiled_schema/validateConfig';
 // eslint-disable-next-line import/default
-import validateStreamConfig from '../dist/validateStreamConfig';
+import validateStreamConfig from './compiled_schema/validateStreamConfig';
 
 const validate = {
   'config.json': validateConfig,

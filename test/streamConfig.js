@@ -4,7 +4,7 @@ import ajvSchemaDraft06 from 'ajv/lib/refs/json-schema-draft-06.json';
 import {
   expect,
 } from 'chai';
-import validateConfig from '../dist/validateStreamConfig';
+import validateConfig from '../src/compiled_schema/validateStreamConfig';
 import configSchema from '../src/schemas/streamConfig.json';
 import configSamples from './streamConfigSamples';
 
