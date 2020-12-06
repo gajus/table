@@ -4,9 +4,12 @@ import ajvSchemaDraft06 from 'ajv/lib/refs/json-schema-draft-06.json';
 import {
   expect,
 } from 'chai';
-import validateConfig from '../dist/validateStreamConfig';
+import validators from '../dist/validators';
+import sharedSchema from '../src/schemas/shared.json';
 import configSchema from '../src/schemas/streamConfig.json';
 import configSamples from './streamConfigSamples';
+
+const validateConfig = validators['streamConfig.json'];
 
 describe('streamConfig.json schema', () => {
   let validate;
@@ -19,7 +22,7 @@ describe('streamConfig.json schema', () => {
     ajv.addMetaSchema(ajvSchemaDraft06);
 
     ajvKeywords(ajv, 'typeof');
-
+    ajv.addSchema(sharedSchema);
     validate = ajv.compile(configSchema);
   });
 
