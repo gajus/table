@@ -3,9 +3,12 @@ import ajvKeywords from 'ajv-keywords';
 import {
   expect,
 } from 'chai';
-import validateConfig from '../dist/validateConfig';
+import validators from '../dist/validators';
 import configSchema from '../src/schemas/config.json';
+import sharedSchema from '../src/schemas/shared.json';
 import configSamples from './configSamples';
+
+const validateConfig = validators['config.json'];
 
 describe('config.json schema', () => {
   let validate;
@@ -14,6 +17,7 @@ describe('config.json schema', () => {
     const ajv = new Ajv({allErrors: true});
 
     ajvKeywords(ajv, 'typeof');
+    ajv.addSchema(sharedSchema);
     validate = ajv.compile(configSchema);
   });
 
