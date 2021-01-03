@@ -4,6 +4,7 @@ import {
   expect,
 } from 'chai';
 import calculateRowHeightIndex from '../src/calculateRowHeightIndex';
+import makeConfig from '../src/makeConfig';
 
 describe('calculateRowHeightIndex', () => {
   context('single column', () => {
@@ -15,14 +16,14 @@ describe('calculateRowHeightIndex', () => {
           ],
         ];
 
-        const config = {
+        const config = makeConfig(data, {
           columns: {
             0: {
               width: 10,
               wrapWord: false,
             },
           },
-        };
+        });
 
         const rowSpanIndex = calculateRowHeightIndex(data, config);
 
@@ -37,14 +38,14 @@ describe('calculateRowHeightIndex', () => {
           ],
         ];
 
-        const config = {
+        const config = makeConfig(data, {
           columns: {
             0: {
               width: 3,
               wrapWord: false,
             },
           },
-        };
+        });
 
         const rowSpanIndex = calculateRowHeightIndex(data, config);
 
@@ -60,14 +61,14 @@ describe('calculateRowHeightIndex', () => {
           ['aaabbb'],
         ];
 
-        const config = {
+        const config = makeConfig(data, {
           columns: {
             0: {
               width: 2,
               wrapWord: false,
             },
           },
-        };
+        });
 
         const rowSpanIndex = calculateRowHeightIndex(data, config);
 
