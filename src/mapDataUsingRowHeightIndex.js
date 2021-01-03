@@ -24,7 +24,7 @@ export default (unmappedRows, rowHeightIndex, config) => {
         value,
         config.columns[index1].width,
         config.columns[index1].wrapWord,
-        config.columns[index1].disableWrap
+        config.columns[index1].disableWrap,
       );
 
       cellLines.forEach((cellLine, index2) => {

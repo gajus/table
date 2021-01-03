@@ -29,11 +29,11 @@ const makeColumns = (columnCount, columns = {}, columnDefault = {}) => {
 
     columns[index] = Object.assign({
       alignment: 'left',
+      disableWrap: false,
       paddingLeft: 1,
       paddingRight: 1,
       truncate: Number.POSITIVE_INFINITY,
       wrapWord: false,
-      disableWrap: false
     }, columnDefault, columns[index]);
   });
 
