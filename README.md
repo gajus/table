@@ -571,7 +571,8 @@ import {
   createStream
 } from 'table';
 
-import _ from 'lodash';
+import sample from 'lodash.sample';
+import random from 'lodash.random';
 
 let config,
   stream,
@@ -603,7 +604,7 @@ i = 0;
 setInterval(() => {
   let random;
 
-  random = _.sample('abcdefghijklmnopqrstuvwxyz', _.random(1, 30)).join('');
+  random = sample('abcdefghijklmnopqrstuvwxyz',random(1, 30)).join('');
 
   stream.write([i++, new Date(), random]);
 }, 500);

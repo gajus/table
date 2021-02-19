@@ -27,7 +27,6 @@ describe('README.md usage/', () => {
 
     const output = table(data, options);
 
-    // eslint-disable-next-line no-restricted-syntax
     expectTable(output, `
 ╔════╤════╤════╗
 ║ 0A │ 0B │ 0C ║

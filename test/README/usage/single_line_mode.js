@@ -24,7 +24,6 @@ describe('README.md usage/', () => {
 
     // console.log(output);
 
-    /* eslint-disable no-restricted-syntax */
     expectTable(output, `
 ╔═════════════╤═════╤══════════╤═══════╤════════╤══════════════╤═══════════════════╗
 ║ -rw-r--r--  │ 1   │ pandorym │ staff │ 1529   │ May 23 11:25 │ LICENSE           ║
@@ -37,6 +36,5 @@ describe('README.md usage/', () => {
 ║ drwxr-xr-x  │ 20  │ pandorym │ staff │ 640    │ May 23 11:25 │ test              ║
 ╚═════════════╧═════╧══════════╧═══════╧════════╧══════════════╧═══════════════════╝
         `);
-    /* eslint-enable no-restricted-syntax */
   });
 });

@@ -34,11 +34,10 @@ describe('README.md usage/', () => {
         joinJoin: '┼',
       },
     };
-    /* eslint-enable */
+    /* eslint-enable sort-keys-fix/sort-keys-fix */
 
     const output = table(data, config);
 
-    // eslint-disable-next-line no-restricted-syntax
     expectTable(output, `
 ┌────┬────┬────┐
 │ 0A │ 0B │ 0C │
