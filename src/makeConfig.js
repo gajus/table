@@ -1,4 +1,5 @@
-import _ from 'lodash';
+import cloneDeep from 'lodash.clonedeep';
+import times from 'lodash.times';
 import calculateMaximumColumnWidthIndex from './calculateMaximumColumnWidthIndex';
 import getBorderCharacters from './getBorderCharacters';
 import validateConfig from './validateConfig';
@@ -25,8 +26,8 @@ const makeBorder = (border = {}) => {
 const makeColumns = (rows, columns = {}, columnDefault = {}) => {
   const maximumColumnWidthIndex = calculateMaximumColumnWidthIndex(rows);
 
-  _.times(rows[0].length, (index) => {
-    if (_.isUndefined(columns[index])) {
+  times(rows[0].length, (index) => {
+    if (typeof columns[index] === 'undefined') {
       columns[index] = {};
     }
 
@@ -54,7 +55,7 @@ const makeColumns = (rows, columns = {}, columnDefault = {}) => {
 export default (rows, userConfig = {}) => {
   validateConfig('config.json', userConfig);
 
-  const config = _.cloneDeep(userConfig);
+  const config = cloneDeep(userConfig);
 
   config.border = makeBorder(config.border);
   config.columns = makeColumns(rows, config.columns, config.columnDefault);

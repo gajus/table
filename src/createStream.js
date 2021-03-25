@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import mapValues from 'lodash.mapvalues';
 import alignTableData from './alignTableData';
 import calculateRowHeightIndex from './calculateRowHeightIndex';
 import {
@@ -96,7 +96,7 @@ const append = (row, columnWidthIndex, config) => {
 export default (userConfig = {}) => {
   const config = makeStreamConfig(userConfig);
 
-  const columnWidthIndex = Object.values(_.mapValues(config.columns, (column) => {
+  const columnWidthIndex = Object.values(mapValues(config.columns, (column) => {
     return column.width + column.paddingLeft + column.paddingRight;
   }));
 
