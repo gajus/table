@@ -1,5 +1,4 @@
 import cloneDeep from 'lodash.clonedeep';
-import times from 'lodash.times';
 import getBorderCharacters from './getBorderCharacters';
 import validateConfig from './validateConfig';
 
@@ -23,7 +22,7 @@ const makeBorder = (border = {}) => {
  * @returns {object}
  */
 const makeColumns = (columnCount, columns = {}, columnDefault = {}) => {
-  times(columnCount, (index) => {
+  for (let index = 0; index < columnCount; index++) {
     if (typeof columns[index] === 'undefined') {
       columns[index] = {};
     }
@@ -35,7 +34,7 @@ const makeColumns = (columnCount, columns = {}, columnDefault = {}) => {
       truncate: Number.POSITIVE_INFINITY,
       wrapWord: false,
     }, columnDefault, columns[index]);
-  });
+  }
 
   return columns;
 };

@@ -12,7 +12,6 @@
     "lodash.clonedeep": "^4.5.0",
     "lodash.flatten": "^4.4.0",
     "lodash.mapvalues": "^4.6.0",
-    "lodash.times": "^4.3.2",
     "lodash.truncate": "^4.4.2",
     "slice-ansi": "^4.0.0",
     "string-width": "^4.2.0"

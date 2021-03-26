@@ -1,5 +1,4 @@
 import cloneDeep from 'lodash.clonedeep';
-import times from 'lodash.times';
 import calculateMaximumColumnWidthIndex from './calculateMaximumColumnWidthIndex';
 import getBorderCharacters from './getBorderCharacters';
 import validateConfig from './validateConfig';
@@ -26,7 +25,7 @@ const makeBorder = (border = {}) => {
 const makeColumns = (rows, columns = {}, columnDefault = {}) => {
   const maximumColumnWidthIndex = calculateMaximumColumnWidthIndex(rows);
 
-  times(rows[0].length, (index) => {
+  for (let index = 0; index < rows[0].length; index++) {
     if (typeof columns[index] === 'undefined') {
       columns[index] = {};
     }
@@ -39,7 +38,7 @@ const makeColumns = (rows, columns = {}, columnDefault = {}) => {
       width: maximumColumnWidthIndex[index],
       wrapWord: false,
     }, columnDefault, columns[index]);
-  });
+  }
 
   return columns;
 };
