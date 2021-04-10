@@ -6,7 +6,7 @@
  */
 
 /**
- * @param {number[]} columns
+ * @param {string[]} columns
  * @param {drawRow~border} border
  * @returns {string}
  */
