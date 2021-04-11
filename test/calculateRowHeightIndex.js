@@ -6,14 +6,39 @@ import {
 import calculateRowHeightIndex from '../src/calculateRowHeightIndex';
 
 describe('calculateRowHeightIndex', () => {
+  context('invalid column width', () => {
+    it('throws an TypeError', () => {
+      expect(() => {
+        return calculateRowHeightIndex([['a']], {
+          columns: {
+            0: {
+              width: '3',
+            },
+          },
+        });
+      }).to.be.throw(TypeError, 'column[index].width must be a number.');
+    });
+  });
+
+  context('invalid column wrapWord', () => {
+    it('throws an TypeError', () => {
+      expect(() => {
+        return calculateRowHeightIndex([['a']], {
+          columns: {
+            0: {
+              width: 3,
+              wrapWord: 'true',
+            },
+          },
+        });
+      }).to.be.throw(TypeError, 'column[index].wrapWord must be a boolean.');
+    });
+  });
+
   context('single column', () => {
     context('cell content width is lesser than column width', () => {
       it('is equal to 1', () => {
-        const data = [
-          [
-            'aaa',
-          ],
-        ];
+        const data = [['aaa']];
 
         const config = {
           columns: {
@@ -31,11 +56,7 @@ describe('calculateRowHeightIndex', () => {
     });
     context('cell content width is twice the size of the column width', () => {
       it('is equal to 2', () => {
-        const data = [
-          [
-            'aaabbb',
-          ],
-        ];
+        const data = [['aaabbb']];
 
         const config = {
           columns: {

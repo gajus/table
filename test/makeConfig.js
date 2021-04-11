@@ -72,4 +72,23 @@ describe('makeConfig', () => {
       });
     });
   });
+
+  context('"drawHorizontalLine', () => {
+    context('is not provided', () => {
+      it('defaults to retuning true', () => {
+        const config = makeConfig([['aaaaa']]);
+
+        expect(config.drawHorizontalLine()).to.equal(true);
+      });
+    });
+  });
+  context('"drawHorizontalLine', () => {
+    context('is not provided', () => {
+      it('defaults to retuning true', () => {
+        const config = makeConfig([['aaaaa']]);
+
+        expect(config.singleLine).to.equal(false);
+      });
+    });
+  });
 });
