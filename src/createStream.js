@@ -22,7 +22,7 @@ const prepareData = (data, config) => {
 
   rows = stringifyTableData(data);
 
-  rows = truncateTableData(data, config);
+  rows = truncateTableData(rows, config);
 
   const rowHeightIndex = calculateRowHeightIndex(rows, config);
 
