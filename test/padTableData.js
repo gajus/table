@@ -8,7 +8,7 @@ import padTableData from '../src/padTableData';
 
 describe('padTableData', () => {
   context('when no given userConfig', () => {
-    it('insert 01 whitespace character regardless of string whitespaces', () => {
+    it('inserts 01 whitespace character regardless of string whitespaces', () => {
       const rows = [[' a  ']];
 
       expect(padTableData(rows, makeConfig(rows, undefined))).to.deep.equal([['  a   ']]);
@@ -17,7 +17,7 @@ describe('padTableData', () => {
 
   context('when given paddings in columnDefault', () => {
     context('when no given column-specific paddings', () => {
-      it('use the columnDefault values', () => {
+      it('uses the columnDefault values', () => {
         const rows = [['a']];
 
         expect(padTableData(rows, makeConfig(rows, {columnDefault: {
@@ -28,7 +28,7 @@ describe('padTableData', () => {
     });
 
     context('when given column-specific padding values', () => {
-      it('use column-specific padding values', () => {
+      it('uses column-specific padding values', () => {
         const rows = [['a']];
 
         expect(padTableData(rows, makeConfig(rows, {
@@ -48,7 +48,7 @@ describe('padTableData', () => {
   });
 
   context('when given multiple rows and columns', () => {
-    it('use corresponding column-specific padding values or fallback to the default padding values', () => {
+    it('uses corresponding column-specific padding values or fallback to the default padding values', () => {
       const rows = [['a', 'b'], ['c', 'd']];
 
       expect(padTableData(rows, makeConfig(rows, {

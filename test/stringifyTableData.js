@@ -4,7 +4,7 @@ import {
 import stringifyTableData from '../src/stringifyTableData';
 
 describe('stringifyTableData', () => {
-  it('convert all cell values to strings', () => {
+  it('converts all cell values to strings', () => {
     const rows = [[null, undefined, true, false],
       [0, -3.141_59, Number.NaN, Number.POSITIVE_INFINITY],
       [['a', 'b'], {cd: 1}]];

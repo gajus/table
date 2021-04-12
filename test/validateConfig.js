@@ -17,8 +17,8 @@ describe('validateConfig', () => {
     });
   });
 
-  context('given invalid config', () => {
-    it('throws an error', () => {
+  context('given valid config', () => {
+    it('does not throw an error', () => {
       expect(() => {
         return validateConfig('config.json', {
           columnDefault: {

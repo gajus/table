@@ -43,7 +43,7 @@ describe('createStream', () => {
     });
   });
 
-  context('given two normal rows', () => {
+  context('write two rows', () => {
     let stub;
     before(() => {
       stub = SinonStub(process.stdout, 'write');

@@ -12,7 +12,7 @@ describe('wrapCell', () => {
 
   context('useWrapWord is enabled', () => {
     context('the string does not contain the newline character', () => {
-      it('should return the same output as wrapWord\'s', () => {
+      it('returns the same output as wrapWord\'s', () => {
         for (const string of strings) {
           expect(wrapCell(string, 3, true)).to.deep.equal(wrapWord(string, 3));
         }
@@ -38,7 +38,7 @@ describe('wrapCell', () => {
       });
 
       context('the length of lineChunk is longer than the length of container', () => {
-        it('continue cuts the word by wrapWord function', () => {
+        it('continues cut the word by wrapWord function', () => {
           expect(wrapCell('aaa bbb\nc', 3, true)).to.deep.equal(['aaa', 'bbb', 'c']);
           expect(wrapCell('a b c\nd', 3, true)).to.deep.equal(['a b', 'c', 'd']);
 
@@ -60,7 +60,7 @@ describe('wrapCell', () => {
 
   context('useWrapWord is disable', () => {
     context('the string does not contain the newline character', () => {
-      it('should return the same output as wrapString\'s', () => {
+      it('returns the same output as wrapString\'s', () => {
         for (const string of strings) {
           expect(wrapCell(string, 3, false)).to.deep.equal(wrapString(string, 3));
         }
