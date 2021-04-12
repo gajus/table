@@ -68,6 +68,15 @@ export default (rows, userConfig = {}) => {
     };
   }
 
+  if (!config.drawVerticalLine) {
+    /**
+     * @returns {boolean}
+     */
+    config.drawVerticalLine = () => {
+      return true;
+    };
+  }
+
   if (config.singleLine === undefined) {
     config.singleLine = false;
   }

@@ -1,3 +1,5 @@
+import drawHorizontalContent from './drawHorizontalContent';
+
 /**
  * @typedef drawBorder~parts
  * @property {string} left
@@ -9,16 +11,15 @@
 /**
  * @param {number[]} columnSizeIndex
  * @param {drawBorder~parts} parts
+ * @param {Function} drawVerticalLine
  * @returns {string}
  */
-const drawBorder = (columnSizeIndex, parts) => {
-  const columns = columnSizeIndex
-    .map((size) => {
-      return parts.body.repeat(size);
-    })
-    .join(parts.join);
+const drawBorder = (columnSizeIndex, parts, drawVerticalLine) => {
+  const columns = columnSizeIndex.map((size) => {
+    return parts.body.repeat(size);
+  });
 
-  return parts.left + columns + parts.right + '\n';
+  return drawHorizontalContent(columns, parts, drawVerticalLine);
 };
 
 /**
@@ -32,15 +33,16 @@ const drawBorder = (columnSizeIndex, parts) => {
 /**
  * @param {number[]} columnSizeIndex
  * @param {drawBorderTop~parts} parts
+ * @param {Function} drawVerticalLine
  * @returns {string}
  */
-const drawBorderTop = (columnSizeIndex, parts) => {
+const drawBorderTop = (columnSizeIndex, parts, drawVerticalLine) => {
   const border = drawBorder(columnSizeIndex, {
     body: parts.topBody,
     join: parts.topJoin,
     left: parts.topLeft,
     right: parts.topRight,
-  });
+  }, drawVerticalLine);
 
   if (border === '\n') {
     return '';
@@ -60,37 +62,39 @@ const drawBorderTop = (columnSizeIndex, parts) => {
 /**
  * @param {number[]} columnSizeIndex
  * @param {drawBorderJoin~parts} parts
+ * @param {Function} drawVerticalLine
  * @returns {string}
  */
-const drawBorderJoin = (columnSizeIndex, parts) => {
+const drawBorderJoin = (columnSizeIndex, parts, drawVerticalLine) => {
   return drawBorder(columnSizeIndex, {
     body: parts.joinBody,
     join: parts.joinJoin,
     left: parts.joinLeft,
     right: parts.joinRight,
-  });
+  }, drawVerticalLine);
 };
 
 /**
  * @typedef drawBorderBottom~parts
- * @property {string} topLeft
- * @property {string} topRight
- * @property {string} topBody
- * @property {string} topJoin
+ * @property {string} bottomLeft
+ * @property {string} bottomRight
+ * @property {string} bottomBody
+ * @property {string} bottomJoin
  */
 
 /**
  * @param {number[]} columnSizeIndex
  * @param {drawBorderBottom~parts} parts
+ * @param {Function} drawVerticalLine
  * @returns {string}
  */
-const drawBorderBottom = (columnSizeIndex, parts) => {
+const drawBorderBottom = (columnSizeIndex, parts, drawVerticalLine) => {
   return drawBorder(columnSizeIndex, {
     body: parts.bottomBody,
     join: parts.bottomJoin,
     left: parts.bottomLeft,
     right: parts.bottomRight,
-  });
+  }, drawVerticalLine);
 };
 
 export {

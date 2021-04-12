@@ -1,5 +1,7 @@
+import drawHorizontalContent from './drawHorizontalContent';
+
 /**
- * @typedef {object} drawRow~border
+ * @typedef {object} Border
  * @property {string} bodyLeft
  * @property {string} bodyRight
  * @property {string} bodyJoin
@@ -7,9 +9,14 @@
 
 /**
  * @param {string[]} columns
- * @param {drawRow~border} border
+ * @param {Border} border
+ * @param {Function} drawVerticalLine
  * @returns {string}
  */
-export default (columns, border) => {
-  return border.bodyLeft + columns.join(border.bodyJoin) + border.bodyRight + '\n';
+export default (columns, border, drawVerticalLine) => {
+  return drawHorizontalContent(columns, {
+    join: border.bodyJoin,
+    left: border.bodyLeft,
+    right: border.bodyRight,
+  }, drawVerticalLine);
 };

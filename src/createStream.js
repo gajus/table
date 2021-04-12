@@ -43,16 +43,16 @@ const create = (row, columnWidthIndex, config) => {
   const rows = prepareData([row], config);
 
   const body = rows.map((literalRow) => {
-    return drawRow(literalRow, config.border);
+    return drawRow(literalRow, config.border, config.drawVerticalLine);
   }).join('');
 
   let output;
 
   output = '';
 
-  output += drawBorderTop(columnWidthIndex, config.border);
+  output += drawBorderTop(columnWidthIndex, config.border, config.drawVerticalLine);
   output += body;
-  output += drawBorderBottom(columnWidthIndex, config.border);
+  output += drawBorderBottom(columnWidthIndex, config.border, config.drawVerticalLine);
 
   output = output.trimEnd();
 
@@ -69,17 +69,17 @@ const append = (row, columnWidthIndex, config) => {
   const rows = prepareData([row], config);
 
   const body = rows.map((literalRow) => {
-    return drawRow(literalRow, config.border);
+    return drawRow(literalRow, config.border, config.drawVerticalLine);
   }).join('');
 
   let output = '';
-  const bottom = drawBorderBottom(columnWidthIndex, config.border);
+  const bottom = drawBorderBottom(columnWidthIndex, config.border, config.drawVerticalLine);
 
   if (bottom !== '\n') {
     output = '\r\u001B[K';
   }
 
-  output += drawBorderJoin(columnWidthIndex, config.border);
+  output += drawBorderJoin(columnWidthIndex, config.border, config.drawVerticalLine);
   output += body;
   output += bottom;
 
