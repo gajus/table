@@ -45,11 +45,12 @@ describe('createStream', () => {
 
   context('write two rows', () => {
     let stub;
-    before(() => {
+    beforeEach(() => {
       stub = SinonStub(process.stdout, 'write');
     });
-    after(() => {
+    afterEach(() => {
       stub.restore();
+      stub.resetHistory();
     });
 
     it('process.stdout.write calls twice with proper arguments', () => {
@@ -80,6 +81,25 @@ describe('createStream', () => {
       assert.callCount(stub, 2);
       assert.calledWithExactly(stub.getCall(0), '+------+-----+-------+\n|   a  | cc  | d     |\n|    b | c   |       |\n+------+-----+-------+');
       assert.calledWithExactly(stub.getCall(1), '\r\u001b[K|------|-----|-------|\n|    e | f   | g     |\n+------+-----+-------+');
+    });
+
+    context('given custom drawVerticalLine', () => {
+      it('should work', () => {
+        const stream = createStream({
+          columnCount: 2,
+          columnDefault: {
+            width: 2,
+          },
+          drawVerticalLine: (index) => {
+            return index === 1;
+          },
+        });
+
+        stream.write(['a', 'b']);
+        assert.callCount(stub, 1);
+
+        assert.calledOnceWithExactly(stub, '════╤════\n a  │ b  \n════╧════');
+      });
     });
   });
 });

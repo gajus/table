@@ -78,13 +78,24 @@ describe('makeConfig', () => {
       it('defaults to retuning true', () => {
         const config = makeConfig([['aaaaa']]);
 
+        expect(config.drawVerticalLine()).to.equal(true);
+      });
+    });
+  });
+
+  context('"drawHorizontalLine', () => {
+    context('is not provided', () => {
+      it('defaults to retuning true', () => {
+        const config = makeConfig([['aaaaa']]);
+
         expect(config.drawHorizontalLine()).to.equal(true);
       });
     });
   });
-  context('"drawHorizontalLine', () => {
+
+  context('"singleLine', () => {
     context('is not provided', () => {
-      it('defaults to retuning true', () => {
+      it('defaults to retuning false', () => {
         const config = makeConfig([['aaaaa']]);
 
         expect(config.singleLine).to.equal(false);
