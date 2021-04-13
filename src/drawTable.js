@@ -15,13 +15,15 @@ import drawRow from './drawRow';
  */
 export default (
   rows,
-  border,
   columnSizeIndex,
   rowSpanIndex,
-  drawVerticalLine,
-  drawHorizontalLine,
-  singleLine,
+  config,
 ) => {
+  const {
+    drawHorizontalLine,
+    singleLine,
+  } = config;
+
   let output;
   let realRowIndex;
   let rowHeight;
@@ -33,11 +35,11 @@ export default (
   output = '';
 
   if (drawHorizontalLine(realRowIndex, rowCount)) {
-    output += drawBorderTop(columnSizeIndex, border, drawVerticalLine);
+    output += drawBorderTop(columnSizeIndex, config);
   }
 
   rows.forEach((row, index0) => {
-    output += drawRow(row, border, drawVerticalLine);
+    output += drawRow(row, config);
 
     if (!rowHeight) {
       rowHeight = rowSpanIndex[realRowIndex];
@@ -53,12 +55,12 @@ export default (
       index0 !== rowCount - 1 &&
       drawHorizontalLine(realRowIndex, rowCount)
     ) {
-      output += drawBorderJoin(columnSizeIndex, border, drawVerticalLine);
+      output += drawBorderJoin(columnSizeIndex, config);
     }
   });
 
   if (drawHorizontalLine(realRowIndex, rowCount)) {
-    output += drawBorderBottom(columnSizeIndex, border, drawVerticalLine);
+    output += drawBorderBottom(columnSizeIndex, config);
   }
 
   return output;

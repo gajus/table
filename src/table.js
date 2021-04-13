@@ -104,5 +104,5 @@ export default (data, userConfig = {}) => {
 
   const cellWidthIndex = calculateCellWidthIndex(rows[0]);
 
-  return drawTable(rows, config.border, cellWidthIndex, rowHeightIndex, config.drawVerticalLine, config.drawHorizontalLine, config.singleLine);
+  return drawTable(rows, cellWidthIndex, rowHeightIndex, config);
 };

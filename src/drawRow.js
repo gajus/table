@@ -13,10 +13,16 @@ import drawHorizontalContent from './drawHorizontalContent';
  * @param {Function} drawVerticalLine
  * @returns {string}
  */
-export default (columns, border, drawVerticalLine) => {
+export default (columns, {
+  border,
+  drawVerticalLine,
+}) => {
   return drawHorizontalContent(columns, {
-    join: border.bodyJoin,
-    left: border.bodyLeft,
-    right: border.bodyRight,
-  }, drawVerticalLine);
+    drawVerticalLine,
+    separator: {
+      join: border.bodyJoin,
+      left: border.bodyLeft,
+      right: border.bodyRight,
+    },
+  });
 };

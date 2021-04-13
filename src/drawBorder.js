@@ -14,12 +14,18 @@ import drawHorizontalContent from './drawHorizontalContent';
  * @param {Function} drawVerticalLine
  * @returns {string}
  */
-const drawBorder = (columnSizeIndex, parts, drawVerticalLine) => {
+const drawBorder = (columnSizeIndex, {
+  border,
+  drawVerticalLine,
+}) => {
   const columns = columnSizeIndex.map((size) => {
-    return parts.body.repeat(size);
+    return border.body.repeat(size);
   });
 
-  return drawHorizontalContent(columns, parts, drawVerticalLine);
+  return drawHorizontalContent(columns, {
+    drawVerticalLine,
+    separator: border,
+  });
 };
 
 /**
@@ -36,19 +42,23 @@ const drawBorder = (columnSizeIndex, parts, drawVerticalLine) => {
  * @param {Function} drawVerticalLine
  * @returns {string}
  */
-const drawBorderTop = (columnSizeIndex, parts, drawVerticalLine) => {
-  const border = drawBorder(columnSizeIndex, {
-    body: parts.topBody,
-    join: parts.topJoin,
-    left: parts.topLeft,
-    right: parts.topRight,
-  }, drawVerticalLine);
+const drawBorderTop = (columnSizeIndex, {
+  border,
+  drawVerticalLine,
+}) => {
+  const result = drawBorder(columnSizeIndex, {border: {
+    body: border.topBody,
+    join: border.topJoin,
+    left: border.topLeft,
+    right: border.topRight,
+  },
+  drawVerticalLine});
 
-  if (border === '\n') {
+  if (result === '\n') {
     return '';
   }
 
-  return border;
+  return result;
 };
 
 /**
@@ -65,13 +75,16 @@ const drawBorderTop = (columnSizeIndex, parts, drawVerticalLine) => {
  * @param {Function} drawVerticalLine
  * @returns {string}
  */
-const drawBorderJoin = (columnSizeIndex, parts, drawVerticalLine) => {
+const drawBorderJoin = (columnSizeIndex, {border, drawVerticalLine}) => {
   return drawBorder(columnSizeIndex, {
-    body: parts.joinBody,
-    join: parts.joinJoin,
-    left: parts.joinLeft,
-    right: parts.joinRight,
-  }, drawVerticalLine);
+    border: {
+      body: border.joinBody,
+      join: border.joinJoin,
+      left: border.joinLeft,
+      right: border.joinRight,
+    },
+    drawVerticalLine,
+  });
 };
 
 /**
@@ -88,13 +101,16 @@ const drawBorderJoin = (columnSizeIndex, parts, drawVerticalLine) => {
  * @param {Function} drawVerticalLine
  * @returns {string}
  */
-const drawBorderBottom = (columnSizeIndex, parts, drawVerticalLine) => {
+const drawBorderBottom = (columnSizeIndex, {border, drawVerticalLine}) => {
   return drawBorder(columnSizeIndex, {
-    body: parts.bottomBody,
-    join: parts.bottomJoin,
-    left: parts.bottomLeft,
-    right: parts.bottomRight,
-  }, drawVerticalLine);
+    border: {
+      body: border.bottomBody,
+      join: border.bottomJoin,
+      left: border.bottomLeft,
+      right: border.bottomRight,
+    },
+    drawVerticalLine,
+  });
 };
 
 export {

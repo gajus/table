@@ -11,7 +11,10 @@
  * @param {Function} drawVerticalLine
  * @returns {string}
  */
-export default (columns, separator, drawVerticalLine) => {
+export default (columns, {
+  separator,
+  drawVerticalLine,
+}) => {
   const columnCount = columns.length;
   const result = [];
 

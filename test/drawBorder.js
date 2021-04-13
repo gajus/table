@@ -16,73 +16,88 @@ const drawVerticalLine = () => {
 
 describe('drawBorder', () => {
   it('draws a border using parts', () => {
-    const parts = {
-      left: '╔',
-      right: '╗',
-      body: '═',
-      join: '╤',
+    const config = {
+      border: {
+        left: '╔',
+        right: '╗',
+        body: '═',
+        join: '╤',
+      },
+      drawVerticalLine,
     };
 
-    expect(drawBorder([1], parts, drawVerticalLine)).to.equal('╔═╗\n');
-    expect(drawBorder([1, 1], parts, drawVerticalLine)).to.equal('╔═╤═╗\n');
-    expect(drawBorder([5, 10], parts, drawVerticalLine)).to.equal('╔═════╤══════════╗\n');
+    expect(drawBorder([1], config)).to.equal('╔═╗\n');
+    expect(drawBorder([1, 1], config)).to.equal('╔═╤═╗\n');
+    expect(drawBorder([5, 10], config)).to.equal('╔═════╤══════════╗\n');
   });
 });
 
 describe('drawBorderTop', () => {
   it('draws a border using parts', () => {
-    const parts = {
-      topLeft: '╔',
-      topRight: '╗',
-      topBody: '═',
-      topJoin: '╤',
+    const config = {
+      border: {
+        topLeft: '╔',
+        topRight: '╗',
+        topBody: '═',
+        topJoin: '╤',
+      },
+      drawVerticalLine,
     };
 
-    expect(drawBorderTop([1], parts, drawVerticalLine)).to.equal('╔═╗\n');
-    expect(drawBorderTop([1, 1], parts, drawVerticalLine)).to.equal('╔═╤═╗\n');
-    expect(drawBorderTop([5, 10], parts, drawVerticalLine)).to.equal('╔═════╤══════════╗\n');
+    expect(drawBorderTop([1], config)).to.equal('╔═╗\n');
+    expect(drawBorderTop([1, 1], config)).to.equal('╔═╤═╗\n');
+    expect(drawBorderTop([5, 10], config)).to.equal('╔═════╤══════════╗\n');
   });
 
   it('no leading new line if borderless', () => {
-    const parts = {
-      topLeft: '',
-      topRight: '',
-      topBody: '',
-      topJoin: '',
+    const config = {
+      border: {
+        topLeft: '',
+        topRight: '',
+        topBody: '',
+        topJoin: '',
+      },
+      drawVerticalLine,
     };
 
-    expect(drawBorderTop([1], parts, drawVerticalLine)).to.equal('');
-    expect(drawBorderTop([1, 1], parts, drawVerticalLine)).to.equal('');
-    expect(drawBorderTop([5, 10], parts, drawVerticalLine)).to.equal('');
+    expect(drawBorderTop([1], config)).to.equal('');
+    expect(drawBorderTop([1, 1], config)).to.equal('');
+    expect(drawBorderTop([5, 10], config)).to.equal('');
   });
 });
 
 describe('drawBorderJoin', () => {
   it('draws a border using parts', () => {
-    const parts = {
-      joinBody: '─',
-      joinLeft: '╟',
-      joinRight: '╢',
-      joinJoin: '┼',
+    const config = {
+      border: {
+        joinBody: '─',
+        joinLeft: '╟',
+        joinRight: '╢',
+        joinJoin: '┼',
+      },
+      drawVerticalLine,
     };
 
-    expect(drawBorderJoin([1], parts, drawVerticalLine)).to.equal('╟─╢\n');
-    expect(drawBorderJoin([1, 1], parts, drawVerticalLine)).to.equal('╟─┼─╢\n');
-    expect(drawBorderJoin([5, 10], parts, drawVerticalLine)).to.equal('╟─────┼──────────╢\n');
+    expect(drawBorderJoin([1], config)).to.equal('╟─╢\n');
+    expect(drawBorderJoin([1, 1], config)).to.equal('╟─┼─╢\n');
+    expect(drawBorderJoin([5, 10], config)).to.equal('╟─────┼──────────╢\n');
   });
 });
 
 describe('drawBorderBottom', () => {
   it('draws a border using parts', () => {
-    const parts = {
-      bottomBody: '═',
-      bottomJoin: '╧',
-      bottomLeft: '╚',
-      bottomRight: '╝',
+    const config = {
+      border: {
+        bottomBody: '═',
+        bottomJoin: '╧',
+        bottomLeft: '╚',
+        bottomRight: '╝',
+      },
+      drawVerticalLine,
     };
 
-    expect(drawBorderBottom([1], parts, drawVerticalLine)).to.equal('╚═╝\n');
-    expect(drawBorderBottom([1, 1], parts, drawVerticalLine)).to.equal('╚═╧═╝\n');
-    expect(drawBorderBottom([5, 10], parts, drawVerticalLine)).to.equal('╚═════╧══════════╝\n');
+    expect(drawBorderBottom([1], config)).to.equal('╚═╝\n');
+    expect(drawBorderBottom([1, 1], config)).to.equal('╚═╧═╝\n');
+    expect(drawBorderBottom([5, 10], config)).to.equal('╚═════╧══════════╝\n');
   });
 });
