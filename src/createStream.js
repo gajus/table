@@ -14,7 +14,7 @@ import truncateTableData from './truncateTableData';
 
 /**
  * @param {Array} data
- * @param {object} config
+ * @param {streamConfig} config
  * @returns {Array}
  */
 const prepareData = (data, config) => {
@@ -36,23 +36,23 @@ const prepareData = (data, config) => {
 /**
  * @param {string[]} row
  * @param {number[]} columnWidthIndex
- * @param {object} config
+ * @param {streamConfig} config
  * @returns {undefined}
  */
 const create = (row, columnWidthIndex, config) => {
   const rows = prepareData([row], config);
 
   const body = rows.map((literalRow) => {
-    return drawRow(literalRow, config.border);
+    return drawRow(literalRow, config);
   }).join('');
 
   let output;
 
   output = '';
 
-  output += drawBorderTop(columnWidthIndex, config.border);
+  output += drawBorderTop(columnWidthIndex, config);
   output += body;
-  output += drawBorderBottom(columnWidthIndex, config.border);
+  output += drawBorderBottom(columnWidthIndex, config);
 
   output = output.trimEnd();
 
@@ -62,24 +62,24 @@ const create = (row, columnWidthIndex, config) => {
 /**
  * @param {string[]} row
  * @param {number[]} columnWidthIndex
- * @param {object} config
+ * @param {streamConfig} config
  * @returns {undefined}
  */
 const append = (row, columnWidthIndex, config) => {
   const rows = prepareData([row], config);
 
   const body = rows.map((literalRow) => {
-    return drawRow(literalRow, config.border);
+    return drawRow(literalRow, config);
   }).join('');
 
   let output = '';
-  const bottom = drawBorderBottom(columnWidthIndex, config.border);
+  const bottom = drawBorderBottom(columnWidthIndex, config);
 
   if (bottom !== '\n') {
     output = '\r\u001B[K';
   }
 
-  output += drawBorderJoin(columnWidthIndex, config.border);
+  output += drawBorderJoin(columnWidthIndex, config);
   output += body;
   output += bottom;
 
