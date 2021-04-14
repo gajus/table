@@ -10,8 +10,12 @@ import {
   drawBorderBottom,
 } from '../src/drawBorder';
 
-const drawVerticalLine = () => {
+const defaultDrawVerticalLine = () => {
   return true;
+};
+
+const customDrawVerticalLine = (index, size) => {
+  return index === size - 1;
 };
 
 describe('drawBorder', () => {
@@ -23,12 +27,18 @@ describe('drawBorder', () => {
         body: '═',
         join: '╤',
       },
-      drawVerticalLine,
+      drawVerticalLine: defaultDrawVerticalLine,
     };
 
     expect(drawBorder([1], config)).to.equal('╔═╗\n');
     expect(drawBorder([1, 1], config)).to.equal('╔═╤═╗\n');
     expect(drawBorder([5, 10], config)).to.equal('╔═════╤══════════╗\n');
+
+    expect(drawBorder([5, 10],
+      {
+        ...config,
+        drawVerticalLine: customDrawVerticalLine,
+      })).to.equal('═════╤══════════\n');
   });
 });
 
@@ -41,12 +51,18 @@ describe('drawBorderTop', () => {
         topBody: '═',
         topJoin: '╤',
       },
-      drawVerticalLine,
+      drawVerticalLine: defaultDrawVerticalLine,
     };
 
     expect(drawBorderTop([1], config)).to.equal('╔═╗\n');
     expect(drawBorderTop([1, 1], config)).to.equal('╔═╤═╗\n');
     expect(drawBorderTop([5, 10], config)).to.equal('╔═════╤══════════╗\n');
+
+    expect(drawBorderTop([5, 10],
+      {
+        ...config,
+        drawVerticalLine: customDrawVerticalLine,
+      })).to.equal('═════╤══════════\n');
   });
 
   it('no leading new line if borderless', () => {
@@ -57,12 +73,18 @@ describe('drawBorderTop', () => {
         topBody: '',
         topJoin: '',
       },
-      drawVerticalLine,
+      drawVerticalLine: defaultDrawVerticalLine,
     };
 
     expect(drawBorderTop([1], config)).to.equal('');
     expect(drawBorderTop([1, 1], config)).to.equal('');
     expect(drawBorderTop([5, 10], config)).to.equal('');
+
+    expect(drawBorderTop([5, 10],
+      {
+        ...config,
+        drawVerticalLine: customDrawVerticalLine,
+      })).to.equal('');
   });
 });
 
@@ -75,12 +97,18 @@ describe('drawBorderJoin', () => {
         joinRight: '╢',
         joinJoin: '┼',
       },
-      drawVerticalLine,
+      drawVerticalLine: defaultDrawVerticalLine,
     };
 
     expect(drawBorderJoin([1], config)).to.equal('╟─╢\n');
     expect(drawBorderJoin([1, 1], config)).to.equal('╟─┼─╢\n');
     expect(drawBorderJoin([5, 10], config)).to.equal('╟─────┼──────────╢\n');
+
+    expect(drawBorderJoin([5, 10],
+      {
+        ...config,
+        drawVerticalLine: customDrawVerticalLine,
+      })).to.equal('─────┼──────────\n');
   });
 });
 
@@ -93,11 +121,17 @@ describe('drawBorderBottom', () => {
         bottomLeft: '╚',
         bottomRight: '╝',
       },
-      drawVerticalLine,
+      drawVerticalLine: defaultDrawVerticalLine,
     };
 
     expect(drawBorderBottom([1], config)).to.equal('╚═╝\n');
     expect(drawBorderBottom([1, 1], config)).to.equal('╚═╧═╝\n');
     expect(drawBorderBottom([5, 10], config)).to.equal('╚═════╧══════════╝\n');
+
+    expect(drawBorderBottom([5, 10],
+      {
+        ...config,
+        drawVerticalLine: customDrawVerticalLine,
+      })).to.equal('═════╧══════════\n');
   });
 });
