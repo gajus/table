@@ -1,6 +1,16 @@
 {
-  "extends": "canonical",
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "extends": [
+    "canonical",
+    "canonical/typescript"
+  ],
   "rules": {
-    "max-len": 0
+    "max-len": 0,
+    "jsdoc/check-tag-names": [
+      "error", {"definedTags": ["internal"]}
+    ]
   }
 }
