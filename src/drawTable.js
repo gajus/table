@@ -5,12 +5,9 @@ import drawRow from './drawRow';
 
 /**
  * @param {string[][]} rows
- * @param {object} border
  * @param {Array} columnSizeIndex
  * @param {Array} rowSpanIndex
- * @param {Function} drawVerticalLine
- * @param {Function} drawHorizontalLine
- * @param {boolean} singleLine
+ * @param {table~config} config
  * @returns {string}
  */
 export default (

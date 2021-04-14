@@ -84,7 +84,7 @@ describe('createStream', () => {
     });
 
     context('given custom drawVerticalLine', () => {
-      it('should work', () => {
+      it('use the callback to draw vertical lines', () => {
         const stream = createStream({
           columnCount: 2,
           columnDefault: {

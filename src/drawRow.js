@@ -1,7 +1,7 @@
 import drawHorizontalContent from './drawHorizontalContent';
 
 /**
- * @typedef {object} Border
+ * @typedef {object} drawRow~border
  * @property {string} bodyLeft
  * @property {string} bodyRight
  * @property {string} bodyJoin
@@ -9,8 +9,9 @@ import drawHorizontalContent from './drawHorizontalContent';
 
 /**
  * @param {string[]} columns
- * @param {Border} border
- * @param {Function} drawVerticalLine
+ * @param {object} config
+ * @param {border} config.border
+ * @param {Function} config.drawVerticalLine
  * @returns {string}
  */
 export default (columns, {

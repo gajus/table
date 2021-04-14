@@ -1,5 +1,5 @@
 /**
- * @typedef {object} Separator
+ * @typedef {object} drawHorizontalContent~separator
  * @property {string} left
  * @property {string} right
  * @property {string} join
@@ -7,14 +7,12 @@
 
 /**
  * @param {string[]} columns
- * @param {Separator} separator
- * @param {Function} drawVerticalLine
+ * @param {object} config
+ * @param {drawHorizontalContent~separator} config.separator
+ * @param {Function} config.drawVerticalLine
  * @returns {string}
  */
-export default (columns, {
-  separator,
-  drawVerticalLine,
-}) => {
+export default (columns, {separator, drawVerticalLine}) => {
   const columnCount = columns.length;
   const result = [];
 

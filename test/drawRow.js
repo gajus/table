@@ -8,7 +8,7 @@ const drawVerticalLine = () => {
 };
 
 describe('drawRow', () => {
-  context('not provide drawVerticalLine', () => {
+  context('default drawVerticalLine', () => {
     it('draws a row using all parts', () => {
       const border = {
         bodyJoin: '│',
@@ -26,8 +26,8 @@ describe('drawRow', () => {
     });
   });
 
-  context('provide drawVerticalLine', () => {
-    it('draw the line when the drawVerticalLine return true', () => {
+  context('custom drawVerticalLine', () => {
+    it('draws the vertical line when the drawVerticalLine returns true', () => {
       const rows = [' a ', ' b ', ' c '];
 
       const border = {
@@ -53,9 +53,9 @@ describe('drawRow', () => {
       expect(drawRow(rows, {
         border,
         drawVerticalLine: (index, size) => {
-          return index > 0 && index < size;
+          return index > 0 && index <= size;
         },
-      })).to.equal(' a │ b │ c \n');
+      })).to.equal(' a │ b │ c ║\n');
     });
   });
 });

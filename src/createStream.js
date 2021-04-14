@@ -14,7 +14,7 @@ import truncateTableData from './truncateTableData';
 
 /**
  * @param {Array} data
- * @param {object} config
+ * @param {streamConfig} config
  * @returns {Array}
  */
 const prepareData = (data, config) => {
@@ -36,7 +36,7 @@ const prepareData = (data, config) => {
 /**
  * @param {string[]} row
  * @param {number[]} columnWidthIndex
- * @param {object} config
+ * @param {streamConfig} config
  * @returns {undefined}
  */
 const create = (row, columnWidthIndex, config) => {
@@ -62,7 +62,7 @@ const create = (row, columnWidthIndex, config) => {
 /**
  * @param {string[]} row
  * @param {number[]} columnWidthIndex
- * @param {object} config
+ * @param {streamConfig} config
  * @returns {undefined}
  */
 const append = (row, columnWidthIndex, config) => {

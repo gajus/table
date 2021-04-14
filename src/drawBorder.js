@@ -1,7 +1,7 @@
 import drawHorizontalContent from './drawHorizontalContent';
 
 /**
- * @typedef drawBorder~parts
+ * @typedef drawBorder~border
  * @property {string} left
  * @property {string} right
  * @property {string} body
@@ -10,14 +10,12 @@ import drawHorizontalContent from './drawHorizontalContent';
 
 /**
  * @param {number[]} columnSizeIndex
- * @param {drawBorder~parts} parts
- * @param {Function} drawVerticalLine
+ * @param {object} config
+ * @param {drawBorder~border} config.border
+ * @param {Function} config.drawVerticalLine
  * @returns {string}
  */
-const drawBorder = (columnSizeIndex, {
-  border,
-  drawVerticalLine,
-}) => {
+const drawBorder = (columnSizeIndex, {border, drawVerticalLine}) => {
   const columns = columnSizeIndex.map((size) => {
     return border.body.repeat(size);
   });
@@ -29,23 +27,11 @@ const drawBorder = (columnSizeIndex, {
 };
 
 /**
- * @typedef drawBorderTop~parts
- * @property {string} topLeft
- * @property {string} topRight
- * @property {string} topBody
- * @property {string} topJoin
- */
-
-/**
  * @param {number[]} columnSizeIndex
- * @param {drawBorderTop~parts} parts
- * @param {Function} drawVerticalLine
+ * @param {table~config} config
  * @returns {string}
  */
-const drawBorderTop = (columnSizeIndex, {
-  border,
-  drawVerticalLine,
-}) => {
+const drawBorderTop = (columnSizeIndex, {border, drawVerticalLine}) => {
   const result = drawBorder(columnSizeIndex, {border: {
     body: border.topBody,
     join: border.topJoin,
@@ -62,17 +48,8 @@ const drawBorderTop = (columnSizeIndex, {
 };
 
 /**
- * @typedef drawBorderJoin~parts
- * @property {string} joinLeft
- * @property {string} joinRight
- * @property {string} joinBody
- * @property {string} joinJoin
- */
-
-/**
  * @param {number[]} columnSizeIndex
- * @param {drawBorderJoin~parts} parts
- * @param {Function} drawVerticalLine
+ * @param {table~config} config
  * @returns {string}
  */
 const drawBorderJoin = (columnSizeIndex, {border, drawVerticalLine}) => {
@@ -88,17 +65,8 @@ const drawBorderJoin = (columnSizeIndex, {border, drawVerticalLine}) => {
 };
 
 /**
- * @typedef drawBorderBottom~parts
- * @property {string} bottomLeft
- * @property {string} bottomRight
- * @property {string} bottomBody
- * @property {string} bottomJoin
- */
-
-/**
  * @param {number[]} columnSizeIndex
- * @param {drawBorderBottom~parts} parts
- * @param {Function} drawVerticalLine
+ * @param {table~config} config
  * @returns {string}
  */
 const drawBorderBottom = (columnSizeIndex, {border, drawVerticalLine}) => {
