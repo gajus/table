@@ -1,0 +1,31 @@
+{
+  "include": [
+    "src",
+    "test"
+  ],
+  "compilerOptions": {
+    "resolveJsonModule": true,
+    "incremental": true,
+    "target": "ES2018",
+    "module": "commonjs",
+    "lib": ["ES2018"],
+    "allowJs": false,
+    "declaration": true,
+    "sourceMap": true,
+    "outDir": "dist",
+    "removeComments": false,
+    "isolatedModules": true,
+    "strict": true,
+    "alwaysStrict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "moduleResolution": "node",
+    "typeRoots": ["types", "node_modules/@types"],
+    "esModuleInterop": true,
+    "stripInternal": true,
+    "skipLibCheck": false,
+    "forceConsistentCasingInFileNames": true
+  }
+}

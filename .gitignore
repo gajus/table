@@ -2,12 +2,10 @@ node_modules
 package-lock.json
 coverage
 dist
+tsconfig.tsbuildinfo
 *.log
 .*
 !.editorconfig
-!.babelrc
 !.eslintrc
-!.flowconfig
 !.gitignore
-!.npmignore
 !.travis.yml
