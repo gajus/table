@@ -2,6 +2,9 @@
   "include": [
     "src"
   ],
+  "ts-node": {
+   "sourceMap": true
+  },
   "compilerOptions": {
     "resolveJsonModule": true,
     "incremental": true,
@@ -10,7 +13,7 @@
     "lib": ["ES2018"],
     "allowJs": true,
     "declaration": true,
-    "sourceMap": true,
+    "sourceMap": false,
     "outDir": "dist",
     "removeComments": false,
     "isolatedModules": true,
