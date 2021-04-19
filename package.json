@@ -74,7 +74,7 @@
       ".ts"
     ],
     "exclude": [
-      "dist/src/validators.js",
+      "src/generated/validators.js",
       "test/**/*.ts"
     ],
     "reporter": [
@@ -90,9 +90,9 @@
     "prebuild": "rm -fr ./dist && mkdirp dist/src",
     "build": "npm run create-validators && npm run compile",
     "create-readme": "gitdown ./.README/README.md --output-file ./README.md",
-    "create-validators": "ajv compile --all-errors --inline-refs=false -s src/schemas/config -s src/schemas/streamConfig -r src/schemas/shared -c ajv-keywords/dist/keywords/typeof -o | js-beautify > dist/src/validators.js",
-    "lint": "eslint ./src ./test",
-    "test": "mocha ./dist/test/**/*.js"
+    "create-validators": "rm -fr ./src/generated && mkdirp ./src/generated && ajv compile --all-errors --inline-refs=false -s src/schemas/config -s src/schemas/streamConfig -r src/schemas/shared -c ajv-keywords/dist/keywords/typeof -o | js-beautify > ./src/generated/validators.js",
+    "lint": "eslint --ignore-path .gitignore ./src ./test",
+    "test": "npm run create-validators && mocha ./dist/test/**/*.js"
   },
   "version": "1.0.0"
 }

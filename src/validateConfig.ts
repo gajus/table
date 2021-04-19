@@ -1,18 +1,16 @@
 import type {
   ErrorObject,
+  ValidateFunction,
 } from 'ajv/dist/types';
+import validators from './generated/validators';
 import type {
   TableUserConfig,
 } from './types/api';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-expect-error
-// eslint-disable-next-line import/no-unresolved
-import validators from './validators';
 
-export default (schemaId: string, config: TableUserConfig): void => {
-  const validate = validators[schemaId];
+export default (schemaId: 'config.json'|'streamConfig.json', config: TableUserConfig): void => {
+  const validate = validators[schemaId] as ValidateFunction;
   if (!validate(config)) {
-    const errors = validate.errors.map((error: ErrorObject) => {
+    const errors = validate.errors?.map((error: ErrorObject) => {
       return {
         message: error.message,
         params: error.params,
