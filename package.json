@@ -64,10 +64,10 @@
     "ansi"
   ],
   "license": "BSD-3-Clause",
-  "main": "./dist/src/index.js",
+  "main": "./dist/index.js",
   "files": [
-    "dist/src/**/*.js",
-    "dist/src/**/*.d.ts"
+    "dist/**/*.js",
+    "dist/**/*.d.ts"
   ],
   "name": "table",
   "nyc": {
@@ -88,7 +88,7 @@
   },
   "scripts": {
     "compile": "tsc",
-    "prebuild": "rm -fr ./dist && mkdirp dist/src",
+    "prebuild": "rm -fr ./dist && mkdirp dist",
     "build": "npm run create-validators && npm run compile",
     "create-readme": "gitdown ./.README/README.md --output-file ./README.md",
     "create-validators": "rm -fr ./src/generated && mkdirp ./src/generated && ajv compile --all-errors --inline-refs=false -s src/schemas/config -s src/schemas/streamConfig -r src/schemas/shared -c ajv-keywords/dist/keywords/typeof -o | js-beautify > ./src/generated/validators.js",
