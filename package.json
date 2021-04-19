@@ -44,6 +44,7 @@
     "nyc": "^15.1.0",
     "semantic-release": "^17.3.1",
     "sinon": "^9.2.2",
+    "ts-node": "^9.1.1",
     "typescript": "4.2.4"
   },
   "engines": {
@@ -92,7 +93,7 @@
     "create-readme": "gitdown ./.README/README.md --output-file ./README.md",
     "create-validators": "rm -fr ./src/generated && mkdirp ./src/generated && ajv compile --all-errors --inline-refs=false -s src/schemas/config -s src/schemas/streamConfig -r src/schemas/shared -c ajv-keywords/dist/keywords/typeof -o | js-beautify > ./src/generated/validators.js",
     "lint": "eslint --ignore-path .gitignore ./src ./test",
-    "test": "npm run create-validators && mocha ./dist/test/**/*.js"
+    "test": "npm run create-validators && mocha --require ts-node/register ./test/**/*.ts"
   },
   "version": "1.0.0"
 }
