@@ -26,7 +26,7 @@ describe('README.md usage/', () => {
 ║ t amet, consectetur  ║
 ║ adipiscing elit. Pha ║
 ║ sellus pulvinar nibh ║
-║ sed mauris conva...  ║
+║ sed mauris convall…  ║
 ╚══════════════════════╝
         `);
   });

@@ -22,7 +22,7 @@ describe('truncateTableData', () => {
 
         expect(truncateTableData(rows, makeConfig(rows, {columnDefault: {
           truncate: 20,
-        }}))).to.deep.equal([['a'.repeat(17) + '...']]);
+        }}))).to.deep.equal([['a'.repeat(19) + '…']]);
       });
     });
 
@@ -39,7 +39,7 @@ describe('truncateTableData', () => {
               truncate: 30,
             },
           },
-        }))).to.deep.equal([['a'.repeat(27) + '...']]);
+        }))).to.deep.equal([['a'.repeat(29) + '…']]);
       });
     });
   });
@@ -57,7 +57,48 @@ describe('truncateTableData', () => {
             truncate: 30,
           },
         },
-      }))).to.deep.equal([['a'.repeat(27) + '...', 'b'.repeat(17) + '...'], ['c'.repeat(27) + '...', 'd'.repeat(17) + '...']]);
+      }))).to.deep.equal([
+        ['a'.repeat(29) + '…', 'b'.repeat(19) + '…'],
+        ['c'.repeat(29) + '…', 'd'.repeat(19) + '…']]);
+    });
+  });
+
+  context('edge cases', () => {
+    context('truncate = 0', () => {
+      it('returns ellipsis only', () => {
+        const rows = [['a'.repeat(100)]];
+        expect(truncateTableData(rows, makeConfig(rows, {
+          columns: {0: {truncate: 0}},
+        }))).to.deep.equal([['…']]);
+      });
+    });
+
+    context('truncate = 1', () => {
+      it('returns ellipsis only', () => {
+        const rows = [['a'.repeat(100)]];
+        expect(truncateTableData(rows, makeConfig(rows, {
+          columns: {0: {truncate: 1}},
+
+        }))).to.deep.equal([['…']]);
+      });
+    });
+
+    context('truncate = 2', () => {
+      it('returns 2-length string with ellipsis', () => {
+        const rows = [['a'.repeat(100)]];
+        expect(truncateTableData(rows, makeConfig(rows, {
+          columns: {0: {truncate: 2}},
+        }))).to.deep.equal([['a…']]);
+      });
+    });
+
+    context('empty string', () => {
+      it('returns empty string', () => {
+        const rows = [['']];
+        expect(truncateTableData(rows, makeConfig(rows, {
+          columns: {0: {truncate: 100}},
+        }))).to.deep.equal([['']]);
+      });
     });
   });
 });

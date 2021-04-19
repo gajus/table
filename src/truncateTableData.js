@@ -11,6 +11,7 @@ export default (rows, config) => {
     return cells.map((content, index) => {
       return truncate(content, {
         length: config.columns[index].truncate,
+        omission: '…',
       });
     });
   });
