@@ -5,9 +5,9 @@ import type {
   Indexable,
   StreamUserConfig,
   BorderUserConfig,
+  BorderConfig,
 } from './types/api';
 import type {
-  BorderConfig,
   ColumnConfig,
   StreamConfig,
 } from './types/internal';
