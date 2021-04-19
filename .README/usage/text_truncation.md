@@ -33,6 +33,6 @@ console.log(output);
 ║ t amet, consectetur  ║
 ║ adipiscing elit. Pha ║
 ║ sellus pulvinar nibh ║
-║ sed mauris conva...  ║
+║ sed mauris convall…  ║
 ╚══════════════════════╝
 ```
