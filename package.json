@@ -66,8 +66,7 @@
   "main": "./dist/src/index.js",
   "files": [
     "dist/src/**/*.js",
-    "dist/src/types/api.d.ts",
-    "dist/src/index.d.ts"
+    "dist/src/**/*.d.ts"
   ],
   "name": "table",
   "nyc": {

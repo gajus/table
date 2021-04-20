@@ -1,5 +1,5 @@
 import type {
-  BorderUserConfig,
+  BorderConfig,
   ColumnUserConfig, DrawVerticalLine, Indexable, StreamUserConfig, TableUserConfig,
 } from './api';
 
@@ -8,9 +8,6 @@ export type Cell = string;
 
 /** @internal */
 export type Row = Cell[];
-
-/** @internal */
-export type BorderConfig = Required<BorderUserConfig>;
 
 /** @internal */
 export type TopBorderConfig = Pick<BorderConfig, 'topBody' | 'topJoin' | 'topLeft' | 'topRight'>;

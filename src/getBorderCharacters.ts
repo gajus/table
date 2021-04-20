@@ -2,7 +2,7 @@
 
 import type {
   BorderConfig,
-} from './types/internal';
+} from './types/api';
 
 export default (name: string): BorderConfig => {
   if (name === 'honeywell') {

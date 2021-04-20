@@ -3,10 +3,10 @@ import calculateMaximumColumnWidthIndex from './calculateMaximumColumnWidthIndex
 import getBorderCharacters from './getBorderCharacters';
 import type {
   ColumnUserConfig, Indexable,
-  BorderUserConfig, TableUserConfig,
+  BorderUserConfig, BorderConfig, TableUserConfig,
 } from './types/api';
 import type {
-  BorderConfig, ColumnConfig, Row, TableConfig,
+  ColumnConfig, Row, TableConfig,
 } from './types/internal';
 import validateConfig from './validateConfig';
 

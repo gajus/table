@@ -23,6 +23,8 @@ export type BorderUserConfig = {
   readonly joinJoin?: string,
 };
 
+export type BorderConfig = Required<BorderUserConfig>;
+
 export type ColumnUserConfig = {
 
   /**
@@ -122,3 +124,4 @@ export type WritableStream = {
 export type Indexable<T> = {
   readonly [index: number]: T,
 };
+
