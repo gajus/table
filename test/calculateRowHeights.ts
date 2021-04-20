@@ -3,8 +3,12 @@
 import {
   expect,
 } from 'chai';
-import calculateRowHeights from '../src/calculateRowHeights';
-import makeConfig from '../src/makeConfig';
+import {
+  calculateRowHeights,
+} from '../src/calculateRowHeights';
+import {
+  makeConfig,
+} from '../src/makeConfig';
 
 describe('calculateRowHeights', () => {
   context('single column', () => {

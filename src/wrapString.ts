@@ -9,7 +9,7 @@ import stringWidth from 'string-width';
  * in that whitespace characters that occur on a chunk size limit are trimmed.
  *
  */
-export default (subject: string, size: number): string[] => {
+export const wrapString = (subject: string, size: number): string[] => {
   let subjectSlice = subject;
 
   const chunks: string[] = [];

@@ -6,7 +6,7 @@ import type {
 /**
  * @todo Make it work with ASCII content.
  */
-export default (rows: Row[], config: BaseConfig): Row[] => {
+export const truncateTableData = (rows: Row[], config: BaseConfig): Row[] => {
   return rows.map((cells) => {
     return cells.map((cell, cellIndex) => {
       return truncate(cell, {

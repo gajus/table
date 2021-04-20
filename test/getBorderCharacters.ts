@@ -3,7 +3,9 @@
 import {
   expect,
 } from 'chai';
-import getBorderCharacters from '../src/getBorderCharacters';
+import {
+  getBorderCharacters,
+} from '../src/getBorderCharacters';
 
 describe('getBorderCharacters', () => {
   context('given name \'honeywell\'', () => {

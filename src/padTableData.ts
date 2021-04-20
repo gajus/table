@@ -3,7 +3,7 @@ import type {
   Row,
 } from './types/internal';
 
-export default (rows: Row[], config: BaseConfig): Row[] => {
+export const padTableData = (rows: Row[], config: BaseConfig): Row[] => {
   return rows.map((cells) => {
     return cells.map((cell, cellIndex) => {
       const column = config.columns[cellIndex];

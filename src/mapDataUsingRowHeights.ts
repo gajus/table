@@ -3,9 +3,11 @@ import type {
   BaseConfig,
   Row,
 } from './types/internal';
-import wrapCell from './wrapCell';
+import {
+  wrapCell,
+} from './wrapCell';
 
-export default (unmappedRows: Row[], rowHeights: number[], config: BaseConfig): Row[] => {
+export const mapDataUsingRowHeights = (unmappedRows: Row[], rowHeights: number[], config: BaseConfig): Row[] => {
   const tableWidth = unmappedRows[0].length;
 
   const mappedRows = unmappedRows.map((unmappedRow, unmappedRowIndex) => {

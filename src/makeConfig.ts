@@ -10,7 +10,9 @@ import type {
 import {
   makeBorder,
 } from './utils';
-import validateConfig from './validateConfig';
+import {
+  validateConfig,
+} from './validateConfig';
 
 /**
  * Creates a configuration for every column using default
@@ -40,7 +42,7 @@ const makeColumns = (rows: Row[],
  * using default values for the missing configuration properties.
  */
 
-export default (rows: Row[], userConfig: TableUserConfig = {}): TableConfig => {
+export const makeConfig = (rows: Row[], userConfig: TableUserConfig = {}): TableConfig => {
   validateConfig('config.json', userConfig);
 
   const config = cloneDeep(userConfig);

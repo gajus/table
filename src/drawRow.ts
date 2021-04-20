@@ -1,4 +1,6 @@
-import drawContent from './drawContent';
+import {
+  drawContent,
+} from './drawContent';
 import type {
   DrawVerticalLine,
 } from './types/api';
@@ -6,7 +8,7 @@ import type {
   BodyBorderConfig, Row,
 } from './types/internal';
 
-export default (row: Row, config: {
+export const drawRow = (row: Row, config: {
   border: BodyBorderConfig,
   drawVerticalLine: DrawVerticalLine,
 }): string => {

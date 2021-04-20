@@ -6,7 +6,9 @@ import {
 import type {
   TableUserConfig,
 } from '../src';
-import table from '../src/table';
+import {
+  table,
+} from '../src/table';
 
 const data = [
   ['Lorem ipsum', 'dolor sit'],

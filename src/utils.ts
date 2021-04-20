@@ -1,6 +1,8 @@
 import slice from 'slice-ansi';
 import stripAnsi from 'strip-ansi';
-import getBorderCharacters from './getBorderCharacters';
+import {
+  getBorderCharacters,
+} from './getBorderCharacters';
 import type {
   BorderConfig, BorderUserConfig,
 } from './types/api';

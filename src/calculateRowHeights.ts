@@ -1,4 +1,6 @@
-import calculateCellHeight from './calculateCellHeight';
+import {
+  calculateCellHeight,
+} from './calculateCellHeight';
 import type {
   BaseConfig,
   Row,
@@ -7,7 +9,7 @@ import type {
 /**
  * Produces an array of values that describe the largest value length (height) in every row.
  */
-export default (rows: Row[], config: BaseConfig): number[] => {
+export const calculateRowHeights = (rows: Row[], config: BaseConfig): number[] => {
   return rows.map((row) => {
     let rowHeight = 1;
 

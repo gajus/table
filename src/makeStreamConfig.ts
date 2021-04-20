@@ -11,7 +11,9 @@ import type {
 import {
   makeBorder,
 } from './utils';
-import validateConfig from './validateConfig';
+import {
+  validateConfig,
+} from './validateConfig';
 
 /**
  * Creates a configuration for every column using default
@@ -37,7 +39,7 @@ const makeColumns = (columnCount: number,
  * Makes a new configuration object out of the userConfig object
  * using default values for the missing configuration properties.
  */
-export default (userConfig: StreamUserConfig): StreamConfig => {
+export const makeStreamConfig = (userConfig: StreamUserConfig): StreamConfig => {
   validateConfig('streamConfig.json', userConfig);
 
   const config = cloneDeep(userConfig);

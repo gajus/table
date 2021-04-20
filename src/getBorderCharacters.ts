@@ -4,7 +4,7 @@ import type {
   BorderConfig,
 } from './types/api';
 
-export default (name: string): BorderConfig => {
+export const getBorderCharacters = (name: string): BorderConfig => {
   if (name === 'honeywell') {
     return {
       topBody: '═',

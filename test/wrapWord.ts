@@ -1,7 +1,9 @@
 import {
   expect,
 } from 'chai';
-import wrapWord from '../src/wrapWord';
+import {
+  wrapWord,
+} from '../src/wrapWord';
 import {
   arrayToRed, closeRed, openRed, stringToRed,
 } from './utils';

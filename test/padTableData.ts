@@ -3,8 +3,12 @@
 import {
   expect,
 } from 'chai';
-import makeConfig from '../src/makeConfig';
-import padTableData from '../src/padTableData';
+import {
+  makeConfig,
+} from '../src/makeConfig';
+import {
+  padTableData,
+} from '../src/padTableData';
 
 describe('padTableData', () => {
   context('when no given userConfig', () => {

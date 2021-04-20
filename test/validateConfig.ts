@@ -3,7 +3,9 @@
 import {
   expect,
 } from 'chai';
-import validateConfig from '../src/validateConfig';
+import {
+  validateConfig,
+} from '../src/validateConfig';
 
 describe('validateConfig', () => {
   context('given invalid config', () => {
