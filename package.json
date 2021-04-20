@@ -44,6 +44,7 @@
     "nyc": "^15.1.0",
     "semantic-release": "^17.3.1",
     "sinon": "^9.2.2",
+    "ts-node": "^9.1.1",
     "typescript": "4.2.4"
   },
   "engines": {
@@ -63,10 +64,10 @@
     "ansi"
   ],
   "license": "BSD-3-Clause",
-  "main": "./dist/src/index.js",
+  "main": "./dist/index.js",
   "files": [
-    "dist/src/**/*.js",
-    "dist/src/**/*.d.ts"
+    "dist/**/*.js",
+    "dist/**/*.d.ts"
   ],
   "name": "table",
   "nyc": {
@@ -74,7 +75,7 @@
       ".ts"
     ],
     "exclude": [
-      "dist/src/validators.js",
+      "src/generated/validators.js",
       "test/**/*.ts"
     ],
     "reporter": [
@@ -87,12 +88,12 @@
   },
   "scripts": {
     "compile": "tsc",
-    "prebuild": "rm -fr ./dist && mkdirp dist/src",
+    "prebuild": "rm -fr ./dist && mkdirp dist",
     "build": "npm run create-validators && npm run compile",
     "create-readme": "gitdown ./.README/README.md --output-file ./README.md",
-    "create-validators": "ajv compile --all-errors --inline-refs=false -s src/schemas/config -s src/schemas/streamConfig -r src/schemas/shared -c ajv-keywords/dist/keywords/typeof -o | js-beautify > dist/src/validators.js",
-    "lint": "eslint ./src ./test",
-    "test": "mocha ./dist/test/**/*.js"
+    "create-validators": "rm -fr ./src/generated && mkdirp ./src/generated && ajv compile --all-errors --inline-refs=false -s src/schemas/config -s src/schemas/streamConfig -r src/schemas/shared -c ajv-keywords/dist/keywords/typeof -o | js-beautify > ./src/generated/validators.js",
+    "lint": "eslint --ignore-path .gitignore ./src ./test",
+    "test": "npm run create-validators && mocha --require ts-node/register ./test/**/*.ts"
   },
   "version": "1.0.0"
 }

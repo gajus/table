@@ -6,12 +6,9 @@ import ajvKeywords from 'ajv-keywords';
 import {
   expect,
 } from 'chai';
+import validators from '../src/generated/validators';
 import configSchema from '../src/schemas/config.json';
 import sharedSchema from '../src/schemas/shared.json';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-expect-error
-// eslint-disable-next-line import/no-unresolved
-import validators from '../src/validators';
 import configSamples from './configSamples';
 
 const validateConfig = validators['config.json'];

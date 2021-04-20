@@ -1,17 +1,19 @@
 {
   "include": [
-    "src",
-    "test"
+    "src"
   ],
+  "ts-node": {
+   "sourceMap": true
+  },
   "compilerOptions": {
     "resolveJsonModule": true,
     "incremental": true,
     "target": "ES2018",
     "module": "commonjs",
     "lib": ["ES2018"],
-    "allowJs": false,
+    "allowJs": true,
     "declaration": true,
-    "sourceMap": true,
+    "sourceMap": false,
     "outDir": "dist",
     "removeComments": false,
     "isolatedModules": true,
@@ -22,7 +24,7 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "moduleResolution": "node",
-    "typeRoots": ["types", "node_modules/@types"],
+    "typeRoots": ["src/types/external", "node_modules/@types"],
     "esModuleInterop": true,
     "stripInternal": true,
     "skipLibCheck": false,

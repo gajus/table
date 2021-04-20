@@ -7,12 +7,9 @@ import ajvSchemaDraft06 from 'ajv/lib/refs/json-schema-draft-06.json';
 import {
   expect,
 } from 'chai';
+import validators from '../src/generated/validators';
 import sharedSchema from '../src/schemas/shared.json';
 import configSchema from '../src/schemas/streamConfig.json';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-expect-error
-// eslint-disable-next-line import/no-unresolved
-import validators from '../src/validators';
 import streamConfigSamples from './streamConfigSamples';
 
 const validateConfig = validators['streamConfig.json'];

@@ -1,7 +1,7 @@
 {
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "project": "./tsconfig.json"
+    "project": "./tsconfig.eslint.json"
   },
   "extends": [
     "canonical",
@@ -11,6 +11,7 @@
     "max-len": 0,
     "jsdoc/check-tag-names": [
       "error", {"definedTags": ["internal"]}
-    ]
+    ],
+    "filenames/match-exported": 0
   }
 }
