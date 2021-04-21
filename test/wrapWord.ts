@@ -88,11 +88,11 @@ describe('wrapWord', () => {
 
       expect(wrapWord(`${openBold}${openRed}Lorem ipsum dolor sit${closeRed}${closeBold}`, 4)).to.deep.equal(
         [
-          `${openBold}${openRed}Lore${closeRed}`,
+          `${openBold}${openRed}Lore${closeRed}${closeBold}`,
           `${openBold}${openRed}m${closeRed}${closeBold}`,
-          `${openBold}${openRed}ipsu${closeRed}`,
+          `${openBold}${openRed}ipsu${closeRed}${closeBold}`,
           `${openBold}${openRed}m${closeRed}${closeBold}`,
-          `${openBold}${openRed}dolo${closeRed}`,
+          `${openBold}${openRed}dolo${closeRed}${closeBold}`,
           `${openBold}${openRed}r${closeRed}${closeBold}`,
           `${openBold}${openRed}sit${closeBold}${closeRed}`],
       );

@@ -14,8 +14,7 @@
     "lodash.truncate": "^4.4.2",
     "slice-ansi": "^4.0.0",
     "string-width": "^4.2.0",
-    "strip-ansi": "^6.0.0",
-    "wrap-ansi": "^7.0.0"
+    "strip-ansi": "^6.0.0"
   },
   "description": "Formats data into a string table.",
   "devDependencies": {
@@ -28,7 +27,6 @@
     "@types/node": "^14.14.37",
     "@types/sinon": "^10.0.0",
     "@types/slice-ansi": "^4.0.0",
-    "@types/wrap-ansi": "^3.0.0",
     "ajv-cli": "^5.0.0",
     "ajv-keywords": "^5.0.0",
     "chai": "^4.2.0",
