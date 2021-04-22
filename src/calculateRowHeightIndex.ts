@@ -1,4 +1,3 @@
-import isNumber from 'is-number-object';
 import calculateCellHeight from './calculateCellHeight';
 import type {
   BaseConfig,
@@ -17,7 +16,7 @@ export default (rows: Row[], config: BaseConfig): number[] => {
     const cellHeightIndex = new Array(tableWidth).fill(1);
 
     cells.forEach((value, index1) => {
-      if (!isNumber(config.columns[index1].width)) {
+      if (typeof config.columns[index1].width !== 'number') {
         throw new TypeError('column[index].width must be a number.');
       }
 

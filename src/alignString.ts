@@ -1,4 +1,3 @@
-import isNumber from 'is-number-object';
 import isString from 'is-string';
 import stringWidth from 'string-width';
 
@@ -39,7 +38,7 @@ export default (subject: string, containerWidth: number, alignment: string): str
     throw new TypeError('Subject parameter value must be a string.');
   }
 
-  if (!isNumber(containerWidth)) {
+  if (typeof containerWidth !== 'number') {
     throw new TypeError('Container width parameter value must be a number.');
   }
 
