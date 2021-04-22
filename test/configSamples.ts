@@ -27,6 +27,7 @@ const configSamples: {invalid: unknown[], valid: TableUserConfig[], } = {
     {columns: {1: {unknown: 1}}},
     {columns: {1: {alignment: 1}}},
     {columns: {1: {alignment: '1'}}},
+    {columns: {0: {alignment: 'middle'}}},
     {columns: {1: {width: '5'}}},
     {columns: {1: {wrapWord: 1}}},
     {columns: {1: {truncate: '1'}}},
@@ -36,6 +37,7 @@ const configSamples: {invalid: unknown[], valid: TableUserConfig[], } = {
     {columnDefault: {unknown: 1}},
     {columnDefault: {alignment: 1}},
     {columnDefault: {alignment: '1'}},
+    {columnDefault: {alignment: 'middle'}},
     {columnDefault: {width: '5'}},
     {columnDefault: {wrapWord: 1}},
     {columnDefault: {truncate: '1'}},
@@ -45,6 +47,7 @@ const configSamples: {invalid: unknown[], valid: TableUserConfig[], } = {
     {unknown: 1},
   ],
   valid: [
+    {},
     {
       columns: {
         0: {
@@ -121,6 +124,9 @@ const configSamples: {invalid: unknown[], valid: TableUserConfig[], } = {
         },
       },
     },
+    {columns: {0: {alignment: 'left'}}},
+    {columns: {1: {alignment: 'right'}}},
+    {columns: {2: {alignment: 'center'}}},
     {border: {topBody: '-'}},
     {border: {topJoin: '-'}},
     {border: {topLeft: '-'}},

@@ -42,6 +42,11 @@ const streamConfigSamples: {invalid: unknown[], valid: StreamUserConfig[], } = {
     {columnDefault: {paddingLeft: '1'}},
     {columnDefault: {paddingRight: '1'}},
     {unknown: 1},
+    {
+      columnCount: 3,
+      columnDefault: {width: 20},
+      columns: {0: {alignment: 'middle'}},
+    },
 
     // eslint-disable-next-line no-warning-comments
     // TODO: Fix the schema so that the following configs are truly invalid
@@ -74,6 +79,25 @@ const streamConfigSamples: {invalid: unknown[], valid: StreamUserConfig[], } = {
     // {columnDefault: {paddingRight: 1}},
   ],
   valid: [
+    {
+      columnCount: 3,
+      columnDefault: {width: 20},
+    },
+    {
+      columnCount: 3,
+      columnDefault: {width: 20},
+      columns: {0: {alignment: 'left'}},
+    },
+    {
+      columnCount: 3,
+      columnDefault: {width: 20},
+      columns: {1: {alignment: 'right'}},
+    },
+    {
+      columnCount: 3,
+      columnDefault: {width: 20},
+      columns: {2: {alignment: 'center'}},
+    },
     {
       columnCount: 3,
       columnDefault: {

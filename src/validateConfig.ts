@@ -9,8 +9,8 @@ import type {
 
 export default (schemaId: 'config.json'|'streamConfig.json', config: TableUserConfig): void => {
   const validate = validators[schemaId] as ValidateFunction;
-  if (!validate(config)) {
-    const errors = validate.errors?.map((error: ErrorObject) => {
+  if (!validate(config) && validate.errors) {
+    const errors = validate.errors.map((error: ErrorObject) => {
       return {
         message: error.message,
         params: error.params,
