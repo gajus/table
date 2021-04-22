@@ -14,12 +14,6 @@ import type {
  */
 
 const groupBySizes = <T>(array: T[], sizes: number[]): T[][] => {
-  if (sizes.reduce((sum, current) => {
-    return sum + current;
-  }, 0) !== array.length) {
-    throw new Error('The sizes array is not compatible with array\'s length');
-  }
-
   let startIndex = 0;
 
   return sizes.map((rowHeight) => {
