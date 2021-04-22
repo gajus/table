@@ -6,6 +6,10 @@ import {
 import wrapCell from '../src/wrapCell';
 import wrapString from '../src/wrapString';
 import wrapWord from '../src/wrapWord';
+import {
+  arrayToRed,
+  stringToRed,
+} from './utils';
 
 describe('wrapCell', () => {
   const strings = ['aa bb cc', 'a a bb cccc', 'aaabbcc', 'a\\bb', 'a_bb', 'a-bb', 'a.bb', 'a,bb', 'a;bb'];
@@ -15,6 +19,7 @@ describe('wrapCell', () => {
       it('returns the same output as wrapWord\'s', () => {
         for (const string of strings) {
           expect(wrapCell(string, 3, true)).to.deep.equal(wrapWord(string, 3));
+          expect(wrapCell(stringToRed(string), 3, true)).to.deep.equal(arrayToRed(wrapWord(string, 3)));
         }
       });
     });
@@ -28,12 +33,23 @@ describe('wrapCell', () => {
           expect(wrapCell('\na\n', 5, true)).to.deep.equal(['', 'a', '']);
           expect(wrapCell('a\na', 5, true)).to.deep.equal(['a', 'a']);
           expect(wrapCell('a \na', 5, true)).to.deep.equal(['a', 'a']);
-
           expect(wrapCell('\n\n', 5, true)).to.deep.equal(['', '', '']);
           expect(wrapCell('a\n\n', 5, true)).to.deep.equal(['a', '', '']);
           expect(wrapCell('\n\na', 5, true)).to.deep.equal(['', '', 'a']);
           expect(wrapCell('a\n\nb', 5, true)).to.deep.equal(['a', '', 'b']);
           expect(wrapCell('a\n\n\nb', 5, true)).to.deep.equal(['a', '', '', 'b']);
+
+          expect(wrapCell(stringToRed('\n'), 5, true)).to.deep.equal(arrayToRed(['', '']));
+          expect(wrapCell(stringToRed('a\n'), 5, true)).to.deep.equal(arrayToRed(['a', '']));
+          expect(wrapCell(stringToRed('\na'), 5, true)).to.deep.equal(arrayToRed(['', 'a']));
+          expect(wrapCell(stringToRed('\na\n'), 5, true)).to.deep.equal(arrayToRed(['', 'a', '']));
+          expect(wrapCell(stringToRed('a\na'), 5, true)).to.deep.equal(arrayToRed(['a', 'a']));
+          expect(wrapCell(stringToRed('a \na'), 5, true)).to.deep.equal(arrayToRed(['a', 'a']));
+          expect(wrapCell(stringToRed('\n\n'), 5, true)).to.deep.equal(arrayToRed(['', '', '']));
+          expect(wrapCell(stringToRed('a\n\n'), 5, true)).to.deep.equal(arrayToRed(['a', '', '']));
+          expect(wrapCell(stringToRed('\n\na'), 5, true)).to.deep.equal(arrayToRed(['', '', 'a']));
+          expect(wrapCell(stringToRed('a\n\nb'), 5, true)).to.deep.equal(arrayToRed(['a', '', 'b']));
+          expect(wrapCell(stringToRed('a\n\n\nb'), 5, true)).to.deep.equal(arrayToRed(['a', '', '', 'b']));
         });
       });
 
@@ -41,9 +57,7 @@ describe('wrapCell', () => {
         it('continues cut the word by wrapWord function', () => {
           expect(wrapCell('aaa bbb\nc', 3, true)).to.deep.equal(['aaa', 'bbb', 'c']);
           expect(wrapCell('a b c\nd', 3, true)).to.deep.equal(['a b', 'c', 'd']);
-
           expect(wrapCell('aaaa\nbbbb', 3, true)).to.deep.equal(['aaa', 'a', 'bbb', 'b']);
-
           expect(wrapCell('a\\bb\nc', 3, true)).to.deep.equal(['a\\', 'bb', 'c']);
           expect(wrapCell('a/bb\nc', 3, true)).to.deep.equal(['a/', 'bb', 'c']);
           expect(wrapCell('a_bb\nc', 3, true)).to.deep.equal(['a_', 'bb', 'c']);
@@ -51,8 +65,19 @@ describe('wrapCell', () => {
           expect(wrapCell('a.bb\nc', 3, true)).to.deep.equal(['a.', 'bb', 'c']);
           expect(wrapCell('a,bb\nc', 3, true)).to.deep.equal(['a,', 'bb', 'c']);
           expect(wrapCell('a;bb\nc', 3, true)).to.deep.equal(['a;', 'bb', 'c']);
-
           expect(wrapCell('aaa-b\nc', 3, true)).to.deep.equal(['aaa', '-b', 'c']);
+
+          expect(wrapCell(stringToRed('aaa bbb\nc'), 3, true)).to.deep.equal(arrayToRed(['aaa', 'bbb', 'c']));
+          expect(wrapCell(stringToRed('a b c\nd'), 3, true)).to.deep.equal(arrayToRed(['a b', 'c', 'd']));
+          expect(wrapCell(stringToRed('aaaa\nbbbb'), 3, true)).to.deep.equal(arrayToRed(['aaa', 'a', 'bbb', 'b']));
+          expect(wrapCell(stringToRed('a\\bb\nc'), 3, true)).to.deep.equal(arrayToRed(['a\\', 'bb', 'c']));
+          expect(wrapCell(stringToRed('a/bb\nc'), 3, true)).to.deep.equal(arrayToRed(['a/', 'bb', 'c']));
+          expect(wrapCell(stringToRed('a_bb\nc'), 3, true)).to.deep.equal(arrayToRed(['a_', 'bb', 'c']));
+          expect(wrapCell(stringToRed('a-bb\nc'), 3, true)).to.deep.equal(arrayToRed(['a-', 'bb', 'c']));
+          expect(wrapCell(stringToRed('a.bb\nc'), 3, true)).to.deep.equal(arrayToRed(['a.', 'bb', 'c']));
+          expect(wrapCell(stringToRed('a,bb\nc'), 3, true)).to.deep.equal(arrayToRed(['a,', 'bb', 'c']));
+          expect(wrapCell(stringToRed('a;bb\nc'), 3, true)).to.deep.equal(arrayToRed(['a;', 'bb', 'c']));
+          expect(wrapCell(stringToRed('aaa-b\nc'), 3, true)).to.deep.equal(arrayToRed(['aaa', '-b', 'c']));
         });
       });
     });

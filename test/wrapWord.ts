@@ -2,16 +2,9 @@ import {
   expect,
 } from 'chai';
 import wrapWord from '../src/wrapWord';
-
-const openRed = '\u001b[31m';
-const closeRed = '\u001b[39m';
-
-const stringToRed = (string: string) => {
-  return openRed + string + closeRed;
-};
-const arrayToRed = (array: string[]) => {
-  return array.map(stringToRed);
-};
+import {
+  arrayToRed, closeRed, openRed, stringToRed,
+} from './utils';
 
 describe('wrapWord', () => {
   it('wraps a string at a nearest whitespace', () => {
@@ -55,8 +48,8 @@ describe('wrapWord', () => {
     });
   });
 
-  context('mixed ansi', () => {
-    it('askdjhasdkj', () => {
+  context('mixed ansi and plain', () => {
+    it('returns proper strings', () => {
       expect(wrapWord(`${openRed}Lorem ${closeRed}ipsum dolor ${openRed}sit amet${closeRed}`, 5)).to.deep.equal([
         `${openRed}Lorem${closeRed}`,
         'ipsum',
