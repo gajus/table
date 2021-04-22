@@ -1,4 +1,3 @@
-import isBoolean from 'is-boolean-object';
 import isNumber from 'is-number-object';
 import calculateCellHeight from './calculateCellHeight';
 import type {
@@ -22,7 +21,7 @@ export default (rows: Row[], config: BaseConfig): number[] => {
         throw new TypeError('column[index].width must be a number.');
       }
 
-      if (!isBoolean(config.columns[index1].wrapWord)) {
+      if (config.columns[index1].wrapWord !== true && config.columns[index1].wrapWord !== false) {
         throw new TypeError('column[index].wrapWord must be a boolean.');
       }
 
