@@ -7,16 +7,23 @@ import type {
 } from './types/internal';
 
 /**
- * Groups mapped rows into chunks by calculated heights
+ * Group the array into sub-arrays by sizes.
+ *
+ * @example
+ * chunkBySizes(['a', 'b', 'c', 'd', 'e'], [2, 1, 2]) = [ ['a', 'b'], ['c'], ['d', 'e'] ]
  */
 
-const groupRows = (rows: Row[], rowHeights: number[], config: TableConfig): Row => {
+const groupBySizes = <T>(array: T[], sizes: number[]): T[][] => {
+  if (sizes.reduce((sum, current) => {
+    return sum + current;
+  }, 0) !== array.length) {
+    throw new Error('The sizes array is not compatible with array\'s length');
+  }
+
   let startIndex = 0;
 
-  return rowHeights.map((rowHeight) => {
-    const chunk = rows.slice(startIndex, startIndex + rowHeight).map((row) => {
-      return drawRow(row, config);
-    }).join('');
+  return sizes.map((rowHeight) => {
+    const chunk = array.slice(startIndex, startIndex + rowHeight);
 
     startIndex += rowHeight;
 
@@ -35,7 +42,12 @@ export default (rows: Row[], columnWidths: number[], rowHeights: number[], confi
     drawHorizontalLine,
   } = config;
 
-  const groupedRows = groupRows(rows, rowHeights, config);
+  const groupedRows = groupBySizes(rows, rowHeights).map((group) => {
+    return group.map((row) => {
+      return drawRow(row, config);
+    }).join('');
+  });
+
   const rowCount = groupedRows.length;
   let output = '';
 

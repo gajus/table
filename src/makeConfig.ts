@@ -29,20 +29,18 @@ const makeColumns = (rows: Row[],
   columnDefault?: ColumnUserConfig): Indexable<ColumnConfig> => {
   const maximumColumnWidthIndex = calculateMaximumColumnWidthIndex(rows);
 
-  return rows[0].reduce<Record<number, ColumnConfig>>((result, _cell, index) => {
-    result[index] = {
+  return rows[0].map((_cell, index) => {
+    return {
       alignment: 'left',
       paddingLeft: 1,
       paddingRight: 1,
-      truncate: Number.MAX_VALUE,
+      truncate: Number.POSITIVE_INFINITY,
       width: maximumColumnWidthIndex[index],
       wrapWord: false,
       ...columnDefault,
       ...columns?.[index],
     };
-
-    return result;
-  }, {});
+  });
 };
 
 /**

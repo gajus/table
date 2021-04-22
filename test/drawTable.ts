@@ -3,11 +3,10 @@
 import {
   expect,
 } from 'chai';
-import makeConfig from '../src/makeConfig';
-import table from '../src/table';
 import type {
-  TableConfig,
-} from '../src/types/internal';
+  TableUserConfig,
+} from '../src';
+import table from '../src/table';
 
 const data = [
   ['Lorem ipsum', 'dolor sit'],
@@ -15,17 +14,17 @@ const data = [
   ['adipiscing', 'elit'],
 ];
 
-const basicConfig = makeConfig(data, {
+const basicConfig: TableUserConfig = {
   columnDefault: {
     width: 5,
   },
-});
+};
 
 describe('drawTable', () => {
   describe('drawHorizontalLine', () => {
     context('only draw top and bottom borders', () => {
       it('draws proper borders', () => {
-        const config: TableConfig = {
+        const config: TableUserConfig = {
           ...basicConfig,
           drawHorizontalLine: (index, size) => {
             return index === 0 || index === size;
@@ -48,7 +47,7 @@ describe('drawTable', () => {
 
     context('only draw inner borders', () => {
       it('draws proper borders', () => {
-        const config: TableConfig = {
+        const config: TableUserConfig = {
           ...basicConfig,
           drawHorizontalLine: (index, size) => {
             return index > 0 && index < size;
@@ -71,7 +70,7 @@ describe('drawTable', () => {
 
     context('only draw top and next-to-last borders', () => {
       it('draws proper borders', () => {
-        const config: TableConfig = {
+        const config: TableUserConfig = {
           ...basicConfig,
           drawHorizontalLine: (index, size) => {
             return index === 0 || index === size - 1;
