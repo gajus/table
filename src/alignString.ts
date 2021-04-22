@@ -1,5 +1,3 @@
-import isNumber from 'is-number-object';
-import isString from 'is-string';
 import stringWidth from 'string-width';
 
 const alignLeft = (subject: string, width: number): string => {
@@ -35,11 +33,11 @@ const alignments = [
  * text in a desired alignment within a container.
  */
 export default (subject: string, containerWidth: number, alignment: string): string => {
-  if (!isString(subject)) {
+  if (typeof subject !== 'string') {
     throw new TypeError('Subject parameter value must be a string.');
   }
 
-  if (!isNumber(containerWidth)) {
+  if (typeof containerWidth !== 'number') {
     throw new TypeError('Container width parameter value must be a number.');
   }
 
@@ -49,7 +47,7 @@ export default (subject: string, containerWidth: number, alignment: string): str
     throw new Error('Subject parameter value width cannot be greater than the container width.');
   }
 
-  if (!isString(alignment)) {
+  if (typeof alignment !== 'string') {
     throw new TypeError('Alignment parameter value must be a string.');
   }
 
