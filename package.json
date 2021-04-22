@@ -34,8 +34,6 @@
     "husky": "^4.3.6",
     "js-beautify": "^1.13.0",
     "lodash.mapvalues": "^4.6.0",
-    "lodash.random": "^3.2.0",
-    "lodash.sample": "^4.2.1",
     "mkdirp": "^1.0.4",
     "mocha": "^8.2.1",
     "nyc": "^15.1.0",
