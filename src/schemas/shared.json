@@ -3,13 +3,23 @@
     "$schema": "http://json-schema.org/draft-07/schema#",
     "definitions": {
         "columns": {
-            "type": "object",
-            "patternProperties": {
-                "^[0-9]+$": {
+            "oneOf": [
+              {
+                "type": "object",
+                "patternProperties": {
+                  "^[0-9]+$": {
                     "$ref": "#/definitions/column"
+                  }
+                },
+                "additionalProperties": false
+              },
+              {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/column"
                 }
-            },
-            "additionalProperties": false
+              }
+            ]
         },
         "column": {
             "type": "object",

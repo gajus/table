@@ -34,6 +34,9 @@ const configSamples: {invalid: unknown[], valid: TableUserConfig[], } = {
     {columns: {1: {truncate: '1'}}},
     {columns: {1: {paddingLeft: '1'}}},
     {columns: {1: {paddingRight: '1'}}},
+    {columns: [1]},
+    {columns: ['']},
+    {columns: [{unknown: 1}]},
     {columnDefault: 1},
     {columnDefault: {unknown: 1}},
     {columnDefault: {alignment: 1}},
@@ -102,17 +105,15 @@ const configSamples: {invalid: unknown[], valid: TableUserConfig[], } = {
         paddingLeft: 0,
         paddingRight: 1,
       },
-
-      // drawHorizontalLine: () => {
-      //     return false
-      // }
+      drawHorizontalLine: () => {
+        return false;
+      },
     },
+
     {
       columnDefault: {
         width: 50,
       },
-
-      // columnCount: 3,
       columns: {
         0: {
           alignment: 'right',
@@ -151,6 +152,10 @@ const configSamples: {invalid: unknown[], valid: TableUserConfig[], } = {
     {columns: {1: {truncate: 1}}},
     {columns: {1: {paddingLeft: 1}}},
     {columns: {1: {paddingRight: 1}}},
+    {columns: []},
+    {columns: [{width: 5}]},
+    {columns: [{wrapWord: true}, {truncate: 1}]},
+    {columns: [{paddingLeft: 1}, {paddingRight: 1}, {alignment: 'right'}]},
     {columnDefault: {alignment: 'left'}},
     {columnDefault: {width: 5}},
     {columnDefault: {wrapWord: true}},
