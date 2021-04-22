@@ -1,8 +1,7 @@
-import isString from 'is-string';
 import wrapCell from './wrapCell';
 
 export default (value: string, columnWidth: number, useWrapWord = false): number => {
-  if (!isString(value)) {
+  if (typeof value !== 'string') {
     throw new TypeError('Value must be a string.');
   }
 
