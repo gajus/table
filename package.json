@@ -10,7 +10,8 @@
     "lodash.flatten": "^4.4.0",
     "lodash.truncate": "^4.4.2",
     "slice-ansi": "^4.0.0",
-    "string-width": "^4.2.0"
+    "string-width": "^4.2.0",
+    "strip-ansi": "^6.0.0"
   },
   "description": "Formats data into a string table.",
   "devDependencies": {

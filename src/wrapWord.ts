@@ -1,32 +1,48 @@
 import slice from 'slice-ansi';
-import stringWidth from 'string-width';
+import stripAnsi from 'strip-ansi';
 
-export default (input: string, size: number): string[] => {
-  let subject = input;
+const calculateStringLengths = (input: string, size: number): Array<[Length:number, Offset: number]> => {
+  let subject = stripAnsi(input);
 
-  const chunks = [];
+  const chunks: Array<[number, number]> = [];
 
   // https://regex101.com/r/gY5kZ1/1
   const re = new RegExp('(^.{1,' + String(size) + '}(\\s+|$))|(^.{1,' + String(size - 1) + '}(\\\\|/|_|\\.|,|;|-))');
 
   do {
-    let chunk;
+    let chunk: string;
 
-    chunk = re.exec(subject);
+    const match = re.exec(subject);
 
-    if (chunk) {
-      chunk = chunk[0];
+    if (match) {
+      chunk = match[0];
 
-      subject = slice(subject, stringWidth(chunk));
+      subject = subject.slice(chunk.length);
 
-      chunk = chunk.trim();
+      const trimmedLength = chunk.trim().length;
+      const offset = chunk.length - trimmedLength;
+
+      chunks.push([trimmedLength, offset]);
     } else {
-      chunk = slice(subject, 0, size);
-      subject = slice(subject, size);
-    }
+      chunk = subject.slice(0, size);
+      subject = subject.slice(size);
 
-    chunks.push(chunk);
-  } while (stringWidth(subject));
+      chunks.push([chunk.length, 0]);
+    }
+  } while (subject.length);
 
   return chunks;
+};
+
+export default (input: string, size: number): string[] => {
+  const result: string[] = [];
+
+  let startIndex = 0;
+  calculateStringLengths(input, size).forEach(([length, offset]) => {
+    result.push(slice(input, startIndex, startIndex + length));
+
+    startIndex += length + offset;
+  });
+
+  return result;
 };
