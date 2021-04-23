@@ -23,7 +23,9 @@
                     ]
                 },
                 "width": {
-                    "type": "number"
+                    "type": "number",
+                    "minimum": 1,
+                    "multipleOf": 1.0
                 },
                 "wrapWord": {
                     "type": "boolean"

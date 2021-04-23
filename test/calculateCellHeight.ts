@@ -22,20 +22,6 @@ describe('calculateCellHeight', () => {
     });
   });
   describe('context width', () => {
-    context('is not an integer', () => {
-      it('throws an error', () => {
-        expect(() => {
-          calculateCellHeight('foo', 1.5);
-        }).to.throw(Error, 'Column width must be an integer greater than 0.');
-      });
-    });
-    context('is 0', () => {
-      it('throws an error', () => {
-        expect(() => {
-          calculateCellHeight('foo', 0);
-        }).to.throw(Error, 'Column width must be an integer greater than 0.');
-      });
-    });
     context('is lesser than the column width', () => {
       it('has height 1', () => {
         expect(calculateCellHeight('foo', 10)).to.equal(1);

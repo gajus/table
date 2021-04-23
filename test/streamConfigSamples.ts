@@ -63,6 +63,24 @@ const streamConfigSamples: {invalid: unknown[], valid: StreamUserConfig[], } = {
       columnDefault: {width: 20},
       columns: {0: {wrapWord: 1}},
     },
+    {
+      columnCount: 1,
+      columnDefault: {width: 2},
+      columns: {0: {width: 0}},
+    },
+    {
+      columnCount: 1,
+      columnDefault: {width: 2},
+      columns: {0: {width: 1.5}},
+    },
+    {
+      columnCount: 1,
+      columnDefault: {width: 0},
+    },
+    {
+      columnCount: 1,
+      columnDefault: {width: 1.5},
+    },
 
     // eslint-disable-next-line no-warning-comments
     // TODO: Fix the schema so that the following configs are truly invalid
@@ -95,9 +113,25 @@ const streamConfigSamples: {invalid: unknown[], valid: StreamUserConfig[], } = {
     // {columnDefault: {paddingRight: 1}},
   ],
   valid: [
+    // FIXME: The empty option pass the validator but be threw in runtime
+    {} as never,
+    {
+      columnCount: 1,
+      columnDefault: {width: 1},
+    },
     {
       columnCount: 3,
       columnDefault: {width: 20},
+    },
+    {
+      columnCount: 1,
+      columnDefault: {width: 1},
+      columns: {0: {width: 1}},
+    },
+    {
+      columnCount: 1,
+      columnDefault: {width: 5},
+      columns: {0: {width: 5}},
     },
     {
       columnCount: 3,
