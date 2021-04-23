@@ -6,54 +6,59 @@ import type {
   TableConfig, Row,
 } from './types/internal';
 
-export default (
-  rows: Row[],
-  columnSizeIndex: number[],
-  rowSpanIndex: number[],
-  config: TableConfig,
-): string => {
+/**
+ * Group the array into sub-arrays by sizes.
+ *
+ * @example
+ * chunkBySizes(['a', 'b', 'c', 'd', 'e'], [2, 1, 2]) = [ ['a', 'b'], ['c'], ['d', 'e'] ]
+ */
+
+const groupBySizes = <T>(array: T[], sizes: number[]): T[][] => {
+  let startIndex = 0;
+
+  return sizes.map((rowHeight) => {
+    const chunk = array.slice(startIndex, startIndex + rowHeight);
+
+    startIndex += rowHeight;
+
+    return chunk;
+  });
+};
+
+const shouldDrawBorderJoin = (rowIndex: number, rowCount: number, config: TableConfig): boolean => {
+  const {singleLine, drawHorizontalLine} = config;
+
+  return !singleLine && rowIndex + 1 < rowCount && drawHorizontalLine(rowIndex + 1, rowCount);
+};
+
+export default (rows: Row[], columnWidths: number[], rowHeights: number[], config: TableConfig): string => {
   const {
     drawHorizontalLine,
-    singleLine,
   } = config;
 
-  let output: string;
-  let realRowIndex: number;
-  let rowHeight: number;
+  const groupedRows = groupBySizes(rows, rowHeights).map((group) => {
+    return group.map((row) => {
+      return drawRow(row, config);
+    }).join('');
+  });
 
-  const rowCount = rows.length;
+  const rowCount = groupedRows.length;
+  let output = '';
 
-  realRowIndex = 0;
-
-  output = '';
-
-  if (drawHorizontalLine(realRowIndex, rowCount)) {
-    output += drawBorderTop(columnSizeIndex, config);
+  if (drawHorizontalLine(0, rowCount)) {
+    output += drawBorderTop(columnWidths, config);
   }
 
-  rows.forEach((row, index0) => {
-    output += drawRow(row, config);
+  groupedRows.forEach((row, rowIndex) => {
+    output += row;
 
-    if (!rowHeight) {
-      rowHeight = rowSpanIndex[realRowIndex];
-
-      realRowIndex++;
-    }
-
-    rowHeight--;
-
-    if (
-      !singleLine &&
-      rowHeight === 0 &&
-      index0 !== rowCount - 1 &&
-      drawHorizontalLine(realRowIndex, rowCount)
-    ) {
-      output += drawBorderJoin(columnSizeIndex, config);
+    if (shouldDrawBorderJoin(rowIndex, rowCount, config)) {
+      output += drawBorderJoin(columnWidths, config);
     }
   });
 
-  if (drawHorizontalLine(realRowIndex, rowCount)) {
-    output += drawBorderBottom(columnSizeIndex, config);
+  if (drawHorizontalLine(rowCount, rowCount)) {
+    output += drawBorderBottom(columnWidths, config);
   }
 
   return output;
