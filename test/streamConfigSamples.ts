@@ -32,6 +32,21 @@ const streamConfigSamples: {invalid: unknown[], valid: StreamUserConfig[], } = {
     {columns: {1: {truncate: '1'}}},
     {columns: {1: {paddingLeft: '1'}}},
     {columns: {1: {paddingRight: '1'}}},
+    {columnCount: 3,
+      columnDefault: {
+        width: 50,
+      },
+      columns: [1]},
+    {columnCount: 3,
+      columnDefault: {
+        width: 50,
+      },
+      columns: ['']},
+    {columnCount: 3,
+      columnDefault: {
+        width: 50,
+      },
+      columns: [{unknown: 1}]},
     {columnDefault: 1},
     {columnDefault: {unknown: 1}},
     {columnDefault: {alignment: 1}},
@@ -248,6 +263,28 @@ const streamConfigSamples: {invalid: unknown[], valid: StreamUserConfig[], } = {
       columnDefault: {width: 20},
       columns: {0: {wrapWord: false}},
     },
+
+    {columnCount: 3,
+      columnDefault: {
+        width: 50,
+      },
+      columns: []},
+    {columnCount: 3,
+      columnDefault: {
+        width: 50,
+      },
+      columns: [{width: 5}]},
+    {columnCount: 3,
+      columnDefault: {
+        width: 50,
+      },
+      columns: [{wrapWord: true}, {truncate: 1}]},
+    {columnCount: 3,
+      columnDefault: {
+        width: 50,
+      },
+      columns: [{paddingLeft: 1}, {paddingRight: 1}, {alignment: 'right'}]},
+
   ],
 };
 
