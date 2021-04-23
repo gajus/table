@@ -34,10 +34,6 @@ export default (subject: string, containerWidth: number, alignment: ColumnUserCo
     throw new TypeError('Subject parameter value must be a string.');
   }
 
-  if (typeof containerWidth !== 'number') {
-    throw new TypeError('Container width parameter value must be a number.');
-  }
-
   const subjectWidth = stringWidth(subject);
 
   if (subjectWidth > containerWidth) {

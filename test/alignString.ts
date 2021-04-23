@@ -14,13 +14,7 @@ describe('alignString', () => {
       }).to.throw(Error, 'Subject parameter value must be a string.');
     });
   });
-  context('container width parameter value is not a string', () => {
-    it('throws an error', () => {
-      expect(() => {
-        alignString('aa', 'aa' as never, 'left');
-      }).to.throw(Error, 'Container width parameter value must be a number.');
-    });
-  });
+
   context('subject parameter value width is greater than the container width', () => {
     it('throws an error', () => {
       expect(() => {
