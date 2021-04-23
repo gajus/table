@@ -113,6 +113,8 @@ const streamConfigSamples: {invalid: unknown[], valid: StreamUserConfig[], } = {
     // {columnDefault: {paddingRight: 1}},
   ],
   valid: [
+    // FIXME: The empty option pass the validator but be threw in runtime
+    {} as never,
     {
       columnCount: 1,
       columnDefault: {width: 1},
