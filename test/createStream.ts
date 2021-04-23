@@ -13,7 +13,7 @@ describe('createStream', () => {
     it('throws an error', () => {
       expect(() => {
         createStream({} as never);
-      }).to.throw(Error, 'Must provide config.columnDefault when creating a stream.');
+      }).to.throw(Error, 'Must provide config.columnDefault.width when creating a stream.');
     });
   });
   context('"config.columnCount" property is not provided', () => {
