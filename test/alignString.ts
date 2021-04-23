@@ -28,20 +28,7 @@ describe('alignString', () => {
       }).to.throw(Error, 'Subject parameter value width cannot be greater than the container width.');
     });
   });
-  context('container alignment parameter value is not a string', () => {
-    it('throws an error', () => {
-      expect(() => {
-        alignString('', 1, 2 as never);
-      }).to.throw(Error, 'Alignment parameter value must be a string.');
-    });
-  });
-  context('container alignment parameter value is not a known alignment parameter value', () => {
-    it('throws an error', () => {
-      expect(() => {
-        alignString('', 1, 'foo');
-      }).to.throw(Error, 'Alignment parameter value must be a known alignment parameter value (left, right, center).');
-    });
-  });
+
   context('subject parameter value', () => {
     context('0 width', () => {
       it('produces a string consisting of container width number of whitespace characters', () => {

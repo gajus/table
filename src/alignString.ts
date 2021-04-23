@@ -1,4 +1,7 @@
 import stringWidth from 'string-width';
+import type {
+  ColumnUserConfig,
+} from './types/api';
 
 const alignLeft = (subject: string, width: number): string => {
   return subject + ' '.repeat(width);
@@ -22,17 +25,11 @@ const alignCenter = (subject: string, width: number): string => {
   }
 };
 
-const alignments = [
-  'left',
-  'right',
-  'center',
-];
-
 /**
  * Pads a string to the left and/or right to position the subject
  * text in a desired alignment within a container.
  */
-export default (subject: string, containerWidth: number, alignment: string): string => {
+export default (subject: string, containerWidth: number, alignment: ColumnUserConfig['alignment']): string => {
   if (typeof subject !== 'string') {
     throw new TypeError('Subject parameter value must be a string.');
   }
@@ -45,14 +42,6 @@ export default (subject: string, containerWidth: number, alignment: string): str
 
   if (subjectWidth > containerWidth) {
     throw new Error('Subject parameter value width cannot be greater than the container width.');
-  }
-
-  if (typeof alignment !== 'string') {
-    throw new TypeError('Alignment parameter value must be a string.');
-  }
-
-  if (!alignments.includes(alignment)) {
-    throw new Error('Alignment parameter value must be a known alignment parameter value (left, right, center).');
   }
 
   if (subjectWidth === 0) {
