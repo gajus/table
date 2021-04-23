@@ -20,10 +20,6 @@ export default (rows: Row[], config: BaseConfig): number[] => {
         throw new TypeError('column[index].width must be a number.');
       }
 
-      if (config.columns[index1].wrapWord !== true && config.columns[index1].wrapWord !== false) {
-        throw new TypeError('column[index].wrapWord must be a boolean.');
-      }
-
       cellHeightIndex[index1] = calculateCellHeight(value, config.columns[index1].width, config.columns[index1].wrapWord);
     });
 

@@ -23,23 +23,6 @@ describe('calculateRowHeightIndex', () => {
     });
   });
 
-  context('invalid column wrapWord', () => {
-    it('throws an TypeError', () => {
-      expect(() => {
-        return calculateRowHeightIndex([['a']], {
-          columns: {
-            0: {
-              width: 3,
-              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-              // @ts-expect-error
-              wrapWord: 'true',
-            },
-          },
-        });
-      }).to.be.throw(TypeError, 'column[index].wrapWord must be a boolean.');
-    });
-  });
-
   context('single column', () => {
     context('cell content width is lesser than column width', () => {
       it('is equal to 1', () => {
