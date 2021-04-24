@@ -3,7 +3,7 @@
 import {
   expect,
 } from 'chai';
-import calculateRowHeightIndex from '../src/calculateRowHeightIndex';
+import calculateRowHeights from '../src/calculateRowHeights';
 import makeConfig from '../src/makeConfig';
 
 describe('calculateRowHeightIndex', () => {
@@ -21,7 +21,7 @@ describe('calculateRowHeightIndex', () => {
           },
         });
 
-        const rowSpanIndex = calculateRowHeightIndex(data, config);
+        const rowSpanIndex = calculateRowHeights(data, config);
 
         expect(rowSpanIndex[0]).to.equal(1);
       });
@@ -39,7 +39,7 @@ describe('calculateRowHeightIndex', () => {
           },
         });
 
-        const rowSpanIndex = calculateRowHeightIndex(data, config);
+        const rowSpanIndex = calculateRowHeights(data, config);
 
         expect(rowSpanIndex[0]).to.equal(2);
       });
@@ -62,7 +62,7 @@ describe('calculateRowHeightIndex', () => {
           },
         });
 
-        const rowSpanIndex = calculateRowHeightIndex(data, config);
+        const rowSpanIndex = calculateRowHeights(data, config);
 
         expect(rowSpanIndex[0]).to.equal(3);
       });

@@ -28,7 +28,7 @@ const splitAnsi = (input: string) => {
  * depending on user configuration.
  *
  */
-export default (cellValue: string, columnWidth: number, useWrapWord: boolean): string[] => {
+export default (cellValue: string, cellWidth: number, useWrapWord: boolean): string[] => {
   // First split on literal newlines
   const cellLines = splitAnsi(cellValue);
 
@@ -37,9 +37,9 @@ export default (cellValue: string, columnWidth: number, useWrapWord: boolean): s
     let lineChunks;
 
     if (useWrapWord) {
-      lineChunks = wrapWord(cellLines[lineNr], columnWidth);
+      lineChunks = wrapWord(cellLines[lineNr], cellWidth);
     } else {
-      lineChunks = wrapString(cellLines[lineNr], columnWidth);
+      lineChunks = wrapString(cellLines[lineNr], cellWidth);
     }
 
     // Replace our original array element with whatever the wrapping returned

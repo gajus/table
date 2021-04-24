@@ -3,7 +3,7 @@ import {
 } from 'chai';
 import chalk from 'chalk';
 import makeConfig from '../src/makeConfig';
-import mapDataUsingRowHeightIndex from '../src/mapDataUsingRowHeightIndex';
+import mapDataUsingRowHeights from '../src/mapDataUsingRowHeights';
 
 describe('mapDataUsingRowHeightIndex', () => {
   context('no data spans multiple rows', () => {
@@ -26,7 +26,7 @@ describe('mapDataUsingRowHeightIndex', () => {
         },
       });
 
-      const mappedData = mapDataUsingRowHeightIndex(data, rowSpanIndex, config);
+      const mappedData = mapDataUsingRowHeights(data, rowSpanIndex, config);
 
       expect(mappedData).to.deep.equal([
         [
@@ -56,7 +56,7 @@ describe('mapDataUsingRowHeightIndex', () => {
         },
       });
 
-      const mappedData = mapDataUsingRowHeightIndex(data, rowSpanIndex, config);
+      const mappedData = mapDataUsingRowHeights(data, rowSpanIndex, config);
 
       expect(mappedData).to.deep.equal([
         ['aa'],
@@ -88,7 +88,7 @@ describe('mapDataUsingRowHeightIndex', () => {
         },
       });
 
-      const mappedData = mapDataUsingRowHeightIndex(data, rowSpanIndex, config);
+      const mappedData = mapDataUsingRowHeights(data, rowSpanIndex, config);
 
       expect(mappedData).to.deep.equal([
         ['aa'],
@@ -118,7 +118,7 @@ describe('mapDataUsingRowHeightIndex', () => {
         },
       });
 
-      const mappedData = mapDataUsingRowHeightIndex(data, rowSpanIndex, config);
+      const mappedData = mapDataUsingRowHeights(data, rowSpanIndex, config);
 
       expect(mappedData).to.deep.equal([
         [chalk.red('aa')],
@@ -154,7 +154,7 @@ describe('mapDataUsingRowHeightIndex', () => {
         },
       });
 
-      const mappedData = mapDataUsingRowHeightIndex(data, rowSpanIndex, config);
+      const mappedData = mapDataUsingRowHeights(data, rowSpanIndex, config);
 
       expect(mappedData).to.deep.equal([
         [

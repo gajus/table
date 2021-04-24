@@ -1,5 +1,5 @@
 import alignTableData from './alignTableData';
-import calculateRowHeightIndex from './calculateRowHeightIndex';
+import calculateRowHeights from './calculateRowHeights';
 import {
   drawBorderBottom,
   drawBorderJoin,
@@ -7,7 +7,7 @@ import {
 } from './drawBorder';
 import drawRow from './drawRow';
 import makeStreamConfig from './makeStreamConfig';
-import mapDataUsingRowHeightIndex from './mapDataUsingRowHeightIndex';
+import mapDataUsingRowHeights from './mapDataUsingRowHeights';
 import padTableData from './padTableData';
 import stringifyTableData from './stringifyTableData';
 import truncateTableData from './truncateTableData';
@@ -24,9 +24,9 @@ const prepareData = (data: Row[], config: StreamConfig) => {
 
   rows = truncateTableData(rows, config);
 
-  const rowHeightIndex = calculateRowHeightIndex(rows, config);
+  const rowHeights = calculateRowHeights(rows, config);
 
-  rows = mapDataUsingRowHeightIndex(rows, rowHeightIndex, config);
+  rows = mapDataUsingRowHeights(rows, rowHeights, config);
   rows = alignTableData(rows, config);
   rows = padTableData(rows, config);
 

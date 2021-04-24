@@ -2,16 +2,16 @@ import {
   expect,
 } from 'chai';
 import chalk from 'chalk';
-import calculateMaximumColumnWidthIndex from '../src/calculateMaximumColumnWidthIndex';
+import calculateColumnWidth from '../src/calculateColumnWidths';
 
 describe('calculateMaximumColumnWidthIndex', () => {
   it('throws an error when attempting to calculate maximum column value index for an empty data set', () => {
     expect(() => {
-      calculateMaximumColumnWidthIndex([]);
+      calculateColumnWidth([]);
     }).to.throw(Error, 'Dataset must have at least one row.');
   });
   it('calculates the maximum column value index', () => {
-    const maximumColumnValueIndex = calculateMaximumColumnWidthIndex([
+    const maximumColumnValueIndex = calculateColumnWidth([
       [
         '',
         'a',
@@ -36,7 +36,7 @@ describe('calculateMaximumColumnWidthIndex', () => {
   });
   context('cell values contain ANSI codes', () => {
     it('uses visual width of the string', () => {
-      const maximumColumnValueIndex = calculateMaximumColumnWidthIndex([
+      const maximumColumnValueIndex = calculateColumnWidth([
         [
           chalk.red('aaaaa'),
         ],
@@ -47,7 +47,7 @@ describe('calculateMaximumColumnWidthIndex', () => {
   });
   context('cell values contain fullwidth characters', () => {
     it('uses visual width of the string', () => {
-      const maximumColumnValueIndex = calculateMaximumColumnWidthIndex([
+      const maximumColumnValueIndex = calculateColumnWidth([
         [
           chalk.red('古'),
         ],

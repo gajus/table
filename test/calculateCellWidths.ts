@@ -1,12 +1,12 @@
 import {
   expect,
 } from 'chai';
-import calculateCellWidthIndex from '../src/calculateCellWidthIndex';
+import calculateCellWidths from '../src/calculateCellWidths';
 
 describe('calculateCellWidthIndex', () => {
   context('all cells have different width', () => {
     it('describes each cell contents width', () => {
-      const cellWidthIndex = calculateCellWidthIndex([
+      const cellWidthIndex = calculateCellWidths([
         'a',
         'aaa',
         'aaaaaa',
@@ -19,7 +19,7 @@ describe('calculateCellWidthIndex', () => {
   });
   context('cell contains newline characters', () => {
     it('picks the longest line length', () => {
-      const cellWidthIndex = calculateCellWidthIndex([
+      const cellWidthIndex = calculateCellWidths([
         'aaaa\naa',
       ]);
 

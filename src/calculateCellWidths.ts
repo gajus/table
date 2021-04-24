@@ -4,14 +4,12 @@ import type {
 } from './types/internal';
 
 /**
- * Calculates width of each cell contents.
+ * Calculates width of each cell contents in a row.
  */
 export default (cells: Cell[]): number[] => {
-  return cells.map((value) => {
+  return cells.map((cell) => {
     return Math.max(
-      ...value.split('\n').map((line) => {
-        return stringWidth(line);
-      }),
+      ...cell.split('\n').map(stringWidth),
     );
   });
 };
