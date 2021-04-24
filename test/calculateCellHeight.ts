@@ -7,13 +7,6 @@ import calculateCellHeight from '../src/calculateCellHeight';
 
 describe('calculateCellHeight', () => {
   describe('value', () => {
-    context('is not a string', () => {
-      it('throws an error', () => {
-        expect(() => {
-          calculateCellHeight(null as never, 10);
-        }).to.throw(Error, 'Value must be a string.');
-      });
-    });
     it('contains newlines', () => {
       expect(calculateCellHeight('a\nb\nc', 10)).to.equal(3);
     });

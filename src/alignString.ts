@@ -30,10 +30,6 @@ const alignCenter = (subject: string, width: number): string => {
  * text in a desired alignment within a container.
  */
 export default (subject: string, containerWidth: number, alignment: ColumnUserConfig['alignment']): string => {
-  if (typeof subject !== 'string') {
-    throw new TypeError('Subject parameter value must be a string.');
-  }
-
   const subjectWidth = stringWidth(subject);
 
   if (subjectWidth > containerWidth) {

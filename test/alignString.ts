@@ -7,14 +7,6 @@ import chalk from 'chalk';
 import alignString from '../src/alignString';
 
 describe('alignString', () => {
-  context('subject parameter value is not a string', () => {
-    it('throws an error', () => {
-      expect(() => {
-        alignString(2 as never, 1, 'left');
-      }).to.throw(Error, 'Subject parameter value must be a string.');
-    });
-  });
-
   context('subject parameter value width is greater than the container width', () => {
     it('throws an error', () => {
       expect(() => {
