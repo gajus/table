@@ -1,5 +1,4 @@
-import drawHorizontalContent, {
-} from './drawHorizontalContent';
+import drawContent from './drawContent';
 import type {
   DrawVerticalLine,
 } from './types/api';
@@ -11,12 +10,12 @@ export default (row: Row, config: {
   border: BodyBorderConfig,
   drawVerticalLine: DrawVerticalLine,
 }): string => {
-  return drawHorizontalContent(row, {
-    ...config,
-    separator: {
-      join: config.border.bodyJoin,
-      left: config.border.bodyLeft,
-      right: config.border.bodyRight,
-    },
-  });
+  const {border, drawVerticalLine} = config;
+
+  return drawContent(row, {
+    drawSeparator: drawVerticalLine,
+    endSeparator: border.bodyRight,
+    middleSeparator: border.bodyJoin,
+    startSeparator: border.bodyLeft,
+  }) + '\n';
 };

@@ -1,6 +1,7 @@
 import {
   drawBorderTop, drawBorderJoin, drawBorderBottom,
 } from './drawBorder';
+import drawContent from './drawContent';
 import drawRow from './drawRow';
 import type {
   TableConfig, Row,
@@ -10,56 +11,44 @@ import type {
  * Group the array into sub-arrays by sizes.
  *
  * @example
- * chunkBySizes(['a', 'b', 'c', 'd', 'e'], [2, 1, 2]) = [ ['a', 'b'], ['c'], ['d', 'e'] ]
+ * groupBySizes(['a', 'b', 'c', 'd', 'e'], [2, 1, 2]) = [ ['a', 'b'], ['c'], ['d', 'e'] ]
  */
 
 const groupBySizes = <T>(array: T[], sizes: number[]): T[][] => {
   let startIndex = 0;
 
-  return sizes.map((rowHeight) => {
-    const chunk = array.slice(startIndex, startIndex + rowHeight);
+  return sizes.map((size) => {
+    const group = array.slice(startIndex, startIndex + size);
 
-    startIndex += rowHeight;
+    startIndex += size;
 
-    return chunk;
+    return group;
   });
-};
-
-const shouldDrawBorderJoin = (rowIndex: number, rowCount: number, config: TableConfig): boolean => {
-  const {singleLine, drawHorizontalLine} = config;
-
-  return !singleLine && rowIndex + 1 < rowCount && drawHorizontalLine(rowIndex + 1, rowCount);
 };
 
 export default (rows: Row[], columnWidths: number[], rowHeights: number[], config: TableConfig): string => {
   const {
     drawHorizontalLine,
+    singleLine,
   } = config;
 
-  const groupedRows = groupBySizes(rows, rowHeights).map((group) => {
+  const contents = groupBySizes(rows, rowHeights).map((group) => {
     return group.map((row) => {
       return drawRow(row, config);
     }).join('');
   });
 
-  const rowCount = groupedRows.length;
-  let output = '';
+  return drawContent(contents, {
+    drawSeparator: (index, size) => {
+      // Top/bottom border
+      if (index === 0 || index === size) {
+        return drawHorizontalLine(index, size);
+      }
 
-  if (drawHorizontalLine(0, rowCount)) {
-    output += drawBorderTop(columnWidths, config);
-  }
-
-  groupedRows.forEach((row, rowIndex) => {
-    output += row;
-
-    if (shouldDrawBorderJoin(rowIndex, rowCount, config)) {
-      output += drawBorderJoin(columnWidths, config);
-    }
+      return !singleLine && drawHorizontalLine(index, size);
+    },
+    endSeparator: drawBorderBottom(columnWidths, config),
+    middleSeparator: drawBorderJoin(columnWidths, config),
+    startSeparator: drawBorderTop(columnWidths, config),
   });
-
-  if (drawHorizontalLine(rowCount, rowCount)) {
-    output += drawBorderBottom(columnWidths, config);
-  }
-
-  return output;
 };
