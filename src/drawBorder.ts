@@ -1,4 +1,4 @@
-import drawHorizontalContent from './drawHorizontalContent';
+import drawContent from './drawContent';
 import type {
   DrawVerticalLine,
 } from './types/api';
@@ -17,11 +17,17 @@ type Separator = {
 
 const drawBorder = (columnSizeIndex: number[],
   config: {separator: Separator, drawVerticalLine: DrawVerticalLine, }): string => {
+  const {separator, drawVerticalLine} = config;
   const columns = columnSizeIndex.map((size) => {
     return config.separator.body.repeat(size);
   });
 
-  return drawHorizontalContent(columns, config);
+  return drawContent(columns, {
+    drawSeparator: drawVerticalLine,
+    endSeparator: separator.right,
+    middleSeparator: separator.join,
+    startSeparator: separator.left,
+  }) + '\n';
 };
 
 const drawBorderTop = (columnSizeIndex: number[],
