@@ -11,8 +11,8 @@ export default (rows: Row[], config: BaseConfig): number[] => {
   return rows.map((row) => {
     let rowHeight = 1;
 
-    row.forEach((cell, index) => {
-      const cellHeight = calculateCellHeight(cell, config.columns[index].width, config.columns[index].wrapWord);
+    row.forEach((cell, cellIndex) => {
+      const cellHeight = calculateCellHeight(cell, config.columns[cellIndex].width, config.columns[cellIndex].wrapWord);
 
       rowHeight = Math.max(rowHeight, cellHeight);
     });

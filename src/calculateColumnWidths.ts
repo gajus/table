@@ -16,8 +16,8 @@ export default (rows: Row[]): number[] => {
   rows.forEach((row) => {
     const cellWidths = calculateCellWidths(row);
 
-    cellWidths.forEach((cellWidth, index) => {
-      columnWidths[index] = Math.max(columnWidths[index], cellWidth);
+    cellWidths.forEach((cellWidth, cellIndex) => {
+      columnWidths[cellIndex] = Math.max(columnWidths[cellIndex], cellWidth);
     });
   });
 

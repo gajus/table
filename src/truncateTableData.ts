@@ -8,9 +8,9 @@ import type {
  */
 export default (rows: Row[], config: BaseConfig): Row[] => {
   return rows.map((cells) => {
-    return cells.map((content, index) => {
-      return truncate(content, {
-        length: config.columns[index].truncate,
+    return cells.map((cell, cellIndex) => {
+      return truncate(cell, {
+        length: config.columns[cellIndex].truncate,
         omission: '…',
       });
     });

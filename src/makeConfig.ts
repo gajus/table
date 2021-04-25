@@ -29,16 +29,16 @@ const makeColumns = (rows: Row[],
   columnDefault?: ColumnUserConfig): Indexable<ColumnConfig> => {
   const columnWidths = calculateColumnWidths(rows);
 
-  return rows[0].map((_cell, index) => {
+  return rows[0].map((_, columnIndex) => {
     return {
       alignment: 'left',
       paddingLeft: 1,
       paddingRight: 1,
       truncate: Number.POSITIVE_INFINITY,
-      width: columnWidths[index],
+      width: columnWidths[columnIndex],
       wrapWord: false,
       ...columnDefault,
-      ...columns?.[index],
+      ...columns?.[columnIndex],
     };
   });
 };

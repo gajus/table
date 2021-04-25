@@ -3,27 +3,27 @@ import {
 } from 'chai';
 import calculateCellWidths from '../src/calculateCellWidths';
 
-describe('calculateCellWidthIndex', () => {
+describe('calculateCellWidths', () => {
   context('all cells have different width', () => {
     it('describes each cell contents width', () => {
-      const cellWidthIndex = calculateCellWidths([
+      const cellWidths = calculateCellWidths([
         'a',
         'aaa',
         'aaaaaa',
       ]);
 
-      expect(cellWidthIndex[0]).to.equal(1, 'first column');
-      expect(cellWidthIndex[1]).to.equal(3, 'second column');
-      expect(cellWidthIndex[2]).to.equal(6, 'third column');
+      expect(cellWidths[0]).to.equal(1, 'first column');
+      expect(cellWidths[1]).to.equal(3, 'second column');
+      expect(cellWidths[2]).to.equal(6, 'third column');
     });
   });
   context('cell contains newline characters', () => {
     it('picks the longest line length', () => {
-      const cellWidthIndex = calculateCellWidths([
+      const cellWidths = calculateCellWidths([
         'aaaa\naa',
       ]);
 
-      expect(cellWidthIndex[0]).to.equal(4);
+      expect(cellWidths[0]).to.equal(4);
     });
   });
 });
