@@ -5,11 +5,12 @@ import type {
 } from './types/internal';
 import wrapCell from './wrapCell';
 
-export default (unmappedRows: Row[], rowHeightIndex: number[], config: BaseConfig): Row[] => {
+export default (unmappedRows: Row[], rowHeights: number[], config: BaseConfig): Row[] => {
   const tableWidth = unmappedRows[0].length;
 
-  const mappedRows = unmappedRows.map((row, index0) => {
-    const rowHeight: string[][] = Array.from({length: rowHeightIndex[index0]}, () => {
+  const mappedRows = unmappedRows.map((unmappedRow, unmappedRowIndex) => {
+    const outputRowHeight = rowHeights[unmappedRowIndex];
+    const outputRow: Row[] = Array.from({length: outputRowHeight}, () => {
       return new Array(tableWidth).fill('');
     });
 
@@ -17,15 +18,15 @@ export default (unmappedRows: Row[], rowHeightIndex: number[], config: BaseConfi
     //     [{row index within rowSaw; index2}]
     //     [{cell index within a virtual row; index1}]
 
-    row.forEach((cell, index1) => {
-      const cellLines = wrapCell(cell, config.columns[index1].width, config.columns[index1].wrapWord);
+    unmappedRow.forEach((cell, cellIndex) => {
+      const cellLines = wrapCell(cell, config.columns[cellIndex].width, config.columns[cellIndex].wrapWord);
 
-      cellLines.forEach((cellLine, index2) => {
-        rowHeight[index2][index1] = cellLine;
+      cellLines.forEach((cellLine, cellLineIndex) => {
+        outputRow[cellLineIndex][cellIndex] = cellLine;
       });
     });
 
-    return rowHeight;
+    return outputRow;
   });
 
   return flatten(mappedRows);
