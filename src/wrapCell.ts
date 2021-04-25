@@ -1,25 +1,8 @@
-import slice from 'slice-ansi';
-import stripAnsi from 'strip-ansi';
+import {
+  splitAnsi,
+} from './utils';
 import wrapString from './wrapString';
 import wrapWord from './wrapWord';
-
-const splitAnsi = (input: string) => {
-  const lengths = stripAnsi(input).split('\n').map(({length}) => {
-    return length;
-  });
-
-  const result: string[] = [];
-  let startIndex = 0;
-
-  lengths.forEach((length) => {
-    result.push(length === 0 ? '' : slice(input, startIndex, startIndex + length));
-
-    // Plus 1 for the newline character itself
-    startIndex += length + 1;
-  });
-
-  return result;
-};
 
 /**
  * Wrap a single cell value into a list of lines

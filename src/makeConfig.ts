@@ -1,24 +1,16 @@
 import cloneDeep from 'lodash.clonedeep';
 import calculateColumnWidths from './calculateColumnWidths';
-import getBorderCharacters from './getBorderCharacters';
 import type {
   ColumnUserConfig, Indexable,
-  BorderUserConfig, BorderConfig, TableUserConfig,
+  TableUserConfig,
 } from './types/api';
 import type {
   ColumnConfig, Row, TableConfig,
 } from './types/internal';
+import {
+  makeBorder,
+} from './utils';
 import validateConfig from './validateConfig';
-
-/**
- * Merges user provided border characters with the default border ("honeywell") characters.
- */
-const makeBorder = (border: BorderUserConfig | undefined): BorderConfig => {
-  return {
-    ...getBorderCharacters('honeywell'),
-    ...border,
-  };
-};
 
 /**
  * Creates a configuration for every column using default
