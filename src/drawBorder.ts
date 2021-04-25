@@ -15,10 +15,10 @@ type Separator = {
   readonly join: string,
 };
 
-const drawBorder = (columnSizeIndex: number[],
+const drawBorder = (columnWidths: number[],
   config: {separator: Separator, drawVerticalLine: DrawVerticalLine, }): string => {
   const {separator, drawVerticalLine} = config;
-  const columns = columnSizeIndex.map((size) => {
+  const columns = columnWidths.map((size) => {
     return config.separator.body.repeat(size);
   });
 
@@ -30,9 +30,9 @@ const drawBorder = (columnSizeIndex: number[],
   }) + '\n';
 };
 
-const drawBorderTop = (columnSizeIndex: number[],
+const drawBorderTop = (columnWidths: number[],
   config: {border: TopBorderConfig, drawVerticalLine: DrawVerticalLine, }): string => {
-  const result = drawBorder(columnSizeIndex, {
+  const result = drawBorder(columnWidths, {
     ...config,
     separator: {
       body: config.border.topBody,
@@ -49,9 +49,9 @@ const drawBorderTop = (columnSizeIndex: number[],
   return result;
 };
 
-const drawBorderJoin = (columnSizeIndex: number[],
+const drawBorderJoin = (columnWidths: number[],
   config: {border: JoinBorderConfig, drawVerticalLine: DrawVerticalLine, }): string => {
-  return drawBorder(columnSizeIndex, {
+  return drawBorder(columnWidths, {
     ...config,
     separator: {
       body: config.border.joinBody,
@@ -62,9 +62,9 @@ const drawBorderJoin = (columnSizeIndex: number[],
   });
 };
 
-const drawBorderBottom = (columnSizeIndex: number[],
+const drawBorderBottom = (columnWidths: number[],
   config: {border: BottomBorderConfig, drawVerticalLine: DrawVerticalLine, }): string => {
-  return drawBorder(columnSizeIndex, {
+  return drawBorder(columnWidths, {
     ...config,
     separator: {
       body: config.border.bottomBody,

@@ -1,5 +1,5 @@
 import cloneDeep from 'lodash.clonedeep';
-import calculateMaximumColumnWidthIndex from './calculateMaximumColumnWidthIndex';
+import calculateColumnWidths from './calculateColumnWidths';
 import getBorderCharacters from './getBorderCharacters';
 import type {
   ColumnUserConfig, Indexable,
@@ -27,18 +27,18 @@ const makeBorder = (border: BorderUserConfig | undefined): BorderConfig => {
 const makeColumns = (rows: Row[],
   columns?: Indexable<ColumnUserConfig>,
   columnDefault?: ColumnUserConfig): Indexable<ColumnConfig> => {
-  const maximumColumnWidthIndex = calculateMaximumColumnWidthIndex(rows);
+  const columnWidths = calculateColumnWidths(rows);
 
-  return rows[0].map((_cell, index) => {
+  return rows[0].map((_, columnIndex) => {
     return {
       alignment: 'left',
       paddingLeft: 1,
       paddingRight: 1,
       truncate: Number.POSITIVE_INFINITY,
-      width: maximumColumnWidthIndex[index],
+      width: columnWidths[columnIndex],
       wrapWord: false,
       ...columnDefault,
-      ...columns?.[index],
+      ...columns?.[columnIndex],
     };
   });
 };

@@ -7,8 +7,8 @@ import type {
 
 export default (rows: Row[], config: BaseConfig): Row[] => {
   return rows.map((row) => {
-    return row.map((cell, index) => {
-      const column = config.columns[index];
+    return row.map((cell, cellIndex) => {
+      const column = config.columns[cellIndex];
 
       if (stringWidth(cell) === column.width) {
         return cell;

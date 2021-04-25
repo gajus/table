@@ -1,9 +1,9 @@
 import alignTableData from './alignTableData';
-import calculateCellWidthIndex from './calculateCellWidthIndex';
-import calculateRowHeightIndex from './calculateRowHeightIndex';
+import calculateCellWidths from './calculateCellWidths';
+import calculateRowHeights from './calculateRowHeights';
 import drawTable from './drawTable';
 import makeConfig from './makeConfig';
-import mapDataUsingRowHeightIndex from './mapDataUsingRowHeightIndex';
+import mapDataUsingRowHeights from './mapDataUsingRowHeights';
 import padTableData from './padTableData';
 import stringifyTableData from './stringifyTableData';
 import truncateTableData from './truncateTableData';
@@ -21,13 +21,13 @@ export default (data: unknown[][], userConfig: TableUserConfig = {}): string => 
 
   rows = truncateTableData(rows, config);
 
-  const rowHeightIndex = calculateRowHeightIndex(rows, config);
+  const rowHeights = calculateRowHeights(rows, config);
 
-  rows = mapDataUsingRowHeightIndex(rows, rowHeightIndex, config);
+  rows = mapDataUsingRowHeights(rows, rowHeights, config);
   rows = alignTableData(rows, config);
   rows = padTableData(rows, config);
 
-  const cellWidthIndex = calculateCellWidthIndex(rows[0]);
+  const cellWidths = calculateCellWidths(rows[0]);
 
-  return drawTable(rows, cellWidthIndex, rowHeightIndex, config);
+  return drawTable(rows, cellWidths, rowHeights, config);
 };

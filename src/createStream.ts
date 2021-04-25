@@ -1,5 +1,5 @@
 import alignTableData from './alignTableData';
-import calculateRowHeightIndex from './calculateRowHeightIndex';
+import calculateRowHeights from './calculateRowHeights';
 import {
   drawBorderBottom,
   drawBorderJoin,
@@ -7,7 +7,7 @@ import {
 } from './drawBorder';
 import drawRow from './drawRow';
 import makeStreamConfig from './makeStreamConfig';
-import mapDataUsingRowHeightIndex from './mapDataUsingRowHeightIndex';
+import mapDataUsingRowHeights from './mapDataUsingRowHeights';
 import padTableData from './padTableData';
 import stringifyTableData from './stringifyTableData';
 import truncateTableData from './truncateTableData';
@@ -24,16 +24,16 @@ const prepareData = (data: Row[], config: StreamConfig) => {
 
   rows = truncateTableData(rows, config);
 
-  const rowHeightIndex = calculateRowHeightIndex(rows, config);
+  const rowHeights = calculateRowHeights(rows, config);
 
-  rows = mapDataUsingRowHeightIndex(rows, rowHeightIndex, config);
+  rows = mapDataUsingRowHeights(rows, rowHeights, config);
   rows = alignTableData(rows, config);
   rows = padTableData(rows, config);
 
   return rows;
 };
 
-const create = (row: Row, columnWidthIndex: number[], config: StreamConfig) => {
+const create = (row: Row, columnWidths: number[], config: StreamConfig) => {
   const rows = prepareData([row], config);
 
   const body = rows.map((literalRow) => {
@@ -44,16 +44,16 @@ const create = (row: Row, columnWidthIndex: number[], config: StreamConfig) => {
 
   output = '';
 
-  output += drawBorderTop(columnWidthIndex, config);
+  output += drawBorderTop(columnWidths, config);
   output += body;
-  output += drawBorderBottom(columnWidthIndex, config);
+  output += drawBorderBottom(columnWidths, config);
 
   output = output.trimEnd();
 
   process.stdout.write(output);
 };
 
-const append = (row: Row, columnWidthIndex: number[], config: StreamConfig) => {
+const append = (row: Row, columnWidths: number[], config: StreamConfig) => {
   const rows = prepareData([row], config);
 
   const body = rows.map((literalRow) => {
@@ -61,13 +61,13 @@ const append = (row: Row, columnWidthIndex: number[], config: StreamConfig) => {
   }).join('');
 
   let output = '';
-  const bottom = drawBorderBottom(columnWidthIndex, config);
+  const bottom = drawBorderBottom(columnWidths, config);
 
   if (bottom !== '\n') {
     output = '\r\u001B[K';
   }
 
-  output += drawBorderJoin(columnWidthIndex, config);
+  output += drawBorderJoin(columnWidths, config);
   output += body;
   output += bottom;
 
@@ -79,7 +79,7 @@ const append = (row: Row, columnWidthIndex: number[], config: StreamConfig) => {
 export default (userConfig: StreamUserConfig): WritableStream => {
   const config = makeStreamConfig(userConfig);
 
-  const columnWidthIndex = Object.values(config.columns).map((column) => {
+  const columnWidths = Object.values(config.columns).map((column) => {
     return column.width + column.paddingLeft + column.paddingRight;
   });
 
@@ -94,9 +94,9 @@ export default (userConfig: StreamUserConfig): WritableStream => {
       if (empty) {
         empty = false;
 
-        create(row, columnWidthIndex, config);
+        create(row, columnWidths, config);
       } else {
-        append(row, columnWidthIndex, config);
+        append(row, columnWidths, config);
       }
     },
   };

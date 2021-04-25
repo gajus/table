@@ -3,19 +3,15 @@ import {
 } from 'chai';
 import chalk from 'chalk';
 import makeConfig from '../src/makeConfig';
-import mapDataUsingRowHeightIndex from '../src/mapDataUsingRowHeightIndex';
+import mapDataUsingRowHeights from '../src/mapDataUsingRowHeights';
 
-describe('mapDataUsingRowHeightIndex', () => {
+describe('mapDataUsingRowHeights', () => {
   context('no data spans multiple rows', () => {
     it('maps data to a single cell', () => {
-      const rowSpanIndex = [
-        1,
-      ];
+      const rowHeights: number[] = [1];
 
       const data = [
-        [
-          'aa',
-        ],
+        ['aa'],
       ];
 
       const config = makeConfig(data, {
@@ -26,26 +22,20 @@ describe('mapDataUsingRowHeightIndex', () => {
         },
       });
 
-      const mappedData = mapDataUsingRowHeightIndex(data, rowSpanIndex, config);
+      const mappedData = mapDataUsingRowHeights(data, rowHeights, config);
 
       expect(mappedData).to.deep.equal([
-        [
-          'aa',
-        ],
+        ['aa'],
       ]);
     });
   });
 
   context('single cell spans multiple rows', () => {
     it('maps data to multiple rows', () => {
-      const rowSpanIndex = [
-        5,
-      ];
+      const rowHeights: number[] = [5];
 
       const data = [
-        [
-          'aabbccddee',
-        ],
+        ['aabbccddee'],
       ];
 
       const config = makeConfig(data, {
@@ -56,7 +46,7 @@ describe('mapDataUsingRowHeightIndex', () => {
         },
       });
 
-      const mappedData = mapDataUsingRowHeightIndex(data, rowSpanIndex, config);
+      const mappedData = mapDataUsingRowHeights(data, rowHeights, config);
 
       expect(mappedData).to.deep.equal([
         ['aa'],
@@ -70,9 +60,7 @@ describe('mapDataUsingRowHeightIndex', () => {
 
   context('single cell contains newlines', () => {
     it('maps data to multiple rows', () => {
-      const rowSpanIndex = [
-        5,
-      ];
+      const rowHeights = [5];
 
       const data = [
         [
@@ -88,7 +76,7 @@ describe('mapDataUsingRowHeightIndex', () => {
         },
       });
 
-      const mappedData = mapDataUsingRowHeightIndex(data, rowSpanIndex, config);
+      const mappedData = mapDataUsingRowHeights(data, rowHeights, config);
 
       expect(mappedData).to.deep.equal([
         ['aa'],
@@ -100,7 +88,7 @@ describe('mapDataUsingRowHeightIndex', () => {
     });
 
     it('maps data with color coding to multiple rows', () => {
-      const rowSpanIndex = [
+      const rowHeights = [
         5,
       ];
 
@@ -118,7 +106,7 @@ describe('mapDataUsingRowHeightIndex', () => {
         },
       });
 
-      const mappedData = mapDataUsingRowHeightIndex(data, rowSpanIndex, config);
+      const mappedData = mapDataUsingRowHeights(data, rowHeights, config);
 
       expect(mappedData).to.deep.equal([
         [chalk.red('aa')],
@@ -132,7 +120,7 @@ describe('mapDataUsingRowHeightIndex', () => {
 
   context('multiple cells spans multiple rows', () => {
     it('maps data to multiple rows', () => {
-      const rowSpanIndex = [
+      const rowHeights = [
         5,
       ];
 
@@ -154,7 +142,7 @@ describe('mapDataUsingRowHeightIndex', () => {
         },
       });
 
-      const mappedData = mapDataUsingRowHeightIndex(data, rowSpanIndex, config);
+      const mappedData = mapDataUsingRowHeights(data, rowHeights, config);
 
       expect(mappedData).to.deep.equal([
         [

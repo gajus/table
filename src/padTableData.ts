@@ -5,10 +5,10 @@ import type {
 
 export default (rows: Row[], config: BaseConfig): Row[] => {
   return rows.map((cells) => {
-    return cells.map((value, index1) => {
-      const column = config.columns[index1];
+    return cells.map((cell, cellIndex) => {
+      const column = config.columns[cellIndex];
 
-      return ' '.repeat(column.paddingLeft) + value + ' '.repeat(column.paddingRight);
+      return ' '.repeat(column.paddingLeft) + cell + ' '.repeat(column.paddingRight);
     });
   });
 };

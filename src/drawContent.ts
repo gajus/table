@@ -18,11 +18,11 @@ export default function drawContent (contents: string[], separatorConfig: Separa
     result.push(startSeparator);
   }
 
-  contents.forEach((content, index) => {
+  contents.forEach((content, contentIndex) => {
     result.push(content);
 
     // Only append the middle separator if the content is not the last
-    if (index + 1 < contentSize && drawSeparator(index + 1, contentSize)) {
+    if (contentIndex + 1 < contentSize && drawSeparator(contentIndex + 1, contentSize)) {
       result.push(middleSeparator);
     }
   });

@@ -3,10 +3,10 @@
 import {
   expect,
 } from 'chai';
-import calculateRowHeightIndex from '../src/calculateRowHeightIndex';
+import calculateRowHeights from '../src/calculateRowHeights';
 import makeConfig from '../src/makeConfig';
 
-describe('calculateRowHeightIndex', () => {
+describe('calculateRowHeights', () => {
   context('single column', () => {
     context('cell content width is lesser than column width', () => {
       it('is equal to 1', () => {
@@ -21,9 +21,9 @@ describe('calculateRowHeightIndex', () => {
           },
         });
 
-        const rowSpanIndex = calculateRowHeightIndex(data, config);
+        const rowHeights = calculateRowHeights(data, config);
 
-        expect(rowSpanIndex[0]).to.equal(1);
+        expect(rowHeights[0]).to.equal(1);
       });
     });
     context('cell content width is twice the size of the column width', () => {
@@ -39,9 +39,9 @@ describe('calculateRowHeightIndex', () => {
           },
         });
 
-        const rowSpanIndex = calculateRowHeightIndex(data, config);
+        const rowHeights = calculateRowHeights(data, config);
 
-        expect(rowSpanIndex[0]).to.equal(2);
+        expect(rowHeights[0]).to.equal(2);
       });
     });
   });
@@ -62,9 +62,9 @@ describe('calculateRowHeightIndex', () => {
           },
         });
 
-        const rowSpanIndex = calculateRowHeightIndex(data, config);
+        const rowHeights = calculateRowHeights(data, config);
 
-        expect(rowSpanIndex[0]).to.equal(3);
+        expect(rowHeights[0]).to.equal(3);
       });
     });
   });
