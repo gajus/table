@@ -12,19 +12,11 @@ describe('createStream', () => {
   context('"config.columnDefault.width" property is not provided', () => {
     it('throws an error', () => {
       expect(() => {
-        createStream({} as never);
-      }).to.throw(Error, 'Must provide config.columnDefault.width when creating a stream.');
-    });
-  });
-  context('"config.columnCount" property is not provided', () => {
-    it('throws an error', () => {
-      expect(() => {
         createStream({
-          columnDefault: {
-            width: 10,
-          },
+          columnCount: 1,
+          columnDefault: {},
         } as never);
-      }).to.throw(Error, 'Must provide config.columnCount.');
+      }).to.throw(Error, 'Must provide config.columnDefault.width when creating a stream.');
     });
   });
   context('Table data cell count does not match the columnCount.', () => {

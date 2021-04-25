@@ -5,11 +5,6 @@ import chalk from 'chalk';
 import calculateColumnWidths from '../src/calculateColumnWidths';
 
 describe('calculateColumnWidths', () => {
-  it('throws an error when attempting to calculate maximum column value index for an empty data set', () => {
-    expect(() => {
-      calculateColumnWidths([]);
-    }).to.throw(Error, 'Dataset must have at least one row.');
-  });
   it('calculates the maximum column value index', () => {
     const columnWidths = calculateColumnWidths([
       [

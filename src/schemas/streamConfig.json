@@ -13,11 +13,12 @@
             "$ref": "shared.json#/definitions/column"
         },
         "columnCount": {
-            "type": "number"
+            "$ref": "shared.json#/definitions/naturalNumber"
         },
         "drawVerticalLine": {
-          "typeof": "function"
+            "typeof": "function"
         }
     },
-    "additionalProperties": false
+  "required": ["columnDefault", "columnCount"],
+  "additionalProperties": false
 }

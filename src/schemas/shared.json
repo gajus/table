@@ -33,9 +33,7 @@
                     ]
                 },
                 "width": {
-                    "type": "number",
-                    "minimum": 1,
-                    "multipleOf": 1.0
+                    "$ref": "#/definitions/naturalNumber"
                 },
                 "wrapWord": {
                     "type": "boolean"
@@ -105,6 +103,11 @@
         },
         "border": {
             "type": "string"
+        },
+        "naturalNumber": {
+          "type": "number",
+          "minimum": 1,
+          "multipleOf": 1.0
         }
     }
 }

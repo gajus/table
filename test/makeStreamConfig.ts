@@ -23,30 +23,12 @@ describe('makeStreamConfig', () => {
   });
 
   context('columnDefault', () => {
-    context('is not provided', () => {
-      it('throws an error', () => {
-        expect(() => {
-          return makeStreamConfig({columnCount: 2} as never);
-        }).to.be.throw('Must provide config.columnDefault.width when creating a stream.');
-      });
-    });
-
-    context('is provided but not contains width', () => {
+    context('not contains width', () => {
       it('throws an error', () => {
         expect(() => {
           return makeStreamConfig({columnCount: 2,
             columnDefault: {}} as never);
         }).to.be.throw('Must provide config.columnDefault.width when creating a stream.');
-      });
-    });
-  });
-
-  context('columnCount', () => {
-    context('is not provided', () => {
-      it('throws an error', () => {
-        expect(() => {
-          return makeStreamConfig({columnDefault: {width: 5}} as never);
-        }).to.be.throw('Must provide config.columnCount.');
       });
     });
   });
