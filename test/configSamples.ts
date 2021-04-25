@@ -134,6 +134,7 @@ const configSamples: {invalid: unknown[], valid: TableUserConfig[], } = {
     {columns: {0: {alignment: 'left'}}},
     {columns: {1: {alignment: 'right'}}},
     {columns: {2: {alignment: 'center'}}},
+    {columns: {3: {alignment: 'justify'}}},
     {border: {topBody: '-'}},
     {border: {topJoin: '-'}},
     {border: {topLeft: '-'}},

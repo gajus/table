@@ -1,7 +1,10 @@
 import stringWidth from 'string-width';
 import type {
-  ColumnUserConfig,
+  Alignment,
 } from './types/api';
+import {
+  countSpaceSequence, distributeUnevenly,
+} from './utils';
 
 const alignLeft = (subject: string, width: number): string => {
   return subject + ' '.repeat(width);
@@ -25,11 +28,31 @@ const alignCenter = (subject: string, width: number): string => {
   }
 };
 
+const alignJustify = (subject: string, width: number): string => {
+  const spaceSequenceCount = countSpaceSequence(subject);
+
+  if (spaceSequenceCount === 0) {
+    return alignLeft(subject, width);
+  }
+
+  const addingSpaces = distributeUnevenly(width, spaceSequenceCount);
+
+  if (Math.max(...addingSpaces) > 3) {
+    return alignLeft(subject, width);
+  }
+
+  let spaceSequenceIndex = 0;
+
+  return subject.replace(/\s+/g, (groupSpace) => {
+    return groupSpace + ' '.repeat(addingSpaces[spaceSequenceIndex++]);
+  });
+};
+
 /**
  * Pads a string to the left and/or right to position the subject
  * text in a desired alignment within a container.
  */
-export const alignString = (subject: string, containerWidth: number, alignment: ColumnUserConfig['alignment']): string => {
+export const alignString = (subject: string, containerWidth: number, alignment: Alignment): string => {
   const subjectWidth = stringWidth(subject);
 
   if (subjectWidth > containerWidth) {
@@ -48,6 +71,10 @@ export const alignString = (subject: string, containerWidth: number, alignment: 
 
   if (alignment === 'right') {
     return alignRight(subject, availableWidth);
+  }
+
+  if (alignment === 'justify') {
+    return alignJustify(subject, availableWidth);
   }
 
   return alignCenter(subject, availableWidth);

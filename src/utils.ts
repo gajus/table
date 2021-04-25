@@ -70,3 +70,32 @@ export const groupBySizes = <T>(array: T[], sizes: number[]): T[][] => {
     return group;
   });
 };
+
+/**
+ * Counts the number of continuous spaces in a string
+ *
+ * @internal
+ * @example
+ * countGroupSpaces('a  bc  de f') = 3
+ */
+export const countSpaceSequence = (input: string): number => {
+  return input.match(/\s+/g)?.length ?? 0;
+};
+
+/**
+ * Creates the non-increasing number array given sum and length
+ * whose the difference between maximum and minimum is not greater than 1
+ *
+ * @internal
+ * @example
+ * distributeUnevenly(6, 3) = [2, 2, 2]
+ * distributeUnevenly(8, 3) = [3, 3, 2]
+ */
+export const distributeUnevenly = (sum: number, length: number): number[] => {
+  const result = Array.from<number>({length}).fill(Math.floor(sum / length));
+
+  return result.map((element, index) => {
+    return element + (index < sum % length ? 1 : 0);
+  });
+};
+

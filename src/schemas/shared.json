@@ -29,7 +29,8 @@
                     "enum": [
                         "left",
                         "right",
-                        "center"
+                        "center",
+                        "justify"
                     ]
                 },
                 "width": {
