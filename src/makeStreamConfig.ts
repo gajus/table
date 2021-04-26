@@ -42,12 +42,8 @@ export default (userConfig: StreamUserConfig): StreamConfig => {
 
   const config = cloneDeep(userConfig);
 
-  if (!config.columnDefault || !config.columnDefault.width) {
+  if (config.columnDefault.width === undefined) {
     throw new Error('Must provide config.columnDefault.width when creating a stream.');
-  }
-
-  if (!config.columnCount) {
-    throw new Error('Must provide config.columnCount.');
   }
 
   return {
