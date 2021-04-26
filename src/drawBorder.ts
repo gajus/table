@@ -1,4 +1,6 @@
-import drawContent from './drawContent';
+import {
+  drawContent,
+} from './drawContent';
 import type {
   DrawVerticalLine,
 } from './types/api';

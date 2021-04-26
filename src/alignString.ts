@@ -29,7 +29,7 @@ const alignCenter = (subject: string, width: number): string => {
  * Pads a string to the left and/or right to position the subject
  * text in a desired alignment within a container.
  */
-export default (subject: string, containerWidth: number, alignment: ColumnUserConfig['alignment']): string => {
+export const alignString = (subject: string, containerWidth: number, alignment: ColumnUserConfig['alignment']): string => {
   const subjectWidth = stringWidth(subject);
 
   if (subjectWidth > containerWidth) {

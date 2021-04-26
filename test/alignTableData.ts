@@ -4,8 +4,12 @@ import {
   expect,
 } from 'chai';
 import chalk from 'chalk';
-import alignTableData from '../src/alignTableData';
-import makeConfig from '../src/makeConfig';
+import {
+  alignTableData,
+} from '../src/alignTableData';
+import {
+  makeConfig,
+} from '../src/makeConfig';
 
 describe('alignTableData', () => {
   context('when the string width is equal to column width config', () => {

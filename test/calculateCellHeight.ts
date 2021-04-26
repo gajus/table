@@ -3,7 +3,9 @@
 import {
   expect,
 } from 'chai';
-import calculateCellHeight from '../src/calculateCellHeight';
+import {
+  calculateCellHeight,
+} from '../src/calculateCellHeight';
 
 describe('calculateCellHeight', () => {
   describe('value', () => {

@@ -3,9 +3,15 @@
 import {
   expect,
 } from 'chai';
-import wrapCell from '../src/wrapCell';
-import wrapString from '../src/wrapString';
-import wrapWord from '../src/wrapWord';
+import {
+  wrapCell,
+} from '../src/wrapCell';
+import {
+  wrapString,
+} from '../src/wrapString';
+import {
+  wrapWord,
+} from '../src/wrapWord';
 import {
   arrayToRed,
   stringToRed,

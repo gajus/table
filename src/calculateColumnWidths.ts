@@ -1,4 +1,6 @@
-import calculateCellWidths from './calculateCellWidths';
+import {
+  calculateCellWidths,
+} from './calculateCellWidths';
 import type {
   Row,
 } from './types/internal';

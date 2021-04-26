@@ -34,7 +34,7 @@ const calculateStringLengths = (input: string, size: number): Array<[Length:numb
   return chunks;
 };
 
-export default (input: string, size: number): string[] => {
+export const wrapWord = (input: string, size: number): string[] => {
   const result: string[] = [];
 
   let startIndex = 0;

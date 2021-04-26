@@ -3,8 +3,12 @@
 import {
   expect,
 } from 'chai';
-import makeConfig from '../src/makeConfig';
-import truncateTableData from '../src/truncateTableData';
+import {
+  makeConfig,
+} from '../src/makeConfig';
+import {
+  truncateTableData,
+} from '../src/truncateTableData';
 
 describe('truncateTableData', () => {
   context('when no given userConfig', () => {

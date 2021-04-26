@@ -2,8 +2,12 @@ import {
   expect,
 } from 'chai';
 import chalk from 'chalk';
-import makeConfig from '../src/makeConfig';
-import mapDataUsingRowHeights from '../src/mapDataUsingRowHeights';
+import {
+  makeConfig,
+} from '../src/makeConfig';
+import {
+  mapDataUsingRowHeights,
+} from '../src/mapDataUsingRowHeights';
 
 describe('mapDataUsingRowHeights', () => {
   context('no data spans multiple rows', () => {

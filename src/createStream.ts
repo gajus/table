@@ -1,16 +1,32 @@
-import alignTableData from './alignTableData';
-import calculateRowHeights from './calculateRowHeights';
+import {
+  alignTableData,
+} from './alignTableData';
+import {
+  calculateRowHeights,
+} from './calculateRowHeights';
 import {
   drawBorderBottom,
   drawBorderJoin,
   drawBorderTop,
 } from './drawBorder';
-import drawRow from './drawRow';
-import makeStreamConfig from './makeStreamConfig';
-import mapDataUsingRowHeights from './mapDataUsingRowHeights';
-import padTableData from './padTableData';
-import stringifyTableData from './stringifyTableData';
-import truncateTableData from './truncateTableData';
+import {
+  drawRow,
+} from './drawRow';
+import {
+  makeStreamConfig,
+} from './makeStreamConfig';
+import {
+  mapDataUsingRowHeights,
+} from './mapDataUsingRowHeights';
+import {
+  padTableData,
+} from './padTableData';
+import {
+  stringifyTableData,
+} from './stringifyTableData';
+import {
+  truncateTableData,
+} from './truncateTableData';
 import type {
   StreamUserConfig,
   WritableStream,
@@ -76,7 +92,7 @@ const append = (row: Row, columnWidths: number[], config: StreamConfig) => {
   process.stdout.write(output);
 };
 
-export default (userConfig: StreamUserConfig): WritableStream => {
+export const createStream = (userConfig: StreamUserConfig): WritableStream => {
   const config = makeStreamConfig(userConfig);
 
   const columnWidths = Object.values(config.columns).map((column) => {

@@ -1,7 +1,9 @@
 import {
   expect,
 } from 'chai';
-import drawRow from '../src/drawRow';
+import {
+  drawRow,
+} from '../src/drawRow';
 
 const drawVerticalLine = () => {
   return true;

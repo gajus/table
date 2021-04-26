@@ -5,8 +5,12 @@ import {
 } from 'chai';
 // eslint-disable-next-line import/no-namespace
 import * as Sinon from 'sinon';
-import createStream from '../src/createStream';
-import getBorderCharacters from '../src/getBorderCharacters';
+import {
+  createStream,
+} from '../src/createStream';
+import {
+  getBorderCharacters,
+} from '../src/getBorderCharacters';
 
 describe('createStream', () => {
   context('"config.columnDefault.width" property is not provided', () => {

@@ -6,7 +6,9 @@ import {
 import type {
   StreamUserConfig,
 } from '../src';
-import makeStreamConfig from '../src/makeStreamConfig';
+import {
+  makeStreamConfig,
+} from '../src/makeStreamConfig';
 
 const baseStreamConfig: StreamUserConfig = {
   columnCount: 1,

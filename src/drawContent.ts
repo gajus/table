@@ -9,7 +9,7 @@ type SeparatorConfig = {
  * Shared function to draw horizontal borders, rows or the entire table
  */
 
-export default function drawContent (contents: string[], separatorConfig: SeparatorConfig): string {
+export const drawContent = (contents: string[], separatorConfig: SeparatorConfig): string => {
   const {startSeparator, middleSeparator, endSeparator, drawSeparator} = separatorConfig;
   const contentSize = contents.length;
   const result: string[] = [];
@@ -32,4 +32,4 @@ export default function drawContent (contents: string[], separatorConfig: Separa
   }
 
   return result.join('');
-}
+};

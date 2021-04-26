@@ -6,7 +6,7 @@ import type {
 /**
  * Calculates width of each cell contents in a row.
  */
-export default (cells: Cell[]): number[] => {
+export const calculateCellWidths = (cells: Cell[]): number[] => {
   return cells.map((cell) => {
     return Math.max(
       ...cell.split('\n').map(stringWidth),

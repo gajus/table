@@ -1,7 +1,9 @@
 import {
   expect,
 } from 'chai';
-import stringifyTableData from '../src/stringifyTableData';
+import {
+  stringifyTableData,
+} from '../src/stringifyTableData';
 
 describe('stringifyTableData', () => {
   it('converts all cell values to strings', () => {

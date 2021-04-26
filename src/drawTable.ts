@@ -1,8 +1,12 @@
 import {
   drawBorderTop, drawBorderJoin, drawBorderBottom,
 } from './drawBorder';
-import drawContent from './drawContent';
-import drawRow from './drawRow';
+import {
+  drawContent,
+} from './drawContent';
+import {
+  drawRow,
+} from './drawRow';
 import type {
   TableConfig, Row,
 } from './types/internal';
@@ -10,7 +14,7 @@ import {
   groupBySizes,
 } from './utils';
 
-export default (rows: Row[], columnWidths: number[], rowHeights: number[], config: TableConfig): string => {
+export const drawTable = (rows: Row[], columnWidths: number[], rowHeights: number[], config: TableConfig): string => {
   const {
     drawHorizontalLine,
     singleLine,

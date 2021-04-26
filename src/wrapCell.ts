@@ -1,8 +1,12 @@
 import {
   splitAnsi,
 } from './utils';
-import wrapString from './wrapString';
-import wrapWord from './wrapWord';
+import {
+  wrapString,
+} from './wrapString';
+import {
+  wrapWord,
+} from './wrapWord';
 
 /**
  * Wrap a single cell value into a list of lines
@@ -11,7 +15,7 @@ import wrapWord from './wrapWord';
  * depending on user configuration.
  *
  */
-export default (cellValue: string, cellWidth: number, useWrapWord: boolean): string[] => {
+export const wrapCell = (cellValue: string, cellWidth: number, useWrapWord: boolean): string[] => {
   // First split on literal newlines
   const cellLines = splitAnsi(cellValue);
 
