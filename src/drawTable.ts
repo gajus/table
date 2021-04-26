@@ -6,25 +6,9 @@ import drawRow from './drawRow';
 import type {
   TableConfig, Row,
 } from './types/internal';
-
-/**
- * Group the array into sub-arrays by sizes.
- *
- * @example
- * groupBySizes(['a', 'b', 'c', 'd', 'e'], [2, 1, 2]) = [ ['a', 'b'], ['c'], ['d', 'e'] ]
- */
-
-const groupBySizes = <T>(array: T[], sizes: number[]): T[][] => {
-  let startIndex = 0;
-
-  return sizes.map((size) => {
-    const group = array.slice(startIndex, startIndex + size);
-
-    startIndex += size;
-
-    return group;
-  });
-};
+import {
+  groupBySizes,
+} from './utils';
 
 export default (rows: Row[], columnWidths: number[], rowHeights: number[], config: TableConfig): string => {
   const {

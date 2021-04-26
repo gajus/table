@@ -1,3 +1,7 @@
+import {
+  normalizeString,
+} from './utils';
+
 export default (rows: unknown[][]): void => {
   if (!Array.isArray(rows)) {
     throw new TypeError('Table data must be an array.');
@@ -24,7 +28,7 @@ export default (rows: unknown[][]): void => {
 
     for (const cell of row) {
       // eslint-disable-next-line no-control-regex
-      if (/[\u0001-\u0006\u0008\u0009\u000B-\u001A]/.test(cell)) {
+      if (/[\u0001-\u0006\u0008\u0009\u000B-\u001A]/.test(normalizeString(String(cell)))) {
         throw new Error('Table data must not contain control characters.');
       }
     }

@@ -3,6 +3,9 @@
 import {
   expect,
 } from 'chai';
+import {
+  table,
+} from '../src';
 import validateTableData from '../src/validateTableData';
 
 describe('validateTableData', () => {
@@ -52,7 +55,27 @@ describe('validateTableData', () => {
 
   context('cell data contains newlines', () => {
     it('does not throw', () => {
-      validateTableData([['ab\nc']]);
+      expect(() => {
+        validateTableData([['ab\nc']]);
+      }).to.not.throw();
+    });
+  });
+
+  context('cell data contains Windows-style newlines', () => {
+    it('does not throw and replaces by Unix-style newline', () => {
+      expect(() => {
+        validateTableData([['ab\r\nc']]);
+      }).to.not.throw();
+
+      expect(table([['ab\r\nc']])).to.equal('╔════╗\n║ ab ║\n║ c  ║\n╚════╝\n');
+    });
+  });
+
+  context('cell data contains carriage return only', () => {
+    it('throws an error', () => {
+      expect(() => {
+        validateTableData([['ab\rc']]);
+      }).to.throw(Error, 'Table data must not contain control characters.');
     });
   });
 
@@ -79,7 +102,9 @@ describe('validateTableData', () => {
     ].join('');
 
     it('does not throw', () => {
-      validateTableData([[link]]);
+      expect(() => {
+        validateTableData([[link]]);
+      }).to.not.throw();
     });
   });
 
