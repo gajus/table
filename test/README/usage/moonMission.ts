@@ -60,7 +60,9 @@ describe('README.md usage/', () => {
       border: tableBorder,
       columns: {
         4: {
+          alignment: 'justify',
           width: 50,
+          wrapWord: true,
         },
       },
     });
