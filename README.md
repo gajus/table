@@ -10,18 +10,12 @@
 * [Table](#table)
     * [Features](#table-features)
     * [Install](#table-install)
+    * [Install](#table-install-1)
     * [Usage](#table-usage)
-        * [Cell Content Alignment](#table-usage-cell-content-alignment)
-        * [Column Width](#table-usage-column-width)
-        * [Custom Border](#table-usage-custom-border)
-        * [Draw Vertical Line](#table-usage-draw-vertical-line)
-        * [Draw Horizontal Line](#table-usage-draw-horizontal-line)
-        * [Single Line Mode](#table-usage-single-line-mode)
-        * [Padding Cell Content](#table-usage-padding-cell-content)
-        * [Predefined Border Templates](#table-usage-predefined-border-templates)
-        * [Streaming](#table-usage-streaming)
-        * [Text Truncation](#table-usage-text-truncation)
-        * [Text Wrapping](#table-usage-text-wrapping)
+    * [APIs](#table-apis)
+        * [table(data, config = {})](#table-apis-table-data-config)
+        * [createStream(config)](#table-apis-createstream-config)
+        * [getBorderCharacters(template)](#table-apis-getbordercharacters-template)
 
 
 Produces a string that represents array data in a text table.
@@ -39,7 +33,19 @@ Produces a string that represents array data in a text table.
 * Configurable column width.
 * Text wrapping.
 
+
 <a name="table-install"></a>
+## Install
+
+```bash
+npm install table
+
+```
+
+[![Buy Me A Coffee](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/gajus)
+[![Become a Patron](https://c5.patreon.com/external/logo/become_a_patron_button.png)](https://www.patreon.com/gajus)
+
+<a name="table-install-1"></a>
 ## Install
 
 ```bash
@@ -53,8 +59,6 @@ npm install table
 <a name="table-usage"></a>
 ## Usage
 
-Table data is described using an array (rows) of array (cells).
-
 ```js
 import {
   table
@@ -63,76 +67,12 @@ import {
 // Using commonjs?
 // const {table} = require('table');
 
-let data,
-    output;
-
-data = [
+const data = [
     ['0A', '0B', '0C'],
     ['1A', '1B', '1C'],
     ['2A', '2B', '2C']
 ];
 
-/**
- * @typedef {string} table~cell
- */
-
-/**
- * @typedef {table~cell[]} table~row
- */
-
-/**
- * @typedef {Object} table~columns
- * @property {string} alignment Cell content alignment (enum: left, center, right) (default: left).
- * @property {number} width Column width (default: auto).
- * @property {number} truncate Number of characters are which the content will be truncated (default: Infinity).
- * @property {number} paddingLeft Cell content padding width left (default: 1).
- * @property {number} paddingRight Cell content padding width right (default: 1).
- */
-
-/**
- * @typedef {Object} table~border
- * @property {string} topBody
- * @property {string} topJoin
- * @property {string} topLeft
- * @property {string} topRight
- * @property {string} bottomBody
- * @property {string} bottomJoin
- * @property {string} bottomLeft
- * @property {string} bottomRight
- * @property {string} bodyLeft
- * @property {string} bodyRight
- * @property {string} bodyJoin
- * @property {string} joinBody
- * @property {string} joinLeft
- * @property {string} joinRight
- * @property {string} joinJoin
- */
-
-/**
- * Used to dynamically tell table whether to draw a line separating rows or not.
- * The default behavior is to always return true.
- *
- * @typedef {function} drawHorizontalLine
- * @param {number} index
- * @param {number} size
- * @return {boolean}
- */
-
-/**
- * @typedef {Object} table~config
- * @property {table~border} border
- * @property {table~columns[]} columns Column specific configuration.
- * @property {table~columns} columnDefault Default values for all columns. Column specific settings overwrite the default values.
- * @property {table~drawHorizontalLine} drawHorizontalLine
- */
-
-/**
- * Generates a text table.
- *
- * @param {table~row[]} rows
- * @param {table~config} config
- * @return {String}
- */
 output = table(data);
 
 console.log(output);
@@ -150,107 +90,57 @@ console.log(output);
 ```
 
 
-<a name="table-usage-cell-content-alignment"></a>
-### Cell Content Alignment
+<a name="table-apis"></a>
+## APIs
 
-`{string} config.columns[{number}].alignment` property controls content horizontal alignment within a cell.
+<a name="table-apis-table-data-config"></a>
+### table(data, config = {})
 
-Valid values are: "left", "right", "center" and "justify".
+Returns the string in the table format
 
-```js
-let config,
-  data,
-  output;
+<a name="table-apis-table-data-config-data"></a>
+#### data
+Type: `any[][]`
 
-data = [
-  ['0A', '0B', '0C', '0D 0E 0F'],
-  ['1A', '1B', '1C', '1D 1E 1F'],
-  ['2A', '2B', '2C', '2D 2E 2F'],
-];
+<a name="table-apis-table-data-config-config"></a>
+#### config
+Type: `object`
+Required: `false`
 
-config = {
-  columnDefault: {
-    width: 10,
-  },
-  columns: [
-    {alignment: 'left'},
-    {alignment: 'center'},
-    {alignment: 'right'},
-    {alignment: 'justify'},
-  ],
-};
+<a name="table-apis-table-data-config-config-config-border"></a>
+##### config.border
+Type: `{ [type: string]: string }`
+Required: `false`
+Default: see #predefined_border_templates
 
-output = table(data, config);
+To custom border. The object with keys are any of:
+- topLeft
+- topRight
+- topBody
+- topJoin
 
-console.log(output);
-```
+- bottomLeft
+- bottomRight
+- bottomBody
+- bottomJoin
 
-```
-╔════════════╤════════════╤════════════╤════════════╗
-║ 0A         │     0B     │         0C │ 0D  0E  0F ║
-╟────────────┼────────────┼────────────┼────────────╢
-║ 1A         │     1B     │         1C │ 1D  1E  1F ║
-╟────────────┼────────────┼────────────┼────────────╢
-║ 2A         │     2B     │         2C │ 2D  2E  2F ║
-╚════════════╧════════════╧════════════╧════════════╝
-```
+- joinLeft
+- joinRight
+- joinBody
+- joinRight
 
-<a name="table-usage-column-width"></a>
-### Column Width
-
-`{number} config.columns[{number}].width` property restricts column width to a fixed width.
+- bodyLeft
+- bodyRight
+- bodyJoin
 
 ```js
-let data,
-  output,
-  options;
-
-data = [
+const data = [
   ['0A', '0B', '0C'],
   ['1A', '1B', '1C'],
   ['2A', '2B', '2C']
 ];
 
-options = {
-  columns: {
-    1: {
-      width: 10
-    }
-  }
-};
-
-output = table(data, options);
-
-console.log(output);
-```
-
-```
-╔════╤════════════╤════╗
-║ 0A │ 0B         │ 0C ║
-╟────┼────────────┼────╢
-║ 1A │ 1B         │ 1C ║
-╟────┼────────────┼────╢
-║ 2A │ 2B         │ 2C ║
-╚════╧════════════╧════╝
-```
-
-<a name="table-usage-custom-border"></a>
-### Custom Border
-
-`{object} config.border` property describes characters used to draw the table border.
-
-```js
-let config,
-  data,
-  output;
-
-data = [
-  ['0A', '0B', '0C'],
-  ['1A', '1B', '1C'],
-  ['2A', '2B', '2C']
-];
-
-config = {
+const config = {
   border: {
     topBody: `─`,
     topJoin: `┬`,
@@ -273,9 +163,7 @@ config = {
   }
 };
 
-output = table(data, config);
-
-console.log(output);
+console.log(table(data, config));
 ```
 
 ```
@@ -288,17 +176,17 @@ console.log(output);
 └────┴────┴────┘
 ```
 
-<a name="table-usage-draw-vertical-line"></a>
-### Draw Vertical Line
+<a name="table-apis-table-data-config-config-config-drawverticalline"></a>
+##### config.drawVerticalLine
+Type: `(index: number, columnCount: number) => boolean`
+Required: `false`
+Default: `() => true`
 
-`{function} config.drawVerticalLine` property is a function that is called for every non-content column in the table. The result of the function `{boolean}` determines whether a border is drawn.
+Used to tell whether to draw a vertical line. This callback is called for each vertical border of the table.
+If the table has `n` columns then the `index` parameter is alternatively received all numbers in range `0..n` inclusively.
 
 ```js
-let data,
-  output,
-  options;
-
-data = [
+const data = [
   ['0A', '0B', '0C'],
   ['1A', '1B', '1C'],
   ['2A', '2B', '2C'],
@@ -306,21 +194,13 @@ data = [
   ['4A', '4B', '4C']
 ];
 
-options = {
-  /**
-    * @typedef {function} drawVerticalLine
-    * @param {number} index
-    * @param {number} size
-    * @return {boolean}
-    */
-  drawVerticalLine: (index, size) => {
-    return index === 0 || index === size;
+const config = {
+  drawVerticalLine: (index, columnCount) => {
+    return index === 0 || index === columnCount;
   }
 };
 
-output = table(data, options);
-
-console.log(output);
+console.log(table(data, options));
 
 ```
 
@@ -339,17 +219,17 @@ console.log(output);
 
 ```
 
-<a name="table-usage-draw-horizontal-line"></a>
-### Draw Horizontal Line
+<a name="table-apis-table-data-config-config-config-drawhorizontalline"></a>
+##### config.drawHorizontalLine
+Type: `(index: number, rowCount: number) => boolean`
+Required: `false`
+Default: `() => true`
 
-`{function} config.drawHorizontalLine` property is a function that is called for every non-content row in the table. The result of the function `{boolean}` determines whether a row is drawn.
+Used to tell whether to draw a horizontal line. This callback is called for each horizontal border of the table.
+If the table has `n` rows then the `index` parameter is alternatively received all numbers in range `0..n` inclusively.
 
 ```js
-let data,
-  output,
-  options;
-
-data = [
+const data = [
   ['0A', '0B', '0C'],
   ['1A', '1B', '1C'],
   ['2A', '2B', '2C'],
@@ -357,21 +237,13 @@ data = [
   ['4A', '4B', '4C']
 ];
 
-options = {
-  /**
-    * @typedef {function} drawHorizontalLine
-    * @param {number} index
-    * @param {number} size
-    * @return {boolean}
-    */
-  drawHorizontalLine: (index, size) => {
-    return index === 0 || index === 1 || index === size - 1 || index === size;
+const config = {
+  drawHorizontalLine: (index, rowCount) => {
+    return index === 0 || index === 1 || index === rowCount - 1 || index === rowCount;
   }
 };
 
-output = table(data, options);
-
-console.log(output);
+console.log(table(data, options));
 
 ```
 
@@ -388,17 +260,15 @@ console.log(output);
 
 ```
 
-<a name="table-usage-single-line-mode"></a>
-### Single Line Mode
+<a name="table-apis-table-data-config-config-config-singleline"></a>
+##### config.singleLine
+Type: `boolean`
+Required: `false`
+Default: `false`
 
-Horizontal lines inside the table are not drawn.
+If true, horizontal lines inside the table are not drawn.
 
 ```js
-import {
-  table,
-  getBorderCharacters
-} from 'table';
-
 const data = [
   ['-rw-r--r--', '1', 'pandorym', 'staff', '1529', 'May 23 11:25', 'LICENSE'],
   ['-rw-r--r--', '1', 'pandorym', 'staff', '16327', 'May 23 11:58', 'README.md'],
@@ -414,8 +284,7 @@ const config = {
   singleLine: true
 };
 
-const output = table(data, config);
-console.log(output);
+console.log(table(data, config));
 ```
 
 ```
@@ -431,37 +300,121 @@ console.log(output);
 ╚═════════════╧═════╧══════════╧═══════╧════════╧══════════════╧═══════════════════╝
 ```
 
-<a name="table-usage-padding-cell-content"></a>
-### Padding Cell Content
+<a name="table-apis-table-data-config-config-config-columns"></a>
+##### config.columns
+Type: `Column[] | { [index: number]: Column }`
 
-`{number} config.columns[{number}].paddingLeft` and `{number} config.columns[{number}].paddingRight` properties control content padding within a cell. Property value represents a number of whitespaces used to pad the content.
+Column specific configuration.
+
+<a name="table-apis-table-data-config-config-config-columns-config-columns-width"></a>
+###### config.columns[*].width
+Type: `number`
+Default: the maximum width of cells in the column
+
+Column width
 
 ```js
-let config,
-  data,
-  output;
 
-data = [
+const data = [
+  ['0A', '0B', '0C'],
+  ['1A', '1B', '1C'],
+  ['2A', '2B', '2C']
+];
+
+const options = {
+  columns: {
+    1: {
+      width: 10
+    }
+  }
+};
+
+console.log(table(data, options));
+```
+
+```
+╔════╤════════════╤════╗
+║ 0A │ 0B         │ 0C ║
+╟────┼────────────┼────╢
+║ 1A │ 1B         │ 1C ║
+╟────┼────────────┼────╢
+║ 2A │ 2B         │ 2C ║
+╚════╧════════════╧════╝
+```
+
+<a name="table-apis-table-data-config-config-config-columns-config-columns-alignment"></a>
+###### config.columns[*].alignment
+Type: `'center' | 'justify' | 'left' | 'right'`
+Default: `'left'`
+
+Cell content horizontal alignment
+
+```js
+const data = [
+  ['0A', '0B', '0C', '0D 0E 0F'],
+  ['1A', '1B', '1C', '1D 1E 1F'],
+  ['2A', '2B', '2C', '2D 2E 2F'],
+];
+
+const config = {
+  columnDefault: {
+    width: 10,
+  },
+  columns: [
+    {alignment: 'left'},
+    {alignment: 'center'},
+    {alignment: 'right'},
+    {alignment: 'justify'},
+  ],
+};
+
+console.log(table(data, config));
+```
+
+```
+╔════════════╤════════════╤════════════╤════════════╗
+║ 0A         │     0B     │         0C │ 0D  0E  0F ║
+╟────────────┼────────────┼────────────┼────────────╢
+║ 1A         │     1B     │         1C │ 1D  1E  1F ║
+╟────────────┼────────────┼────────────┼────────────╢
+║ 2A         │     2B     │         2C │ 2D  2E  2F ║
+╚════════════╧════════════╧════════════╧════════════╝
+```
+
+<a name="table-apis-table-data-config-config-config-columns-config-columns-paddingleft"></a>
+###### config.columns[*].paddingLeft
+Type: `number`
+Default: `1`
+
+The number of whitespaces used to pad the content on the left.
+
+<a name="table-apis-table-data-config-config-config-columns-config-columns-paddingright"></a>
+###### config.columns[*].paddingRight
+Type: `number`
+Default: `1`
+
+The number of whitespaces used to pad the content on the right.
+
+```js
+const data = [
   ['0A', 'AABBCC', '0C'],
   ['1A', '1B', '1C'],
   ['2A', '2B', '2C']
 ];
 
-config = {
-  columns: {
-    0: {
+const config = {
+  columns: [
+    {
       paddingLeft: 3
     },
-    1: {
+    {
       width: 2,
       paddingRight: 3
     }
-  }
+  ]
 };
 
-output = table(data, config);
-
-console.log(output);
+console.log(table(data, config));
 ```
 
 ```
@@ -476,10 +429,202 @@ console.log(output);
 ╚══════╧══════╧════╝
 ```
 
-<a name="table-usage-predefined-border-templates"></a>
-### Predefined Border Templates
+<a name="table-apis-table-data-config-config-config-columns-config-columns-truncate"></a>
+###### config.columns[*].truncate
+Type: `number`
+Default: `Infinity`
+
+Number of characters are which the content will be truncated.
+To handle a content that overflows the container width, `table` package implements [text wrapping](#table-usage-text-wrapping). However, sometimes you may want to truncate content that is too long to be displayed in the table.
+
+```js
+const data = [
+  ['Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pulvinar nibh sed mauris convallis dapibus. Nunc venenatis tempus nulla sit amet viverra.']
+];
+
+const config = {
+  columns: {
+    0: {
+      width: 20,
+      truncate: 100
+    }
+  }
+};
+
+console.log(table(data, config));
+```
+
+```
+╔══════════════════════╗
+║ Lorem ipsum dolor si ║
+║ t amet, consectetur  ║
+║ adipiscing elit. Pha ║
+║ sellus pulvinar nibh ║
+║ sed mauris convall…  ║
+╚══════════════════════╝
+```
+
+<a name="table-apis-table-data-config-config-config-columns-config-columns-wrapword"></a>
+###### config.columns[*].wrapWord
+Type: `boolean`
+Default: `false`
+
+`table` package implements auto text wrapping, i.e. text that has width greater than the container width will be separated into multiple lines at the nearest space or one of the special characters: `\|/_.,;-`.
+
+When `wrapWord` is `false`:
+```js
+const data = [
+    ['Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pulvinar nibh sed mauris convallis dapibus. Nunc venenatis tempus nulla sit amet viverra.']
+];
+
+const config = {
+  columns: [
+    {
+      width: 20
+    }
+  ]
+};
+
+console.log(table(data, config));
+```
+
+```
+╔══════════════════════╗
+║ Lorem ipsum dolor si ║
+║ t amet, consectetur  ║
+║ adipiscing elit. Pha ║
+║ sellus pulvinar nibh ║
+║ sed mauris convallis ║
+║ dapibus. Nunc venena ║
+║ tis tempus nulla sit ║
+║ amet viverra.        ║
+╚══════════════════════╝
+```
+
+When `wrapWord` is `true`:
+
+```js
+const data = [
+  ['Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pulvinar nibh sed mauris convallis dapibus. Nunc venenatis tempus nulla sit amet viverra.']
+];
+
+const config = {
+  columns: [
+    {
+      width: 20,
+      wrapWord: true
+    }
+  ]
+};
+
+console.log(table(data, config));
+```
+
+```
+╔══════════════════════╗
+║ Lorem ipsum dolor    ║
+║ sit amet,            ║
+║ consectetur          ║
+║ adipiscing elit.     ║
+║ Phasellus pulvinar   ║
+║ nibh sed mauris      ║
+║ convallis dapibus.   ║
+║ Nunc venenatis       ║
+║ tempus nulla sit     ║
+║ amet viverra.        ║
+╚══════════════════════╝
+
+```
+
+<a name="table-apis-table-data-config-config-config-columndefault"></a>
+##### config.columnDefault
+Type: `Column`
+
+Default configuration for all columns. Column specific settings will overwrite the default values.
+
+
+<a name="table-apis-createstream-config"></a>
+### createStream(config)
+
+`table` package exports `createStream` function used to draw a table and append rows.
+
+`createStream` requires `columnDefault.width` and `columnCount` configuration properties.
+
+```js
+import {
+  createStream
+} from 'table';
+
+const config = {
+  columnDefault: {
+    width: 50
+  },
+  columnCount: 1
+};
+
+const stream = createStream(config);
+
+setInterval(() => {
+  stream.write([new Date()]);
+}, 500);
+```
+
+![Streaming current date.](./.README/streaming.gif)
+
+`table` package uses ANSI escape codes to overwrite the output of the last line when a new row is printed.
+
+The underlying implementation is explained in this [Stack Overflow answer](http://stackoverflow.com/a/32938658/368691).
+
+Streaming supports all of the configuration properties and functionality of a static table (such as auto text wrapping, alignment and padding), e.g.
+
+```js
+import {
+  createStream
+} from 'table';
+
+import _ from 'lodash';
+
+const config = {
+  columnDefault: {
+    width: 50
+  },
+  columnCount: 3,
+  columns: [
+    {
+      width: 10,
+      alignment: 'right'
+    },
+    { alignment: 'center' },
+    { width: 10 }
+
+  ]
+};
+
+const stream = createStream(config);
+
+let i = 0;
+
+setInterval(() => {
+  let random;
+
+  random = _.sample('abcdefghijklmnopqrstuvwxyz', _.random(1, 30)).join('');
+
+  stream.write([i++, new Date(), random]);
+}, 500);
+```
+
+![Streaming random data.](./.README/streaming-random.gif)
+
+<a name="table-apis-getbordercharacters-template"></a>
+### getBorderCharacters(template)
 
 You can load one of the predefined border templates using `getBorderCharacters` function.
+
+<a name="table-apis-getbordercharacters-template-template"></a>
+#### template
+Type: `'honeywell' | 'norc' | 'ramac' | 'void'`
+Required: `true`
+Return:  #config.border
 
 ```js
 import {
@@ -487,16 +632,13 @@ import {
   getBorderCharacters
 } from 'table';
 
-let config,
-  data;
-
-data = [
+const data = [
   ['0A', '0B', '0C'],
   ['1A', '1B', '1C'],
   ['2A', '2B', '2C']
 ];
 
-config = {
+const config = {
   border: getBorderCharacters(`name of the template`)
 };
 
@@ -546,12 +688,12 @@ table(data, config);
 
 Raise [an issue](https://github.com/gajus/table/issues) if you'd like to contribute a new border template.
 
-<a name="table-usage-predefined-border-templates-borderless-table"></a>
+<a name="table-apis-getbordercharacters-template-borderless-table"></a>
 #### Borderless Table
 
 Simply using "void" border character template creates a table with a lot of unnecessary spacing.
 
-To create a more plesant to the eye table, reset the padding and remove the joining rows, e.g.
+To create a more pleasant to the eye table, reset the padding and remove the joining rows, e.g.
 
 ```js
 let output;
@@ -574,208 +716,5 @@ console.log(output);
 0A 0B 0C
 1A 1B 1C
 2A 2B 2C
-```
-
-<a name="table-usage-streaming"></a>
-### Streaming
-
-`table` package exports `createStream` function used to draw a table and append rows.
-
-`createStream` requires `{number} columnDefault.width` and `{number} columnCount` configuration properties.
-
-```js
-import {
-  createStream
-} from 'table';
-
-let config,
-  stream;
-
-config = {
-  columnDefault: {
-    width: 50
-  },
-  columnCount: 1
-};
-
-stream = createStream(config);
-
-setInterval(() => {
-  stream.write([new Date()]);
-}, 500);
-```
-
-![Streaming current date.](./.README/streaming.gif)
-
-`table` package uses ANSI escape codes to overwrite the output of the last line when a new row is printed.
-
-The underlying implementation is explained in this [Stack Overflow answer](http://stackoverflow.com/a/32938658/368691).
-
-Streaming supports all of the configuration properties and functionality of a static table (such as auto text wrapping, alignment and padding), e.g.
-
-```js
-import {
-  createStream
-} from 'table';
-
-import _ from 'lodash';
-
-let config,
-  stream,
-  i;
-
-config = {
-  columnDefault: {
-    width: 50
-  },
-  columnCount: 3,
-  columns: {
-    0: {
-      width: 10,
-      alignment: 'right'
-    },
-    1: {
-      alignment: 'center',
-    },
-    2: {
-      width: 10
-    }
-  }
-};
-
-stream = createStream(config);
-
-i = 0;
-
-setInterval(() => {
-  let random;
-
-  random = _.sample('abcdefghijklmnopqrstuvwxyz', _.random(1, 30)).join('');
-
-  stream.write([i++, new Date(), random]);
-}, 500);
-```
-
-![Streaming random data.](./.README/streaming-random.gif)
-
-<a name="table-usage-text-truncation"></a>
-### Text Truncation
-
-To handle a content that overflows the container width, `table` package implements [text wrapping](#table-usage-text-wrapping). However, sometimes you may want to truncate content that is too long to be displayed in the table.
-
-`{number} config.columns[{number}].truncate` property (default: `Infinity`) truncates the text at the specified length.
-
-```js
-let config,
-  data,
-  output;
-
-data = [
-  ['Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pulvinar nibh sed mauris convallis dapibus. Nunc venenatis tempus nulla sit amet viverra.']
-];
-
-config = {
-  columns: {
-    0: {
-      width: 20,
-      truncate: 100
-    }
-  }
-};
-
-output = table(data, config);
-
-console.log(output);
-```
-
-```
-╔══════════════════════╗
-║ Lorem ipsum dolor si ║
-║ t amet, consectetur  ║
-║ adipiscing elit. Pha ║
-║ sellus pulvinar nibh ║
-║ sed mauris convall…  ║
-╚══════════════════════╝
-```
-
-<a name="table-usage-text-wrapping"></a>
-### Text Wrapping
-
-`table` package implements auto text wrapping, i.e. text that has width greater than the container width will be separated into multiple lines, e.g.
-
-```js
-let config,
-  data,
-  output;
-
-data = [
-    ['Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pulvinar nibh sed mauris convallis dapibus. Nunc venenatis tempus nulla sit amet viverra.']
-];
-
-config = {
-  columns: {
-    0: {
-      width: 20
-    }
-  }
-};
-
-output = table(data, config);
-
-console.log(output);
-```
-
-```
-╔══════════════════════╗
-║ Lorem ipsum dolor si ║
-║ t amet, consectetur  ║
-║ adipiscing elit. Pha ║
-║ sellus pulvinar nibh ║
-║ sed mauris convallis ║
-║ dapibus. Nunc venena ║
-║ tis tempus nulla sit ║
-║ amet viverra.        ║
-╚══════════════════════╝
-```
-
-When `wrapWord` is `true` the text is broken at the nearest space or one of the special characters ("-", "_", "\", "/", ".", ",", ";"), e.g.
-
-```js
-let config,
-  data,
-  output;
-
-data = [
-  ['Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pulvinar nibh sed mauris convallis dapibus. Nunc venenatis tempus nulla sit amet viverra.']
-];
-
-config = {
-  columns: {
-    0: {
-      width: 20,
-      wrapWord: true
-    }
-  }
-};
-
-output = table(data, config);
-
-console.log(output);
-```
-
-```
-╔══════════════════════╗
-║ Lorem ipsum dolor    ║
-║ sit amet,            ║
-║ consectetur          ║
-║ adipiscing elit.     ║
-║ Phasellus pulvinar   ║
-║ nibh sed mauris      ║
-║ convallis dapibus.   ║
-║ Nunc venenatis       ║
-║ tempus nulla sit     ║
-║ amet viverra.        ║
-╚══════════════════════╝
-
 ```
 

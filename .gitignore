@@ -10,3 +10,4 @@ tsconfig.tsbuildinfo
 !.eslintrc
 !.gitignore
 !.travis.yml
+!.README

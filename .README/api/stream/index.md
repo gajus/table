@@ -1,25 +1,22 @@
-### Streaming
+### createStream(config)
 
 `table` package exports `createStream` function used to draw a table and append rows.
 
-`createStream` requires `{number} columnDefault.width` and `{number} columnCount` configuration properties.
+`createStream` requires `columnDefault.width` and `columnCount` configuration properties.
 
 ```js
 import {
   createStream
 } from 'table';
 
-let config,
-  stream;
-
-config = {
+const config = {
   columnDefault: {
     width: 50
   },
   columnCount: 1
 };
 
-stream = createStream(config);
+const stream = createStream(config);
 
 setInterval(() => {
   stream.write([new Date()]);
@@ -41,32 +38,25 @@ import {
 
 import _ from 'lodash';
 
-let config,
-  stream,
-  i;
-
-config = {
+const config = {
   columnDefault: {
     width: 50
   },
   columnCount: 3,
-  columns: {
-    0: {
+  columns: [
+    {
       width: 10,
       alignment: 'right'
     },
-    1: {
-      alignment: 'center',
-    },
-    2: {
-      width: 10
-    }
-  }
+    { alignment: 'center' },
+    { width: 10 }
+
+  ]
 };
 
-stream = createStream(config);
+const stream = createStream(config);
 
-i = 0;
+let i = 0;
 
 setInterval(() => {
   let random;

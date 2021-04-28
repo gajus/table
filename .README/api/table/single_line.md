@@ -1,13 +1,11 @@
-### Single Line Mode
+##### config.singleLine
+Type: `boolean`
+Required: `false`
+Default: `false`
 
-Horizontal lines inside the table are not drawn.
+If true, horizontal lines inside the table are not drawn.
 
 ```js
-import {
-  table,
-  getBorderCharacters
-} from 'table';
-
 const data = [
   ['-rw-r--r--', '1', 'pandorym', 'staff', '1529', 'May 23 11:25', 'LICENSE'],
   ['-rw-r--r--', '1', 'pandorym', 'staff', '16327', 'May 23 11:58', 'README.md'],
@@ -23,8 +21,7 @@ const config = {
   singleLine: true
 };
 
-const output = table(data, config);
-console.log(output);
+console.log(table(data, config));
 ```
 
 ```

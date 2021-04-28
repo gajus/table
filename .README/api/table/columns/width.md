@@ -1,19 +1,18 @@
-### Column Width
+###### config.columns[*].width
+Type: `number`
+Default: the maximum width of cells in the column
 
-`{number} config.columns[{number}].width` property restricts column width to a fixed width.
+Column width
 
 ```js
-let data,
-  output,
-  options;
 
-data = [
+const data = [
   ['0A', '0B', '0C'],
   ['1A', '1B', '1C'],
   ['2A', '2B', '2C']
 ];
 
-options = {
+const options = {
   columns: {
     1: {
       width: 10
@@ -21,9 +20,7 @@ options = {
   }
 };
 
-output = table(data, options);
-
-console.log(output);
+console.log(table(data, options));
 ```
 
 ```

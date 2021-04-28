@@ -1,19 +1,36 @@
-### Custom Border
+##### config.border
+Type: `{ [type: string]: string }`
+Required: `false`
+Default: see #predefined_border_templates
 
-`{object} config.border` property describes characters used to draw the table border.
+To custom border. The object with keys are any of:
+- topLeft
+- topRight
+- topBody
+- topJoin
+
+- bottomLeft
+- bottomRight
+- bottomBody
+- bottomJoin
+
+- joinLeft
+- joinRight
+- joinBody
+- joinRight
+
+- bodyLeft
+- bodyRight
+- bodyJoin
 
 ```js
-let config,
-  data,
-  output;
-
-data = [
+const data = [
   ['0A', '0B', '0C'],
   ['1A', '1B', '1C'],
   ['2A', '2B', '2C']
 ];
 
-config = {
+const config = {
   border: {
     topBody: `─`,
     topJoin: `┬`,
@@ -36,9 +53,7 @@ config = {
   }
 };
 
-output = table(data, config);
-
-console.log(output);
+console.log(table(data, config));
 ```
 
 ```

@@ -1,6 +1,11 @@
-### Predefined Border Templates
+### getBorderCharacters(template)
 
 You can load one of the predefined border templates using `getBorderCharacters` function.
+
+#### template
+Type: `'honeywell' | 'norc' | 'ramac' | 'void'`
+Required: `true`
+Return:  #config.border
 
 ```js
 import {
@@ -8,16 +13,13 @@ import {
   getBorderCharacters
 } from 'table';
 
-let config,
-  data;
-
-data = [
+const data = [
   ['0A', '0B', '0C'],
   ['1A', '1B', '1C'],
   ['2A', '2B', '2C']
 ];
 
-config = {
+const config = {
   border: getBorderCharacters(`name of the template`)
 };
 
@@ -71,7 +73,7 @@ Raise [an issue](https://github.com/gajus/table/issues) if you'd like to contrib
 
 Simply using "void" border character template creates a table with a lot of unnecessary spacing.
 
-To create a more plesant to the eye table, reset the padding and remove the joining rows, e.g.
+To create a more pleasant to the eye table, reset the padding and remove the joining rows, e.g.
 
 ```js
 let output;
