@@ -1,8 +1,8 @@
 ##### config.border
 
-**Type:** `{ [type: string]: string }`
+Type: `{ [type: string]: string }`
 
-**Default:** `honeywell` [template](#table-api-getbordercharacters-template)
+Default: `honeywell` [template](#getbordercharacters)
 
 Custom borders. The keys are any of:
 - `topLeft`, `topRight`, `topBody`,`topJoin`

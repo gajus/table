@@ -1,8 +1,9 @@
-### createStream(config)
+### createStream
 
 `table` package exports `createStream` function used to draw a table and append rows.
 
-The function accepts the same configuration as `table`'s, except `config.columnDefault.width` and `config.columnCount` must be provided.
+Parameter:
+ - _**config:**_ the same as `table`'s, except `config.columnDefault.width` and `config.columnCount` must be provided.
 
 
 ```js

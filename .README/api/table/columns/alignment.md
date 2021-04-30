@@ -1,8 +1,8 @@
 ###### config.columns[*].alignment
 
-**Type**: `'center' | 'justify' | 'left' | 'right'`
+Type: `'center' | 'justify' | 'left' | 'right'`
 
-**Default**: `'left'`
+Default: `'left'`
 
 Cell content horizontal alignment
 

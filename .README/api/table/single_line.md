@@ -4,7 +4,7 @@ Type: `boolean`
 
 Default: `false`
 
-If true, horizontal lines inside the table are not drawn. This option also overrides the `config.drawHorizontalLine` if specified.
+If `true`, horizontal lines inside the table are not drawn. This option also overrides the `config.drawHorizontalLine` if specified.
 
 ```js
 const data = [

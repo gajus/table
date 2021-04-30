@@ -1,8 +1,8 @@
 ###### config.columns[*].truncate
 
-**Type**: `number`
+Type: `number`
 
-**Default**: `Infinity`
+Default: `Infinity`
 
 Number of characters are which the content will be truncated.
 To handle a content that overflows the container width, `table` package implements [text wrapping](#config.columns[*].wrapWord). However, sometimes you may want to truncate content that is too long to be displayed in the table.

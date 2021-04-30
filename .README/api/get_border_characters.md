@@ -1,9 +1,9 @@
 ### getBorderCharacters
 
-**Parameter**:
+**Parameter:**
  - **_template_**
-   - **Type**: `'honeywell' | 'norc' | 'ramac' | 'void'`
-   - **Required**: `true`
+   - Type: `'honeywell' | 'norc' | 'ramac' | 'void'`
+   - Required: `true`
 
 You can load one of the predefined border templates using `getBorderCharacters` function.
 

@@ -1,8 +1,8 @@
 ###### config.columns[*].wrapWord
 
-**Type**: `boolean`
+Type: `boolean`
 
-**Default**: `false`
+Default: `false`
 
 The `table` package implements auto text wrapping, i.e. text that has width greater than the container width will be separated into multiple lines at the nearest space or one of the special characters: `\|/_.,;-`.
 

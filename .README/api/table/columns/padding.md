@@ -1,16 +1,16 @@
 ###### config.columns[*].paddingLeft
 
-**Type**: `number`
+Type: `number`
 
-**Default**: `1`
+Default: `1`
 
 The number of whitespaces used to pad the content on the left.
 
 ###### config.columns[*].paddingRight
 
-**Type**: `number`
+Type: `number`
 
-**Default**: `1`
+Default: `1`
 
 The number of whitespaces used to pad the content on the right.
 

@@ -1,8 +1,8 @@
 ##### config.drawVerticalLine
 
-**Type**: `(lineIndex: number, columnCount: number) => boolean`
+Type: `(lineIndex: number, columnCount: number) => boolean`
 
-**Default**: `() => true`
+Default: `() => true`
 
 Used to tell whether to draw a vertical line. This callback is called for each vertical border of the table.
 If the table has `n` columns then the `index` parameter is alternatively received all numbers in range `[0, n]` inclusively.
