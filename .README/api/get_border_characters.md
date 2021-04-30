@@ -54,7 +54,7 @@ console.log(table(data, config));
 | 2A | 2B | 2C |
 +----+----+----+
 
-# void (no borders; see "bordless table" section of the documentation)
+# void (no borders; see "borderless table" section of the documentation)
 
  0A  0B  0C
 
@@ -68,7 +68,7 @@ Raise [an issue](https://github.com/gajus/table/issues) if you'd like to contrib
 
 #### Borderless Table
 
-Simply using "void" border character template creates a table with a lot of unnecessary spacing.
+Simply using `void` border character template creates a table with a lot of unnecessary spacing.
 
 To create a more pleasant to the eye table, reset the padding and remove the joining rows, e.g.
 

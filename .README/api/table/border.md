@@ -1,7 +1,6 @@
 ##### config.border
 
-Type: `{ [type: string]: string }`
-
+Type: `{ [type: string]: string }`\
 Default: `honeywell` [template](#getbordercharacters)
 
 Custom borders. The keys are any of:

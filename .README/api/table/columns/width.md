@@ -1,7 +1,6 @@
 ###### config.columns[*].width
 
-Type: `number`
-
+Type: `number`\
 Default: the maximum cell widths of the column
 
 Column width.

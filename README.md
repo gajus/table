@@ -93,8 +93,7 @@ Returns the string in the table format
 <a name="table-api-table-1-config-border"></a>
 ##### config.border
 
-Type: `{ [type: string]: string }`
-
+Type: `{ [type: string]: string }`\
 Default: `honeywell` [template](#getbordercharacters)
 
 Custom borders. The keys are any of:
@@ -149,8 +148,7 @@ console.log(table(data, config));
 <a name="table-api-table-1-config-drawverticalline"></a>
 ##### config.drawVerticalLine
 
-Type: `(lineIndex: number, columnCount: number) => boolean`
-
+Type: `(lineIndex: number, columnCount: number) => boolean`\
 Default: `() => true`
 
 Used to tell whether to draw a vertical line. This callback is called for each vertical border of the table.
@@ -193,8 +191,7 @@ console.log(table(data, config));
 <a name="table-api-table-1-config-drawhorizontalline"></a>
 ##### config.drawHorizontalLine
 
-Type: `(lineIndex: number, rowCount: number) => boolean`
-
+Type: `(lineIndex: number, rowCount: number) => boolean`\
 Default: `() => true`
 
 Used to tell whether to draw a horizontal line. This callback is called for each horizontal border of the table.
@@ -235,8 +232,7 @@ console.log(table(data, config));
 <a name="table-api-table-1-config-singleline"></a>
 ##### config.singleLine
 
-Type: `boolean`
-
+Type: `boolean`\
 Default: `false`
 
 If `true`, horizontal lines inside the table are not drawn. This option also overrides the `config.drawHorizontalLine` if specified.
@@ -277,15 +273,13 @@ console.log(table(data, config));
 <a name="table-api-table-1-config-columns"></a>
 ##### config.columns
 
-Type: `Column[] | { [columnIndex: number]: Column }`
-
+Type: `Column[] | { [columnIndex: number]: Column }`\
 Column specific configurations.
 
 <a name="table-api-table-1-config-columns-config-columns-width"></a>
 ###### config.columns[*].width
 
-Type: `number`
-
+Type: `number`\
 Default: the maximum cell widths of the column
 
 Column width.
@@ -320,8 +314,7 @@ console.log(table(data, config));
 <a name="table-api-table-1-config-columns-config-columns-alignment"></a>
 ###### config.columns[*].alignment
 
-Type: `'center' | 'justify' | 'left' | 'right'`
-
+Type: `'center' | 'justify' | 'left' | 'right'`\
 Default: `'left'`
 
 Cell content horizontal alignment
@@ -361,8 +354,7 @@ console.log(table(data, config));
 <a name="table-api-table-1-config-columns-config-columns-paddingleft"></a>
 ###### config.columns[*].paddingLeft
 
-Type: `number`
-
+Type: `number`\
 Default: `1`
 
 The number of whitespaces used to pad the content on the left.
@@ -370,8 +362,7 @@ The number of whitespaces used to pad the content on the left.
 <a name="table-api-table-1-config-columns-config-columns-paddingright"></a>
 ###### config.columns[*].paddingRight
 
-Type: `number`
-
+Type: `number`\
 Default: `1`
 
 The number of whitespaces used to pad the content on the right.
@@ -416,8 +407,7 @@ console.log(table(data, config));
 <a name="table-api-table-1-config-columns-config-columns-truncate"></a>
 ###### config.columns[*].truncate
 
-Type: `number`
-
+Type: `number`\
 Default: `Infinity`
 
 Number of characters are which the content will be truncated.
@@ -453,8 +443,7 @@ console.log(table(data, config));
 <a name="table-api-table-1-config-columns-config-columns-wrapword"></a>
 ###### config.columns[*].wrapWord
 
-Type: `boolean`
-
+Type: `boolean`\
 Default: `false`
 
 The `table` package implements auto text wrapping, i.e. text that has width greater than the container width will be separated into multiple lines at the nearest space or one of the special characters: `\|/_.,;-`.
@@ -524,7 +513,7 @@ console.log(table(data, config));
 <a name="table-api-table-1-config-columndefault"></a>
 ##### config.columnDefault
 
-Type: `Column`
+Type: `Column`\
 Default: `{}`
 
 Default configuration for all columns. Column specific settings will overwrite the default values.
