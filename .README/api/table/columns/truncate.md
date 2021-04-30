@@ -1,30 +1,26 @@
-### Text Truncation
+###### config.columns[*].truncate
 
-To handle a content that overflows the container width, `table` package implements [text wrapping](#table-usage-text-wrapping). However, sometimes you may want to truncate content that is too long to be displayed in the table.
+Type: `number`\
+Default: `Infinity`
 
-`{number} config.columns[{number}].truncate` property (default: `Infinity`) truncates the text at the specified length.
+The number of characters is which the content will be truncated.
+To handle a content that overflows the container width, `table` package implements [text wrapping](#config.columns[*].wrapWord). However, sometimes you may want to truncate content that is too long to be displayed in the table.
 
 ```js
-let config,
-  data,
-  output;
-
-data = [
+const data = [
   ['Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pulvinar nibh sed mauris convallis dapibus. Nunc venenatis tempus nulla sit amet viverra.']
 ];
 
-config = {
-  columns: {
-    0: {
+const config = {
+  columns: [
+    {
       width: 20,
       truncate: 100
     }
-  }
+  ]
 };
 
-output = table(data, config);
-
-console.log(output);
+console.log(table(data, config));
 ```
 
 ```

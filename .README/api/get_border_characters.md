@@ -1,27 +1,26 @@
-### Predefined Border Templates
+### getBorderCharacters
+
+**Parameter:**
+ - **_template_**
+   - Type: `'honeywell' | 'norc' | 'ramac' | 'void'`
+   - Required: `true`
 
 You can load one of the predefined border templates using `getBorderCharacters` function.
 
 ```js
-import {
-  table,
-  getBorderCharacters
-} from 'table';
+import { table, getBorderCharacters } from 'table';
 
-let config,
-  data;
-
-data = [
+const data = [
   ['0A', '0B', '0C'],
   ['1A', '1B', '1C'],
   ['2A', '2B', '2C']
 ];
 
-config = {
+const config = {
   border: getBorderCharacters(`name of the template`)
 };
 
-table(data, config);
+console.log(table(data, config));
 ```
 
 ```
@@ -55,7 +54,7 @@ table(data, config);
 | 2A | 2B | 2C |
 +----+----+----+
 
-# void (no borders; see "bordless table" section of the documentation)
+# void (no borders; see "borderless table" section of the documentation)
 
  0A  0B  0C
 
@@ -69,23 +68,21 @@ Raise [an issue](https://github.com/gajus/table/issues) if you'd like to contrib
 
 #### Borderless Table
 
-Simply using "void" border character template creates a table with a lot of unnecessary spacing.
+Simply using `void` border character template creates a table with a lot of unnecessary spacing.
 
-To create a more plesant to the eye table, reset the padding and remove the joining rows, e.g.
+To create a more pleasant to the eye table, reset the padding and remove the joining rows, e.g.
 
 ```js
-let output;
 
-output = table(data, {
-    border: getBorderCharacters(`void`),
+const output = table(data, {
+    border: getBorderCharacters('void'),
     columnDefault: {
         paddingLeft: 0,
         paddingRight: 1
     },
-    drawHorizontalLine: () => {
-        return false
+    drawHorizontalLine: () => false
     }
-});
+);
 
 console.log(output);
 ```

@@ -1,27 +1,22 @@
-### Text Wrapping
+###### config.columns[*].wrapWord
 
-`table` package implements auto text wrapping, i.e. text that has width greater than the container width will be separated into multiple lines, e.g.
+Type: `boolean`\
+Default: `false`
+
+The `table` package implements auto text wrapping, i.e., text that has the width greater than the container width will be separated into multiple lines at the nearest space or one of the special characters: `\|/_.,;-`.
+
+When `wrapWord` is `false`:
 
 ```js
-let config,
-  data,
-  output;
-
-data = [
+const data = [
     ['Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pulvinar nibh sed mauris convallis dapibus. Nunc venenatis tempus nulla sit amet viverra.']
 ];
 
-config = {
-  columns: {
-    0: {
-      width: 20
-    }
-  }
+const config = {
+  columns: [ { width: 20 } ]
 };
 
-output = table(data, config);
-
-console.log(output);
+console.log(table(data, config));
 ```
 
 ```
@@ -37,29 +32,23 @@ console.log(output);
 ╚══════════════════════╝
 ```
 
-When `wrapWord` is `true` the text is broken at the nearest space or one of the special characters ("-", "_", "\", "/", ".", ",", ";"), e.g.
+When `wrapWord` is `true`:
 
 ```js
-let config,
-  data,
-  output;
-
-data = [
+const data = [
   ['Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pulvinar nibh sed mauris convallis dapibus. Nunc venenatis tempus nulla sit amet viverra.']
 ];
 
-config = {
-  columns: {
-    0: {
+const config = {
+  columns: [
+    {
       width: 20,
       wrapWord: true
     }
-  }
+  ]
 };
 
-output = table(data, config);
-
-console.log(output);
+console.log(table(data, config));
 ```
 
 ```

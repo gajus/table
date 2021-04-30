@@ -1,5 +1,7 @@
 # Table
 
+> Produces a string that represents array data in a text table.
+
 [![Travis build status](http://img.shields.io/travis/gajus/table/master.svg?style=flat-square)](https://travis-ci.org/gajus/table)
 [![Coveralls](https://img.shields.io/coveralls/gajus/table.svg?style=flat-square)](https://coveralls.io/github/gajus/table)
 [![NPM version](http://img.shields.io/npm/v/table.svg?style=flat-square)](https://www.npmjs.org/package/table)
@@ -7,8 +9,6 @@
 [![Twitter Follow](https://img.shields.io/twitter/follow/kuizinas.svg?style=social&label=Follow)](https://twitter.com/kuizinas)
 
 {"gitdown": "contents"}
-
-Produces a string that represents array data in a text table.
 
 ![Demo of table displaying a list of missions to the Moon.](./.README/demo.png)
 
@@ -22,16 +22,30 @@ Produces a string that represents array data in a text table.
 * Configurable column width.
 * Text wrapping.
 
+## Install
+
+{"gitdown": "include", "file": "./install.md"}
+
+## Usage
+
 {"gitdown": "include", "file": "./usage.md"}
 
-{"gitdown": "include", "file": "./usage/cell_content_alignment.md"}
-{"gitdown": "include", "file": "./usage/column_width.md"}
-{"gitdown": "include", "file": "./usage/custom_border.md"}
-{"gitdown": "include", "file": "./usage/draw_vertical_line.md"}
-{"gitdown": "include", "file": "./usage/draw_horizontal_line.md"}
-{"gitdown": "include", "file": "./usage/single_line_mode.md"}
-{"gitdown": "include", "file": "./usage/padding_cell_content.md"}
-{"gitdown": "include", "file": "./usage/predefined_border_templates.md"}
-{"gitdown": "include", "file": "./usage/streaming.md"}
-{"gitdown": "include", "file": "./usage/text_truncation.md"}
-{"gitdown": "include", "file": "./usage/text_wrapping.md"}
+## API
+
+{"gitdown": "include", "file": "./api/table/index.md"}
+{"gitdown": "include", "file": "./api/table/border.md"}
+{"gitdown": "include", "file": "./api/table/draw_vertical_line.md"}
+{"gitdown": "include", "file": "./api/table/draw_horizontal_line.md"}
+{"gitdown": "include", "file": "./api/table/single_line.md"}
+
+{"gitdown": "include", "file": "./api/table/columns/index.md"}
+{"gitdown": "include", "file": "./api/table/columns/width.md"}
+{"gitdown": "include", "file": "./api/table/columns/alignment.md"}
+{"gitdown": "include", "file": "./api/table/columns/padding.md"}
+{"gitdown": "include", "file": "./api/table/columns/truncate.md"}
+{"gitdown": "include", "file": "./api/table/columns/wrapWord.md"}
+{"gitdown": "include", "file": "./api/table/column_default.md"}
+
+{"gitdown": "include", "file": "./api/stream/index.md"}
+
+{"gitdown": "include", "file": "./api/get_border_characters.md"}
