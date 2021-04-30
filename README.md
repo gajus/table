@@ -151,8 +151,8 @@ console.log(table(data, config));
 Type: `(lineIndex: number, columnCount: number) => boolean`\
 Default: `() => true`
 
-Used to tell whether to draw a vertical line. This callback is called for each vertical border of the table.
-If the table has `n` columns then the `index` parameter is alternatively received all numbers in range `[0, n]` inclusively.
+It is used to tell whether to draw a vertical line. This callback is called for each vertical border of the table.
+If the table has `n` columns, then the `index` parameter is alternatively received all numbers in range `[0, n]` inclusively.
 
 ```js
 const data = [
@@ -194,8 +194,8 @@ console.log(table(data, config));
 Type: `(lineIndex: number, rowCount: number) => boolean`\
 Default: `() => true`
 
-Used to tell whether to draw a horizontal line. This callback is called for each horizontal border of the table.
-If the table has `n` rows then the `index` parameter is alternatively received all numbers in range `[0, n]` inclusively.
+It is used to tell whether to draw a horizontal line. This callback is called for each horizontal border of the table.
+If the table has `n` rows, then the `index` parameter is alternatively received all numbers in range `[0, n]` inclusively.
 
 ```js
 const data = [
@@ -410,7 +410,7 @@ console.log(table(data, config));
 Type: `number`\
 Default: `Infinity`
 
-Number of characters are which the content will be truncated.
+The number of characters is which the content will be truncated.
 To handle a content that overflows the container width, `table` package implements [text wrapping](#config.columns[*].wrapWord). However, sometimes you may want to truncate content that is too long to be displayed in the table.
 
 ```js
@@ -446,7 +446,7 @@ console.log(table(data, config));
 Type: `boolean`\
 Default: `false`
 
-The `table` package implements auto text wrapping, i.e. text that has width greater than the container width will be separated into multiple lines at the nearest space or one of the special characters: `\|/_.,;-`.
+The `table` package implements auto text wrapping, i.e., text that has the width greater than the container width will be separated into multiple lines at the nearest space or one of the special characters: `\|/_.,;-`.
 
 When `wrapWord` is `false`:
 
@@ -516,7 +516,7 @@ console.log(table(data, config));
 Type: `Column`\
 Default: `{}`
 
-Default configuration for all columns. Column specific settings will overwrite the default values.
+The default configuration for all columns. Column-specific settings will overwrite the default values.
 
 
 <a name="table-api-createstream"></a>
@@ -647,7 +647,7 @@ console.log(table(data, config));
 | 2A | 2B | 2C |
 +----+----+----+
 
-# void (no borders; see "bordless table" section of the documentation)
+# void (no borders; see "borderless table" section of the documentation)
 
  0A  0B  0C
 
@@ -662,7 +662,7 @@ Raise [an issue](https://github.com/gajus/table/issues) if you'd like to contrib
 <a name="table-api-getbordercharacters-borderless-table"></a>
 #### Borderless Table
 
-Simply using "void" border character template creates a table with a lot of unnecessary spacing.
+Simply using `void` border character template creates a table with a lot of unnecessary spacing.
 
 To create a more pleasant to the eye table, reset the padding and remove the joining rows, e.g.
 
