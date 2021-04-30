@@ -1,6 +1,7 @@
 ##### config.drawVerticalLine
+
 Type: `(index: number, columnCount: number) => boolean`
-Required: `false`
+
 Default: `() => true`
 
 Used to tell whether to draw a vertical line. This callback is called for each vertical border of the table.

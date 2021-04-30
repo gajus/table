@@ -1,6 +1,7 @@
 ##### config.singleLine
+
 Type: `boolean`
-Required: `false`
+
 Default: `false`
 
 If true, horizontal lines inside the table are not drawn.

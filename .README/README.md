@@ -10,7 +10,7 @@
 
 Produces a string that represents array data in a text table.
 
-![Demo of table displaying a list of missions to the Moon.](./.README/demo.png)
+![Demo of table displaying a list of missions to the Moon.](./demo.png)
 
 ## Features
 
@@ -22,17 +22,22 @@ Produces a string that represents array data in a text table.
 * Configurable column width.
 * Text wrapping.
 
+## Install
 
 {"gitdown": "include", "file": "./install.md"}
+
+## Usage
+
 {"gitdown": "include", "file": "./usage.md"}
 
-## APIs
+## API
 
 {"gitdown": "include", "file": "./api/table/index.md"}
 {"gitdown": "include", "file": "./api/table/border.md"}
 {"gitdown": "include", "file": "./api/table/draw_vertical_line.md"}
 {"gitdown": "include", "file": "./api/table/draw_horizontal_line.md"}
 {"gitdown": "include", "file": "./api/table/single_line.md"}
+
 {"gitdown": "include", "file": "./api/table/columns/index.md"}
 {"gitdown": "include", "file": "./api/table/columns/width.md"}
 {"gitdown": "include", "file": "./api/table/columns/alignment.md"}

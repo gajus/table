@@ -1,6 +1,7 @@
 ##### config.drawHorizontalLine
+
 Type: `(index: number, rowCount: number) => boolean`
-Required: `false`
+
 Default: `() => true`
 
 Used to tell whether to draw a horizontal line. This callback is called for each horizontal border of the table.

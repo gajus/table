@@ -10,17 +10,16 @@
 * [Table](#table)
     * [Features](#table-features)
     * [Install](#table-install)
-    * [Install](#table-install-1)
     * [Usage](#table-usage)
-    * [APIs](#table-apis)
-        * [table(data, config = {})](#table-apis-table-data-config)
-        * [createStream(config)](#table-apis-createstream-config)
-        * [getBorderCharacters(template)](#table-apis-getbordercharacters-template)
+    * [API](#table-api)
+        * [table(data, config = {})](#table-api-table-data-config)
+        * [createStream(config)](#table-api-createstream-config)
+        * [getBorderCharacters(template)](#table-api-getbordercharacters-template)
 
 
 Produces a string that represents array data in a text table.
 
-![Demo of table displaying a list of missions to the Moon.](./.README/demo.png)
+![Demo of table displaying a list of missions to the Moon.](./demo.png)
 
 <a name="table-features"></a>
 ## Features
@@ -33,7 +32,6 @@ Produces a string that represents array data in a text table.
 * Configurable column width.
 * Text wrapping.
 
-
 <a name="table-install"></a>
 ## Install
 
@@ -45,16 +43,6 @@ npm install table
 [![Buy Me A Coffee](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/gajus)
 [![Become a Patron](https://c5.patreon.com/external/logo/become_a_patron_button.png)](https://www.patreon.com/gajus)
 
-<a name="table-install-1"></a>
-## Install
-
-```bash
-npm install table
-
-```
-
-[![Buy Me A Coffee](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/gajus)
-[![Become a Patron](https://c5.patreon.com/external/logo/become_a_patron_button.png)](https://www.patreon.com/gajus)
 
 <a name="table-usage"></a>
 ## Usage
@@ -90,27 +78,32 @@ console.log(output);
 ```
 
 
-<a name="table-apis"></a>
-## APIs
+<a name="table-api"></a>
+## API
 
-<a name="table-apis-table-data-config"></a>
+<a name="table-api-table-data-config"></a>
 ### table(data, config = {})
 
 Returns the string in the table format
 
-<a name="table-apis-table-data-config-data"></a>
+<a name="table-api-table-data-config-data"></a>
 #### data
 Type: `any[][]`
 
-<a name="table-apis-table-data-config-config"></a>
+Table data to display. It should be a non-empty array of non-empty equal-length arrays. The `table` will convert all values to string internally.
+
+<a name="table-api-table-data-config-config"></a>
 #### config
 Type: `object`
 Required: `false`
 
-<a name="table-apis-table-data-config-config-config-border"></a>
+Table configuration.
+
+<a name="table-api-table-data-config-config-config-border"></a>
 ##### config.border
+
 Type: `{ [type: string]: string }`
-Required: `false`
+
 Default: see #predefined_border_templates
 
 To custom border. The object with keys are any of:
@@ -176,10 +169,11 @@ console.log(table(data, config));
 └────┴────┴────┘
 ```
 
-<a name="table-apis-table-data-config-config-config-drawverticalline"></a>
+<a name="table-api-table-data-config-config-config-drawverticalline"></a>
 ##### config.drawVerticalLine
+
 Type: `(index: number, columnCount: number) => boolean`
-Required: `false`
+
 Default: `() => true`
 
 Used to tell whether to draw a vertical line. This callback is called for each vertical border of the table.
@@ -219,10 +213,11 @@ console.log(table(data, options));
 
 ```
 
-<a name="table-apis-table-data-config-config-config-drawhorizontalline"></a>
+<a name="table-api-table-data-config-config-config-drawhorizontalline"></a>
 ##### config.drawHorizontalLine
+
 Type: `(index: number, rowCount: number) => boolean`
-Required: `false`
+
 Default: `() => true`
 
 Used to tell whether to draw a horizontal line. This callback is called for each horizontal border of the table.
@@ -260,10 +255,11 @@ console.log(table(data, options));
 
 ```
 
-<a name="table-apis-table-data-config-config-config-singleline"></a>
+<a name="table-api-table-data-config-config-config-singleline"></a>
 ##### config.singleLine
+
 Type: `boolean`
-Required: `false`
+
 Default: `false`
 
 If true, horizontal lines inside the table are not drawn.
@@ -300,13 +296,14 @@ console.log(table(data, config));
 ╚═════════════╧═════╧══════════╧═══════╧════════╧══════════════╧═══════════════════╝
 ```
 
-<a name="table-apis-table-data-config-config-config-columns"></a>
+
+<a name="table-api-table-data-config-config-config-columns"></a>
 ##### config.columns
 Type: `Column[] | { [index: number]: Column }`
 
 Column specific configuration.
 
-<a name="table-apis-table-data-config-config-config-columns-config-columns-width"></a>
+<a name="table-api-table-data-config-config-config-columns-config-columns-width"></a>
 ###### config.columns[*].width
 Type: `number`
 Default: the maximum width of cells in the column
@@ -342,7 +339,7 @@ console.log(table(data, options));
 ╚════╧════════════╧════╝
 ```
 
-<a name="table-apis-table-data-config-config-config-columns-config-columns-alignment"></a>
+<a name="table-api-table-data-config-config-config-columns-config-columns-alignment"></a>
 ###### config.columns[*].alignment
 Type: `'center' | 'justify' | 'left' | 'right'`
 Default: `'left'`
@@ -381,14 +378,14 @@ console.log(table(data, config));
 ╚════════════╧════════════╧════════════╧════════════╝
 ```
 
-<a name="table-apis-table-data-config-config-config-columns-config-columns-paddingleft"></a>
+<a name="table-api-table-data-config-config-config-columns-config-columns-paddingleft"></a>
 ###### config.columns[*].paddingLeft
 Type: `number`
 Default: `1`
 
 The number of whitespaces used to pad the content on the left.
 
-<a name="table-apis-table-data-config-config-config-columns-config-columns-paddingright"></a>
+<a name="table-api-table-data-config-config-config-columns-config-columns-paddingright"></a>
 ###### config.columns[*].paddingRight
 Type: `number`
 Default: `1`
@@ -429,7 +426,7 @@ console.log(table(data, config));
 ╚══════╧══════╧════╝
 ```
 
-<a name="table-apis-table-data-config-config-config-columns-config-columns-truncate"></a>
+<a name="table-api-table-data-config-config-config-columns-config-columns-truncate"></a>
 ###### config.columns[*].truncate
 Type: `number`
 Default: `Infinity`
@@ -464,7 +461,7 @@ console.log(table(data, config));
 ╚══════════════════════╝
 ```
 
-<a name="table-apis-table-data-config-config-config-columns-config-columns-wrapword"></a>
+<a name="table-api-table-data-config-config-config-columns-config-columns-wrapword"></a>
 ###### config.columns[*].wrapWord
 Type: `boolean`
 Default: `false`
@@ -536,14 +533,15 @@ console.log(table(data, config));
 
 ```
 
-<a name="table-apis-table-data-config-config-config-columndefault"></a>
+<a name="table-api-table-data-config-config-config-columndefault"></a>
 ##### config.columnDefault
+
 Type: `Column`
 
 Default configuration for all columns. Column specific settings will overwrite the default values.
 
 
-<a name="table-apis-createstream-config"></a>
+<a name="table-api-createstream-config"></a>
 ### createStream(config)
 
 `table` package exports `createStream` function used to draw a table and append rows.
@@ -569,7 +567,7 @@ setInterval(() => {
 }, 500);
 ```
 
-![Streaming current date.](./.README/streaming.gif)
+![Streaming current date.](./streaming.gif)
 
 `table` package uses ANSI escape codes to overwrite the output of the last line when a new row is printed.
 
@@ -613,14 +611,14 @@ setInterval(() => {
 }, 500);
 ```
 
-![Streaming random data.](./.README/streaming-random.gif)
+![Streaming random data.](./streaming-random.gif)
 
-<a name="table-apis-getbordercharacters-template"></a>
+<a name="table-api-getbordercharacters-template"></a>
 ### getBorderCharacters(template)
 
 You can load one of the predefined border templates using `getBorderCharacters` function.
 
-<a name="table-apis-getbordercharacters-template-template"></a>
+<a name="table-api-getbordercharacters-template-template"></a>
 #### template
 Type: `'honeywell' | 'norc' | 'ramac' | 'void'`
 Required: `true`
@@ -688,7 +686,7 @@ table(data, config);
 
 Raise [an issue](https://github.com/gajus/table/issues) if you'd like to contribute a new border template.
 
-<a name="table-apis-getbordercharacters-template-borderless-table"></a>
+<a name="table-api-getbordercharacters-template-borderless-table"></a>
 #### Borderless Table
 
 Simply using "void" border character template creates a table with a lot of unnecessary spacing.

@@ -1,6 +1,7 @@
 ##### config.border
+
 Type: `{ [type: string]: string }`
-Required: `false`
+
 Default: see #predefined_border_templates
 
 To custom border. The object with keys are any of:

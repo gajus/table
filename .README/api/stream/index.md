@@ -23,7 +23,7 @@ setInterval(() => {
 }, 500);
 ```
 
-![Streaming current date.](./.README/streaming.gif)
+![Streaming current date.](./streaming.gif)
 
 `table` package uses ANSI escape codes to overwrite the output of the last line when a new row is printed.
 
@@ -67,4 +67,4 @@ setInterval(() => {
 }, 500);
 ```
 
-![Streaming random data.](./.README/streaming-random.gif)
+![Streaming random data.](./streaming-random.gif)
