@@ -1,14 +1,21 @@
 ###### config.columns[*].paddingLeft
-Type: `number`
-Default: `1`
+
+**Type**: `number`
+
+**Default**: `1`
 
 The number of whitespaces used to pad the content on the left.
 
 ###### config.columns[*].paddingRight
-Type: `number`
-Default: `1`
+
+**Type**: `number`
+
+**Default**: `1`
 
 The number of whitespaces used to pad the content on the right.
+
+The `paddingLeft` and `paddingRight` options do not count on the column width. So the column has `width = 5`, `paddingLeft = 2` and `paddingRight = 2` will have the total width is `9`.
+
 
 ```js
 const data = [

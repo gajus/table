@@ -1,6 +1,8 @@
 ###### config.columns[*].alignment
-Type: `'center' | 'justify' | 'left' | 'right'`
-Default: `'left'`
+
+**Type**: `'center' | 'justify' | 'left' | 'right'`
+
+**Default**: `'left'`
 
 Cell content horizontal alignment
 
@@ -16,10 +18,10 @@ const config = {
     width: 10,
   },
   columns: [
-    {alignment: 'left'},
-    {alignment: 'center'},
-    {alignment: 'right'},
-    {alignment: 'justify'},
+    { alignment: 'left' },
+    { alignment: 'center' },
+    { alignment: 'right' },
+    { alignment: 'justify' }
   ],
 };
 

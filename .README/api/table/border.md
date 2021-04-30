@@ -1,28 +1,14 @@
 ##### config.border
 
-Type: `{ [type: string]: string }`
+**Type:** `{ [type: string]: string }`
 
-Default: see #predefined_border_templates
+**Default:** `honeywell` [template](#table-api-getbordercharacters-template)
 
-To custom border. The object with keys are any of:
-- topLeft
-- topRight
-- topBody
-- topJoin
-
-- bottomLeft
-- bottomRight
-- bottomBody
-- bottomJoin
-
-- joinLeft
-- joinRight
-- joinBody
-- joinRight
-
-- bodyLeft
-- bodyRight
-- bodyJoin
+Custom borders. The keys are any of:
+- `topLeft`, `topRight`, `topBody`,`topJoin`
+- `bottomLeft`, `bottomRight`, `bottomBody`, `bottomJoin`
+- `joinLeft`, `joinRight`, `joinBody`, `joinJoin`
+- `bodyLeft`, `bodyRight`, `bodyJoin`
 
 ```js
 const data = [

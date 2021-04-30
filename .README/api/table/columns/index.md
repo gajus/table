@@ -1,4 +1,5 @@
 ##### config.columns
-Type: `Column[] | { [index: number]: Column }`
 
-Column specific configuration.
+**Type**: `Column[] | { [columnIndex: number]: Column }`
+
+Column specific configurations.

@@ -1,17 +1,14 @@
-### getBorderCharacters(template)
+### getBorderCharacters
+
+**Parameter**:
+ - **_template_**
+   - **Type**: `'honeywell' | 'norc' | 'ramac' | 'void'`
+   - **Required**: `true`
 
 You can load one of the predefined border templates using `getBorderCharacters` function.
 
-#### template
-Type: `'honeywell' | 'norc' | 'ramac' | 'void'`
-Required: `true`
-Return:  #config.border
-
 ```js
-import {
-  table,
-  getBorderCharacters
-} from 'table';
+import { table, getBorderCharacters } from 'table';
 
 const data = [
   ['0A', '0B', '0C'],
@@ -23,7 +20,7 @@ const config = {
   border: getBorderCharacters(`name of the template`)
 };
 
-table(data, config);
+console.log(table(data, config));
 ```
 
 ```
@@ -76,18 +73,16 @@ Simply using "void" border character template creates a table with a lot of unne
 To create a more pleasant to the eye table, reset the padding and remove the joining rows, e.g.
 
 ```js
-let output;
 
-output = table(data, {
-    border: getBorderCharacters(`void`),
+const output = table(data, {
+    border: getBorderCharacters('void'),
     columnDefault: {
         paddingLeft: 0,
         paddingRight: 1
     },
-    drawHorizontalLine: () => {
-        return false
+    drawHorizontalLine: () => false
     }
-});
+);
 
 console.log(output);
 ```

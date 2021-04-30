@@ -2,12 +2,11 @@
 
 `table` package exports `createStream` function used to draw a table and append rows.
 
-`createStream` requires `columnDefault.width` and `columnCount` configuration properties.
+The function accepts the same configuration as `table`'s, except `config.columnDefault.width` and `config.columnCount` must be provided.
+
 
 ```js
-import {
-  createStream
-} from 'table';
+import { createStream } from 'table';
 
 const config = {
   columnDefault: {
@@ -23,7 +22,7 @@ setInterval(() => {
 }, 500);
 ```
 
-![Streaming current date.](./streaming.gif)
+![Streaming current date.](./.README/api/stream/streaming.gif)
 
 `table` package uses ANSI escape codes to overwrite the output of the last line when a new row is printed.
 
@@ -32,9 +31,7 @@ The underlying implementation is explained in this [Stack Overflow answer](http:
 Streaming supports all of the configuration properties and functionality of a static table (such as auto text wrapping, alignment and padding), e.g.
 
 ```js
-import {
-  createStream
-} from 'table';
+import { createStream } from 'table';
 
 import _ from 'lodash';
 
@@ -67,4 +64,4 @@ setInterval(() => {
 }, 500);
 ```
 
-![Streaming random data.](./streaming-random.gif)
+![Streaming random data.](./.README/api/stream/streaming-random.gif)

@@ -1,6 +1,8 @@
 <a name="table"></a>
 # Table
 
+> Produces a string that represents array data in a text table.
+
 [![Travis build status](http://img.shields.io/travis/gajus/table/master.svg?style=flat-square)](https://travis-ci.org/gajus/table)
 [![Coveralls](https://img.shields.io/coveralls/gajus/table.svg?style=flat-square)](https://coveralls.io/github/gajus/table)
 [![NPM version](http://img.shields.io/npm/v/table.svg?style=flat-square)](https://www.npmjs.org/package/table)
@@ -14,12 +16,10 @@
     * [API](#table-api)
         * [table(data, config = {})](#table-api-table-data-config)
         * [createStream(config)](#table-api-createstream-config)
-        * [getBorderCharacters(template)](#table-api-getbordercharacters-template)
+        * [getBorderCharacters](#table-api-getbordercharacters)
 
 
-Produces a string that represents array data in a text table.
-
-![Demo of table displaying a list of missions to the Moon.](./demo.png)
+![Demo of table displaying a list of missions to the Moon.](./.README/demo.png)
 
 <a name="table-features"></a>
 ## Features
@@ -37,7 +37,6 @@ Produces a string that represents array data in a text table.
 
 ```bash
 npm install table
-
 ```
 
 [![Buy Me A Coffee](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/gajus)
@@ -48,12 +47,10 @@ npm install table
 ## Usage
 
 ```js
-import {
-  table
-} from 'table';
+import { table } from 'table';
 
 // Using commonjs?
-// const {table} = require('table');
+// const { table } = require('table');
 
 const data = [
     ['0A', '0B', '0C'],
@@ -61,9 +58,7 @@ const data = [
     ['2A', '2B', '2C']
 ];
 
-output = table(data);
-
-console.log(output);
+console.log(table(data));
 ```
 
 ```
@@ -84,47 +79,29 @@ console.log(output);
 <a name="table-api-table-data-config"></a>
 ### table(data, config = {})
 
+**Parameters:**
+- **_data_**: The data to display
+  - **Type**: `any[][]`
+  - **Required**: `true`
+
+- **_config_**: Table configuration
+  - **Type**: `object`
+  - **Required**: `false`
+
 Returns the string in the table format
 
-<a name="table-api-table-data-config-data"></a>
-#### data
-Type: `any[][]`
-
-Table data to display. It should be a non-empty array of non-empty equal-length arrays. The `table` will convert all values to string internally.
-
-<a name="table-api-table-data-config-config"></a>
-#### config
-Type: `object`
-Required: `false`
-
-Table configuration.
-
-<a name="table-api-table-data-config-config-config-border"></a>
+<a name="table-api-table-data-config-config-border"></a>
 ##### config.border
 
-Type: `{ [type: string]: string }`
+**Type:** `{ [type: string]: string }`
 
-Default: see #predefined_border_templates
+**Default:** `honeywell` [template](#table-api-getbordercharacters-template)
 
-To custom border. The object with keys are any of:
-- topLeft
-- topRight
-- topBody
-- topJoin
-
-- bottomLeft
-- bottomRight
-- bottomBody
-- bottomJoin
-
-- joinLeft
-- joinRight
-- joinBody
-- joinRight
-
-- bodyLeft
-- bodyRight
-- bodyJoin
+Custom borders. The keys are any of:
+- `topLeft`, `topRight`, `topBody`,`topJoin`
+- `bottomLeft`, `bottomRight`, `bottomBody`, `bottomJoin`
+- `joinLeft`, `joinRight`, `joinBody`, `joinJoin`
+- `bodyLeft`, `bodyRight`, `bodyJoin`
 
 ```js
 const data = [
@@ -169,15 +146,15 @@ console.log(table(data, config));
 └────┴────┴────┘
 ```
 
-<a name="table-api-table-data-config-config-config-drawverticalline"></a>
+<a name="table-api-table-data-config-config-drawverticalline"></a>
 ##### config.drawVerticalLine
 
-Type: `(index: number, columnCount: number) => boolean`
+**Type**: `(lineIndex: number, columnCount: number) => boolean`
 
-Default: `() => true`
+**Default**: `() => true`
 
 Used to tell whether to draw a vertical line. This callback is called for each vertical border of the table.
-If the table has `n` columns then the `index` parameter is alternatively received all numbers in range `0..n` inclusively.
+If the table has `n` columns then the `index` parameter is alternatively received all numbers in range `[0, n]` inclusively.
 
 ```js
 const data = [
@@ -189,12 +166,12 @@ const data = [
 ];
 
 const config = {
-  drawVerticalLine: (index, columnCount) => {
-    return index === 0 || index === columnCount;
+  drawVerticalLine: (lineIndex, columnCount) => {
+    return lineIndex === 0 || lineIndex === columnCount;
   }
 };
 
-console.log(table(data, options));
+console.log(table(data, config));
 
 ```
 
@@ -213,15 +190,15 @@ console.log(table(data, options));
 
 ```
 
-<a name="table-api-table-data-config-config-config-drawhorizontalline"></a>
+<a name="table-api-table-data-config-config-drawhorizontalline"></a>
 ##### config.drawHorizontalLine
 
-Type: `(index: number, rowCount: number) => boolean`
+**Type**: `(lineIndex: number, rowCount: number) => boolean`
 
-Default: `() => true`
+**Default**: `() => true`
 
 Used to tell whether to draw a horizontal line. This callback is called for each horizontal border of the table.
-If the table has `n` rows then the `index` parameter is alternatively received all numbers in range `0..n` inclusively.
+If the table has `n` rows then the `index` parameter is alternatively received all numbers in range `[0, n]` inclusively.
 
 ```js
 const data = [
@@ -233,12 +210,12 @@ const data = [
 ];
 
 const config = {
-  drawHorizontalLine: (index, rowCount) => {
-    return index === 0 || index === 1 || index === rowCount - 1 || index === rowCount;
+  drawHorizontalLine: (lineIndex, rowCount) => {
+    return lineIndex === 0 || lineIndex === 1 || lineIndex === rowCount - 1 || lineIndex === rowCount;
   }
 };
 
-console.log(table(data, options));
+console.log(table(data, config));
 
 ```
 
@@ -255,14 +232,14 @@ console.log(table(data, options));
 
 ```
 
-<a name="table-api-table-data-config-config-config-singleline"></a>
+<a name="table-api-table-data-config-config-singleline"></a>
 ##### config.singleLine
 
 Type: `boolean`
 
 Default: `false`
 
-If true, horizontal lines inside the table are not drawn.
+If true, horizontal lines inside the table are not drawn. This option also overrides the `config.drawHorizontalLine` if specified.
 
 ```js
 const data = [
@@ -297,18 +274,21 @@ console.log(table(data, config));
 ```
 
 
-<a name="table-api-table-data-config-config-config-columns"></a>
+<a name="table-api-table-data-config-config-columns"></a>
 ##### config.columns
-Type: `Column[] | { [index: number]: Column }`
 
-Column specific configuration.
+**Type**: `Column[] | { [columnIndex: number]: Column }`
 
-<a name="table-api-table-data-config-config-config-columns-config-columns-width"></a>
+Column specific configurations.
+
+<a name="table-api-table-data-config-config-columns-config-columns-width"></a>
 ###### config.columns[*].width
-Type: `number`
-Default: the maximum width of cells in the column
 
-Column width
+**Type**: `number`
+
+**Default**: the maximum cell widths of the columns
+
+Column width.
 
 ```js
 
@@ -318,15 +298,13 @@ const data = [
   ['2A', '2B', '2C']
 ];
 
-const options = {
+const config = {
   columns: {
-    1: {
-      width: 10
-    }
+    1: { width: 10 }
   }
 };
 
-console.log(table(data, options));
+console.log(table(data, config));
 ```
 
 ```
@@ -339,10 +317,12 @@ console.log(table(data, options));
 ╚════╧════════════╧════╝
 ```
 
-<a name="table-api-table-data-config-config-config-columns-config-columns-alignment"></a>
+<a name="table-api-table-data-config-config-columns-config-columns-alignment"></a>
 ###### config.columns[*].alignment
-Type: `'center' | 'justify' | 'left' | 'right'`
-Default: `'left'`
+
+**Type**: `'center' | 'justify' | 'left' | 'right'`
+
+**Default**: `'left'`
 
 Cell content horizontal alignment
 
@@ -358,10 +338,10 @@ const config = {
     width: 10,
   },
   columns: [
-    {alignment: 'left'},
-    {alignment: 'center'},
-    {alignment: 'right'},
-    {alignment: 'justify'},
+    { alignment: 'left' },
+    { alignment: 'center' },
+    { alignment: 'right' },
+    { alignment: 'justify' }
   ],
 };
 
@@ -378,19 +358,26 @@ console.log(table(data, config));
 ╚════════════╧════════════╧════════════╧════════════╝
 ```
 
-<a name="table-api-table-data-config-config-config-columns-config-columns-paddingleft"></a>
+<a name="table-api-table-data-config-config-columns-config-columns-paddingleft"></a>
 ###### config.columns[*].paddingLeft
-Type: `number`
-Default: `1`
+
+**Type**: `number`
+
+**Default**: `1`
 
 The number of whitespaces used to pad the content on the left.
 
-<a name="table-api-table-data-config-config-config-columns-config-columns-paddingright"></a>
+<a name="table-api-table-data-config-config-columns-config-columns-paddingright"></a>
 ###### config.columns[*].paddingRight
-Type: `number`
-Default: `1`
+
+**Type**: `number`
+
+**Default**: `1`
 
 The number of whitespaces used to pad the content on the right.
+
+The `paddingLeft` and `paddingRight` options do not count on the column width. So the column has `width = 5`, `paddingLeft = 2` and `paddingRight = 2` will have the total width is `9`.
+
 
 ```js
 const data = [
@@ -426,13 +413,15 @@ console.log(table(data, config));
 ╚══════╧══════╧════╝
 ```
 
-<a name="table-api-table-data-config-config-config-columns-config-columns-truncate"></a>
+<a name="table-api-table-data-config-config-columns-config-columns-truncate"></a>
 ###### config.columns[*].truncate
-Type: `number`
-Default: `Infinity`
+
+**Type**: `number`
+
+**Default**: `Infinity`
 
 Number of characters are which the content will be truncated.
-To handle a content that overflows the container width, `table` package implements [text wrapping](#table-usage-text-wrapping). However, sometimes you may want to truncate content that is too long to be displayed in the table.
+To handle a content that overflows the container width, `table` package implements [text wrapping](#config.columns[*].wrapWord). However, sometimes you may want to truncate content that is too long to be displayed in the table.
 
 ```js
 const data = [
@@ -440,12 +429,12 @@ const data = [
 ];
 
 const config = {
-  columns: {
-    0: {
+  columns: [
+    {
       width: 20,
       truncate: 100
     }
-  }
+  ]
 };
 
 console.log(table(data, config));
@@ -461,25 +450,24 @@ console.log(table(data, config));
 ╚══════════════════════╝
 ```
 
-<a name="table-api-table-data-config-config-config-columns-config-columns-wrapword"></a>
+<a name="table-api-table-data-config-config-columns-config-columns-wrapword"></a>
 ###### config.columns[*].wrapWord
-Type: `boolean`
-Default: `false`
 
-`table` package implements auto text wrapping, i.e. text that has width greater than the container width will be separated into multiple lines at the nearest space or one of the special characters: `\|/_.,;-`.
+**Type**: `boolean`
+
+**Default**: `false`
+
+The `table` package implements auto text wrapping, i.e. text that has width greater than the container width will be separated into multiple lines at the nearest space or one of the special characters: `\|/_.,;-`.
 
 When `wrapWord` is `false`:
+
 ```js
 const data = [
     ['Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pulvinar nibh sed mauris convallis dapibus. Nunc venenatis tempus nulla sit amet viverra.']
 ];
 
 const config = {
-  columns: [
-    {
-      width: 20
-    }
-  ]
+  columns: [ { width: 20 } ]
 };
 
 console.log(table(data, config));
@@ -533,10 +521,10 @@ console.log(table(data, config));
 
 ```
 
-<a name="table-api-table-data-config-config-config-columndefault"></a>
+<a name="table-api-table-data-config-config-columndefault"></a>
 ##### config.columnDefault
 
-Type: `Column`
+**Type**: `Column`
 
 Default configuration for all columns. Column specific settings will overwrite the default values.
 
@@ -546,12 +534,11 @@ Default configuration for all columns. Column specific settings will overwrite t
 
 `table` package exports `createStream` function used to draw a table and append rows.
 
-`createStream` requires `columnDefault.width` and `columnCount` configuration properties.
+The function accepts the same configuration as `table`'s, except `config.columnDefault.width` and `config.columnCount` must be provided.
+
 
 ```js
-import {
-  createStream
-} from 'table';
+import { createStream } from 'table';
 
 const config = {
   columnDefault: {
@@ -567,7 +554,7 @@ setInterval(() => {
 }, 500);
 ```
 
-![Streaming current date.](./streaming.gif)
+![Streaming current date.](./.README/api/stream/streaming.gif)
 
 `table` package uses ANSI escape codes to overwrite the output of the last line when a new row is printed.
 
@@ -576,9 +563,7 @@ The underlying implementation is explained in this [Stack Overflow answer](http:
 Streaming supports all of the configuration properties and functionality of a static table (such as auto text wrapping, alignment and padding), e.g.
 
 ```js
-import {
-  createStream
-} from 'table';
+import { createStream } from 'table';
 
 import _ from 'lodash';
 
@@ -611,24 +596,21 @@ setInterval(() => {
 }, 500);
 ```
 
-![Streaming random data.](./streaming-random.gif)
+![Streaming random data.](./.README/api/stream/streaming-random.gif)
 
-<a name="table-api-getbordercharacters-template"></a>
-### getBorderCharacters(template)
+
+<a name="table-api-getbordercharacters"></a>
+### getBorderCharacters
+
+**Parameter**:
+ - **_template_**
+   - **Type**: `'honeywell' | 'norc' | 'ramac' | 'void'`
+   - **Required**: `true`
 
 You can load one of the predefined border templates using `getBorderCharacters` function.
 
-<a name="table-api-getbordercharacters-template-template"></a>
-#### template
-Type: `'honeywell' | 'norc' | 'ramac' | 'void'`
-Required: `true`
-Return:  #config.border
-
 ```js
-import {
-  table,
-  getBorderCharacters
-} from 'table';
+import { table, getBorderCharacters } from 'table';
 
 const data = [
   ['0A', '0B', '0C'],
@@ -640,7 +622,7 @@ const config = {
   border: getBorderCharacters(`name of the template`)
 };
 
-table(data, config);
+console.log(table(data, config));
 ```
 
 ```
@@ -686,7 +668,7 @@ table(data, config);
 
 Raise [an issue](https://github.com/gajus/table/issues) if you'd like to contribute a new border template.
 
-<a name="table-api-getbordercharacters-template-borderless-table"></a>
+<a name="table-api-getbordercharacters-borderless-table"></a>
 #### Borderless Table
 
 Simply using "void" border character template creates a table with a lot of unnecessary spacing.
@@ -694,18 +676,16 @@ Simply using "void" border character template creates a table with a lot of unne
 To create a more pleasant to the eye table, reset the padding and remove the joining rows, e.g.
 
 ```js
-let output;
 
-output = table(data, {
-    border: getBorderCharacters(`void`),
+const output = table(data, {
+    border: getBorderCharacters('void'),
     columnDefault: {
         paddingLeft: 0,
         paddingRight: 1
     },
-    drawHorizontalLine: () => {
-        return false
+    drawHorizontalLine: () => false
     }
-});
+);
 
 console.log(output);
 ```

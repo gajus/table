@@ -1,10 +1,8 @@
 ```js
-import {
-  table
-} from 'table';
+import { table } from 'table';
 
 // Using commonjs?
-// const {table} = require('table');
+// const { table } = require('table');
 
 const data = [
     ['0A', '0B', '0C'],
@@ -12,9 +10,7 @@ const data = [
     ['2A', '2B', '2C']
 ];
 
-output = table(data);
-
-console.log(output);
+console.log(table(data));
 ```
 
 ```

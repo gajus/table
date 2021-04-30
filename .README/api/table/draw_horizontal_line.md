@@ -1,11 +1,11 @@
 ##### config.drawHorizontalLine
 
-Type: `(index: number, rowCount: number) => boolean`
+**Type**: `(lineIndex: number, rowCount: number) => boolean`
 
-Default: `() => true`
+**Default**: `() => true`
 
 Used to tell whether to draw a horizontal line. This callback is called for each horizontal border of the table.
-If the table has `n` rows then the `index` parameter is alternatively received all numbers in range `0..n` inclusively.
+If the table has `n` rows then the `index` parameter is alternatively received all numbers in range `[0, n]` inclusively.
 
 ```js
 const data = [
@@ -17,12 +17,12 @@ const data = [
 ];
 
 const config = {
-  drawHorizontalLine: (index, rowCount) => {
-    return index === 0 || index === 1 || index === rowCount - 1 || index === rowCount;
+  drawHorizontalLine: (lineIndex, rowCount) => {
+    return lineIndex === 0 || lineIndex === 1 || lineIndex === rowCount - 1 || lineIndex === rowCount;
   }
 };
 
-console.log(table(data, options));
+console.log(table(data, config));
 
 ```
 

@@ -1,5 +1,7 @@
 # Table
 
+> Produces a string that represents array data in a text table.
+
 [![Travis build status](http://img.shields.io/travis/gajus/table/master.svg?style=flat-square)](https://travis-ci.org/gajus/table)
 [![Coveralls](https://img.shields.io/coveralls/gajus/table.svg?style=flat-square)](https://coveralls.io/github/gajus/table)
 [![NPM version](http://img.shields.io/npm/v/table.svg?style=flat-square)](https://www.npmjs.org/package/table)
@@ -8,9 +10,7 @@
 
 {"gitdown": "contents"}
 
-Produces a string that represents array data in a text table.
-
-![Demo of table displaying a list of missions to the Moon.](./demo.png)
+![Demo of table displaying a list of missions to the Moon.](./.README/demo.png)
 
 ## Features
 
@@ -47,4 +47,5 @@ Produces a string that represents array data in a text table.
 {"gitdown": "include", "file": "./api/table/column_default.md"}
 
 {"gitdown": "include", "file": "./api/stream/index.md"}
+
 {"gitdown": "include", "file": "./api/get_border_characters.md"}
