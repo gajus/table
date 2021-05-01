@@ -1,3 +1,5 @@
+## Install
+
 ```bash
 npm install table
 ```

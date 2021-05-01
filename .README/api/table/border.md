@@ -8,6 +8,7 @@ Custom borders. The keys are any of:
 - `bottomLeft`, `bottomRight`, `bottomBody`, `bottomJoin`
 - `joinLeft`, `joinRight`, `joinBody`, `joinJoin`
 - `bodyLeft`, `bodyRight`, `bodyJoin`
+- `headerJoin`
 
 ```js
 const data = [

@@ -150,4 +150,53 @@ describe('makeConfig', () => {
       });
     });
   });
+
+  context('header', () => {
+    context('when no given', () => {
+      it('returns undefined', () => {
+        const config = makeConfig(rows, {header: undefined});
+
+        expect(config.header).to.equal(undefined);
+      });
+    });
+
+    context('when given content only', () => {
+      it('returns the default config', () => {
+        const config = makeConfig(rows, {header: {
+          content: 'bb',
+        }});
+
+        expect(config.header).to.deep.equal({
+          alignment: 'center',
+          content: 'bb',
+          paddingLeft: 1,
+          paddingRight: 1,
+          truncate: Number.POSITIVE_INFINITY,
+          wrapWord: false,
+        });
+      });
+    });
+
+    context('when given extra configs', () => {
+      it('overrides the default', () => {
+        const config = makeConfig(rows, {header: {
+          alignment: 'left',
+          content: 'bb',
+          paddingLeft: 2,
+          paddingRight: 3,
+          truncate: 5,
+          wrapWord: true,
+        }});
+
+        expect(config.header).to.deep.equal({
+          alignment: 'left',
+          content: 'bb',
+          paddingLeft: 2,
+          paddingRight: 3,
+          truncate: 5,
+          wrapWord: true,
+        });
+      });
+    });
+  });
 });

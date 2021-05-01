@@ -22,11 +22,7 @@
 * Configurable column width.
 * Text wrapping.
 
-## Install
-
 {"gitdown": "include", "file": "./install.md"}
-
-## Usage
 
 {"gitdown": "include", "file": "./usage.md"}
 
@@ -44,7 +40,10 @@
 {"gitdown": "include", "file": "./api/table/columns/padding.md"}
 {"gitdown": "include", "file": "./api/table/columns/truncate.md"}
 {"gitdown": "include", "file": "./api/table/columns/wrapWord.md"}
+
 {"gitdown": "include", "file": "./api/table/column_default.md"}
+
+{"gitdown": "include", "file": "./api/table/header.md"}
 
 {"gitdown": "include", "file": "./api/stream/index.md"}
 

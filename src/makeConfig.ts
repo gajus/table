@@ -5,10 +5,10 @@ import type {
   TableUserConfig,
 } from './types/api';
 import type {
-  ColumnConfig, Row, TableConfig,
+  ColumnConfig, HeaderConfig, Row, TableConfig,
 } from './types/internal';
 import {
-  makeBorder,
+  makeBorderConfig,
 } from './utils';
 import {
   validateConfig,
@@ -20,7 +20,7 @@ import {
  */
 const makeColumns = (rows: Row[],
   columns?: Indexable<ColumnUserConfig>,
-  columnDefault?: ColumnUserConfig): Indexable<ColumnConfig> => {
+  columnDefault?: ColumnUserConfig): ColumnConfig[] => {
   const columnWidths = calculateColumnWidths(rows);
 
   return rows[0].map((_, columnIndex) => {
@@ -37,6 +37,21 @@ const makeColumns = (rows: Row[],
   });
 };
 
+const makeHeaderConfig = (config: TableUserConfig): HeaderConfig | undefined => {
+  if (!config.header) {
+    return undefined;
+  }
+
+  return {
+    alignment: 'center',
+    paddingLeft: 1,
+    paddingRight: 1,
+    truncate: Number.POSITIVE_INFINITY,
+    wrapWord: false,
+    ...config.header,
+  };
+};
+
 /**
  * Makes a new configuration object out of the userConfig object
  * using default values for the missing configuration properties.
@@ -49,7 +64,7 @@ export const makeConfig = (rows: Row[], userConfig: TableUserConfig = {}): Table
 
   return {
     ...config,
-    border: makeBorder(config.border),
+    border: makeBorderConfig(config.border),
     columns: makeColumns(rows, config.columns, config.columnDefault),
     drawHorizontalLine: config.drawHorizontalLine ?? (() => {
       return true;
@@ -57,6 +72,7 @@ export const makeConfig = (rows: Row[], userConfig: TableUserConfig = {}): Table
     drawVerticalLine: config.drawVerticalLine ?? (() => {
       return true;
     }),
+    header: makeHeaderConfig(config),
     singleLine: config.singleLine ?? false,
   };
 };

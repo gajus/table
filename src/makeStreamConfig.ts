@@ -9,7 +9,7 @@ import type {
   StreamConfig,
 } from './types/internal';
 import {
-  makeBorder,
+  makeBorderConfig,
 } from './utils';
 import {
   validateConfig,
@@ -19,9 +19,9 @@ import {
  * Creates a configuration for every column using default
  * values for the missing configuration properties.
  */
-const makeColumns = (columnCount: number,
+const makeColumnsConfig = (columnCount: number,
   columns: Indexable<ColumnUserConfig> = {},
-  columnDefault: StreamUserConfig['columnDefault']): Indexable<ColumnConfig> => {
+  columnDefault: StreamUserConfig['columnDefault']): ColumnConfig[] => {
   return Array.from({length: columnCount}).map((_, index) => {
     return {
       alignment: 'left',
@@ -49,12 +49,11 @@ export const makeStreamConfig = (userConfig: StreamUserConfig): StreamConfig => 
   }
 
   return {
-    ...config,
-    border: makeBorder(config.border),
-    columnCount: config.columnCount,
-    columns: makeColumns(config.columnCount, config.columns, config.columnDefault),
-    drawVerticalLine: config.drawVerticalLine ?? (() => {
+    drawVerticalLine: () => {
       return true;
-    }),
+    },
+    ...config,
+    border: makeBorderConfig(config.border),
+    columns: makeColumnsConfig(config.columnCount, config.columns, config.columnDefault),
   };
 };

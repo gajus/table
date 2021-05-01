@@ -20,6 +20,7 @@ export const getBorderCharacters = (name: string): BorderConfig => {
       bodyLeft: '║',
       bodyRight: '║',
       bodyJoin: '│',
+      headerJoin: '┬',
 
       joinBody: '─',
       joinLeft: '╟',
@@ -43,6 +44,7 @@ export const getBorderCharacters = (name: string): BorderConfig => {
       bodyLeft: '│',
       bodyRight: '│',
       bodyJoin: '│',
+      headerJoin: '┬',
 
       joinBody: '─',
       joinLeft: '├',
@@ -66,6 +68,7 @@ export const getBorderCharacters = (name: string): BorderConfig => {
       bodyLeft: '|',
       bodyRight: '|',
       bodyJoin: '|',
+      headerJoin: '+',
 
       joinBody: '-',
       joinLeft: '|',
@@ -89,6 +92,7 @@ export const getBorderCharacters = (name: string): BorderConfig => {
       bodyLeft: '',
       bodyRight: '',
       bodyJoin: '',
+      headerJoin: '',
 
       joinBody: '',
       joinLeft: '',

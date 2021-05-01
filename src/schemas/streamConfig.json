@@ -13,7 +13,8 @@
             "$ref": "shared.json#/definitions/column"
         },
         "columnCount": {
-            "$ref": "shared.json#/definitions/naturalNumber"
+            "type": "integer",
+            "minimum": 1
         },
         "drawVerticalLine": {
             "typeof": "function"

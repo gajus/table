@@ -6,6 +6,31 @@
         "border": {
             "$ref": "shared.json#/definitions/borders"
         },
+        "header": {
+            "type": "object",
+            "properties": {
+                "content": {
+                    "type": "string"
+                },
+                "alignment": {
+                    "$ref": "shared.json#/definitions/alignment"
+                },
+                "wrapWord": {
+                    "type": "boolean"
+                },
+                "truncate": {
+                    "type": "integer"
+                },
+                "paddingLeft": {
+                    "type": "integer"
+                },
+                "paddingRight": {
+                    "type": "integer"
+                }
+            },
+          "required": ["content"],
+          "additionalProperties": false
+        },
         "columns": {
             "$ref": "shared.json#/definitions/columns"
         },

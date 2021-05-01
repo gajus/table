@@ -55,6 +55,10 @@ const alignJustify = (subject: string, width: number): string => {
 export const alignString = (subject: string, containerWidth: number, alignment: Alignment): string => {
   const subjectWidth = stringWidth(subject);
 
+  if (subjectWidth === containerWidth) {
+    return subject;
+  }
+
   if (subjectWidth > containerWidth) {
     throw new Error('Subject parameter value width cannot be greater than the container width.');
   }

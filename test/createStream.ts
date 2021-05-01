@@ -6,11 +6,9 @@ import {
 // eslint-disable-next-line import/no-namespace
 import * as Sinon from 'sinon';
 import {
-  createStream,
-} from '../src/createStream';
-import {
   getBorderCharacters,
-} from '../src/getBorderCharacters';
+  createStream,
+} from '../src';
 
 describe('createStream', () => {
   context('"config.columnDefault.width" property is not provided', () => {

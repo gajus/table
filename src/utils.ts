@@ -44,7 +44,7 @@ export const splitAnsi = (input: string): string[] => {
  *
  * @internal
  */
-export const makeBorder = (border: BorderUserConfig | undefined): BorderConfig => {
+export const makeBorderConfig = (border: BorderUserConfig | undefined): BorderConfig => {
   return {
     ...getBorderCharacters('honeywell'),
     ...border,

@@ -4,6 +4,8 @@ import {
 
 export const openRed = '\u001b[31m';
 export const closeRed = '\u001b[39m';
+export const openBold = '\u001b[1m';
+export const closeBold = '\u001b[22m';
 
 export const stringToRed = (string: string) => {
   return openRed + string + closeRed;

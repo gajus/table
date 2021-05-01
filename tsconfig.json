@@ -1,6 +1,6 @@
 {
   "include": [
-    "src"
+    "src", "test"
   ],
   "ts-node": {
    "sourceMap": true

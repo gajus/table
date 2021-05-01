@@ -93,4 +93,33 @@ describe('drawTable', () => {
       });
     });
   });
+
+  context('header', () => {
+    it('draw properly', () => {
+      const config: TableUserConfig = {
+        ...basicConfig,
+        header: {
+          content: 'This is the long long header',
+        },
+      };
+
+      expect(table(data, config)).to.be.deep.equal(`
+╔═══════════════╗
+║ This is the l ║
+║ ong long head ║
+║      er       ║
+╟───────┬───────╢
+║ Lorem │ dolor ║
+║ ipsum │ sit   ║
+╟───────┼───────╢
+║ amet  │ conse ║
+║       │ ctetu ║
+║       │ r     ║
+╟───────┼───────╢
+║ adipi │ elit  ║
+║ scing │       ║
+╚═══════╧═══════╝
+`.trimLeft());
+    });
+  });
 });

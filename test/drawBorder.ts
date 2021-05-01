@@ -11,7 +11,14 @@ import {
   drawBorderTop,
   drawBorderJoin,
   drawBorderBottom,
+  createTableBorderGetter,
 } from '../src/drawBorder';
+import {
+  makeConfig,
+} from '../src/makeConfig';
+import type {
+  TableConfig,
+} from '../src/types/internal';
 
 const defaultDrawVerticalLine: DrawVerticalLine = () => {
   return true;
@@ -21,7 +28,7 @@ const customDrawVerticalLine: DrawVerticalLine = (index, size) => {
   return index === size - 1;
 };
 
-describe('drawBorder', () => {
+context('drawBorder', () => {
   it('draws a border using parts', () => {
     const config = {
       drawVerticalLine: defaultDrawVerticalLine,
@@ -45,7 +52,7 @@ describe('drawBorder', () => {
   });
 });
 
-describe('drawBorderTop', () => {
+context('drawBorderTop', () => {
   it('draws a border using parts', () => {
     const config: Parameters<typeof drawBorderTop>[1] = {
       border: {
@@ -91,7 +98,7 @@ describe('drawBorderTop', () => {
   });
 });
 
-describe('drawBorderJoin', () => {
+context('drawBorderJoin', () => {
   it('draws a border using parts', () => {
     const config = {
       border: {
@@ -115,7 +122,7 @@ describe('drawBorderJoin', () => {
   });
 });
 
-describe('drawBorderBottom', () => {
+context('drawBorderBottom', () => {
   it('draws a border using parts', () => {
     const config = {
       border: {
@@ -136,5 +143,39 @@ describe('drawBorderBottom', () => {
         ...config,
         drawVerticalLine: customDrawVerticalLine,
       })).to.equal('═════╧══════════\n');
+  });
+});
+
+context('tableBorderGetter', () => {
+  context('when config.header is undefined', () => {
+    it('draw the table border normally', () => {
+      const config: TableConfig = makeConfig([['a', 'b', 'c']], {
+        header: undefined,
+      });
+
+      const getter = createTableBorderGetter([2, 1, 3], config);
+
+      expect(getter(0, 3)).to.equal('╔══╤═╤═══╗\n');
+      expect(getter(1, 3)).to.equal('╟──┼─┼───╢\n');
+      expect(getter(2, 3)).to.equal('╟──┼─┼───╢\n');
+      expect(getter(3, 3)).to.equal('╚══╧═╧═══╝\n');
+    });
+  });
+
+  context('when config.header is defined', () => {
+    it('draws the borders that modify for header', () => {
+      const config: TableConfig = makeConfig([['a', 'b', 'c']], {
+        header: {
+          content: 'ddd',
+        },
+      });
+
+      const getter = createTableBorderGetter([2, 1, 3], config);
+
+      expect(getter(0, 3)).to.equal('╔════════╗\n');
+      expect(getter(1, 3)).to.equal('╟──┬─┬───╢\n');
+      expect(getter(2, 3)).to.equal('╟──┼─┼───╢\n');
+      expect(getter(3, 3)).to.equal('╚══╧═╧═══╝\n');
+    });
   });
 });

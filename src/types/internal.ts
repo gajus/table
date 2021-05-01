@@ -1,6 +1,6 @@
 import type {
   BorderConfig,
-  ColumnUserConfig, DrawVerticalLine, Indexable, StreamUserConfig, TableUserConfig,
+  ColumnUserConfig, DrawVerticalLine, HeaderUserConfig, Indexable, StreamUserConfig, TableUserConfig,
 } from './api';
 
 /** @internal */
@@ -25,13 +25,17 @@ export type JoinBorderConfig = Pick<BorderConfig, 'joinBody' | 'joinJoin' | 'joi
 export type ColumnConfig = Required<ColumnUserConfig>;
 
 /** @internal */
-export type TableConfig = Required<Omit<TableUserConfig, 'columnDefault'>> & {
+export type HeaderConfig = Required<HeaderUserConfig>;
+
+/** @internal */
+export type TableConfig = Required<Omit<TableUserConfig, 'border' | 'columnDefault' | 'columns' | 'header'>> & {
   readonly border: BorderConfig,
-  readonly columns: Indexable<ColumnConfig>,
+  readonly columns: ColumnConfig[],
+  readonly header?: HeaderConfig,
 };
 
 /** @internal */
-export type StreamConfig = Required<Omit<StreamUserConfig, 'columnDefault'>> & {
+export type StreamConfig = Required<Omit<StreamUserConfig, 'border' | 'columnDefault' | 'columns'>> & {
   readonly border: BorderConfig,
   readonly columns: Indexable<ColumnConfig>,
 };
@@ -42,3 +46,6 @@ export type BaseConfig = {
   readonly columns: Indexable<ColumnConfig>,
   readonly drawVerticalLine: DrawVerticalLine,
 };
+
+/** @internal */
+export type SeparatorGetter = (index: number, size: number) => string;

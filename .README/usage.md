@@ -1,3 +1,5 @@
+## Usage
+
 ```js
 import { table } from 'table';
 
