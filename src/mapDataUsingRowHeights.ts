@@ -1,4 +1,3 @@
-import flatten from 'lodash.flatten';
 import type {
   BaseConfig,
   Row,
@@ -6,6 +5,10 @@ import type {
 import {
   wrapCell,
 } from './wrapCell';
+
+const flatten = <T>(array: T[][]): T[] => {
+  return ([] as T[]).concat(...array);
+};
 
 export const mapDataUsingRowHeights = (unmappedRows: Row[], rowHeights: number[], config: BaseConfig): Row[] => {
   const tableWidth = unmappedRows[0].length;
@@ -15,10 +18,6 @@ export const mapDataUsingRowHeights = (unmappedRows: Row[], rowHeights: number[]
     const outputRow: Row[] = Array.from({length: outputRowHeight}, () => {
       return new Array(tableWidth).fill('');
     });
-
-    // rowHeight
-    //     [{row index within rowSaw; index2}]
-    //     [{cell index within a virtual row; index1}]
 
     unmappedRow.forEach((cell, cellIndex) => {
       const cellLines = wrapCell(cell, config.columns[cellIndex].width, config.columns[cellIndex].wrapWord);
