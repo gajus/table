@@ -29,12 +29,19 @@ export type BorderConfig = Required<BorderUserConfig>;
 
 export type Alignment = 'center' | 'justify' | 'left' | 'right';
 
+export type VerticalAlignment = 'bottom' | 'middle' | 'top';
+
 export type ColumnUserConfig = {
 
   /**
    * Cell content horizontal alignment (default: left)
    */
   readonly alignment?: Alignment,
+
+  /**
+   * Cell content vertical alignment (default: top)
+   */
+  readonly verticalAlignment?: VerticalAlignment,
 
   /**
    * Column width (default: auto calculation based on the cell content)

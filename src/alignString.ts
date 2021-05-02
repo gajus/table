@@ -15,17 +15,7 @@ const alignRight = (subject: string, width: number): string => {
 };
 
 const alignCenter = (subject: string, width: number): string => {
-  let halfWidth;
-
-  halfWidth = width / 2;
-
-  if (width % 2 === 0) {
-    return ' '.repeat(halfWidth) + subject + ' '.repeat(halfWidth);
-  } else {
-    halfWidth = Math.floor(halfWidth);
-
-    return ' '.repeat(halfWidth) + subject + ' '.repeat(halfWidth + 1);
-  }
+  return ' '.repeat(Math.floor(width / 2)) + subject + ' '.repeat(Math.ceil(width / 2));
 };
 
 const alignJustify = (subject: string, width: number): string => {

@@ -1,10 +1,34 @@
 import type {
-  BaseConfig,
+  BaseConfig, ColumnConfig,
   Row,
 } from './types/internal';
 import {
   wrapCell,
 } from './wrapCell';
+
+const createEmptyStrings = (length: number) => {
+  return new Array(length).fill('');
+};
+
+const padCellVertically = (lines: string[], rowHeight: number, columnConfig: ColumnConfig): string[] => {
+  const {verticalAlignment} = columnConfig;
+
+  const availableLines = rowHeight - lines.length;
+
+  if (verticalAlignment === 'top') {
+    return [...lines, ...createEmptyStrings(availableLines)];
+  }
+
+  if (verticalAlignment === 'bottom') {
+    return [...createEmptyStrings(availableLines), ...lines];
+  }
+
+  return [
+    ...createEmptyStrings(Math.floor(availableLines / 2)),
+    ...lines,
+    ...createEmptyStrings(Math.ceil(availableLines / 2)),
+  ];
+};
 
 const flatten = <T>(array: T[][]): T[] => {
   return ([] as T[]).concat(...array);
@@ -22,7 +46,9 @@ export const mapDataUsingRowHeights = (unmappedRows: Row[], rowHeights: number[]
     unmappedRow.forEach((cell, cellIndex) => {
       const cellLines = wrapCell(cell, config.columns[cellIndex].width, config.columns[cellIndex].wrapWord);
 
-      cellLines.forEach((cellLine, cellLineIndex) => {
+      const paddedCellLines = padCellVertically(cellLines, outputRowHeight, config.columns[cellIndex]);
+
+      paddedCellLines.forEach((cellLine, cellLineIndex) => {
         outputRow[cellLineIndex][cellIndex] = cellLine;
       });
     });
@@ -32,3 +58,4 @@ export const mapDataUsingRowHeights = (unmappedRows: Row[], rowHeights: number[]
 
   return flatten(mappedRows);
 };
+
