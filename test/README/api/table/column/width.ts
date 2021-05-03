@@ -1,10 +1,12 @@
 import {
   table,
-} from '../../../src';
-import expectTable from './expectTable';
+} from '../../../../../src';
+import {
+  expectTable,
+} from '../../../../utils';
 
-describe('README.md usage/', () => {
-  it('column_width', () => {
+describe('README.md api/table/columns/', () => {
+  it('width', () => {
     const data = [
       ['0A', '0B', '0C'],
       ['1A', '1B', '1C'],
@@ -19,9 +21,7 @@ describe('README.md usage/', () => {
       },
     };
 
-    const output = table(data, config);
-
-    expectTable(output, `
+    expectTable(table(data, config), `
 ╔════╤════════════╤════╗
 ║ 0A │ 0B         │ 0C ║
 ╟────┼────────────┼────╢

@@ -1,20 +1,18 @@
 import {
   table,
-} from '../../../src';
-import expectTable from './expectTable';
+} from '../../../../../src';
+import {
+  expectTable,
+} from '../../../../utils';
 
-describe('README.md usage/', () => {
+describe('README.md api/table/column/wrapWord', () => {
   it('text_wrapping (no wrap word)', () => {
     const data = [
       ['Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pulvinar nibh sed mauris convallis dapibus. Nunc venenatis tempus nulla sit amet viverra.'],
     ];
 
     const config = {
-      columns: {
-        0: {
-          width: 20,
-        },
-      },
+      columns: [{width: 20}],
     };
 
     const output = table(data, config);
@@ -39,17 +37,11 @@ describe('README.md usage/', () => {
     ];
 
     const config = {
-      columns: {
-        0: {
-          width: 20,
-          wrapWord: true,
-        },
-      },
+      columns: [{width: 20,
+        wrapWord: true}],
     };
 
-    const output = table(data, config);
-
-    expectTable(output, `
+    expectTable(table(data, config), `
 ╔══════════════════════╗
 ║ Lorem ipsum dolor    ║
 ║ sit amet,            ║

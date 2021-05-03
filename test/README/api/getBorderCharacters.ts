@@ -5,9 +5,11 @@ import {
 import type {
   Row,
 } from '../../../src/types/internal';
-import expectTable from './expectTable';
+import {
+  expectTable,
+} from '../../utils';
 
-describe('README.md usage/predefined_border_templates', () => {
+describe('README.md api/getBorderCharacters', () => {
   let data: Row[];
 
   before(() => {

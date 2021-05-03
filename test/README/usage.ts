@@ -1,7 +1,9 @@
 import {
   table,
-} from '../../../src';
-import expectTable from './expectTable';
+} from '../../src';
+import {
+  expectTable,
+} from '../utils';
 
 describe('README.md usage/', () => {
   it('basic', () => {

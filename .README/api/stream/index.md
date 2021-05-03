@@ -2,7 +2,7 @@
 
 `table` package exports `createStream` function used to draw a table and append rows.
 
-Parameter:
+**Parameter:**
  - _**config:**_ the same as `table`'s, except `config.columnDefault.width` and `config.columnCount` must be provided.
 
 

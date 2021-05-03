@@ -1,10 +1,12 @@
 import {
   table,
-} from '../../../src';
-import expectTable from './expectTable';
+} from '../../../../../src';
+import {
+  expectTable,
+} from '../../../../utils';
 
-describe('README.md usage/', () => {
-  it('usage/padding_cell_content', () => {
+describe('README.md api/table/columns/', () => {
+  it('/padding', () => {
     const data = [
       ['0A', 'AABBCC', '0C'],
       ['1A', '1B', '1C'],
@@ -12,20 +14,18 @@ describe('README.md usage/', () => {
     ];
 
     const config = {
-      columns: {
-        0: {
+      columns: [
+        {
           paddingLeft: 3,
         },
-        1: {
+        {
           paddingRight: 3,
           width: 2,
         },
-      },
+      ],
     };
 
-    const output = table(data, config);
-
-    expectTable(output, `
+    expectTable(table(data, config), `
 ╔══════╤══════╤════╗
 ║   0A │ AA   │ 0C ║
 ║      │ BB   │    ║

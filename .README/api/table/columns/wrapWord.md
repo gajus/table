@@ -34,23 +34,6 @@ console.log(table(data, config));
 
 When `wrapWord` is `true`:
 
-```js
-const data = [
-  ['Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pulvinar nibh sed mauris convallis dapibus. Nunc venenatis tempus nulla sit amet viverra.']
-];
-
-const config = {
-  columns: [
-    {
-      width: 20,
-      wrapWord: true
-    }
-  ]
-};
-
-console.log(table(data, config));
-```
-
 ```
 ╔══════════════════════╗
 ║ Lorem ipsum dolor    ║

@@ -3,7 +3,7 @@
 Type: `number`\
 Default: the maximum cell widths of the column
 
-Column width.
+Column width (excluding the paddings).
 
 ```js
 
