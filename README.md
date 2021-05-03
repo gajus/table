@@ -273,7 +273,8 @@ console.log(table(data, config));
 <a name="table-api-table-1-config-columns"></a>
 ##### config.columns
 
-Type: `Column[] | { [columnIndex: number]: Column }`\
+Type: `Column[] | { [columnIndex: number]: Column }`
+
 Column specific configurations.
 
 <a name="table-api-table-1-config-columns-config-columns-width"></a>
@@ -282,7 +283,7 @@ Column specific configurations.
 Type: `number`\
 Default: the maximum cell widths of the column
 
-Column width.
+Column width (excluding the paddings).
 
 ```js
 
@@ -477,23 +478,6 @@ console.log(table(data, config));
 
 When `wrapWord` is `true`:
 
-```js
-const data = [
-  ['Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pulvinar nibh sed mauris convallis dapibus. Nunc venenatis tempus nulla sit amet viverra.']
-];
-
-const config = {
-  columns: [
-    {
-      width: 20,
-      wrapWord: true
-    }
-  ]
-};
-
-console.log(table(data, config));
-```
-
 ```
 ╔══════════════════════╗
 ║ Lorem ipsum dolor    ║
@@ -524,7 +508,7 @@ The default configuration for all columns. Column-specific settings will overwri
 
 `table` package exports `createStream` function used to draw a table and append rows.
 
-Parameter:
+**Parameter:**
  - _**config:**_ the same as `table`'s, except `config.columnDefault.width` and `config.columnCount` must be provided.
 
 
