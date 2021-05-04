@@ -1,26 +1,26 @@
 import {
   table,
-} from '../../../src';
-import expectTable from './expectTable';
+} from '../../../../../src';
+import {
+  expectTable,
+} from '../../../../utils';
 
-describe('README.md usage/', () => {
-  it('text_truncating', () => {
+describe('README.md api/table/column/', () => {
+  it('/truncate', () => {
     const data = [
       ['Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pulvinar nibh sed mauris convallis dapibus. Nunc venenatis tempus nulla sit amet viverra.'],
     ];
 
     const config = {
-      columns: {
-        0: {
+      columns: [
+        {
           truncate: 100,
           width: 20,
         },
-      },
+      ],
     };
 
-    const output = table(data, config);
-
-    expectTable(output, `
+    expectTable(table(data, config), `
 ╔══════════════════════╗
 ║ Lorem ipsum dolor si ║
 ║ t amet, consectetur  ║

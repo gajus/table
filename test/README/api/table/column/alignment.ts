@@ -1,13 +1,15 @@
 import type {
   TableUserConfig,
-} from '../../../src';
+} from '../../../../../src';
 import {
   table,
-} from '../../../src';
-import expectTable from './expectTable';
+} from '../../../../../src';
+import {
+  expectTable,
+} from '../../../../utils';
 
-describe('README.md usage/', () => {
-  it('cell_content_alignment', () => {
+describe('README.md api/table/columns', () => {
+  it('/alignment', () => {
     const data = [
       ['0A', '0B', '0C', '0D 0E 0F'],
       ['1A', '1B', '1C', '1D 1E 1F'],
@@ -26,9 +28,7 @@ describe('README.md usage/', () => {
       ],
     };
 
-    const output = table(data, config);
-
-    expectTable(output, `
+    expectTable(table(data, config), `
 ╔════════════╤════════════╤════════════╤════════════╗
 ║ 0A         │     0B     │         0C │ 0D  0E  0F ║
 ╟────────────┼────────────┼────────────┼────────────╢

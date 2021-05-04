@@ -1,13 +1,15 @@
 import {
   table,
-} from '../../../src';
+} from '../../../../src';
 import type {
   TableUserConfig,
-} from '../../../src';
-import expectTable from './expectTable';
+} from '../../../../src';
+import {
+  expectTable,
+} from '../../../utils';
 
-describe('README.md usage/', () => {
-  it('usage/draw_vertical_line', () => {
+describe('README.md api/table', () => {
+  it('drawVerticalLine', () => {
     const data = [
       ['0A', '0B', '0C'],
       ['1A', '1B', '1C'],

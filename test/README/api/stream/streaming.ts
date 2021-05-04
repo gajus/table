@@ -1,9 +1,11 @@
 import {
   createStream,
-} from '../../../src';
-import expectTable from './expectTable';
+} from '../../../../src';
+import {
+  expectTable,
+} from '../../../utils';
 
-describe('README.md usage/', () => {
+describe('README.md api/stream', () => {
   describe('process.stdout.write', () => {
     let processStdoutWriteBuffer: string;
 

@@ -1,10 +1,12 @@
 import {
   table,
-} from '../../../src';
-import expectTable from './expectTable';
+} from '../../../../src';
+import {
+  expectTable,
+} from '../../../utils';
 
-describe('README.md usage/', () => {
-  it('single_line_mode', () => {
+describe('README.md api/table/', () => {
+  it('singleLine', () => {
     const data = [
       ['-rw-r--r--', '1', 'pandorym', 'staff', '1529', 'May 23 11:25', 'LICENSE'],
       ['-rw-r--r--', '1', 'pandorym', 'staff', '16327', 'May 23 11:58', 'README.md'],

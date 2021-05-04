@@ -3,7 +3,7 @@ import mapValues from 'lodash.mapvalues';
 import {
   table,
   getBorderCharacters,
-} from '../../../src';
+} from '../../src';
 
 describe('README.md usage/', () => {
   it('moon_mission', () => {
