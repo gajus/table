@@ -14,8 +14,8 @@ import {
   createTableBorderGetter,
 } from '../src/drawBorder';
 import {
-  makeConfig,
-} from '../src/makeConfig';
+  makeTableConfig,
+} from '../src/makeTableConfig';
 import type {
   TableConfig,
 } from '../src/types/internal';
@@ -149,7 +149,7 @@ context('drawBorderBottom', () => {
 context('tableBorderGetter', () => {
   context('when config.header is undefined', () => {
     it('draw the table border normally', () => {
-      const config: TableConfig = makeConfig([['a', 'b', 'c']], {
+      const config: TableConfig = makeTableConfig([['a', 'b', 'c']], {
         header: undefined,
       });
 
@@ -164,7 +164,7 @@ context('tableBorderGetter', () => {
 
   context('when config.header is defined', () => {
     it('draws the borders that modify for header', () => {
-      const config: TableConfig = makeConfig([['a', 'b', 'c']], {
+      const config: TableConfig = makeTableConfig([['a', 'b', 'c']], {
         header: {
           content: 'ddd',
         },

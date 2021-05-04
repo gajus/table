@@ -10,8 +10,8 @@ import {
   drawHeader,
 } from '../src/drawHeader';
 import {
-  makeConfig,
-} from '../src/makeConfig';
+  makeTableConfig,
+} from '../src/makeTableConfig';
 import type {
   Row,
 } from '../src/types/internal';
@@ -27,7 +27,7 @@ const basicContent = 'Lorem ipsum dolor sit amet';
 const basicRows: Row[] = [['aaa', 'bb', 'c']];
 
 const createHeader = (headerWidth = 7, headerConfig: TableUserConfig['header']): string => {
-  const config = makeConfig(basicRows, {
+  const config = makeTableConfig(basicRows, {
     header: headerConfig,
   });
 
@@ -37,7 +37,7 @@ const createHeader = (headerWidth = 7, headerConfig: TableUserConfig['header']):
 context('drawHeader', () => {
   context('when no given header', () => {
     it('throws an error', () => {
-      const config = makeConfig(basicRows, {
+      const config = makeTableConfig(basicRows, {
         header: undefined,
       });
 

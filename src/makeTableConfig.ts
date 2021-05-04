@@ -18,7 +18,7 @@ import {
  * Creates a configuration for every column using default
  * values for the missing configuration properties.
  */
-const makeColumns = (rows: Row[],
+const makeColumnsConfig = (rows: Row[],
   columns?: Indexable<ColumnUserConfig>,
   columnDefault?: ColumnUserConfig): ColumnConfig[] => {
   const columnWidths = calculateColumnWidths(rows);
@@ -57,7 +57,7 @@ const makeHeaderConfig = (config: TableUserConfig): HeaderConfig | undefined => 
  * using default values for the missing configuration properties.
  */
 
-export const makeConfig = (rows: Row[], userConfig: TableUserConfig = {}): TableConfig => {
+export const makeTableConfig = (rows: Row[], userConfig: TableUserConfig = {}): TableConfig => {
   validateConfig('config.json', userConfig);
 
   const config = cloneDeep(userConfig);
@@ -65,7 +65,7 @@ export const makeConfig = (rows: Row[], userConfig: TableUserConfig = {}): Table
   return {
     ...config,
     border: makeBorderConfig(config.border),
-    columns: makeColumns(rows, config.columns, config.columnDefault),
+    columns: makeColumnsConfig(rows, config.columns, config.columnDefault),
     drawHorizontalLine: config.drawHorizontalLine ?? (() => {
       return true;
     }),

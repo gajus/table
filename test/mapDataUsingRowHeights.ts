@@ -3,8 +3,8 @@ import {
 } from 'chai';
 import chalk from 'chalk';
 import {
-  makeConfig,
-} from '../src/makeConfig';
+  makeTableConfig,
+} from '../src/makeTableConfig';
 import {
   mapDataUsingRowHeights,
 } from '../src/mapDataUsingRowHeights';
@@ -18,7 +18,7 @@ describe('mapDataUsingRowHeights', () => {
         ['aa'],
       ];
 
-      const config = makeConfig(data, {
+      const config = makeTableConfig(data, {
         columns: {
           0: {
             width: 2,
@@ -42,7 +42,7 @@ describe('mapDataUsingRowHeights', () => {
         ['aabbccddee'],
       ];
 
-      const config = makeConfig(data, {
+      const config = makeTableConfig(data, {
         columns: {
           0: {
             width: 2,
@@ -72,7 +72,7 @@ describe('mapDataUsingRowHeights', () => {
         ],
       ];
 
-      const config = makeConfig(data, {
+      const config = makeTableConfig(data, {
         columns: {
           0: {
             width: 100,
@@ -102,7 +102,7 @@ describe('mapDataUsingRowHeights', () => {
         ],
       ];
 
-      const config = makeConfig(data, {
+      const config = makeTableConfig(data, {
         columns: {
           0: {
             width: 100,
@@ -135,7 +135,7 @@ describe('mapDataUsingRowHeights', () => {
         ],
       ];
 
-      const config = makeConfig(data, {
+      const config = makeTableConfig(data, {
         columns: {
           0: {
             width: 2,

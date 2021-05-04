@@ -4,8 +4,8 @@ import {
   expect,
 } from 'chai';
 import {
-  makeConfig,
-} from '../src/makeConfig';
+  makeTableConfig,
+} from '../src/makeTableConfig';
 import {
   truncateTableData,
 } from '../src/truncateTableData';
@@ -15,7 +15,7 @@ describe('truncateTableData', () => {
     it('not truncate at all', () => {
       const rows = [['a'.repeat(100)]];
 
-      expect(truncateTableData(rows, makeConfig(rows, undefined))).to.deep.equal([['a'.repeat(100)]]);
+      expect(truncateTableData(rows, makeTableConfig(rows, undefined))).to.deep.equal([['a'.repeat(100)]]);
     });
   });
 
@@ -24,7 +24,7 @@ describe('truncateTableData', () => {
       it('uses the columnDefault value', () => {
         const rows = [['a'.repeat(100)]];
 
-        expect(truncateTableData(rows, makeConfig(rows, {columnDefault: {
+        expect(truncateTableData(rows, makeTableConfig(rows, {columnDefault: {
           truncate: 20,
         }}))).to.deep.equal([['a'.repeat(19) + '…']]);
       });
@@ -34,7 +34,7 @@ describe('truncateTableData', () => {
       it('uses column-specific truncate value', () => {
         const rows = [['a'.repeat(100)]];
 
-        expect(truncateTableData(rows, makeConfig(rows, {
+        expect(truncateTableData(rows, makeTableConfig(rows, {
           columnDefault: {
             truncate: 20,
           },
@@ -52,7 +52,7 @@ describe('truncateTableData', () => {
     it('uses corresponding column-specific truncate values or fallback to the default truncate value', () => {
       const rows = [['a'.repeat(100), 'b'.repeat(100)], ['c'.repeat(100), 'd'.repeat(100)]];
 
-      expect(truncateTableData(rows, makeConfig(rows, {
+      expect(truncateTableData(rows, makeTableConfig(rows, {
         columnDefault: {
           truncate: 20,
         },
@@ -71,7 +71,7 @@ describe('truncateTableData', () => {
     context('truncate = 0', () => {
       it('returns ellipsis only', () => {
         const rows = [['a'.repeat(100)]];
-        expect(truncateTableData(rows, makeConfig(rows, {
+        expect(truncateTableData(rows, makeTableConfig(rows, {
           columns: {0: {truncate: 0}},
         }))).to.deep.equal([['…']]);
       });
@@ -80,7 +80,7 @@ describe('truncateTableData', () => {
     context('truncate = 1', () => {
       it('returns ellipsis only', () => {
         const rows = [['a'.repeat(100)]];
-        expect(truncateTableData(rows, makeConfig(rows, {
+        expect(truncateTableData(rows, makeTableConfig(rows, {
           columns: {0: {truncate: 1}},
 
         }))).to.deep.equal([['…']]);
@@ -90,7 +90,7 @@ describe('truncateTableData', () => {
     context('truncate = 2', () => {
       it('returns 2-length string with ellipsis', () => {
         const rows = [['a'.repeat(100)]];
-        expect(truncateTableData(rows, makeConfig(rows, {
+        expect(truncateTableData(rows, makeTableConfig(rows, {
           columns: {0: {truncate: 2}},
         }))).to.deep.equal([['a…']]);
       });
@@ -99,7 +99,7 @@ describe('truncateTableData', () => {
     context('empty string', () => {
       it('returns empty string', () => {
         const rows = [['']];
-        expect(truncateTableData(rows, makeConfig(rows, {
+        expect(truncateTableData(rows, makeTableConfig(rows, {
           columns: {0: {truncate: 100}},
         }))).to.deep.equal([['']]);
       });
