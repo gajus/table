@@ -4,15 +4,15 @@ import {
   expect,
 } from 'chai';
 import {
-  makeConfig,
-} from '../src/makeConfig';
+  makeTableConfig,
+} from '../src/makeTableConfig';
 
 describe('makeConfig', () => {
   const rows = [['aaaaa']];
 
   it('does not affect the parameter configuration object', () => {
     const config = {};
-    makeConfig(rows, config);
+    makeTableConfig(rows, config);
 
     expect(config).to.deep.equal({});
   });
@@ -21,7 +21,7 @@ describe('makeConfig', () => {
     context('"alignment"', () => {
       context('is not provided', () => {
         it('defaults to "left"', () => {
-          const config = makeConfig(rows);
+          const config = makeTableConfig(rows);
 
           expect(config.columns[0].alignment).to.equal('left');
         });
@@ -29,7 +29,7 @@ describe('makeConfig', () => {
 
       context('is provided', () => {
         it('uses the custom value', () => {
-          const config = makeConfig(rows, {columns: {
+          const config = makeTableConfig(rows, {columns: {
             0: {alignment: 'center'},
           }});
 
@@ -41,7 +41,7 @@ describe('makeConfig', () => {
     context('"width"', () => {
       context('is not provided', () => {
         it('defaults to the maximum column width', () => {
-          const config = makeConfig(rows);
+          const config = makeTableConfig(rows);
 
           expect(config.columns[0].width).to.equal(5);
         });
@@ -49,7 +49,7 @@ describe('makeConfig', () => {
 
       context('is provided', () => {
         it('uses the custom value', () => {
-          const config = makeConfig(rows, {columns: {0: {width: 7}}});
+          const config = makeTableConfig(rows, {columns: {0: {width: 7}}});
 
           expect(config.columns[0].width).to.equal(7);
         });
@@ -59,7 +59,7 @@ describe('makeConfig', () => {
     context('"paddingLeft"', () => {
       context('is not provided', () => {
         it('defaults to 1', () => {
-          const config = makeConfig(rows);
+          const config = makeTableConfig(rows);
 
           expect(config.columns[0].paddingLeft).to.equal(1);
         });
@@ -67,7 +67,7 @@ describe('makeConfig', () => {
 
       context('is provided', () => {
         it('uses the custom value', () => {
-          const config = makeConfig(rows, {columns: {0: {paddingLeft: 3}}});
+          const config = makeTableConfig(rows, {columns: {0: {paddingLeft: 3}}});
 
           expect(config.columns[0].paddingLeft).to.equal(3);
         });
@@ -77,7 +77,7 @@ describe('makeConfig', () => {
     context('"paddingRight"', () => {
       context('is not provided', () => {
         it('defaults to 1', () => {
-          const config = makeConfig(rows);
+          const config = makeTableConfig(rows);
 
           expect(config.columns[0].paddingRight).to.equal(1);
         });
@@ -85,7 +85,7 @@ describe('makeConfig', () => {
 
       context('is provided', () => {
         it('uses the custom value', () => {
-          const config = makeConfig(rows, {columns: {0: {paddingRight: 3}}});
+          const config = makeTableConfig(rows, {columns: {0: {paddingRight: 3}}});
 
           expect(config.columns[0].paddingRight).to.equal(3);
         });
@@ -96,7 +96,7 @@ describe('makeConfig', () => {
   context('"drawVerticalLine', () => {
     context('is not provided', () => {
       it('defaults to retuning true', () => {
-        const config = makeConfig(rows);
+        const config = makeTableConfig(rows);
 
         expect(config.drawVerticalLine(-1, -1)).to.equal(true);
       });
@@ -104,7 +104,7 @@ describe('makeConfig', () => {
 
     context('is provided', () => {
       it('uses the custom function', () => {
-        const config = makeConfig(rows, {drawVerticalLine: () => {
+        const config = makeTableConfig(rows, {drawVerticalLine: () => {
           return false;
         }});
 
@@ -116,7 +116,7 @@ describe('makeConfig', () => {
   context('"drawHorizontalLine', () => {
     context('is not provided', () => {
       it('defaults to retuning true', () => {
-        const config = makeConfig([['aaaaa']]);
+        const config = makeTableConfig([['aaaaa']]);
 
         expect(config.drawHorizontalLine(-1, -1)).to.equal(true);
       });
@@ -124,7 +124,7 @@ describe('makeConfig', () => {
 
     context('is provided', () => {
       it('uses the custom function', () => {
-        const config = makeConfig(rows, {drawHorizontalLine: () => {
+        const config = makeTableConfig(rows, {drawHorizontalLine: () => {
           return false;
         }});
 
@@ -136,7 +136,7 @@ describe('makeConfig', () => {
   context('"singleLine', () => {
     context('is not provided', () => {
       it('defaults to retuning false', () => {
-        const config = makeConfig(rows);
+        const config = makeTableConfig(rows);
 
         expect(config.singleLine).to.equal(false);
       });
@@ -144,9 +144,58 @@ describe('makeConfig', () => {
 
     context('is provided', () => {
       it('uses the custom value', () => {
-        const config = makeConfig(rows, {singleLine: true});
+        const config = makeTableConfig(rows, {singleLine: true});
 
         expect(config.singleLine).to.equal(true);
+      });
+    });
+  });
+
+  context('header', () => {
+    context('when no given', () => {
+      it('returns undefined', () => {
+        const config = makeTableConfig(rows, {header: undefined});
+
+        expect(config.header).to.equal(undefined);
+      });
+    });
+
+    context('when given content only', () => {
+      it('returns the default config', () => {
+        const config = makeTableConfig(rows, {header: {
+          content: 'bb',
+        }});
+
+        expect(config.header).to.deep.equal({
+          alignment: 'center',
+          content: 'bb',
+          paddingLeft: 1,
+          paddingRight: 1,
+          truncate: Number.POSITIVE_INFINITY,
+          wrapWord: false,
+        });
+      });
+    });
+
+    context('when given extra configs', () => {
+      it('overrides the default', () => {
+        const config = makeTableConfig(rows, {header: {
+          alignment: 'left',
+          content: 'bb',
+          paddingLeft: 2,
+          paddingRight: 3,
+          truncate: 5,
+          wrapWord: true,
+        }});
+
+        expect(config.header).to.deep.equal({
+          alignment: 'left',
+          content: 'bb',
+          paddingLeft: 2,
+          paddingRight: 3,
+          truncate: 5,
+          wrapWord: true,
+        });
       });
     });
   });

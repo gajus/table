@@ -5,9 +5,11 @@ import type {
   DrawVerticalLine,
 } from './types/api';
 import type {
-  BottomBorderConfig,
-  JoinBorderConfig,
+  TableConfig,
+  SeparatorGetter,
   TopBorderConfig,
+  JoinBorderConfig,
+  BottomBorderConfig,
 } from './types/internal';
 
 type Separator = {
@@ -26,9 +28,18 @@ const drawBorder = (columnWidths: number[],
 
   return drawContent(columns, {
     drawSeparator: drawVerticalLine,
-    endSeparator: separator.right,
-    middleSeparator: separator.join,
-    startSeparator: separator.left,
+    separatorGetter: (index: number, columnCount: number) => {
+      if (index === 0) {
+        return separator.left;
+      }
+
+      if (index === columnCount) {
+        return separator.right;
+      }
+
+      return separator.join;
+    },
+
   }) + '\n';
 };
 
@@ -75,6 +86,49 @@ const drawBorderBottom = (columnWidths: number[],
       right: config.border.bottomRight,
     },
   });
+};
+
+export const createTableBorderGetter = (columnWidths: number[], config: TableConfig): SeparatorGetter => {
+  return (index: number, size: number) => {
+    if (!config.header) {
+      if (index === 0) {
+        return drawBorderTop(columnWidths, config);
+      }
+
+      if (index === size) {
+        return drawBorderBottom(columnWidths, config);
+      }
+
+      return drawBorderJoin(columnWidths, config);
+    }
+
+    // Deal with the header
+    if (index === 0) {
+      return drawBorderTop(columnWidths, {
+        ...config,
+        border: {
+          ...config.border,
+          topJoin: config.border.topBody,
+        },
+      });
+    }
+
+    if (index === 1) {
+      return drawBorderJoin(columnWidths, {
+        ...config,
+        border: {
+          ...config.border,
+          joinJoin: config.border.headerJoin,
+        },
+      });
+    }
+
+    if (index === size) {
+      return drawBorderBottom(columnWidths, config);
+    }
+
+    return drawBorderJoin(columnWidths, config);
+  };
 };
 
 export {

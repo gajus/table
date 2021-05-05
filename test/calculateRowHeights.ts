@@ -7,8 +7,8 @@ import {
   calculateRowHeights,
 } from '../src/calculateRowHeights';
 import {
-  makeConfig,
-} from '../src/makeConfig';
+  makeTableConfig,
+} from '../src/makeTableConfig';
 
 describe('calculateRowHeights', () => {
   context('single column', () => {
@@ -16,7 +16,7 @@ describe('calculateRowHeights', () => {
       it('is equal to 1', () => {
         const data = [['aaa']];
 
-        const config = makeConfig(data, {
+        const config = makeTableConfig(data, {
           columns: {
             0: {
               width: 10,
@@ -34,7 +34,7 @@ describe('calculateRowHeights', () => {
       it('is equal to 2', () => {
         const data = [['aaabbb']];
 
-        const config = makeConfig(data, {
+        const config = makeTableConfig(data, {
           columns: {
             0: {
               width: 3,
@@ -57,7 +57,7 @@ describe('calculateRowHeights', () => {
           ['aaabbb'],
         ];
 
-        const config = makeConfig(data, {
+        const config = makeTableConfig(data, {
           columns: {
             0: {
               width: 2,

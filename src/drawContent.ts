@@ -1,8 +1,6 @@
 type SeparatorConfig = {
   drawSeparator: (index: number, size: number) => boolean,
-  startSeparator: string,
-  middleSeparator: string,
-  endSeparator: string,
+  separatorGetter: (index: number, size: number) => string,
 };
 
 /**
@@ -10,12 +8,12 @@ type SeparatorConfig = {
  */
 
 export const drawContent = (contents: string[], separatorConfig: SeparatorConfig): string => {
-  const {startSeparator, middleSeparator, endSeparator, drawSeparator} = separatorConfig;
+  const {separatorGetter, drawSeparator} = separatorConfig;
   const contentSize = contents.length;
   const result: string[] = [];
 
   if (drawSeparator(0, contentSize)) {
-    result.push(startSeparator);
+    result.push(separatorGetter(0, contentSize));
   }
 
   contents.forEach((content, contentIndex) => {
@@ -23,12 +21,12 @@ export const drawContent = (contents: string[], separatorConfig: SeparatorConfig
 
     // Only append the middle separator if the content is not the last
     if (contentIndex + 1 < contentSize && drawSeparator(contentIndex + 1, contentSize)) {
-      result.push(middleSeparator);
+      result.push(separatorGetter(contentIndex + 1, contentSize));
     }
   });
 
   if (drawSeparator(contentSize, contentSize)) {
-    result.push(endSeparator);
+    result.push(separatorGetter(contentSize, contentSize));
   }
 
   return result.join('');

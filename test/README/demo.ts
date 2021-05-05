@@ -1,11 +1,10 @@
 import chalk from 'chalk';
 import mapValues from 'lodash.mapvalues';
 import {
-  table,
-  getBorderCharacters,
+  getBorderCharacters, table,
 } from '../../src';
 
-describe('README.md usage/', () => {
+describe('README.md demo', () => {
   it('moon_mission', () => {
     const data = [
       [
@@ -19,7 +18,7 @@ describe('README.md usage/', () => {
         'Able I',
         '17 August 1958',
         'USAF',
-        chalk.white.bold.bgRed('Launch failure'),
+        chalk.black.bgRed('Launch failure'),
         'First attempted launch beyond Earth orbit; failed to orbit due to turbopump gearbox malfunction resulting in first stage explosion.[3] Reached apogee of 16 kilometres (9.9 mi)',
       ],
       [
@@ -65,6 +64,7 @@ describe('README.md usage/', () => {
           wrapWord: true,
         },
       },
+      header: {content: chalk.bold.blue('List of missions to the Moon')},
     });
   });
 });

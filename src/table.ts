@@ -11,8 +11,8 @@ import {
   drawTable,
 } from './drawTable';
 import {
-  makeConfig,
-} from './makeConfig';
+  makeTableConfig,
+} from './makeTableConfig';
 import {
   mapDataUsingRowHeights,
 } from './mapDataUsingRowHeights';
@@ -37,7 +37,7 @@ export const table = (data: unknown[][], userConfig: TableUserConfig = {}): stri
 
   let rows = stringifyTableData(data);
 
-  const config = makeConfig(rows, userConfig);
+  const config = makeTableConfig(rows, userConfig);
 
   rows = truncateTableData(rows, config);
 

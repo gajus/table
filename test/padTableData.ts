@@ -4,8 +4,8 @@ import {
   expect,
 } from 'chai';
 import {
-  makeConfig,
-} from '../src/makeConfig';
+  makeTableConfig,
+} from '../src/makeTableConfig';
 import {
   padTableData,
 } from '../src/padTableData';
@@ -15,7 +15,7 @@ describe('padTableData', () => {
     it('inserts 01 whitespace character regardless of string whitespaces', () => {
       const rows = [[' a  ']];
 
-      expect(padTableData(rows, makeConfig(rows, undefined))).to.deep.equal([['  a   ']]);
+      expect(padTableData(rows, makeTableConfig(rows, undefined))).to.deep.equal([['  a   ']]);
     });
   });
 
@@ -24,7 +24,7 @@ describe('padTableData', () => {
       it('uses the columnDefault values', () => {
         const rows = [['a']];
 
-        expect(padTableData(rows, makeConfig(rows, {columnDefault: {
+        expect(padTableData(rows, makeTableConfig(rows, {columnDefault: {
           paddingLeft: 2,
           paddingRight: 3,
         }}))).to.deep.equal([['  a   ']]);
@@ -35,7 +35,7 @@ describe('padTableData', () => {
       it('uses column-specific padding values', () => {
         const rows = [['a']];
 
-        expect(padTableData(rows, makeConfig(rows, {
+        expect(padTableData(rows, makeTableConfig(rows, {
           columnDefault: {
             paddingLeft: 2,
             paddingRight: 3,
@@ -55,7 +55,7 @@ describe('padTableData', () => {
     it('uses corresponding column-specific padding values or fallback to the default padding values', () => {
       const rows = [['a', 'b'], ['c', 'd']];
 
-      expect(padTableData(rows, makeConfig(rows, {
+      expect(padTableData(rows, makeTableConfig(rows, {
         columnDefault: {
           paddingLeft: 2,
           paddingRight: 3,

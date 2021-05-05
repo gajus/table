@@ -16,8 +16,16 @@ export const drawRow = (row: Row, config: {
 
   return drawContent(row, {
     drawSeparator: drawVerticalLine,
-    endSeparator: border.bodyRight,
-    middleSeparator: border.bodyJoin,
-    startSeparator: border.bodyLeft,
+    separatorGetter: (index, columnCount) => {
+      if (index === 0) {
+        return border.bodyLeft;
+      }
+
+      if (index === columnCount) {
+        return border.bodyRight;
+      }
+
+      return border.bodyJoin;
+    },
   }) + '\n';
 };

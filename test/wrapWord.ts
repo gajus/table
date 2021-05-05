@@ -5,7 +5,7 @@ import {
   wrapWord,
 } from '../src/wrapWord';
 import {
-  arrayToRed, closeRed, openRed, stringToRed,
+  arrayToRed, closeBold, closeRed, openBold, openRed, stringToRed,
 } from './utils';
 
 describe('wrapWord', () => {
@@ -78,9 +78,6 @@ describe('wrapWord', () => {
 
   context('multiple ansi', () => {
     it('returns proper strings', () => {
-      const openBold = '\u001b[1m';
-      const closeBold = '\u001b[22m';
-
       expect(wrapWord(`${openBold}${openRed}Lorem ipsum dolor sit${closeRed}${closeBold}`, 4)).to.deep.equal(
         [
           `${openBold}${openRed}Lore${closeRed}${closeBold}`,

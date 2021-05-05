@@ -8,15 +8,15 @@ import {
   alignTableData,
 } from '../src/alignTableData';
 import {
-  makeConfig,
-} from '../src/makeConfig';
+  makeTableConfig,
+} from '../src/makeTableConfig';
 
 describe('alignTableData', () => {
   context('when the string width is equal to column width config', () => {
     it('returns the unchange string', () => {
       const rows = [['aaa'], [chalk.red('bbb')]];
 
-      expect(alignTableData(rows, makeConfig(rows, {
+      expect(alignTableData(rows, makeTableConfig(rows, {
         columns: {
           0: {
             width: 3,
@@ -31,7 +31,7 @@ describe('alignTableData', () => {
       const rows = [['a', 'b', 'c'],
         [chalk.red('a'), chalk.red('b'), chalk.red('c')]];
 
-      expect(alignTableData(rows, makeConfig(rows, {
+      expect(alignTableData(rows, makeTableConfig(rows, {
         columnDefault: {
           width: 3,
         },
@@ -57,7 +57,7 @@ describe('alignTableData', () => {
       const rows = [['aaaa']];
 
       expect(() => {
-        alignTableData(rows, makeConfig(rows, {
+        alignTableData(rows, makeTableConfig(rows, {
           columns: {
             0: {
               width: 3,

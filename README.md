@@ -101,6 +101,7 @@ Custom borders. The keys are any of:
 - `bottomLeft`, `bottomRight`, `bottomBody`, `bottomJoin`
 - `joinLeft`, `joinRight`, `joinBody`, `joinJoin`
 - `bodyLeft`, `bodyRight`, `bodyJoin`
+- `headerJoin`
 
 ```js
 const data = [
@@ -196,6 +197,7 @@ Default: `() => true`
 
 It is used to tell whether to draw a horizontal line. This callback is called for each horizontal border of the table.
 If the table has `n` rows, then the `index` parameter is alternatively received all numbers in range `[0, n]` inclusively.
+If the table has `n` rows and contains the header, then the range will be `[0, n+1]` inclusively.
 
 ```js
 const data = [
@@ -501,6 +503,53 @@ Type: `Column`\
 Default: `{}`
 
 The default configuration for all columns. Column-specific settings will overwrite the default values.
+
+
+<a name="table-api-table-1-config-header"></a>
+##### config.header
+
+Type: `object`
+
+Header configuration.
+
+The header configuration inherits the most of the column's, except:
+- `content` **{string}**: the header content.
+- `width:` calculate based on the content width automatically.
+- `alignment:` `center` be default.
+- `config.border.topJoin` will be `config.border.topBody` for more prettier.
+
+```js
+const data = [
+      ['0A', '0B', '0C'],
+      ['1A', '1B', '1C'],
+      ['2A', '2B', '2C'],
+    ];
+
+const config = {
+  columnDefault: {
+    width: 10,
+  },
+  header: {
+    alignment: 'center',
+    content: 'THE HEADER\nThis is the table about something',
+  },
+}
+
+console.log(table(data, config));
+```
+
+```
+╔══════════════════════════════════════╗
+║              THE HEADER              ║
+║  This is the table about something   ║
+╟────────────┬────────────┬────────────╢
+║ 0A         │ 0B         │ 0C         ║
+╟────────────┼────────────┼────────────╢
+║ 1A         │ 1B         │ 1C         ║
+╟────────────┼────────────┼────────────╢
+║ 2A         │ 2B         │ 2C         ║
+╚════════════╧════════════╧════════════╝
+```
 
 
 <a name="table-api-createstream"></a>

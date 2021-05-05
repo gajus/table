@@ -2,7 +2,7 @@ import type {
   TableUserConfig,
 } from '../src';
 
-const configSamples: {invalid: unknown[], valid: TableUserConfig[], } = {
+export const tableConfigSamples: {invalid: unknown[], valid: TableUserConfig[], } = {
   invalid: [
     {border: 1},
     {border: {unknown: '-'}},
@@ -54,6 +54,11 @@ const configSamples: {invalid: unknown[], valid: TableUserConfig[], } = {
     {columnDefault: {paddingRight: '1'}},
     {drawHorizontalLine: 1},
     {unknown: 1},
+    {header: 'a'},
+    {header: {unknown: 'x'}},
+    {header: {content: 1}},
+    {header: {content: 'x',
+      width: 10}},
   ],
   valid: [
     {},
@@ -173,7 +178,14 @@ const configSamples: {invalid: unknown[], valid: TableUserConfig[], } = {
     {drawHorizontalLine: (): boolean => {
       return false;
     }},
+    {header: {content: ''}},
+    {header: {
+      alignment: 'justify',
+      content: 'a',
+      paddingLeft: 5,
+      paddingRight: 8,
+      truncate: 3,
+      wrapWord: true,
+    }},
   ],
 };
-
-export default configSamples;

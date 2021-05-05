@@ -9,7 +9,9 @@ import {
 import validators from '../src/generated/validators';
 import configSchema from '../src/schemas/config.json';
 import sharedSchema from '../src/schemas/shared.json';
-import configSamples from './configSamples';
+import {
+  tableConfigSamples,
+} from './tableConfigSamples';
 
 const validateConfig = validators['config.json'];
 
@@ -25,14 +27,14 @@ describe('config.json schema', () => {
   });
 
   it('passes validation of valid config samples', () => {
-    for (const sample of configSamples.valid) {
+    for (const sample of tableConfigSamples.valid) {
       expect(validate(sample)).to.equal(true);
       expect(validateConfig(sample)).to.equal(true);
     }
   });
 
   it('fails validation of invalid config samples', () => {
-    for (const sample of configSamples.invalid) {
+    for (const sample of tableConfigSamples.invalid) {
       expect(validate(sample)).to.equal(false);
       expect(validateConfig(sample)).to.equal(false);
     }

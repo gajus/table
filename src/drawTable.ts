@@ -1,9 +1,13 @@
+import stringWidth from 'string-width';
 import {
-  drawBorderTop, drawBorderJoin, drawBorderBottom,
+  createTableBorderGetter,
 } from './drawBorder';
 import {
   drawContent,
 } from './drawContent';
+import {
+  drawHeader,
+} from './drawHeader';
 import {
   drawRow,
 } from './drawRow';
@@ -26,6 +30,15 @@ export const drawTable = (rows: Row[], columnWidths: number[], rowHeights: numbe
     }).join('');
   });
 
+  if (config.header) {
+    // assume that topLeft/right border have width = 1
+    const headerWidth = stringWidth(drawRow(rows[0], config)) - 2 -
+      config.header.paddingLeft - config.header.paddingRight;
+    const header = drawHeader(headerWidth, config);
+
+    contents.unshift(header);
+  }
+
   return drawContent(contents, {
     drawSeparator: (index, size) => {
       // Top/bottom border
@@ -35,8 +48,6 @@ export const drawTable = (rows: Row[], columnWidths: number[], rowHeights: numbe
 
       return !singleLine && drawHorizontalLine(index, size);
     },
-    endSeparator: drawBorderBottom(columnWidths, config),
-    middleSeparator: drawBorderJoin(columnWidths, config),
-    startSeparator: drawBorderTop(columnWidths, config),
+    separatorGetter: createTableBorderGetter(columnWidths, config),
   });
 };

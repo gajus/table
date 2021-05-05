@@ -25,28 +25,23 @@
             "type": "object",
             "properties": {
                 "alignment": {
-                    "type": "string",
-                    "enum": [
-                        "left",
-                        "right",
-                        "center",
-                        "justify"
-                    ]
+                    "$ref": "#/definitions/alignment"
                 },
                 "width": {
-                    "$ref": "#/definitions/naturalNumber"
+                    "type": "integer",
+                    "minimum": 1
                 },
                 "wrapWord": {
                     "type": "boolean"
                 },
                 "truncate": {
-                    "type": "number"
+                    "type": "integer"
                 },
                 "paddingLeft": {
-                    "type": "number"
+                    "type": "integer"
                 },
                 "paddingRight": {
-                    "type": "number"
+                    "type": "integer"
                 }
             },
             "additionalProperties": false
@@ -87,6 +82,9 @@
                 "bodyJoin": {
                     "$ref": "#/definitions/border"
                 },
+                "headerJoin": {
+                  "$ref": "#/definitions/border"
+                },
                 "joinBody": {
                     "$ref": "#/definitions/border"
                 },
@@ -105,10 +103,14 @@
         "border": {
             "type": "string"
         },
-        "naturalNumber": {
-          "type": "number",
-          "minimum": 1,
-          "multipleOf": 1.0
+        "alignment": {
+          "type": "string",
+          "enum": [
+            "left",
+            "right",
+            "center",
+            "justify"
+          ]
         }
     }
 }

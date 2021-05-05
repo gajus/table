@@ -13,14 +13,16 @@ export type BorderUserConfig = {
   readonly bottomBody?: string,
   readonly bottomJoin?: string,
 
-  readonly bodyRight?: string,
-  readonly bodyLeft?: string,
-  readonly bodyJoin?: string,
-
   readonly joinLeft?: string,
   readonly joinRight?: string,
   readonly joinBody?: string,
   readonly joinJoin?: string,
+
+  readonly headerJoin?: string,
+
+  readonly bodyRight?: string,
+  readonly bodyLeft?: string,
+  readonly bodyJoin?: string,
 };
 
 export type BorderConfig = Required<BorderUserConfig>;
@@ -60,6 +62,10 @@ export type ColumnUserConfig = {
   readonly wrapWord?: boolean,
 };
 
+export type HeaderUserConfig = Omit<ColumnUserConfig, 'width'> & {
+  readonly content: string,
+};
+
 export type BaseUserConfig = {
 
   /**
@@ -86,6 +92,11 @@ export type BaseUserConfig = {
 };
 
 export type TableUserConfig = BaseUserConfig & {
+
+  /**
+   * The header configuration
+   */
+  readonly header?: HeaderUserConfig,
 
   /**
    * Used to tell whether to draw a horizontal line.
