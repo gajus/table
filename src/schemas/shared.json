@@ -27,6 +27,14 @@
                 "alignment": {
                     "$ref": "#/definitions/alignment"
                 },
+                "verticalAlignment": {
+                  "type": "string",
+                  "enum": [
+                    "top",
+                    "middle",
+                    "bottom"
+                  ]
+                },
                 "width": {
                     "type": "integer",
                     "minimum": 1

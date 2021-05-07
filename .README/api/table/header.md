@@ -8,7 +8,8 @@ The header configuration inherits the most of the column's, except:
 - `content` **{string}**: the header content.
 - `width:` calculate based on the content width automatically.
 - `alignment:` `center` be default.
-- `config.border.topJoin` will be `config.border.topBody` for more prettier.
+- `verticalAlignment:` is not supported.
+- `config.border.topJoin` will be `config.border.topBody` for prettier.
 
 ```js
 const data = [

@@ -30,21 +30,22 @@
 
 {"gitdown": "include", "file": "./api/table/index.md"}
 {"gitdown": "include", "file": "./api/table/border.md"}
-{"gitdown": "include", "file": "./api/table/draw_vertical_line.md"}
-{"gitdown": "include", "file": "./api/table/draw_horizontal_line.md"}
-{"gitdown": "include", "file": "./api/table/single_line.md"}
+{"gitdown": "include", "file": "./api/table/drawVerticalLine.md"}
+{"gitdown": "include", "file": "./api/table/drawHorizontalLine.md"}
+{"gitdown": "include", "file": "./api/table/singleLine.md"}
 
 {"gitdown": "include", "file": "./api/table/columns/index.md"}
 {"gitdown": "include", "file": "./api/table/columns/width.md"}
 {"gitdown": "include", "file": "./api/table/columns/alignment.md"}
+{"gitdown": "include", "file": "./api/table/columns/verticalAlignment.md"}
 {"gitdown": "include", "file": "./api/table/columns/padding.md"}
 {"gitdown": "include", "file": "./api/table/columns/truncate.md"}
 {"gitdown": "include", "file": "./api/table/columns/wrapWord.md"}
 
-{"gitdown": "include", "file": "./api/table/column_default.md"}
+{"gitdown": "include", "file": "./api/table/columnDefault.md"}
 
 {"gitdown": "include", "file": "./api/table/header.md"}
 
 {"gitdown": "include", "file": "./api/stream/index.md"}
 
-{"gitdown": "include", "file": "./api/get_border_characters.md"}
+{"gitdown": "include", "file": "./api/getBorderCharacters.md"}

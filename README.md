@@ -354,6 +354,41 @@ console.log(table(data, config));
 ╚════════════╧════════════╧════════════╧════════════╝
 ```
 
+<a name="table-api-table-1-config-columns-config-columns-verticalalignment"></a>
+###### config.columns[*].verticalAlignment
+
+Type: `'top' | 'middle' | 'bottom'`\
+Default: `'top'`
+
+Cell content vertical alignment
+
+```js
+const data = [
+  ['A', 'B', 'C', 'DEF'],
+];
+
+const config = {
+  columnDefault: {
+    width: 1,
+  },
+  columns: [
+    { verticalAlignment: 'top' },
+    { verticalAlignment: 'middle' },
+    { verticalAlignment: 'bottom' },
+  ],
+};
+
+console.log(table(data, config));
+```
+
+```
+╔═══╤═══╤═══╤═══╗
+║ A │   │   │ D ║
+║   │ B │   │ E ║
+║   │   │ C │ F ║
+╚═══╧═══╧═══╧═══╝
+```
+
 <a name="table-api-table-1-config-columns-config-columns-paddingleft"></a>
 ###### config.columns[*].paddingLeft
 
@@ -496,6 +531,7 @@ When `wrapWord` is `true`:
 
 ```
 
+
 <a name="table-api-table-1-config-columndefault"></a>
 ##### config.columnDefault
 
@@ -516,7 +552,8 @@ The header configuration inherits the most of the column's, except:
 - `content` **{string}**: the header content.
 - `width:` calculate based on the content width automatically.
 - `alignment:` `center` be default.
-- `config.border.topJoin` will be `config.border.topBody` for more prettier.
+- `verticalAlignment:` is not supported.
+- `config.border.topJoin` will be `config.border.topBody` for prettier.
 
 ```js
 const data = [

@@ -3,12 +3,15 @@
 import {
   expect,
 } from 'chai';
+import {
+  table,
+} from '../src';
 import type {
   TableUserConfig,
 } from '../src';
 import {
-  table,
-} from '../src/table';
+  expectTable,
+} from './utils';
 
 const data = [
   ['Lorem ipsum', 'dolor sit'],
@@ -120,6 +123,68 @@ describe('drawTable', () => {
 ║ scing │       ║
 ╚═══════╧═══════╝
 `.trimLeft());
+    });
+  });
+
+  context('vertical alignment', () => {
+    // eslint-disable-next-line @typescript-eslint/no-shadow
+    const data = [
+      ['Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+        'Phasellus pulvinar nibh sed',
+        'Phasellus pulvinar nibh sed',
+        'Phasellus pulvinar nibh sed'],
+    ];
+    it('works properly', () => {
+      const result = table(data, {
+        columnDefault: {
+          width: 10,
+        },
+        columns: [
+          {},
+          {verticalAlignment: 'top'},
+          {verticalAlignment: 'middle'},
+          {verticalAlignment: 'bottom'}],
+      });
+
+      expectTable(result, `
+╔════════════╤════════════╤════════════╤════════════╗
+║ Lorem ipsu │ Phasellus  │            │            ║
+║ m dolor si │ pulvinar n │ Phasellus  │            ║
+║ t amet, co │ ibh sed    │ pulvinar n │            ║
+║ nsectetur  │            │ ibh sed    │ Phasellus  ║
+║ adipiscing │            │            │ pulvinar n ║
+║ elit       │            │            │ ibh sed    ║
+╚════════════╧════════════╧════════════╧════════════╝`);
+    });
+
+    it('works with horizontal alignment', () => {
+      const result = table(data, {
+        columnDefault: {
+          width: 8,
+          wrapWord: true,
+        },
+        columns: [
+          {},
+          {alignment: 'center',
+            verticalAlignment: 'top'},
+          {alignment: 'right',
+            verticalAlignment: 'middle'},
+          {alignment: 'left',
+            verticalAlignment: 'bottom'}],
+      });
+
+      expectTable(result, `
+╔══════════╤══════════╤══════════╤══════════╗
+║ Lorem    │ Phasellu │          │          ║
+║ ipsum    │    s     │          │          ║
+║ dolor    │ pulvinar │ Phasellu │          ║
+║ sit      │ nibh sed │        s │          ║
+║ amet,    │          │ pulvinar │          ║
+║ consecte │          │ nibh sed │ Phasellu ║
+║ tur      │          │          │ s        ║
+║ adipisci │          │          │ pulvinar ║
+║ ng elit  │          │          │ nibh sed ║
+╚══════════╧══════════╧══════════╧══════════╝`);
     });
   });
 });
