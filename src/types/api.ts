@@ -69,7 +69,7 @@ export type ColumnUserConfig = {
   readonly wrapWord?: boolean,
 };
 
-export type HeaderUserConfig = Omit<ColumnUserConfig, 'width'> & {
+export type HeaderUserConfig = Omit<ColumnUserConfig, 'verticalAlignment' | 'width'> & {
   readonly content: string,
 };
 

@@ -56,38 +56,23 @@ describe('makeConfig', () => {
       });
     });
 
-    context('"paddingLeft"', () => {
+    context('"padding"', () => {
       context('is not provided', () => {
         it('defaults to 1', () => {
           const config = makeTableConfig(rows);
 
           expect(config.columns[0].paddingLeft).to.equal(1);
-        });
-      });
-
-      context('is provided', () => {
-        it('uses the custom value', () => {
-          const config = makeTableConfig(rows, {columns: {0: {paddingLeft: 3}}});
-
-          expect(config.columns[0].paddingLeft).to.equal(3);
-        });
-      });
-    });
-
-    context('"paddingRight"', () => {
-      context('is not provided', () => {
-        it('defaults to 1', () => {
-          const config = makeTableConfig(rows);
-
           expect(config.columns[0].paddingRight).to.equal(1);
         });
       });
 
       context('is provided', () => {
         it('uses the custom value', () => {
-          const config = makeTableConfig(rows, {columns: {0: {paddingRight: 3}}});
+          const config = makeTableConfig(rows, {columns: {0: {paddingLeft: 3,
+            paddingRight: 2}}});
 
-          expect(config.columns[0].paddingRight).to.equal(3);
+          expect(config.columns[0].paddingLeft).to.equal(3);
+          expect(config.columns[0].paddingRight).to.equal(2);
         });
       });
     });
@@ -180,7 +165,7 @@ describe('makeConfig', () => {
     context('when given extra configs', () => {
       it('overrides the default', () => {
         const config = makeTableConfig(rows, {header: {
-          alignment: 'left',
+          alignment: 'center',
           content: 'bb',
           paddingLeft: 2,
           paddingRight: 3,
@@ -189,7 +174,7 @@ describe('makeConfig', () => {
         }});
 
         expect(config.header).to.deep.equal({
-          alignment: 'left',
+          alignment: 'center',
           content: 'bb',
           paddingLeft: 2,
           paddingRight: 3,
