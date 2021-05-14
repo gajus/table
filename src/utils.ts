@@ -1,4 +1,5 @@
 import slice from 'slice-ansi';
+import stringWidth from 'string-width';
 import stripAnsi from 'strip-ansi';
 import {
   getBorderCharacters,
@@ -22,9 +23,7 @@ export const normalizeString = (input: string): string => {
  * @internal
  */
 export const splitAnsi = (input: string): string[] => {
-  const lengths = stripAnsi(input).split('\n').map(({length}) => {
-    return length;
-  });
+  const lengths = stripAnsi(input).split('\n').map(stringWidth);
 
   const result: string[] = [];
   let startIndex = 0;
