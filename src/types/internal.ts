@@ -1,6 +1,6 @@
 import type {
   BorderConfig,
-  ColumnUserConfig, DrawVerticalLine, HeaderUserConfig, Indexable, StreamUserConfig, TableUserConfig,
+  ColumnUserConfig, DrawVerticalLine, HeaderUserConfig, StreamUserConfig, TableUserConfig,
 } from './api';
 
 /** @internal */
@@ -22,28 +22,30 @@ export type BodyBorderConfig = Pick<BorderConfig, 'bodyJoin' | 'bodyLeft' | 'bod
 export type JoinBorderConfig = Pick<BorderConfig, 'joinBody' | 'joinJoin' | 'joinLeft' | 'joinRight'>;
 
 /** @internal */
-export type ColumnConfig = Required<ColumnUserConfig>;
+export type ColumnConfig = Required<ColumnUserConfig> & {
+  width: number,
+};
 
 /** @internal */
 export type HeaderConfig = Required<HeaderUserConfig>;
 
 /** @internal */
-export type TableConfig = Required<Omit<TableUserConfig, 'border' | 'columnDefault' | 'columns' | 'header'>> & {
+export type TableConfig = Required<Omit<TableUserConfig, 'columnDefault' | 'header'>> & {
   readonly border: BorderConfig,
   readonly columns: ColumnConfig[],
   readonly header?: HeaderConfig,
 };
 
 /** @internal */
-export type StreamConfig = Required<Omit<StreamUserConfig, 'border' | 'columnDefault' | 'columns'>> & {
+export type StreamConfig = Required<Omit<StreamUserConfig, 'columnDefault' >> & {
   readonly border: BorderConfig,
-  readonly columns: Indexable<ColumnConfig>,
+  readonly columns: ColumnConfig[],
 };
 
 /** @internal */
 export type BaseConfig = {
   readonly border: BorderConfig,
-  readonly columns: Indexable<ColumnConfig>,
+  readonly columns: ColumnConfig[],
   readonly drawVerticalLine: DrawVerticalLine,
 };
 

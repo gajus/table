@@ -2,11 +2,13 @@ import {
   expect,
 } from 'chai';
 import chalk from 'chalk';
-import calculateColumnWidths from '../src/calculateColumnWidths';
+import {
+  calculateMaximumColumnWidths,
+} from '../src/calculateMaximumColumnWidths';
 
 describe('calculateColumnWidths', () => {
   it('calculates the maximum column value index', () => {
-    const columnWidths = calculateColumnWidths([
+    const columnWidths = calculateMaximumColumnWidths([
       [
         '',
         'a',
@@ -31,7 +33,7 @@ describe('calculateColumnWidths', () => {
   });
   context('cell values contain ANSI codes', () => {
     it('uses visual width of the string', () => {
-      const columnWidths = calculateColumnWidths([
+      const columnWidths = calculateMaximumColumnWidths([
         [
           chalk.red('aaaaa'),
         ],
@@ -42,7 +44,7 @@ describe('calculateColumnWidths', () => {
   });
   context('cell values contain fullwidth characters', () => {
     it('uses visual width of the string', () => {
-      const columnWidths = calculateColumnWidths([
+      const columnWidths = calculateMaximumColumnWidths([
         [
           chalk.red('古'),
         ],

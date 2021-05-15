@@ -46,7 +46,7 @@ export type ColumnUserConfig = {
   /**
    * Column width (default: auto calculation based on the cell content)
    */
-  readonly width?: number,
+  readonly width?: number | 'auto',
 
   /**
    * Number of characters are which the content will be truncated (default: Infinity)

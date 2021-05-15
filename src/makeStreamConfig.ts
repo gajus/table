@@ -1,4 +1,7 @@
 import cloneDeep from 'lodash.clonedeep';
+import {
+  calculateColumnWidths,
+} from './calculateColumnWidths';
 import type {
   ColumnUserConfig,
   Indexable,
@@ -22,6 +25,13 @@ import {
 const makeColumnsConfig = (columnCount: number,
   columns: Indexable<ColumnUserConfig> = {},
   columnDefault: StreamUserConfig['columnDefault']): ColumnConfig[] => {
+  const maxColumnWidths = Array.from({length: columnCount}).map((_, index) => {
+    const width = columns[index]?.width ?? columnDefault?.width;
+
+    return width === 'auto' ? 0 : width;
+  });
+  const widths = calculateColumnWidths(maxColumnWidths, columns, columnDefault);
+
   return Array.from({length: columnCount}).map((_, index) => {
     return {
       alignment: 'left',
@@ -32,6 +42,7 @@ const makeColumnsConfig = (columnCount: number,
       wrapWord: false,
       ...columnDefault,
       ...columns[index],
+      width: widths[index],
     };
   });
 };

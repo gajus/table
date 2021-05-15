@@ -4,7 +4,7 @@ import type {
 } from './types/internal';
 
 /**
- * Calculates width of each cell contents in a row.
+ * Calculates maximum width of each cell contents in a row.
  */
 export const calculateCellWidths = (cells: Cell[]): number[] => {
   return cells.map((cell) => {

@@ -36,8 +36,18 @@
                   ]
                 },
                 "width": {
-                    "type": "integer",
-                    "minimum": 1
+                   "oneOf": [
+                     {
+                       "type": "integer",
+                       "minimum": 1
+                     },
+                     {
+                       "type": "string",
+                       "enum": [
+                         "auto"
+                       ]
+                     }
+                   ]
                 },
                 "wrapWord": {
                     "type": "boolean"

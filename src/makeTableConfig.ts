@@ -1,11 +1,18 @@
 import cloneDeep from 'lodash.clonedeep';
-import calculateColumnWidths from './calculateColumnWidths';
+import {
+  calculateColumnWidths,
+} from './calculateColumnWidths';
+import {
+  calculateMaximumColumnWidths,
+} from './calculateMaximumColumnWidths';
 import type {
-  ColumnUserConfig, Indexable,
+  ColumnUserConfig,
+  Indexable,
   TableUserConfig,
 } from './types/api';
 import type {
-  ColumnConfig, HeaderConfig, Row, TableConfig,
+  ColumnConfig,
+  HeaderConfig, Row, TableConfig,
 } from './types/internal';
 import {
   makeBorderConfig,
@@ -21,7 +28,7 @@ import {
 const makeColumnsConfig = (rows: Row[],
   columns?: Indexable<ColumnUserConfig>,
   columnDefault?: ColumnUserConfig): ColumnConfig[] => {
-  const columnWidths = calculateColumnWidths(rows);
+  const widths = calculateColumnWidths(calculateMaximumColumnWidths(rows), columns, columnDefault);
 
   return rows[0].map((_, columnIndex) => {
     return {
@@ -30,10 +37,10 @@ const makeColumnsConfig = (rows: Row[],
       paddingRight: 1,
       truncate: Number.POSITIVE_INFINITY,
       verticalAlignment: 'top',
-      width: columnWidths[columnIndex],
       wrapWord: false,
       ...columnDefault,
       ...columns?.[columnIndex],
+      width: widths[columnIndex],
     };
   });
 };
