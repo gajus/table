@@ -1,56 +1,67 @@
+/* eslint-disable max-nested-callbacks */
 import {
   expect,
 } from 'chai';
-import chalk from 'chalk';
 import {
-  calculateMaximumColumnWidths,
-} from '../src/calculateMaximumColumnWidths';
+  calculateColumnWidths,
+} from '../dist/calculateColumnWidths';
+
+const MAX_COLUMN_WIDTHS = [20, 10, 30];
 
 describe('calculateColumnWidths', () => {
-  it('calculates the maximum column value index', () => {
-    const columnWidths = calculateMaximumColumnWidths([
-      [
-        '',
-        'a',
-        'b',
-        'c',
-      ],
-      [
-        '',
-        'a',
-        'bbbbbbbbbb',
-        'c',
-      ],
-      [
-        '',
-        '',
-        'b',
-        'ccccc',
-      ],
-    ]);
+  describe('when just provide maxColumnWidth', () => {
+    it('keep that value', () => {
+      const result = calculateColumnWidths(MAX_COLUMN_WIDTHS);
 
-    expect(columnWidths).to.deep.equal([0, 1, 10, 5]);
-  });
-  context('cell values contain ANSI codes', () => {
-    it('uses visual width of the string', () => {
-      const columnWidths = calculateMaximumColumnWidths([
-        [
-          chalk.red('aaaaa'),
-        ],
-      ]);
-
-      expect(columnWidths[0]).to.equal(5);
+      expect(result).to.be.deep.equal(MAX_COLUMN_WIDTHS);
     });
   });
-  context('cell values contain fullwidth characters', () => {
-    it('uses visual width of the string', () => {
-      const columnWidths = calculateMaximumColumnWidths([
-        [
-          chalk.red('古'),
-        ],
-      ]);
 
-      expect(columnWidths[0]).to.equal(2);
+  describe('when given columnDefault\'s width', () => {
+    it('adjust by those values', () => {
+      const result = calculateColumnWidths(MAX_COLUMN_WIDTHS, {}, {width: 5});
+
+      expect(result).to.be.deep.equal([5, 5, 5]);
+    });
+  });
+
+  describe('when given columnsConfig\'s width', () => {
+    it('adjust by those values', () => {
+      const result = calculateColumnWidths(MAX_COLUMN_WIDTHS,
+        {
+          1: {width: 5},
+        }, {width: 7});
+
+      expect(result).to.be.deep.equal([7, 5, 7]);
+    });
+  });
+
+  describe('auto column width', () => {
+    // Total padding and border are 10
+    const asserts: Array<[Parameters<typeof calculateColumnWidths>, number[]]> = [
+      [[MAX_COLUMN_WIDTHS, {}, {width: 'auto'}, 9], MAX_COLUMN_WIDTHS],
+      [[MAX_COLUMN_WIDTHS, {}, {width: 'auto'}, 10], MAX_COLUMN_WIDTHS],
+      [[MAX_COLUMN_WIDTHS, {}, {width: 'auto'}, 11], [1, 10, 30]],
+      [[MAX_COLUMN_WIDTHS, {}, {width: 'auto'}, 12], [1, 1, 30]],
+      [[MAX_COLUMN_WIDTHS, {}, {width: 'auto'}, 13], [1, 1, 1]],
+      [[MAX_COLUMN_WIDTHS, {}, {width: 'auto'}, 20], [4, 3, 3]],
+      [[MAX_COLUMN_WIDTHS, {2: {width: 'auto'}}, {width: 'auto'}, 20], [4, 3, 3]],
+
+      [[MAX_COLUMN_WIDTHS, {1: {width: 3}}, {width: 'auto'}, 9], [20, 3, 30]],
+      [[MAX_COLUMN_WIDTHS, {1: {width: 3}}, {width: 'auto'}, 12], [20, 3, 30]],
+      [[MAX_COLUMN_WIDTHS, {1: {width: 3}}, {width: 'auto'}, 15], [1, 3, 1]],
+      [[MAX_COLUMN_WIDTHS, {1: {width: 3}}, {width: 'auto'}, 18], [3, 3, 2]],
+
+      [[MAX_COLUMN_WIDTHS, {1: {width: 'auto'}}, {width: 4}, 9], [4, 4, 4]],
+      [[MAX_COLUMN_WIDTHS, {1: {width: 'auto'}}, {width: 4}, 14], [4, 4, 4]],
+      [[MAX_COLUMN_WIDTHS, {1: {width: 'auto'}}, {width: 4}, 19], [4, 1, 4]],
+      [[MAX_COLUMN_WIDTHS, {1: {width: 'auto'}}, {width: 4}, 25], [4, 7, 4]],
+    ];
+
+    asserts.forEach(([parameters, expected], index) => {
+      it(`should work ${index}`, () => {
+        expect(calculateColumnWidths(...parameters)).to.be.deep.equal(expected);
+      });
     });
   });
 });

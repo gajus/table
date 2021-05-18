@@ -68,9 +68,9 @@
     "extensions": [
       ".ts"
     ],
+    "include": ["src/**/*.ts"],
     "exclude": [
-      "src/generated/validators.js",
-      "test/**/*.ts"
+      "src/generated/validators.js"
     ],
     "reporter": [
       "text-lcov", "text"
