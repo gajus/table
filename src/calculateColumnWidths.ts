@@ -9,21 +9,21 @@ const DEFAULT_PADDING = 1;
 type ColumnConfigs = Indexable<ColumnUserConfig>;
 
 const calculateRemainWidth = (
-  {fixedWidths, totalWidth, columnConfigs, columnDefault}: {
-    fixedWidths: Array<number | 'auto'>,
+  {widths, totalWidth, columnConfigs, columnDefault}: {
+    widths: Array<number | 'auto'>,
     totalWidth: number,
     columnConfigs?: ColumnConfigs,
     columnDefault?: ColumnUserConfig,
   },
 ): number => {
-  const totalBorderWidth = fixedWidths.length + 1;
-  const totalPadding = fixedWidths.reduce<number>((total, _, columnIndex) => {
+  const totalBorderWidth = widths.length + 1;
+  const totalPadding = widths.reduce<number>((total, _, columnIndex) => {
     const paddingLeft = columnConfigs?.[columnIndex]?.paddingLeft ?? columnDefault?.paddingLeft ?? DEFAULT_PADDING;
     const paddingRight = columnConfigs?.[columnIndex]?.paddingRight ?? columnDefault?.paddingRight ?? DEFAULT_PADDING;
 
     return total + paddingLeft + paddingRight;
   }, 0);
-  const totalFixedWidth = fixedWidths.reduce<number>((total, width) => {
+  const totalFixedWidth = widths.reduce<number>((total, width) => {
     return total + (width === 'auto' ? 0 : width);
   }, 0);
 
@@ -38,22 +38,22 @@ export const calculateColumnWidths = (maxColumnWidths: number[],
   columnsConfig?: ColumnConfigs,
   columnDefault?: ColumnUserConfig,
   totalWidth = process.stdout.columns): number[] => {
-  const fixedWidths = maxColumnWidths.map((maxColumnWidth, columnIndex) => {
+  const widths = maxColumnWidths.map((maxColumnWidth, columnIndex) => {
     return columnsConfig?.[columnIndex]?.width ?? columnDefault?.width ?? maxColumnWidth;
   });
 
   const remainWidth = calculateRemainWidth(
     {columnConfigs: columnsConfig,
       columnDefault,
-      fixedWidths,
-      totalWidth},
+      totalWidth,
+      widths},
   );
   const autoColumnCount = maxColumnWidths.filter((_, columnIndex) => {
-    return columnsConfig?.[columnIndex]?.width === 'auto' || columnsConfig?.[columnIndex]?.width === undefined && columnDefault?.width === 'auto';
+    return 'auto' === (columnsConfig?.[columnIndex]?.width ?? columnDefault?.width);
   }).length;
   const autoWidths = distributeUnevenly(remainWidth, autoColumnCount);
 
-  return fixedWidths.map((width, columnIndex) => {
+  return widths.map((width, columnIndex) => {
     if (width !== 'auto') {
       return width;
     }
@@ -62,7 +62,7 @@ export const calculateColumnWidths = (maxColumnWidths: number[],
     const autoWidth = autoWidths.shift()!;
 
     if (autoWidth <= 0) {
-      return columnDefault?.width !== 'auto' && columnDefault?.width !== undefined ? columnDefault?.width : maxColumnWidths[columnIndex];
+      return typeof columnDefault?.width === 'number' ? columnDefault.width : maxColumnWidths[columnIndex];
     }
 
     return autoWidth;

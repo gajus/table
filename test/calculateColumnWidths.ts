@@ -4,7 +4,7 @@ import {
 } from 'chai';
 import {
   calculateColumnWidths,
-} from '../dist/calculateColumnWidths';
+} from '../src/calculateColumnWidths';
 
 const MAX_COLUMN_WIDTHS = [20, 10, 30];
 

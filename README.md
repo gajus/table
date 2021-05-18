@@ -282,10 +282,11 @@ Column specific configurations.
 <a name="table-api-table-1-config-columns-config-columns-width"></a>
 ###### config.columns[*].width
 
-Type: `number`\
+Type: `number` | `'auto'`\
 Default: the maximum cell widths of the column
 
 Column width (excluding the paddings).
+When one or more columns have `auto` width, they will expand to fill the console evenly.
 
 ```js
 
