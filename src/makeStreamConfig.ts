@@ -22,13 +22,12 @@ import {
  * Creates a configuration for every column using default
  * values for the missing configuration properties.
  */
-const makeColumnsConfig = (columnCount: number,
+export const makeColumnsConfig = (columnCount: number,
   columns: Indexable<ColumnUserConfig> = {},
   columnDefault: StreamUserConfig['columnDefault']): ColumnConfig[] => {
   const maxColumnWidths = Array.from({length: columnCount}).map((_, index) => {
-    const width = columns[index]?.width ?? columnDefault?.width;
-
-    return width === 'auto' ? 0 : width;
+    /* istanbul ignore next */
+    return columns[index]?.width ?? columnDefault?.width;
   });
   const widths = calculateColumnWidths(maxColumnWidths, columns, columnDefault);
 

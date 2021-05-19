@@ -133,7 +133,7 @@ export type StreamUserConfig = BaseUserConfig & {
     /**
      * The default width for each column
      */
-    readonly width: number,
+    readonly width: number | 'auto',
   },
 };
 

@@ -37,30 +37,41 @@ describe('calculateColumnWidths', () => {
   });
 
   describe('auto column width', () => {
-    // Total padding and border are 10
-    const asserts: Array<[Parameters<typeof calculateColumnWidths>, number[]]> = [
-      [[MAX_COLUMN_WIDTHS, {}, {width: 'auto'}, 9], MAX_COLUMN_WIDTHS],
-      [[MAX_COLUMN_WIDTHS, {}, {width: 'auto'}, 10], MAX_COLUMN_WIDTHS],
-      [[MAX_COLUMN_WIDTHS, {}, {width: 'auto'}, 11], [1, 10, 30]],
-      [[MAX_COLUMN_WIDTHS, {}, {width: 'auto'}, 12], [1, 1, 30]],
-      [[MAX_COLUMN_WIDTHS, {}, {width: 'auto'}, 13], [1, 1, 1]],
-      [[MAX_COLUMN_WIDTHS, {}, {width: 'auto'}, 20], [4, 3, 3]],
-      [[MAX_COLUMN_WIDTHS, {2: {width: 'auto'}}, {width: 'auto'}, 20], [4, 3, 3]],
+    describe('when there is enough space', () => {
+      it('should calculate properly', () => {
+        // Total padding and border are 10
+        const asserts: Array<[Parameters<typeof calculateColumnWidths>, number[]]> = [
+          [[MAX_COLUMN_WIDTHS, {}, {width: 'auto'}, 9], [20, 10, 30]],
+          [[MAX_COLUMN_WIDTHS, {1: {width: 3}}, {width: 'auto'}, 9], [20, 3, 30]],
+          [[MAX_COLUMN_WIDTHS, {1: {width: 'auto'}}, {width: 4}, 9], [4, 4, 4]],
 
-      [[MAX_COLUMN_WIDTHS, {1: {width: 3}}, {width: 'auto'}, 9], [20, 3, 30]],
-      [[MAX_COLUMN_WIDTHS, {1: {width: 3}}, {width: 'auto'}, 12], [20, 3, 30]],
-      [[MAX_COLUMN_WIDTHS, {1: {width: 3}}, {width: 'auto'}, 15], [1, 3, 1]],
-      [[MAX_COLUMN_WIDTHS, {1: {width: 3}}, {width: 'auto'}, 18], [3, 3, 2]],
+          [[MAX_COLUMN_WIDTHS, {}, {width: 'auto'}, 10], [0, 0, 0]],
+          [[MAX_COLUMN_WIDTHS, {}, {width: 'auto'}, 11], [1, 0, 0]],
+          [[MAX_COLUMN_WIDTHS, {}, {width: 'auto'}, 12], [1, 1, 0]],
+          [[MAX_COLUMN_WIDTHS, {}, {width: 'auto'}, 13], [1, 1, 1]],
+          [[MAX_COLUMN_WIDTHS, {}, {width: 'auto'}, 20], [4, 3, 3]],
+          [[MAX_COLUMN_WIDTHS, {2: {width: 'auto'}}, {width: 'auto'}, 20], [4, 3, 3]],
+          [[MAX_COLUMN_WIDTHS, {2: {width: 'auto'}}, undefined, 20], [20, 10, 30]],
 
-      [[MAX_COLUMN_WIDTHS, {1: {width: 'auto'}}, {width: 4}, 9], [4, 4, 4]],
-      [[MAX_COLUMN_WIDTHS, {1: {width: 'auto'}}, {width: 4}, 14], [4, 4, 4]],
-      [[MAX_COLUMN_WIDTHS, {1: {width: 'auto'}}, {width: 4}, 19], [4, 1, 4]],
-      [[MAX_COLUMN_WIDTHS, {1: {width: 'auto'}}, {width: 4}, 25], [4, 7, 4]],
-    ];
+          [[MAX_COLUMN_WIDTHS, {1: {width: 3}}, {width: 'auto'}, 12], [20, 3, 30]],
+          [[MAX_COLUMN_WIDTHS, {1: {width: 3}}, {width: 'auto'}, 15], [1, 3, 1]],
+          [[MAX_COLUMN_WIDTHS, {1: {width: 3}}, {width: 'auto'}, 18], [3, 3, 2]],
 
-    asserts.forEach(([parameters, expected], index) => {
-      it(`should work ${index}`, () => {
-        expect(calculateColumnWidths(...parameters)).to.be.deep.equal(expected);
+          [[MAX_COLUMN_WIDTHS, {1: {width: 'auto'}}, {width: 4}, 14], [4, 4, 4]],
+          [[MAX_COLUMN_WIDTHS, {1: {width: 'auto'}}, {width: 4}, 19], [4, 1, 4]],
+          [[MAX_COLUMN_WIDTHS, {1: {width: 'auto'}}, {width: 4}, 25], [4, 7, 4]],
+        ];
+        asserts.forEach(([parameters, expected]) => {
+          expect(calculateColumnWidths(...parameters)).to.be.deep.equal(expected);
+        });
+      });
+    });
+
+    describe('when there is not enough space', () => {
+      it('should throw an error', () => {
+        expect(() => {
+          return calculateColumnWidths([20, 'auto'], undefined, undefined, 10);
+        }).to.be.throw();
       });
     });
   });

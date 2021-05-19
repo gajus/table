@@ -132,6 +132,10 @@ const streamConfigSamples: {invalid: unknown[], valid: StreamUserConfig[], } = {
       columnDefault: {width: 1},
     },
     {
+      columnCount: 1,
+      columnDefault: {width: 'auto'},
+    },
+    {
       columnCount: 3,
       columnDefault: {width: 20},
     },
@@ -246,7 +250,7 @@ const streamConfigSamples: {invalid: unknown[], valid: StreamUserConfig[], } = {
           alignment: 'center',
         },
         2: {
-          width: 10,
+          width: 'auto',
         },
       },
     },

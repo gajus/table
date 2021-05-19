@@ -34,7 +34,7 @@ const calculateRemainWidth = (
  * Creates a configuration for every column using default
  * values for the missing configuration properties.
  */
-export const calculateColumnWidths = (maxColumnWidths: number[],
+export const calculateColumnWidths = (maxColumnWidths: ReadonlyArray<number | 'auto'>,
   columnsConfig?: ColumnConfigs,
   columnDefault?: ColumnUserConfig,
   totalWidth = process.stdout.columns): number[] => {
@@ -53,7 +53,7 @@ export const calculateColumnWidths = (maxColumnWidths: number[],
   }).length;
   const autoWidths = distributeUnevenly(remainWidth, autoColumnCount);
 
-  return widths.map((width, columnIndex) => {
+  return widths.map((width, index) => {
     if (width !== 'auto') {
       return width;
     }
@@ -61,10 +61,19 @@ export const calculateColumnWidths = (maxColumnWidths: number[],
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const autoWidth = autoWidths.shift()!;
 
-    if (autoWidth <= 0) {
-      return typeof columnDefault?.width === 'number' ? columnDefault.width : maxColumnWidths[columnIndex];
+    if (autoWidth >= 0) {
+      return autoWidth;
     }
 
-    return autoWidth;
+    if (typeof columnDefault?.width === 'number') {
+      return columnDefault.width;
+    }
+
+    const maxWidth = maxColumnWidths[index];
+    if (typeof maxWidth === 'number') {
+      return maxWidth;
+    }
+
+    throw new Error('There is not available space for draw the table');
   });
 };
