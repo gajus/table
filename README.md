@@ -10,13 +10,13 @@
 [![Twitter Follow](https://img.shields.io/twitter/follow/kuizinas.svg?style=social&label=Follow)](https://twitter.com/kuizinas)
 
 * [Table](#table)
-    * [Features](#table-features)
-    * [Install](#table-install)
-    * [Usage](#table-usage)
-    * [API](#table-api)
-        * [table](#table-api-table-1)
-        * [createStream](#table-api-createstream)
-        * [getBorderCharacters](#table-api-getbordercharacters)
+    * [Features](#features)
+    * [Install](#install)
+    * [Usage](#usage)
+    * [API](#api)
+        * [table](#table-1)
+        * [createStream](#createstream)
+        * [getBorderCharacters](#getbordercharacters)
 
 
 ![Demo of table displaying a list of missions to the Moon.](./.README/demo.png)
