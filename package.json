@@ -9,8 +9,8 @@
     "lodash.clonedeep": "^4.5.0",
     "lodash.truncate": "^4.4.2",
     "slice-ansi": "^4.0.0",
-    "string-width": "^4.2.0",
-    "strip-ansi": "^6.0.0"
+    "string-width": "^4.2.3",
+    "strip-ansi": "^6.0.1"
   },
   "description": "Formats data into a string table.",
   "devDependencies": {
@@ -73,7 +73,8 @@
       "test/**/*.ts"
     ],
     "reporter": [
-      "text-lcov", "text"
+      "text-lcov",
+      "text"
     ]
   },
   "repository": {
