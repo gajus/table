@@ -7,6 +7,9 @@ import type {
   DrawVerticalLine,
 } from '../src';
 import {
+  getBorderCharacters,
+} from '../src';
+import {
   drawBorder,
   drawBorderTop,
   drawBorderJoin,
@@ -19,6 +22,8 @@ import {
 import type {
   TableConfig,
 } from '../src/types/internal';
+
+const defaultBorderConfig = getBorderCharacters('honeywell');
 
 const defaultDrawVerticalLine: DrawVerticalLine = () => {
   return true;
@@ -56,6 +61,7 @@ context('drawBorderTop', () => {
   it('draws a border using parts', () => {
     const config: Parameters<typeof drawBorderTop>[1] = {
       border: {
+        ...defaultBorderConfig,
         topLeft: '╔',
         topRight: '╗',
         topBody: '═',
@@ -78,6 +84,7 @@ context('drawBorderTop', () => {
   it('no leading new line if borderless', () => {
     const config = {
       border: {
+        ...defaultBorderConfig,
         topLeft: '',
         topRight: '',
         topBody: '',
@@ -102,6 +109,7 @@ context('drawBorderJoin', () => {
   it('draws a border using parts', () => {
     const config = {
       border: {
+        ...defaultBorderConfig,
         joinBody: '─',
         joinLeft: '╟',
         joinRight: '╢',
@@ -126,6 +134,7 @@ context('drawBorderBottom', () => {
   it('draws a border using parts', () => {
     const config = {
       border: {
+        ...defaultBorderConfig,
         bottomBody: '═',
         bottomJoin: '╧',
         bottomLeft: '╚',
@@ -157,23 +166,6 @@ context('tableBorderGetter', () => {
 
       expect(getter(0, 3)).to.equal('╔══╤═╤═══╗\n');
       expect(getter(1, 3)).to.equal('╟──┼─┼───╢\n');
-      expect(getter(2, 3)).to.equal('╟──┼─┼───╢\n');
-      expect(getter(3, 3)).to.equal('╚══╧═╧═══╝\n');
-    });
-  });
-
-  context('when config.header is defined', () => {
-    it('draws the borders that modify for header', () => {
-      const config: TableConfig = makeTableConfig([['a', 'b', 'c']], {
-        header: {
-          content: 'ddd',
-        },
-      });
-
-      const getter = createTableBorderGetter([2, 1, 3], config);
-
-      expect(getter(0, 3)).to.equal('╔════════╗\n');
-      expect(getter(1, 3)).to.equal('╟──┬─┬───╢\n');
       expect(getter(2, 3)).to.equal('╟──┼─┼───╢\n');
       expect(getter(3, 3)).to.equal('╚══╧═╧═══╝\n');
     });

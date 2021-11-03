@@ -34,11 +34,14 @@ import type {
 import type {
   Row, StreamConfig,
 } from './types/internal';
+import {
+  extractTruncates,
+} from './utils';
 
 const prepareData = (data: Row[], config: StreamConfig) => {
   let rows = stringifyTableData(data);
 
-  rows = truncateTableData(rows, config);
+  rows = truncateTableData(rows, extractTruncates(config));
 
   const rowHeights = calculateRowHeights(rows, config);
 

@@ -4,6 +4,8 @@ Type: `object`
 
 Header configuration.
 
+*Deprecated in favor of the new spanning cells API.*
+
 The header configuration inherits the most of the column's, except:
 - `content` **{string}**: the header content.
 - `width:` calculate based on the content width automatically.

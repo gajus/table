@@ -5,8 +5,15 @@ import {
   getBorderCharacters,
 } from './getBorderCharacters';
 import type {
-  BorderConfig, BorderUserConfig,
+  BorderConfig,
+  BorderUserConfig,
+  SpanningCellConfig,
 } from './types/api';
+import type {
+  BaseConfig,
+  CellCoordinates,
+  RangeCoordinate,
+} from './types/internal';
 
 /**
  * Converts Windows-style newline to Unix-style
@@ -98,3 +105,56 @@ export const distributeUnevenly = (sum: number, length: number): number[] => {
   });
 };
 
+export const sequence = (start: number, end: number): number[] => {
+  return Array.from({length: end - start + 1}, (_, index) => {
+    return index + start;
+  });
+};
+
+export const sumArray = (array: number[]): number => {
+  return array.reduce((accumulator, element) => {
+    return accumulator + element;
+  }, 0);
+};
+
+export const extractTruncates = (config: BaseConfig): number[] => {
+  return config.columns.map(({truncate}) => {
+    return truncate;
+  });
+};
+
+export const flatten = <T>(array: T[][]): T[] => {
+  return ([] as T[]).concat(...array);
+};
+
+export const findOriginalRowIndex = (mappedRowHeights: number[], mappedRowIndex: number): number => {
+  const rowIndexMapping = flatten(mappedRowHeights.map((height, index) => {
+    return Array.from({length: height}, () => {
+      return index;
+    });
+  }));
+
+  return rowIndexMapping[mappedRowIndex];
+};
+
+export const calculateRangeCoordinate = (spanningCellConfig: SpanningCellConfig): RangeCoordinate => {
+  const {row, col, colSpan = 1, rowSpan = 1} = spanningCellConfig;
+
+  return {bottomRight: {col: col + colSpan - 1,
+    row: row + rowSpan - 1},
+  topLeft: {col,
+    row}};
+};
+
+export const areCellEqual = (cell1: CellCoordinates, cell2: CellCoordinates): boolean => {
+  return cell1.row === cell2.row && cell1.col === cell2.col;
+};
+
+export const isCellInRange = (cell: CellCoordinates, {topLeft, bottomRight}: RangeCoordinate): boolean => {
+  return (
+    topLeft.row <= cell.row &&
+    cell.row <= bottomRight.row &&
+    topLeft.col <= cell.col &&
+    cell.col <= bottomRight.col
+  );
+};

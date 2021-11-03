@@ -1,13 +1,9 @@
-import stringWidth from 'string-width';
 import {
   createTableBorderGetter,
 } from './drawBorder';
 import {
   drawContent,
 } from './drawContent';
-import {
-  drawHeader,
-} from './drawHeader';
 import {
   drawRow,
 } from './drawRow';
@@ -18,28 +14,20 @@ import {
   groupBySizes,
 } from './utils';
 
-export const drawTable = (rows: Row[], columnWidths: number[], rowHeights: number[], config: TableConfig): string => {
+export const drawTable = (rows: Row[], outputColumnWidths: number[], rowHeights: number[], config: TableConfig): string => {
   const {
     drawHorizontalLine,
     singleLine,
   } = config;
 
-  const contents = groupBySizes(rows, rowHeights).map((group) => {
+  const contents = groupBySizes(rows, rowHeights).map((group, groupIndex) => {
     return group.map((row) => {
-      return drawRow(row, config);
+      return drawRow(row, {...config,
+        rowIndex: groupIndex});
     }).join('');
   });
 
-  if (config.header) {
-    // assume that topLeft/right border have width = 1
-    const headerWidth = stringWidth(drawRow(rows[0], config)) - 2 -
-      config.header.paddingLeft - config.header.paddingRight;
-    const header = drawHeader(headerWidth, config);
-
-    contents.unshift(header);
-  }
-
-  return drawContent(contents, {
+  return drawContent({contents,
     drawSeparator: (index, size) => {
       // Top/bottom border
       if (index === 0 || index === size) {
@@ -48,6 +36,9 @@ export const drawTable = (rows: Row[], columnWidths: number[], rowHeights: numbe
 
       return !singleLine && drawHorizontalLine(index, size);
     },
-    separatorGetter: createTableBorderGetter(columnWidths, config),
-  });
+    elementType: 'row',
+    rowIndex: -1,
+    separatorGetter: createTableBorderGetter(outputColumnWidths, {...config,
+      rowCount: contents.length}),
+    spanningCellManager: config.spanningCellManager});
 };

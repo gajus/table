@@ -7,7 +7,7 @@ const calculateStringLengths = (input: string, size: number): Array<[Length:numb
   const chunks: Array<[number, number]> = [];
 
   // https://regex101.com/r/gY5kZ1/1
-  const re = new RegExp('(^.{1,' + String(Math.max(size, 1)) + '}(\\s+|$))|(^.{1,' + String(Math.max(2, size - 1) - 1) + '}(\\\\|/|_|\\.|,|;|-))');
+  const re = new RegExp('(^.{1,' + String(Math.max(size, 1)) + '}(\\s+|$))|(^.{1,' + String(Math.max(size - 1, 1)) + '}(\\\\|/|_|\\.|,|;|-))');
 
   do {
     let chunk: string;
@@ -38,7 +38,7 @@ export const wrapWord = (input: string, size: number): string[] => {
   const result: string[] = [];
 
   let startIndex = 0;
-  calculateStringLengths(input, Math.max(size, 1)).forEach(([length, offset]) => {
+  calculateStringLengths(input, size).forEach(([length, offset]) => {
     result.push(slice(input, startIndex, startIndex + length));
 
     startIndex += length + offset;

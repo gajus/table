@@ -2,17 +2,17 @@ import {
   expect,
 } from 'chai';
 import {
-  calculateCellWidths,
-} from '../src/calculateCellWidths';
+  calculateMaximumColumnWidths,
+} from '../src/calculateMaximumColumnWidths';
 
-describe('calculateCellWidths', () => {
+describe('calculateMaximumColumnWidths', () => {
   context('all cells have different width', () => {
     it('describes each cell contents width', () => {
-      const cellWidths = calculateCellWidths([
+      const cellWidths = calculateMaximumColumnWidths([[
         'a',
         'aaa',
         'aaaaaa',
-      ]);
+      ]]);
 
       expect(cellWidths[0]).to.equal(1, 'first column');
       expect(cellWidths[1]).to.equal(3, 'second column');
@@ -21,9 +21,9 @@ describe('calculateCellWidths', () => {
   });
   context('cell contains newline characters', () => {
     it('picks the longest line length', () => {
-      const cellWidths = calculateCellWidths([
+      const cellWidths = calculateMaximumColumnWidths([[
         'aaaa\naa',
-      ]);
+      ]]);
 
       expect(cellWidths[0]).to.equal(4);
     });

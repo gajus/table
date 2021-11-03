@@ -1,10 +1,16 @@
-import calculateColumnWidths from './calculateColumnWidths';
+import {
+  calculateMaximumColumnWidths,
+} from './calculateMaximumColumnWidths';
+import {
+  createSpanningCellManager,
+} from './spanningCellManager';
 import type {
   ColumnUserConfig, Indexable,
+  SpanningCellConfig,
   TableUserConfig,
 } from './types/api';
 import type {
-  ColumnConfig, HeaderConfig, Row, TableConfig,
+  ColumnConfig, Row, TableConfig,
 } from './types/internal';
 import {
   makeBorderConfig,
@@ -12,6 +18,9 @@ import {
 import {
   validateConfig,
 } from './validateConfig';
+import {
+  validateSpanningCellConfig,
+} from './validateSpanningCellConfig';
 
 /**
  * Creates a configuration for every column using default
@@ -19,8 +28,9 @@ import {
  */
 const makeColumnsConfig = (rows: Row[],
   columns?: Indexable<ColumnUserConfig>,
-  columnDefault?: ColumnUserConfig): ColumnConfig[] => {
-  const columnWidths = calculateColumnWidths(rows);
+  columnDefault?: ColumnUserConfig,
+  spanningCellConfigs?: SpanningCellConfig[]): ColumnConfig[] => {
+  const columnWidths = calculateMaximumColumnWidths(rows, spanningCellConfigs);
 
   return rows[0].map((_, columnIndex) => {
     return {
@@ -37,40 +47,39 @@ const makeColumnsConfig = (rows: Row[],
   });
 };
 
-const makeHeaderConfig = (config: TableUserConfig): HeaderConfig | undefined => {
-  if (!config.header) {
-    return undefined;
-  }
-
-  return {
-    alignment: 'center',
-    paddingLeft: 1,
-    paddingRight: 1,
-    truncate: Number.POSITIVE_INFINITY,
-    wrapWord: false,
-    ...config.header,
-  };
-};
-
 /**
  * Makes a new configuration object out of the userConfig object
  * using default values for the missing configuration properties.
  */
 
-export const makeTableConfig = (rows: Row[], config: TableUserConfig = {}): TableConfig => {
+export const makeTableConfig = (rows: Row[], config: TableUserConfig = {}, injectedSpanningCellConfig?: SpanningCellConfig[]): TableConfig => {
   validateConfig('config.json', config);
+  validateSpanningCellConfig(rows, config.spanningCells ?? []);
+
+  const spanningCellConfigs = injectedSpanningCellConfig ?? config.spanningCells ?? [];
+
+  const columnsConfig = makeColumnsConfig(rows, config.columns, config.columnDefault, spanningCellConfigs);
+
+  const drawVerticalLine = config.drawVerticalLine ?? (() => {
+    return true;
+  });
+  const drawHorizontalLine = config.drawHorizontalLine ?? (() => {
+    return true;
+  });
 
   return {
     ...config,
     border: makeBorderConfig(config.border),
-    columns: makeColumnsConfig(rows, config.columns, config.columnDefault),
-    drawHorizontalLine: config.drawHorizontalLine ?? (() => {
-      return true;
-    }),
-    drawVerticalLine: config.drawVerticalLine ?? (() => {
-      return true;
-    }),
-    header: makeHeaderConfig(config),
+    columns: columnsConfig,
+    drawHorizontalLine,
+    drawVerticalLine,
     singleLine: config.singleLine ?? false,
+    spanningCellManager: createSpanningCellManager({
+      columnsConfig,
+      drawHorizontalLine,
+      drawVerticalLine,
+      rows,
+      spanningCellConfigs,
+    }),
   };
 };

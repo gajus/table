@@ -2,56 +2,202 @@ import {
   drawContent,
 } from './drawContent';
 import type {
+  SpanningCellManager,
+} from './spanningCellManager';
+import type {
+  BorderConfig,
   DrawVerticalLine,
 } from './types/api';
 import type {
-  TableConfig,
+  CellCoordinates,
   SeparatorGetter,
-  TopBorderConfig,
-  JoinBorderConfig,
-  BottomBorderConfig,
 } from './types/internal';
 
 type Separator = {
-  readonly body: string,
-  readonly join: string,
   readonly left: string,
   readonly right: string,
+  readonly body: string,
+  readonly bodyJoinOuter?: string,
+  readonly bodyJoinInner?: string,
+  readonly join: string,
+  readonly joinUp?: string,
+  readonly joinDown?: string,
+  readonly joinLeft?: string,
+  readonly joinRight?: string,
 };
 
-const drawBorder = (columnWidths: number[],
-  config: {drawVerticalLine: DrawVerticalLine, separator: Separator, }): string => {
-  const {separator, drawVerticalLine} = config;
-  const columns = columnWidths.map((size) => {
-    return config.separator.body.repeat(size);
-  });
+export const drawBorderSegments = (columnWidths: number[], parameters: Parameters<typeof drawBorder>[1]): string[] => {
+  const {separator, horizontalBorderIndex, spanningCellManager} = parameters;
 
-  return drawContent(columns, {
-    drawSeparator: drawVerticalLine,
-    separatorGetter: (index: number, columnCount: number) => {
-      if (index === 0) {
+  return columnWidths.map((columnWidth, columnIndex) => {
+    const normalSegment = separator.body.repeat(columnWidth);
+    if (horizontalBorderIndex === undefined) {
+      return normalSegment;
+    }
+
+    /* istanbul ignore next */
+    const range = spanningCellManager?.getContainingRange({col: columnIndex,
+      row: horizontalBorderIndex});
+    if (!range) {
+      return normalSegment;
+    }
+    const {topLeft} = range;
+
+    // draw border segments as usual for top border of spanning cell
+    if (horizontalBorderIndex === topLeft.row) {
+      return normalSegment;
+    }
+
+    // if for first column/row of spanning cell, just skip
+    if (columnIndex !== topLeft.col) {
+      return '';
+    }
+
+    return range.extractBorderContent(horizontalBorderIndex);
+  });
+};
+
+export const createSeparatorGetter = (dependencies: Parameters<typeof drawBorder>[1]): (verticalBorderIndex: number, columnCount: number) => string => {
+  const {separator, spanningCellManager, horizontalBorderIndex, rowCount} = dependencies;
+
+  // eslint-disable-next-line complexity
+  return (verticalBorderIndex, columnCount) => {
+    const inSameRange = spanningCellManager?.inSameRange;
+    if (horizontalBorderIndex !== undefined && inSameRange) {
+      const topCell: CellCoordinates = {col: verticalBorderIndex,
+        row: horizontalBorderIndex - 1};
+      const leftCell: CellCoordinates = {col: verticalBorderIndex - 1,
+        row: horizontalBorderIndex};
+      const oppositeCell: CellCoordinates = {col: verticalBorderIndex - 1,
+        row: horizontalBorderIndex - 1};
+      const currentCell: CellCoordinates = {col: verticalBorderIndex,
+        row: horizontalBorderIndex};
+
+      const pairs: Array<[CellCoordinates, CellCoordinates]> = [
+        [oppositeCell, topCell],
+        [topCell, currentCell],
+        [currentCell, leftCell],
+        [leftCell, oppositeCell],
+      ];
+
+      // left side of horizontal border
+      if (verticalBorderIndex === 0) {
+        if (inSameRange(currentCell, topCell) && separator.bodyJoinOuter) {
+          return separator.bodyJoinOuter;
+        }
+
         return separator.left;
       }
 
-      if (index === columnCount) {
+      // right side of horizontal border
+      if (verticalBorderIndex === columnCount) {
+        if (inSameRange(oppositeCell, leftCell) && separator.bodyJoinOuter) {
+          return separator.bodyJoinOuter;
+        }
+
         return separator.right;
       }
 
-      return separator.join;
-    },
+      // top horizontal border
+      if (horizontalBorderIndex === 0) {
+        if (inSameRange(currentCell, leftCell)) {
+          return separator.body;
+        }
 
+        return separator.join;
+      }
+
+      // bottom horizontal border
+      if (horizontalBorderIndex === rowCount) {
+        if (inSameRange(topCell, oppositeCell)) {
+          return separator.body;
+        }
+
+        return separator.join;
+      }
+
+      const sameRangeCount = pairs.map((pair) => {
+        return inSameRange(...pair);
+      }).filter(Boolean).length;
+
+      // four cells are belongs to different spanning cells
+      if (sameRangeCount === 0) {
+        return separator.join;
+      }
+
+      // belong to one spanning cell
+      if (sameRangeCount === 4) {
+        return '';
+      }
+
+      // belongs to two spanning cell
+      if (sameRangeCount === 2) {
+        if (inSameRange(...pairs[1]) && inSameRange(...pairs[3]) && separator.bodyJoinInner) {
+          return separator.bodyJoinInner;
+        }
+
+        return separator.body;
+      }
+
+      /* istanbul ignore next */
+      if (sameRangeCount === 1) {
+        if (!separator.joinRight || !separator.joinLeft || !separator.joinUp || !separator.joinDown) {
+          throw new Error(`Can not get border separator for position [${horizontalBorderIndex}, ${verticalBorderIndex}]`);
+        }
+
+        if (inSameRange(...pairs[0])) {
+          return separator.joinDown;
+        }
+        if (inSameRange(...pairs[1])) {
+          return separator.joinLeft;
+        }
+        if (inSameRange(...pairs[2])) {
+          return separator.joinUp;
+        }
+
+        return separator.joinRight;
+      }
+
+      /* istanbul ignore next */
+      throw new Error('Invalid case');
+    }
+
+    if (verticalBorderIndex === 0) {
+      return separator.left;
+    }
+
+    if (verticalBorderIndex === columnCount) {
+      return separator.right;
+    }
+
+    return separator.join;
+  };
+};
+
+export const drawBorder = (columnWidths: number[], parameters: Omit<DrawBorderParameters, 'border'> & {separator: Separator, }): string => {
+  const borderSegments = drawBorderSegments(columnWidths, parameters);
+
+  const {drawVerticalLine, horizontalBorderIndex, spanningCellManager} = parameters;
+
+  return drawContent({
+    contents: borderSegments,
+    drawSeparator: drawVerticalLine,
+    elementType: 'border',
+    rowIndex: horizontalBorderIndex,
+    separatorGetter: createSeparatorGetter(parameters),
+    spanningCellManager,
   }) + '\n';
 };
 
-const drawBorderTop = (columnWidths: number[],
-  config: {border: TopBorderConfig, drawVerticalLine: DrawVerticalLine, }): string => {
+export const drawBorderTop = (columnWidths: number[], parameters: DrawBorderParameters): string => {
+  const {border} = parameters;
   const result = drawBorder(columnWidths, {
-    ...config,
+    ...parameters,
     separator: {
-      body: config.border.topBody,
-      join: config.border.topJoin,
-      left: config.border.topLeft,
-      right: config.border.topRight,
+      body: border.topBody,
+      join: border.topJoin,
+      left: border.topLeft,
+      right: border.topRight,
     },
   });
 
@@ -62,78 +208,63 @@ const drawBorderTop = (columnWidths: number[],
   return result;
 };
 
-const drawBorderJoin = (columnWidths: number[],
-  config: {border: JoinBorderConfig, drawVerticalLine: DrawVerticalLine, }): string => {
+export const drawBorderJoin = (columnWidths: number[], parameters: DrawBorderParameters): string => {
+  const {border} = parameters;
+
   return drawBorder(columnWidths, {
-    ...config,
+    ...parameters,
     separator: {
-      body: config.border.joinBody,
-      join: config.border.joinJoin,
-      left: config.border.joinLeft,
-      right: config.border.joinRight,
+      body: border.joinBody,
+      bodyJoinInner: border.bodyJoin,
+      bodyJoinOuter: border.bodyLeft,
+      join: border.joinJoin,
+      joinDown: border.joinMiddleDown,
+      joinLeft: border.joinMiddleLeft,
+      joinRight: border.joinMiddleRight,
+      joinUp: border.joinMiddleUp,
+      left: border.joinLeft,
+      right: border.joinRight,
     },
   });
 };
 
-const drawBorderBottom = (columnWidths: number[],
-  config: {border: BottomBorderConfig, drawVerticalLine: DrawVerticalLine, }): string => {
+export const drawBorderBottom = (columnWidths: number[], parameters: DrawBorderParameters): string => {
+  const {border} = parameters;
+
   return drawBorder(columnWidths, {
-    ...config,
+    ...parameters,
     separator: {
-      body: config.border.bottomBody,
-      join: config.border.bottomJoin,
-      left: config.border.bottomLeft,
-      right: config.border.bottomRight,
+      body: border.bottomBody,
+      join: border.bottomJoin,
+      left: border.bottomLeft,
+      right: border.bottomRight,
     },
   });
 };
 
-export const createTableBorderGetter = (columnWidths: number[], config: TableConfig): SeparatorGetter => {
+export type BorderGetterParameters = {
+  border: BorderConfig,
+  drawVerticalLine: DrawVerticalLine,
+  spanningCellManager?: SpanningCellManager,
+  rowCount?: number,
+};
+
+export type DrawBorderParameters = Omit<BorderGetterParameters, 'outputColumnWidths'> & {
+  horizontalBorderIndex?: number,
+};
+
+export const createTableBorderGetter = (columnWidths: number[], parameters: BorderGetterParameters): SeparatorGetter => {
   return (index: number, size: number) => {
-    if (!config.header) {
-      if (index === 0) {
-        return drawBorderTop(columnWidths, config);
-      }
+    const drawBorderParameters: DrawBorderParameters = {...parameters,
+      horizontalBorderIndex: index};
 
-      if (index === size) {
-        return drawBorderBottom(columnWidths, config);
-      }
-
-      return drawBorderJoin(columnWidths, config);
-    }
-
-    // Deal with the header
     if (index === 0) {
-      return drawBorderTop(columnWidths, {
-        ...config,
-        border: {
-          ...config.border,
-          topJoin: config.border.topBody,
-        },
-      });
+      return drawBorderTop(columnWidths, drawBorderParameters);
+    } else if (index === size) {
+      return drawBorderBottom(columnWidths, drawBorderParameters);
     }
 
-    if (index === 1) {
-      return drawBorderJoin(columnWidths, {
-        ...config,
-        border: {
-          ...config.border,
-          joinJoin: config.border.headerJoin,
-        },
-      });
-    }
-
-    if (index === size) {
-      return drawBorderBottom(columnWidths, config);
-    }
-
-    return drawBorderJoin(columnWidths, config);
+    return drawBorderJoin(columnWidths, drawBorderParameters);
   };
 };
 
-export {
-  drawBorder,
-  drawBorderBottom,
-  drawBorderJoin,
-  drawBorderTop,
-};
