@@ -1,4 +1,3 @@
-import cloneDeep from 'lodash.clonedeep';
 import type {
   ColumnUserConfig,
   Indexable,
@@ -40,10 +39,8 @@ const makeColumnsConfig = (columnCount: number,
  * Makes a new configuration object out of the userConfig object
  * using default values for the missing configuration properties.
  */
-export const makeStreamConfig = (userConfig: StreamUserConfig): StreamConfig => {
-  validateConfig('streamConfig.json', userConfig);
-
-  const config = cloneDeep(userConfig);
+export const makeStreamConfig = (config: StreamUserConfig): StreamConfig => {
+  validateConfig('streamConfig.json', config);
 
   if (config.columnDefault.width === undefined) {
     throw new Error('Must provide config.columnDefault.width when creating a stream.');

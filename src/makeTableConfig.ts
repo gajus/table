@@ -1,4 +1,3 @@
-import cloneDeep from 'lodash.clonedeep';
 import calculateColumnWidths from './calculateColumnWidths';
 import type {
   ColumnUserConfig, Indexable,
@@ -58,10 +57,8 @@ const makeHeaderConfig = (config: TableUserConfig): HeaderConfig | undefined => 
  * using default values for the missing configuration properties.
  */
 
-export const makeTableConfig = (rows: Row[], userConfig: TableUserConfig = {}): TableConfig => {
-  validateConfig('config.json', userConfig);
-
-  const config = cloneDeep(userConfig);
+export const makeTableConfig = (rows: Row[], config: TableUserConfig = {}): TableConfig => {
+  validateConfig('config.json', config);
 
   return {
     ...config,
