@@ -13,11 +13,11 @@ export const calculateRowHeights = (rows: Row[], config: BaseConfig): number[] =
   return rows.map((row) => {
     let rowHeight = 1;
 
-    row.forEach((cell, cellIndex) => {
+    for (const [cellIndex, cell] of row.entries()) {
       const cellHeight = calculateCellHeight(cell, config.columns[cellIndex].width, config.columns[cellIndex].wrapWord);
 
       rowHeight = Math.max(rowHeight, cellHeight);
-    });
+    }
 
     return rowHeight;
   });

@@ -1,5 +1,3 @@
-/* eslint-disable sort-keys-fix/sort-keys-fix */
-
 import {
   expect,
 } from 'chai';
@@ -33,10 +31,10 @@ context('drawBorder', () => {
     const config = {
       drawVerticalLine: defaultDrawVerticalLine,
       separator: {
-        left: '╔',
-        right: '╗',
         body: '═',
         join: '╤',
+        left: '╔',
+        right: '╗',
       },
     };
 
@@ -56,10 +54,10 @@ context('drawBorderTop', () => {
   it('draws a border using parts', () => {
     const config: Parameters<typeof drawBorderTop>[1] = {
       border: {
-        topLeft: '╔',
-        topRight: '╗',
         topBody: '═',
         topJoin: '╤',
+        topLeft: '╔',
+        topRight: '╗',
       },
       drawVerticalLine: defaultDrawVerticalLine,
     };
@@ -78,10 +76,10 @@ context('drawBorderTop', () => {
   it('no leading new line if borderless', () => {
     const config = {
       border: {
-        topLeft: '',
-        topRight: '',
         topBody: '',
         topJoin: '',
+        topLeft: '',
+        topRight: '',
       },
       drawVerticalLine: defaultDrawVerticalLine,
     };
@@ -103,9 +101,9 @@ context('drawBorderJoin', () => {
     const config = {
       border: {
         joinBody: '─',
+        joinJoin: '┼',
         joinLeft: '╟',
         joinRight: '╢',
-        joinJoin: '┼',
       },
       drawVerticalLine: defaultDrawVerticalLine,
     };

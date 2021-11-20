@@ -1,17 +1,11 @@
-import {
-  createStream,
-} from './createStream';
-import {
-  getBorderCharacters,
-} from './getBorderCharacters';
-import {
-  table,
-} from './table';
+export * from './types/api';
 
 export {
-  table,
   createStream,
+} from './createStream';
+export {
+  table,
+} from './table';
+export {
   getBorderCharacters,
-};
-
-export * from './types/api';
+} from './getBorderCharacters';

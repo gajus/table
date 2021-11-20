@@ -1,5 +1,3 @@
-/* eslint-disable max-nested-callbacks */
-
 import {
   expect,
 } from 'chai';
@@ -46,7 +44,7 @@ describe('drawTable', () => {
 ║ adipi │ elit  ║
 ║ scing │       ║
 ╚═══════╧═══════╝
-`.trimLeft());
+`.trimStart());
       });
     });
 
@@ -69,7 +67,7 @@ describe('drawTable', () => {
 ╟───────┼───────╢
 ║ adipi │ elit  ║
 ║ scing │       ║
-`.trimLeft());
+`.trimStart());
       });
     });
 
@@ -92,7 +90,7 @@ describe('drawTable', () => {
 ╟───────┼───────╢
 ║ adipi │ elit  ║
 ║ scing │       ║
-`.trimLeft());
+`.trimStart());
       });
     });
   });
@@ -122,7 +120,7 @@ describe('drawTable', () => {
 ║ adipi │ elit  ║
 ║ scing │       ║
 ╚═══════╧═══════╝
-`.trimLeft());
+`.trimStart());
     });
   });
 
@@ -143,7 +141,8 @@ describe('drawTable', () => {
           {},
           {verticalAlignment: 'top'},
           {verticalAlignment: 'middle'},
-          {verticalAlignment: 'bottom'}],
+          {verticalAlignment: 'bottom'},
+        ],
       });
 
       expectTable(result, `
@@ -170,7 +169,8 @@ describe('drawTable', () => {
           {alignment: 'right',
             verticalAlignment: 'middle'},
           {alignment: 'left',
-            verticalAlignment: 'bottom'}],
+            verticalAlignment: 'bottom'},
+        ],
       });
 
       expectTable(result, `

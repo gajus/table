@@ -16,14 +16,14 @@ export const drawContent = (contents: string[], separatorConfig: SeparatorConfig
     result.push(separatorGetter(0, contentSize));
   }
 
-  contents.forEach((content, contentIndex) => {
+  for (const [contentIndex, content] of contents.entries()) {
     result.push(content);
 
     // Only append the middle separator if the content is not the last
     if (contentIndex + 1 < contentSize && drawSeparator(contentIndex + 1, contentSize)) {
       result.push(separatorGetter(contentIndex + 1, contentSize));
     }
-  });
+  }
 
   if (drawSeparator(contentSize, contentSize)) {
     result.push(separatorGetter(contentSize, contentSize));

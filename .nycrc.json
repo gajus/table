@@ -1,0 +1,11 @@
+{
+  "include": ["src/**/*.ts"],
+  "exclude": ["src/types/**"],
+  "reporter": [
+    "lcov",
+    "text",
+    "text-summary"
+  ],
+  "check-coverage": true,
+  "lines": 98
+}

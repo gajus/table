@@ -28,7 +28,7 @@ export const validateTableData = (rows: unknown[][]): void => {
 
     for (const cell of row) {
       // eslint-disable-next-line no-control-regex
-      if (/[\u0001-\u0006\u0008\u0009\u000B-\u001A]/.test(normalizeString(String(cell)))) {
+      if (/[\u0001-\u0006\u0008\u0009\u000B-\u001A]/u.test(normalizeString(String(cell)))) {
         throw new Error('Table data must not contain control characters.');
       }
     }

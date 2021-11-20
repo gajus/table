@@ -38,11 +38,11 @@ export const wrapWord = (input: string, size: number): string[] => {
   const result: string[] = [];
 
   let startIndex = 0;
-  calculateStringLengths(input, size).forEach(([length, offset]) => {
+  for (const [length, offset] of calculateStringLengths(input, size)) {
     result.push(slice(input, startIndex, startIndex + length));
 
     startIndex += length + offset;
-  });
+  }
 
   return result;
 };

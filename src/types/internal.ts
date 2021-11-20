@@ -3,49 +3,73 @@ import type {
   ColumnUserConfig, DrawVerticalLine, HeaderUserConfig, Indexable, StreamUserConfig, TableUserConfig,
 } from './api';
 
-/** @internal */
+/**
+ * @internal
+ */
 export type Cell = string;
 
-/** @internal */
+/**
+ * @internal
+ */
 export type Row = Cell[];
 
-/** @internal */
+/**
+ * @internal
+ */
 export type TopBorderConfig = Pick<BorderConfig, 'topBody' | 'topJoin' | 'topLeft' | 'topRight'>;
 
-/** @internal */
+/**
+ * @internal
+ */
 export type BottomBorderConfig = Pick<BorderConfig, 'bottomBody' | 'bottomJoin' | 'bottomLeft' | 'bottomRight'>;
 
-/** @internal */
+/**
+ * @internal
+ */
 export type BodyBorderConfig = Pick<BorderConfig, 'bodyJoin' | 'bodyLeft' | 'bodyRight'>;
 
-/** @internal */
+/**
+ * @internal
+ */
 export type JoinBorderConfig = Pick<BorderConfig, 'joinBody' | 'joinJoin' | 'joinLeft' | 'joinRight'>;
 
-/** @internal */
+/**
+ * @internal
+ */
 export type ColumnConfig = Required<ColumnUserConfig>;
 
-/** @internal */
+/**
+ * @internal
+ */
 export type HeaderConfig = Required<HeaderUserConfig>;
 
-/** @internal */
+/**
+ * @internal
+ */
 export type TableConfig = Required<Omit<TableUserConfig, 'border' | 'columnDefault' | 'columns' | 'header'>> & {
   readonly border: BorderConfig,
   readonly columns: ColumnConfig[],
   readonly header?: HeaderConfig,
 };
 
-/** @internal */
+/**
+ * @internal
+ */
 export type StreamConfig = Required<Omit<StreamUserConfig, 'border' | 'columnDefault' | 'columns'>> & {
   readonly border: BorderConfig,
   readonly columns: Indexable<ColumnConfig>,
 };
 
-/** @internal */
+/**
+ * @internal
+ */
 export type BaseConfig = {
   readonly border: BorderConfig,
   readonly columns: Indexable<ColumnConfig>,
   readonly drawVerticalLine: DrawVerticalLine,
 };
 
-/** @internal */
+/**
+ * @internal
+ */
 export type SeparatorGetter = (index: number, size: number) => string;

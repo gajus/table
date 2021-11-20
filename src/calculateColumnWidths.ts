@@ -1,3 +1,5 @@
+/* eslint-disable unicorn/no-new-array */
+
 import {
   calculateCellWidths,
 } from './calculateCellWidths';
@@ -11,13 +13,13 @@ import type {
 export default (rows: Row[]): number[] => {
   const columnWidths = new Array(rows[0].length).fill(0);
 
-  rows.forEach((row) => {
+  for (const row of rows) {
     const cellWidths = calculateCellWidths(row);
 
-    cellWidths.forEach((cellWidth, cellIndex) => {
+    for (const [cellIndex, cellWidth] of cellWidths.entries()) {
       columnWidths[cellIndex] = Math.max(columnWidths[cellIndex], cellWidth);
-    });
-  });
+    }
+  }
 
   return columnWidths;
 };

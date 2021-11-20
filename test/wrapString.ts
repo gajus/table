@@ -1,5 +1,3 @@
-/* eslint-disable max-nested-callbacks */
-
 import {
   expect,
 } from 'chai';
@@ -26,8 +24,8 @@ describe('wrapString', () => {
     });
   });
   context('subject string contains ANSI escape codes', () => {
-    const openRed = '\u001b[31m';
-    const closeRed = '\u001b[39m';
+    const openRed = '\u001B[31m';
+    const closeRed = '\u001B[39m';
     describe('subject is lesser than the chunk size', () => {
       it('returns subject in a single chunk', () => {
         expect(wrapString(`${openRed}aa${closeRed}`, 3)).to.deep.equal([

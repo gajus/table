@@ -4,17 +4,18 @@
   ],
   "ts-node": {
    "sourceMap": true,
-    "transpileOnly": true
+   "transpileOnly": true
   },
   "compilerOptions": {
     "resolveJsonModule": true,
     "incremental": true,
     "target": "ES2018",
-    "module": "commonjs",
-    "lib": ["ES2018"],
+    "module": "ESNext",
+    "lib": ["ESNext"],
     "allowJs": true,
     "declaration": true,
     "sourceMap": true,
+    "declarationMap": true,
     "outDir": "dist",
     "isolatedModules": true,
     "strict": true,
@@ -24,7 +25,6 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "moduleResolution": "node",
-    "typeRoots": ["src/types/external", "node_modules/@types"],
     "esModuleInterop": true,
     "stripInternal": true,
     "forceConsistentCasingInFileNames": true

@@ -1,4 +1,4 @@
-/* eslint-disable sort-keys-fix/sort-keys-fix */
+/* eslint-disable canonical/sort-keys */
 
 import type {
   BorderConfig,

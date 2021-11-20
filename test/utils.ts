@@ -2,10 +2,10 @@ import {
   expect,
 } from 'chai';
 
-export const openRed = '\u001b[31m';
-export const closeRed = '\u001b[39m';
-export const openBold = '\u001b[1m';
-export const closeBold = '\u001b[22m';
+export const openRed = '\u001B[31m';
+export const closeRed = '\u001B[39m';
+export const openBold = '\u001B[1m';
+export const closeBold = '\u001B[22m';
 
 export const stringToRed = (string: string) => {
   return openRed + string + closeRed;

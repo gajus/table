@@ -13,7 +13,7 @@ describe('README.md api/table', () => {
       ['2A', '2B', '2C'],
     ];
 
-    /* eslint-disable sort-keys-fix/sort-keys-fix */
+    /* eslint-disable canonical/sort-keys */
     const config = {
       border: {
         topBody: '─',
@@ -36,7 +36,7 @@ describe('README.md api/table', () => {
         joinJoin: '┼',
       },
     };
-    /* eslint-enable sort-keys-fix/sort-keys-fix */
+    /* eslint-enable canonical/sort-keys */
 
     const output = table(data, config);
 

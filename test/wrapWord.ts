@@ -86,7 +86,8 @@ describe('wrapWord', () => {
           `${openBold}${openRed}m${closeRed}${closeBold}`,
           `${openBold}${openRed}dolo${closeRed}${closeBold}`,
           `${openBold}${openRed}r${closeRed}${closeBold}`,
-          `${openBold}${openRed}sit${closeBold}${closeRed}`],
+          `${openBold}${openRed}sit${closeBold}${closeRed}`,
+        ],
       );
 
       expect(wrapWord(`${openBold}${openRed}Lorem ipsum dolor sit${closeRed}${closeBold}`, 5)).to.deep.equal(
@@ -94,7 +95,8 @@ describe('wrapWord', () => {
           `${openBold}${openRed}Lorem${closeRed}${closeBold}`,
           `${openBold}${openRed}ipsum${closeRed}${closeBold}`,
           `${openBold}${openRed}dolor${closeRed}${closeBold}`,
-          `${openBold}${openRed}sit${closeBold}${closeRed}`],
+          `${openBold}${openRed}sit${closeBold}${closeRed}`,
+        ],
       );
     });
   });
