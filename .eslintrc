@@ -1,12 +1,13 @@
 {
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "project": "./tsconfig.eslint.json"
+    "project": "./tsconfig.json"
   },
   "extends": [
     "canonical",
     "canonical/typescript"
   ],
+  "ignorePatterns": ["src/generated/**/*.js"],
   "rules": {
     "max-len": 0,
     "jsdoc/check-tag-names": [

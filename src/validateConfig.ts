@@ -10,6 +10,7 @@ import type {
 export const validateConfig = (schemaId: 'config.json' | 'streamConfig.json', config: TableUserConfig): void => {
   const validate = validators[schemaId] as ValidateFunction;
   if (!validate(config) && validate.errors) {
+    // eslint-disable-next-line promise/prefer-await-to-callbacks
     const errors = validate.errors.map((error: ErrorObject) => {
       return {
         message: error.message,
