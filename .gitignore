@@ -11,3 +11,4 @@ tsconfig.tsbuildinfo
 !.gitignore
 !.travis.yml
 !.README
+!.github

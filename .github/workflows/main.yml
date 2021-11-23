@@ -1,0 +1,46 @@
+name: CI
+on:
+  - push
+  - pull_request
+jobs:
+  test:
+    name: Test Node.js ${{ matrix.node-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version:
+          - 14
+          - 12
+          - 10
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm install
+      - run: npm run build
+      - run: npm run lint
+      - run: nyc --silent npm run test
+      - run: nyc report --reporter=text-lcov | coveralls
+      - run: nyc check-coverage --lines 90
+  release:
+    name: Release
+    needs: test
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14
+      - run: npm install
+      - run: npm run build
+      - run: npx semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_ENV: production
+          CI: true
+
+
