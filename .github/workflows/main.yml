@@ -46,8 +46,10 @@ jobs:
       - name: Lint
         run: npm run lint
 
-      - name: Test & Report coverage
+      - name: Test & Report
         run: npm run nyc
+
+      - name: Upload to Coveralls
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
