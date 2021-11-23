@@ -9,5 +9,5 @@ tsconfig.tsbuildinfo
 !.editorconfig
 !.eslintrc
 !.gitignore
-!.travis.yml
 !.README
+!.github
