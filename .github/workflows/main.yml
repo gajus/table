@@ -21,9 +21,8 @@ jobs:
       - run: npm install
       - run: npm run build
       - run: npm run lint
-      - run: nyc --silent npm run test
-      - run: nyc report --reporter=text-lcov | coveralls
-      - run: nyc check-coverage --lines 90
+      - run: npm run nyc npm test -- --reporter=lcov | coveralls
+      - run: npm run nyc -- check-coverage --lines 95
   release:
     name: Release
     needs: test
