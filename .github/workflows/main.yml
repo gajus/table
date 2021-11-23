@@ -21,8 +21,11 @@ jobs:
       - run: npm install
       - run: npm run build
       - run: npm run lint
-      - run: npm run nyc npm test -- --reporter=lcov | coveralls
+      - run: npm run nyc npm test -- --reporter=lcov
       - run: npm run nyc -- check-coverage --lines 95
+      - uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
   release:
     name: Release
     needs: test
