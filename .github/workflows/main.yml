@@ -13,28 +13,58 @@ jobs:
           - 14
           - 12
           - 10
+
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Node
+        uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm install
-      - run: npm run build
-      - run: npm run lint
-      - run: nyc --silent npm run test
-      - run: nyc report --reporter=text-lcov | coveralls
-      - run: nyc check-coverage --lines 90
+
+      - name: Cache node modules
+        id: cache-node-modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
+      - name: Install Dependencies
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Test & Report
+        run: npm run nyc
+
+      - name: Upload to Coveralls
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
   release:
     name: Release
     needs: test
     if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
           node-version: 10
-      - run: npm install
+      - run: npm ci
       - run: npm run build
       - run: npx semantic-release
         env:

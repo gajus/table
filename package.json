@@ -72,8 +72,12 @@
     ],
     "reporter": [
       "text-lcov",
-      "text"
-    ]
+      "text",
+      "lcov"
+    ],
+    "check-coverage": {
+      "lines": 101
+    }
   },
   "repository": {
     "type": "git",
@@ -86,7 +90,8 @@
     "create-readme": "gitdown ./.README/README.md --output-file ./README.md",
     "create-validators": "rm -fr ./src/generated && mkdirp ./src/generated && ajv compile --all-errors --inline-refs=false -s src/schemas/config -s src/schemas/streamConfig -r src/schemas/shared -c ajv-keywords/dist/keywords/typeof -o | js-beautify > ./src/generated/validators.js",
     "lint": "eslint --ignore-path .gitignore ./src ./test",
-    "test": "npm run create-validators && mocha --require ts-node/register \"./test/**/*.ts\""
+    "test": "mocha --require ts-node/register \"./test/**/*.ts\"",
+    "nyc": "nyc npm test -- --check-coverage --lines 95 --reporter-options output=./coverage/lcov.info"
   },
   "version": "1.0.0"
 }
