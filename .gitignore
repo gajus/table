@@ -9,4 +9,5 @@ tsconfig.tsbuildinfo
 !.eslintrc
 !.gitignore
 !.README
+!.mocharc.js
 !.github

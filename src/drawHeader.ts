@@ -24,7 +24,7 @@ export const drawHeader = (width: number, config: TableConfig): string => {
 
   const {alignment, paddingRight, paddingLeft, wrapWord} = config.header;
 
-  let content = config.header.content;
+  let {content} = config.header;
 
   content = truncateString(content, config.header.truncate);
 

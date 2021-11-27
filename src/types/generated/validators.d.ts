@@ -1,3 +1,4 @@
+// eslint-disable-next-line filenames/match-regex
 import type {
   ValidateFunction,
 } from 'ajv/dist/types';
@@ -10,4 +11,3 @@ declare const validators: {
   'config.json': ValidateFunction<TableUserConfig>,
   'streamConfig.json': ValidateFunction<StreamUserConfig>,
 };
-export default validators;

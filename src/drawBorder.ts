@@ -13,14 +13,14 @@ import type {
 } from './types/internal';
 
 type Separator = {
-  readonly left: string,
-  readonly right: string,
   readonly body: string,
   readonly join: string,
+  readonly left: string,
+  readonly right: string,
 };
 
 const drawBorder = (columnWidths: number[],
-  config: {separator: Separator, drawVerticalLine: DrawVerticalLine, }): string => {
+  config: {drawVerticalLine: DrawVerticalLine, separator: Separator, }): string => {
   const {separator, drawVerticalLine} = config;
   const columns = columnWidths.map((size) => {
     return config.separator.body.repeat(size);
