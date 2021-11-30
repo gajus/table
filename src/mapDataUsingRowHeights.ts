@@ -6,8 +6,8 @@ import {
   wrapCell,
 } from './wrapCell';
 
-const createEmptyStrings = (length: number) => {
-  return new Array(length).fill('');
+const createEmptyStrings = (length: number): string[] => {
+  return Array.from<string>({length}).fill('');
 };
 
 const padCellVertically = (lines: string[], rowHeight: number, columnConfig: ColumnConfig): string[] => {
@@ -39,19 +39,19 @@ export const mapDataUsingRowHeights = (unmappedRows: Row[], rowHeights: number[]
 
   const mappedRows = unmappedRows.map((unmappedRow, unmappedRowIndex) => {
     const outputRowHeight = rowHeights[unmappedRowIndex];
-    const outputRow: Row[] = Array.from({length: outputRowHeight}, () => {
-      return new Array(tableWidth).fill('');
+    const outputRow: Row[] = Array.from<Row, Row>({length: outputRowHeight}, () => {
+      return Array.from<string>({length: tableWidth}).fill('');
     });
 
-    unmappedRow.forEach((cell, cellIndex) => {
+    for (const [cellIndex, cell] of unmappedRow.entries()) {
       const cellLines = wrapCell(cell, config.columns[cellIndex].width, config.columns[cellIndex].wrapWord);
 
       const paddedCellLines = padCellVertically(cellLines, outputRowHeight, config.columns[cellIndex]);
 
-      paddedCellLines.forEach((cellLine, cellLineIndex) => {
+      for (const [cellLineIndex, cellLine] of paddedCellLines.entries()) {
         outputRow[cellLineIndex][cellIndex] = cellLine;
-      });
-    });
+      }
+    }
 
     return outputRow;
   });

@@ -1,9 +1,6 @@
-/* eslint-disable max-nested-callbacks */
-
 import {
   expect,
 } from 'chai';
-// eslint-disable-next-line import/no-namespace
 import * as Sinon from 'sinon';
 import {
   getBorderCharacters,
@@ -73,7 +70,7 @@ describe('createStream', () => {
 
       Sinon.assert.callCount(stub, 2);
       Sinon.assert.calledWithExactly(stub.getCall(0), '+------+-----+-------+\n|   a  | cc  | d     |\n|    b | c   |       |\n+------+-----+-------+');
-      Sinon.assert.calledWithExactly(stub.getCall(1), '\r\u001b[K|------|-----|-------|\n|    e | f   | g     |\n+------+-----+-------+');
+      Sinon.assert.calledWithExactly(stub.getCall(1), '\r\u001B[K|------|-----|-------|\n|    e | f   | g     |\n+------+-----+-------+');
     });
 
     context('given custom drawVerticalLine', () => {

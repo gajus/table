@@ -28,12 +28,12 @@ export const splitAnsi = (input: string): string[] => {
   const result: string[] = [];
   let startIndex = 0;
 
-  lengths.forEach((length) => {
+  for (const length of lengths) {
     result.push(length === 0 ? '' : slice(input, startIndex, startIndex + length));
 
     // Plus 1 for the newline character itself
     startIndex += length + 1;
-  });
+  }
 
   return result;
 };

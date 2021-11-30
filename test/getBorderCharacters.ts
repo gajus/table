@@ -1,6 +1,4 @@
-/* eslint-disable max-nested-callbacks */
-/* eslint-disable sort-keys-fix/sort-keys-fix */
-
+/* eslint-disable canonical/sort-keys */
 import {
   expect,
 } from 'chai';

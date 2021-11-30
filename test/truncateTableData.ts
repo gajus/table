@@ -1,5 +1,3 @@
-/* eslint-disable max-nested-callbacks */
-
 import {
   expect,
 } from 'chai';
@@ -63,7 +61,8 @@ describe('truncateTableData', () => {
         },
       }))).to.deep.equal([
         ['a'.repeat(29) + '…', 'b'.repeat(19) + '…'],
-        ['c'.repeat(29) + '…', 'd'.repeat(19) + '…']]);
+        ['c'.repeat(29) + '…', 'd'.repeat(19) + '…'],
+      ]);
     });
   });
 

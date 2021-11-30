@@ -1,3 +1,4 @@
+/* eslint-disable typescript-sort-keys/interface */
 export type DrawLinePredicate = (index: number, size: number) => boolean;
 export type DrawVerticalLine = DrawLinePredicate;
 export type DrawHorizontalLine = DrawLinePredicate;

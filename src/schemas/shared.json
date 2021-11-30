@@ -28,12 +28,7 @@
                     "$ref": "#/definitions/alignment"
                 },
                 "verticalAlignment": {
-                  "type": "string",
-                  "enum": [
-                    "top",
-                    "middle",
-                    "bottom"
-                  ]
+                  "$ref": "#/definitions/verticalAlignment"
                 },
                 "width": {
                     "type": "integer",
@@ -112,13 +107,21 @@
             "type": "string"
         },
         "alignment": {
-          "type": "string",
-          "enum": [
-            "left",
-            "right",
-            "center",
-            "justify"
-          ]
+            "type": "string",
+            "enum": [
+                "left",
+                "right",
+                "center",
+                "justify"
+            ]
+        },
+        "verticalAlignment": {
+            "type": "string",
+            "enum": [
+                "top",
+                "middle",
+                "bottom"
+            ]
         }
     }
 }

@@ -1,5 +1,3 @@
-/* eslint-disable max-nested-callbacks */
-
 import {
   expect,
 } from 'chai';
@@ -26,7 +24,7 @@ const basicContent = 'Lorem ipsum dolor sit amet';
 
 const basicRows: Row[] = [['aaa', 'bb', 'c']];
 
-const createHeader = (headerWidth = 7, headerConfig: TableUserConfig['header']): string => {
+const createHeader = (headerConfig: TableUserConfig['header'], headerWidth = 7): string => {
   const config = makeTableConfig(basicRows, {
     header: headerConfig,
   });
@@ -49,7 +47,7 @@ context('drawHeader', () => {
 
   context('width', () => {
     it('forces to the given width', () => {
-      const header = createHeader(7, {
+      const header = createHeader({
         content: basicContent,
       });
 
@@ -58,13 +56,13 @@ context('drawHeader', () => {
 ║ psum do ║
 ║ lor sit ║
 ║  amet   ║
-`.trimLeft());
+`.trimStart());
     });
   });
 
   context('truncate', () => {
     it('truncates to the truncation value', () => {
-      const header = createHeader(7, {
+      const header = createHeader({
         content: basicContent,
         truncate: 7,
       });
@@ -76,7 +74,7 @@ context('drawHeader', () => {
   context('wrapWord', () => {
     context('wrapWord = false', () => {
       it('slices to the given width', () => {
-        const header = createHeader(7, {
+        const header = createHeader({
           content: basicContent,
           wrapWord: false,
         });
@@ -86,13 +84,13 @@ context('drawHeader', () => {
 ║ psum do ║
 ║ lor sit ║
 ║  amet   ║
-`.trimLeft());
+`.trimStart());
       });
     });
 
     context('wrapWord = true', () => {
       it('wraps word properly', () => {
-        const header = createHeader(7, {
+        const header = createHeader({
           content: basicContent,
           wrapWord: true,
         });
@@ -103,7 +101,7 @@ context('drawHeader', () => {
 ║  dolor  ║
 ║   sit   ║
 ║  amet   ║
-`.trimLeft());
+`.trimStart());
       });
     });
   });
@@ -111,7 +109,7 @@ context('drawHeader', () => {
   context('alignment', () => {
     context('left', () => {
       it('aligns left', () => {
-        const header = createHeader(7, {
+        const header = createHeader({
           alignment: 'left',
           content: basicContent,
           wrapWord: true,
@@ -123,13 +121,13 @@ context('drawHeader', () => {
 ║ dolor   ║
 ║ sit     ║
 ║ amet    ║
-`.trimLeft());
+`.trimStart());
       });
     });
 
     context('center', () => {
       it('aligns center', () => {
-        const header = createHeader(7, {
+        const header = createHeader({
           alignment: 'center',
           content: basicContent,
           wrapWord: true,
@@ -141,13 +139,13 @@ context('drawHeader', () => {
 ║  dolor  ║
 ║   sit   ║
 ║  amet   ║
-`.trimLeft());
+`.trimStart());
       });
     });
 
     context('right', () => {
       it('aligns right', () => {
-        const header = createHeader(7, {
+        const header = createHeader({
           alignment: 'right',
           content: basicContent,
           wrapWord: true,
@@ -159,55 +157,55 @@ context('drawHeader', () => {
 ║   dolor ║
 ║     sit ║
 ║    amet ║
-`.trimLeft());
+`.trimStart());
       });
     });
 
     context('justify', () => {
       it('aligns justify', () => {
-        const header = createHeader(12, {
+        const header = createHeader({
           alignment: 'justify',
           content: basicContent,
           wrapWord: true,
-        });
+        }, 12);
 
         expect(header).to.equal(`
 ║ Lorem  ipsum ║
 ║ dolor    sit ║
 ║ amet         ║
-`.trimLeft());
+`.trimStart());
       });
     });
   });
 
   context('padding', () => {
     it('pads properly', () => {
-      const header = createHeader(12, {
+      const header = createHeader({
         content: basicContent,
         paddingLeft: 2,
         paddingRight: 3,
-      });
+      }, 12);
 
       expect(header).to.equal(`
 ║  Lorem ipsum    ║
 ║  dolor sit am   ║
 ║       et        ║
-`.trimLeft());
+`.trimStart());
     });
   });
 
   context('mixed with ansi word', () => {
     it('works properly', () => {
-      const header = createHeader(16, {
+      const header = createHeader({
         content: `${openBold}This is the header with ${openRed}ansi words${closeRed}${closeBold}`,
         wrapWord: true,
-      });
+      }, 16);
 
       expect(header).to.equal(`
 ║   ${openBold}This is the${closeBold}    ║
 ║ ${openBold}header with ${openRed}ansi${closeRed}${closeBold} ║
 ║      ${openBold}${openRed}words${closeBold}${closeRed}       ║
-`.trimLeft());
+`.trimStart());
     });
   });
 });

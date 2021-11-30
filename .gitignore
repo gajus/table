@@ -1,7 +1,6 @@
 node_modules
 coverage
 dist
-src/generated
 tsconfig.tsbuildinfo
 *.log
 .*
@@ -9,5 +8,7 @@ tsconfig.tsbuildinfo
 !.eslintrc
 !.gitignore
 !.README
-!.mocharc.js
 !.github
+!.mocharc.json
+!.nycrc.json
+!.husky

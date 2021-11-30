@@ -19,7 +19,7 @@ import {
  * values for the missing configuration properties.
  */
 const makeColumnsConfig = (columnCount: number,
-  columns: Indexable<ColumnUserConfig> = {},
+  columns: Indexable<ColumnUserConfig>,
   columnDefault: StreamUserConfig['columnDefault']): ColumnConfig[] => {
   return Array.from({length: columnCount}).map((_, index) => {
     return {
@@ -52,6 +52,6 @@ export const makeStreamConfig = (config: StreamUserConfig): StreamConfig => {
     },
     ...config,
     border: makeBorderConfig(config.border),
-    columns: makeColumnsConfig(config.columnCount, config.columns, config.columnDefault),
+    columns: makeColumnsConfig(config.columnCount, config.columns ?? [], config.columnDefault),
   };
 };
