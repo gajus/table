@@ -23,6 +23,14 @@ describe('wrapWord', () => {
       expect(wrapWord(stringToRed('aaaaa'), 2)).to.deep.equal(arrayToRed(['aa', 'aa', 'a']));
     });
   });
+  context('empty string', () => {
+    it('should return empty string as well', () => {
+      expect(wrapWord('', 0)).to.deep.equal(['']);
+      expect(wrapWord('', 1)).to.deep.equal(['']);
+      expect(wrapWord('', 2)).to.deep.equal(['']);
+      expect(wrapWord('', 3)).to.deep.equal(['']);
+    });
+  });
   context('a long word with a special character', () => {
     it('cuts the word at the special character', () => {
       expect(wrapWord('aaa\\bbb', 5)).to.deep.equal(['aaa\\', 'bbb']);
