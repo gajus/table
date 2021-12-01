@@ -56,10 +56,10 @@
     "ansi"
   ],
   "license": "BSD-3-Clause",
-  "main": "./dist/index.js",
+  "main": "./dist/src/index.js",
   "files": [
-    "dist/**/*.js",
-    "dist/**/*.d.ts"
+    "dist/src/**/*.js",
+    "dist/src/**/*.d.ts"
   ],
   "name": "table",
   "repository": {
