@@ -57,10 +57,7 @@
   ],
   "license": "BSD-3-Clause",
   "main": "./dist/src/index.js",
-  "files": [
-    "dist/src/**/*.js",
-    "dist/src/**/*.d.ts"
-  ],
+  "files": ["dist/src/"],
   "name": "table",
   "repository": {
     "type": "git",
