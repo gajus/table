@@ -27,6 +27,10 @@ describe('getBorderCharacters', () => {
         joinJoin: '┼',
         joinLeft: '╟',
         joinRight: '╢',
+        joinMiddleDown: '┬',
+        joinMiddleLeft: '┤',
+        joinMiddleRight: '├',
+        joinMiddleUp: '┴',
 
         topBody: '═',
         topJoin: '╤',
@@ -54,6 +58,10 @@ describe('getBorderCharacters', () => {
         joinLeft: '├',
         joinRight: '┤',
         joinBody: '─',
+        joinMiddleDown: '┬',
+        joinMiddleLeft: '┤',
+        joinMiddleRight: '├',
+        joinMiddleUp: '┴',
 
         topBody: '─',
         topJoin: '┬',
@@ -81,6 +89,10 @@ describe('getBorderCharacters', () => {
         joinLeft: '|',
         joinRight: '|',
         joinBody: '-',
+        joinMiddleDown: '+',
+        joinMiddleLeft: '+',
+        joinMiddleRight: '+',
+        joinMiddleUp: '+',
 
         topBody: '-',
         topJoin: '+',
@@ -108,6 +120,10 @@ describe('getBorderCharacters', () => {
         joinLeft: '',
         joinRight: '',
         joinBody: '',
+        joinMiddleDown: '',
+        joinMiddleLeft: '',
+        joinMiddleRight: '',
+        joinMiddleUp: '',
 
         topBody: '',
         topJoin: '',

@@ -1,7 +1,13 @@
 import type {
-  BaseConfig, ColumnConfig,
+  VerticalAlignment,
+} from './types/api';
+import type {
+  BaseConfig,
   Row,
 } from './types/internal';
+import {
+  flatten,
+} from './utils';
 import {
   wrapCell,
 } from './wrapCell';
@@ -10,9 +16,7 @@ const createEmptyStrings = (length: number) => {
   return new Array(length).fill('');
 };
 
-const padCellVertically = (lines: string[], rowHeight: number, columnConfig: ColumnConfig): string[] => {
-  const {verticalAlignment} = columnConfig;
-
+export const padCellVertically = (lines: string[], rowHeight: number, verticalAlignment: VerticalAlignment): string[] => {
   const availableLines = rowHeight - lines.length;
 
   if (verticalAlignment === 'top') {
@@ -30,23 +34,28 @@ const padCellVertically = (lines: string[], rowHeight: number, columnConfig: Col
   ];
 };
 
-const flatten = <T>(array: T[][]): T[] => {
-  return ([] as T[]).concat(...array);
-};
-
 export const mapDataUsingRowHeights = (unmappedRows: Row[], rowHeights: number[], config: BaseConfig): Row[] => {
-  const tableWidth = unmappedRows[0].length;
+  const nColumns = unmappedRows[0].length;
 
   const mappedRows = unmappedRows.map((unmappedRow, unmappedRowIndex) => {
     const outputRowHeight = rowHeights[unmappedRowIndex];
     const outputRow: Row[] = Array.from({length: outputRowHeight}, () => {
-      return new Array(tableWidth).fill('');
+      return new Array(nColumns).fill('');
     });
 
     unmappedRow.forEach((cell, cellIndex) => {
+      const containingRange = config.spanningCellManager?.getContainingRange({col: cellIndex,
+        row: unmappedRowIndex});
+      if (containingRange) {
+        containingRange.extractCellContent(unmappedRowIndex).forEach((cellLine, cellLineIndex) => {
+          outputRow[cellLineIndex][cellIndex] = cellLine;
+        });
+
+        return;
+      }
       const cellLines = wrapCell(cell, config.columns[cellIndex].width, config.columns[cellIndex].wrapWord);
 
-      const paddedCellLines = padCellVertically(cellLines, outputRowHeight, config.columns[cellIndex]);
+      const paddedCellLines = padCellVertically(cellLines, outputRowHeight, config.columns[cellIndex].verticalAlignment);
 
       paddedCellLines.forEach((cellLine, cellLineIndex) => {
         outputRow[cellLineIndex][cellIndex] = cellLine;

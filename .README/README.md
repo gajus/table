@@ -46,6 +46,8 @@
 
 {"gitdown": "include", "file": "./api/table/header.md"}
 
+{"gitdown": "include", "file": "./api/table/spanningCells.md"}
+
 {"gitdown": "include", "file": "./api/stream/index.md"}
 
 {"gitdown": "include", "file": "./api/getBorderCharacters.md"}

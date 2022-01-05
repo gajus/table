@@ -8,8 +8,14 @@ export const padString = (input: string, paddingLeft: number, paddingRight: numb
 };
 
 export const padTableData = (rows: Row[], config: BaseConfig): Row[] => {
-  return rows.map((cells) => {
+  return rows.map((cells, rowIndex) => {
     return cells.map((cell, cellIndex) => {
+      const containingRange = config.spanningCellManager?.getContainingRange({col: cellIndex,
+        row: rowIndex}, {mapped: true});
+      if (containingRange) {
+        return cell;
+      }
+
       const {paddingLeft, paddingRight} = config.columns[cellIndex];
 
       return padString(cell, paddingLeft, paddingRight);

@@ -1,6 +1,14 @@
 import type {
+  SpanningCellManager,
+} from '../spanningCellManager';
+import type {
   BorderConfig,
-  ColumnUserConfig, DrawVerticalLine, HeaderUserConfig, Indexable, StreamUserConfig, TableUserConfig,
+  ColumnUserConfig,
+  DrawHorizontalLine,
+  DrawVerticalLine,
+  StreamUserConfig,
+  TableUserConfig,
+  CellUserConfig,
 } from './api';
 
 /** @internal */
@@ -25,27 +33,49 @@ export type JoinBorderConfig = Pick<BorderConfig, 'joinBody' | 'joinJoin' | 'joi
 export type ColumnConfig = Required<ColumnUserConfig>;
 
 /** @internal */
-export type HeaderConfig = Required<HeaderUserConfig>;
-
-/** @internal */
-export type TableConfig = Required<Omit<TableUserConfig, 'border' | 'columnDefault' | 'columns' | 'header'>> & {
+export type TableConfig = Required<Omit<TableUserConfig, 'border' | 'columnDefault' | 'columns' | 'header' | 'spanningCells'>> & {
   readonly border: BorderConfig,
   readonly columns: ColumnConfig[],
-  readonly header?: HeaderConfig,
+  readonly spanningCellManager: SpanningCellManager,
 };
 
 /** @internal */
 export type StreamConfig = Required<Omit<StreamUserConfig, 'border' | 'columnDefault' | 'columns'>> & {
   readonly border: BorderConfig,
-  readonly columns: Indexable<ColumnConfig>,
+  readonly columns: ColumnConfig[],
 };
 
 /** @internal */
 export type BaseConfig = {
   readonly border: BorderConfig,
-  readonly columns: Indexable<ColumnConfig>,
+  readonly columns: ColumnConfig[],
   readonly drawVerticalLine: DrawVerticalLine,
+  readonly drawHorizontalLine?: DrawHorizontalLine,
+  readonly spanningCellManager?: SpanningCellManager,
 };
 
 /** @internal */
 export type SeparatorGetter = (index: number, size: number) => string;
+
+/** @internal */
+export type CellCoordinates = {
+  row: number,
+  col: number,
+};
+
+/** @internal */
+export type RangeCoordinate = {
+  topLeft: CellCoordinates,
+  bottomRight: CellCoordinates,
+};
+
+/** @internal */
+export type RangeConfig = RangeCoordinate & Required<CellUserConfig>;
+
+/** @internal */
+export type ResolvedRangeConfig = RangeConfig & {
+  height: number,
+  width: number,
+  extractCellContent: (rowIndex: number) => string[],
+  extractBorderContent: (borderIndex: number) => string,
+};

@@ -17,6 +17,10 @@ export type BorderUserConfig = {
   readonly joinRight?: string,
   readonly joinBody?: string,
   readonly joinJoin?: string,
+  readonly joinMiddleUp?: string,
+  readonly joinMiddleDown?: string,
+  readonly joinMiddleLeft?: string,
+  readonly joinMiddleRight?: string,
 
   readonly headerJoin?: string,
 
@@ -31,7 +35,7 @@ export type Alignment = 'center' | 'justify' | 'left' | 'right';
 
 export type VerticalAlignment = 'bottom' | 'middle' | 'top';
 
-export type ColumnUserConfig = {
+export type CellUserConfig = {
 
   /**
    * Cell content horizontal alignment (default: left)
@@ -42,11 +46,6 @@ export type ColumnUserConfig = {
    * Cell content vertical alignment (default: top)
    */
   readonly verticalAlignment?: VerticalAlignment,
-
-  /**
-   * Column width (default: auto calculation based on the cell content)
-   */
-  readonly width?: number,
 
   /**
    * Number of characters are which the content will be truncated (default: Infinity)
@@ -69,6 +68,18 @@ export type ColumnUserConfig = {
   readonly wrapWord?: boolean,
 };
 
+export type ColumnUserConfig = CellUserConfig & {
+
+  /**
+   * Column width (default: auto calculation based on the cell content)
+   */
+  readonly width?: number,
+
+};
+
+/**
+ * @deprecated Use spanning cell API instead
+ */
 export type HeaderUserConfig = Omit<ColumnUserConfig, 'verticalAlignment' | 'width'> & {
   readonly content: string,
 };
@@ -116,6 +127,15 @@ export type TableUserConfig = BaseUserConfig & {
    * Horizontal lines inside the table are not drawn.
    */
   readonly singleLine?: boolean,
+
+  readonly spanningCells?: SpanningCellConfig[],
+};
+
+export type SpanningCellConfig = CellUserConfig & {
+  readonly row: number,
+  readonly col: number,
+  readonly rowSpan?: number,
+  readonly colSpan?: number,
 };
 
 export type StreamUserConfig = BaseUserConfig & {

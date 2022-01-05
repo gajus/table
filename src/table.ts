@@ -2,14 +2,17 @@ import {
   alignTableData,
 } from './alignTableData';
 import {
-  calculateCellWidths,
-} from './calculateCellWidths';
+  calculateOutputColumnWidths,
+} from './calculateOutputColumnWidths';
 import {
   calculateRowHeights,
 } from './calculateRowHeights';
 import {
   drawTable,
 } from './drawTable';
+import {
+  injectHeaderConfig,
+} from './injectHeaderConfig';
 import {
   makeTableConfig,
 } from './makeTableConfig';
@@ -29,6 +32,9 @@ import type {
   TableUserConfig,
 } from './types/api';
 import {
+  extractTruncates,
+} from './utils';
+import {
   validateTableData,
 } from './validateTableData';
 
@@ -37,17 +43,21 @@ export const table = (data: unknown[][], userConfig: TableUserConfig = {}): stri
 
   let rows = stringifyTableData(data);
 
-  const config = makeTableConfig(rows, userConfig);
+  const [injectedRows, injectedSpanningCellConfig] = injectHeaderConfig(rows, userConfig);
 
-  rows = truncateTableData(rows, config);
+  const config = makeTableConfig(injectedRows, userConfig, injectedSpanningCellConfig);
+
+  rows = truncateTableData(injectedRows, extractTruncates(config));
 
   const rowHeights = calculateRowHeights(rows, config);
+
+  config.spanningCellManager.setRowHeights(rowHeights);
 
   rows = mapDataUsingRowHeights(rows, rowHeights, config);
   rows = alignTableData(rows, config);
   rows = padTableData(rows, config);
 
-  const cellWidths = calculateCellWidths(rows[0]);
+  const outputColumnWidths = calculateOutputColumnWidths(config);
 
-  return drawTable(rows, cellWidths, rowHeights, config);
+  return drawTable(rows, outputColumnWidths, rowHeights, config);
 };

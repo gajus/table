@@ -26,6 +26,10 @@ export const getBorderCharacters = (name: string): BorderConfig => {
       joinLeft: '╟',
       joinRight: '╢',
       joinJoin: '┼',
+      joinMiddleDown: '┬',
+      joinMiddleUp: '┴',
+      joinMiddleLeft: '┤',
+      joinMiddleRight: '├',
     };
   }
 
@@ -50,6 +54,10 @@ export const getBorderCharacters = (name: string): BorderConfig => {
       joinLeft: '├',
       joinRight: '┤',
       joinJoin: '┼',
+      joinMiddleDown: '┬',
+      joinMiddleUp: '┴',
+      joinMiddleLeft: '┤',
+      joinMiddleRight: '├',
     };
   }
 
@@ -74,6 +82,10 @@ export const getBorderCharacters = (name: string): BorderConfig => {
       joinLeft: '|',
       joinRight: '|',
       joinJoin: '|',
+      joinMiddleDown: '+',
+      joinMiddleUp: '+',
+      joinMiddleLeft: '+',
+      joinMiddleRight: '+',
     };
   }
 
@@ -98,6 +110,10 @@ export const getBorderCharacters = (name: string): BorderConfig => {
       joinLeft: '',
       joinRight: '',
       joinJoin: '',
+      joinMiddleDown: '',
+      joinMiddleUp: '',
+      joinMiddleLeft: '',
+      joinMiddleRight: '',
     };
   }
 

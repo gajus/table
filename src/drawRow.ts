@@ -2,20 +2,31 @@ import {
   drawContent,
 } from './drawContent';
 import type {
+  SpanningCellManager,
+} from './spanningCellManager';
+import type {
   DrawVerticalLine,
 } from './types/api';
 import type {
-  BodyBorderConfig, Row,
+  BodyBorderConfig,
+  Row,
 } from './types/internal';
 
-export const drawRow = (row: Row, config: {
+export type DrawRowConfig = {
   border: BodyBorderConfig,
   drawVerticalLine: DrawVerticalLine,
-}): string => {
-  const {border, drawVerticalLine} = config;
+  spanningCellManager?: SpanningCellManager,
+  rowIndex?: number,
+};
 
-  return drawContent(row, {
+export const drawRow = (row: Row, config: DrawRowConfig): string => {
+  const {border, drawVerticalLine, rowIndex, spanningCellManager} = config;
+
+  return drawContent({
+    contents: row,
     drawSeparator: drawVerticalLine,
+    elementType: 'cell',
+    rowIndex,
     separatorGetter: (index, columnCount) => {
       if (index === 0) {
         return border.bodyLeft;
@@ -27,5 +38,6 @@ export const drawRow = (row: Row, config: {
 
       return border.bodyJoin;
     },
+    spanningCellManager,
   }) + '\n';
 };
