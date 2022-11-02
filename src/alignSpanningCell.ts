@@ -1,3 +1,4 @@
+import stringWidth from 'string-width';
 import {
   alignString,
 } from './alignString';
@@ -58,7 +59,7 @@ export const alignVerticalRangeContent = (range: RangeConfig, content: string[],
 
   return padCellVertically(content, availableRangeHeight, verticalAlignment).map((line) => {
     if (line.length === 0) {
-      return ' '.repeat(content[0].length);
+      return ' '.repeat(stringWidth(content[0]));
     }
 
     return line;
