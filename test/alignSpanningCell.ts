@@ -1,6 +1,7 @@
 import {
   expect,
 } from 'chai';
+import chalk from 'chalk';
 import {
   alignVerticalRangeContent,
   wrapRangeContent,
@@ -266,5 +267,35 @@ describe('alignVerticalRangeContent', () => {
         '                    ',
       ]);
     });
+  });
+
+  it('with ansi string', () => {
+    const result = alignVerticalRangeContent(baseRangeConfig, [
+      ` ${chalk.red('ECMAScript')} (or ES) `,
+      ' is a               ',
+      ' general-purpose    ',
+      ' programming        ',
+      ' language,          ',
+      ' standardised by    ',
+      ` ${chalk.bgGreen('Ecma')} ${chalk.bold.blue('International')} `,
+      ' according to the   ',
+      ' document ECMA-262. ',
+    ], {...baseSpanningCellContext,
+      rowHeights: [12]});
+
+    expect(result).to.deep.equal([
+      ` ${chalk.red('ECMAScript')} (or ES) `,
+      ' is a               ',
+      ' general-purpose    ',
+      ' programming        ',
+      ' language,          ',
+      ' standardised by    ',
+      ` ${chalk.bgGreen('Ecma')} ${chalk.bold.blue('International')} `,
+      ' according to the   ',
+      ' document ECMA-262. ',
+      '                    ',
+      '                    ',
+      '                    ',
+    ]);
   });
 });
