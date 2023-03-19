@@ -38,7 +38,7 @@ import {
   validateTableData,
 } from './validateTableData';
 
-export const table = (data: unknown[][], userConfig: TableUserConfig = {}): string => {
+export const table = (data: ReadonlyArray<readonly unknown[]>, userConfig: TableUserConfig = {}): string => {
   validateTableData(data);
 
   let rows = stringifyTableData(data);
