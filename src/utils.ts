@@ -127,16 +127,6 @@ export const flatten = <T>(array: T[][]): T[] => {
   return ([] as T[]).concat(...array);
 };
 
-export const findOriginalRowIndex = (mappedRowHeights: number[], mappedRowIndex: number): number => {
-  const rowIndexMapping = flatten(mappedRowHeights.map((height, index) => {
-    return Array.from({length: height}, () => {
-      return index;
-    });
-  }));
-
-  return rowIndexMapping[mappedRowIndex];
-};
-
 export const calculateRangeCoordinate = (spanningCellConfig: SpanningCellConfig): RangeCoordinate => {
   const {row, col, colSpan = 1, rowSpan = 1} = spanningCellConfig;
 

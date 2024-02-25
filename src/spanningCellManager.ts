@@ -21,7 +21,7 @@ import type {
 } from './types/internal';
 import {
   areCellEqual,
-  findOriginalRowIndex,
+  flatten,
   isCellInRange, sequence, sumArray,
 } from './utils';
 
@@ -30,6 +30,8 @@ export type SpanningCellManager = {
   inSameRange: (cell1: CellCoordinates, cell2: CellCoordinates) => boolean,
   rowHeights: number[],
   setRowHeights: (rowHeights: number[]) => void,
+  rowIndexMapping: number[],
+  setRowIndexMapping: (mappedRowHeights: number[]) => void,
 };
 
 export type SpanningCellParameters = {
@@ -114,9 +116,10 @@ export const createSpanningCellManager = (parameters: SpanningCellParameters): S
   const rangeCache: Record<string, ResolvedRangeConfig | undefined> = {};
 
   let rowHeights: number[] = [];
+  let rowIndexMapping: number[] = [];
 
   return {getContainingRange: (cell, options) => {
-    const originalRow = options?.mapped ? findOriginalRowIndex(rowHeights, cell.row) : cell.row;
+    const originalRow = options?.mapped ? rowIndexMapping[cell.row] : cell.row;
 
     const range = findRangeConfig({...cell,
       row: originalRow}, ranges);
@@ -139,7 +142,15 @@ export const createSpanningCellManager = (parameters: SpanningCellParameters): S
     return inSameRange(cell1, cell2, ranges);
   },
   rowHeights,
+  rowIndexMapping,
   setRowHeights: (_rowHeights: number[]) => {
     rowHeights = _rowHeights;
+  },
+  setRowIndexMapping: (mappedRowHeights: number[]) => {
+    rowIndexMapping = flatten(mappedRowHeights.map((height, index) => {
+      return Array.from({length: height}, () => {
+        return index;
+      });
+    }));
   }};
 };
