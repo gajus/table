@@ -52,6 +52,7 @@ export const table = (data: unknown[][], userConfig: TableUserConfig = {}): stri
   const rowHeights = calculateRowHeights(rows, config);
 
   config.spanningCellManager.setRowHeights(rowHeights);
+  config.spanningCellManager.setRowIndexMapping(rowHeights);
 
   rows = mapDataUsingRowHeights(rows, rowHeights, config);
   rows = alignTableData(rows, config);
