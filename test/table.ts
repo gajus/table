@@ -187,4 +187,21 @@ describe('drawTable', () => {
 ╚══════════╧══════════╧══════════╧══════════╝`);
     });
   });
+
+  context('readonly array data type input', () => {
+    it('works properly', () => {
+      const dataReadonly = data as ReadonlyArray<readonly string[]>;
+
+      const result = table(dataReadonly);
+
+      expectTable(result, `
+╔═════════════╤═════════════╗
+║ Lorem ipsum │ dolor sit   ║
+╟─────────────┼─────────────╢
+║ amet        │ consectetur ║
+╟─────────────┼─────────────╢
+║ adipiscing  │ elit        ║
+╚═════════════╧═════════════╝`);
+    });
+  });
 });
