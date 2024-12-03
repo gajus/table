@@ -2,7 +2,7 @@ import {
   normalizeString,
 } from './utils';
 
-export const validateTableData = (rows: unknown[][]): void => {
+export const validateTableData = (rows: ReadonlyArray<readonly unknown[]>): void => {
   if (!Array.isArray(rows)) {
     throw new TypeError('Table data must be an array.');
   }
