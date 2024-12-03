@@ -71,5 +71,6 @@
     "lint": "eslint ./src ./test",
     "test": "nyc mocha && nyc check-coverage --lines 95"
   },
+  "sideEffects": false,
   "version": "1.0.0"
 }
