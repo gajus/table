@@ -124,7 +124,13 @@ export const extractTruncates = (config: BaseConfig): number[] => {
 };
 
 export const flatten = <T>(array: T[][]): T[] => {
-  return ([] as T[]).concat(...array);
+  const destination = [];
+  const arrayLength = array.length;
+  for (let index = 0; index < arrayLength; index++) {
+    destination.push(...array[index]);
+  }
+
+  return destination;
 };
 
 export const calculateRangeCoordinate = (spanningCellConfig: SpanningCellConfig): RangeCoordinate => {
