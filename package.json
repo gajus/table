@@ -57,6 +57,7 @@
   ],
   "license": "BSD-3-Clause",
   "main": "./dist/src/index.js",
+  "module": "./dist/src/index.js",
   "files": [
     "dist/src/"
   ],
