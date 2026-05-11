@@ -5,7 +5,6 @@
     "url": "http://gajus.com"
   },
   "dependencies": {
-    "ajv": "^8.0.1",
     "lodash.truncate": "^4.4.2",
     "slice-ansi": "^4.0.0",
     "string-width": "^4.2.3",
@@ -20,6 +19,7 @@
     "@types/node": "^14.14.37",
     "@types/sinon": "^10.0.0",
     "@types/slice-ansi": "^4.0.0",
+    "ajv": "^8.20.0",
     "ajv-cli": "^5.0.0",
     "ajv-keywords": "^5.0.0",
     "chai": "^4.2.0",
