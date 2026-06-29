@@ -106,4 +106,11 @@ describe('wrapWord', () => {
       );
     });
   });
+
+  context('full-width (CJK) characters', () => {
+    it('wraps based on the character width, not the code unit count', () => {
+      expect(wrapWord('一二三四五六七八', 4)).to.deep.equal(['一二', '三四', '五六', '七八']);
+      expect(wrapWord('あいう えお', 6)).to.deep.equal(['あいう', 'えお']);
+    });
+  });
 });

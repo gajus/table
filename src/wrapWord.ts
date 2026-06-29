@@ -1,16 +1,48 @@
 import slice from 'slice-ansi';
+import stringWidth from 'string-width';
 import stripAnsi from 'strip-ansi';
+
+/**
+ * Returns the number of code units of `subject` that fit within `width` display
+ * columns. Full-width characters (e.g. CJK) occupy two columns, so the number
+ * of code units and the number of columns they span are not interchangeable.
+ * At least one character is always consumed to guarantee forward progress.
+ */
+const fittingLength = (subject: string, width: number): number => {
+  let length = 0;
+  let usedWidth = 0;
+
+  for (const character of subject) {
+    const characterWidth = stringWidth(character);
+
+    if (length > 0 && usedWidth + characterWidth > width) {
+      break;
+    }
+
+    usedWidth += characterWidth;
+    length += character.length;
+  }
+
+  return length;
+};
 
 const calculateStringLengths = (input: string, size: number): Array<[Length:number, Offset: number]> => {
   let subject = stripAnsi(input);
 
   const chunks: Array<[number, number]> = [];
 
-  // https://regex101.com/r/gY5kZ1/1
-  const re = new RegExp('(^.{1,' + String(Math.max(size, 1)) + '}(\\s+|$))|(^.{1,' + String(Math.max(size - 1, 1)) + '}(\\\\|/|_|\\.|,|;|-))');
-
   do {
     let chunk: string;
+
+    // The chunk size is expressed in display columns, but the regular expression
+    // counts code units. Because a full-width character spans two columns, the
+    // column limit is first translated into the matching code unit limit for the
+    // current `subject`; otherwise full-width characters would be sliced past the
+    // intended width and silently dropped.
+    // https://regex101.com/r/gY5kZ1/1
+    const wordLimit = Math.max(fittingLength(subject, Math.max(size, 1)), 1);
+    const breakLimit = Math.max(fittingLength(subject, Math.max(size - 1, 1)), 1);
+    const re = new RegExp('(^.{1,' + String(wordLimit) + '}(\\s+|$))|(^.{1,' + String(breakLimit) + '}(\\\\|/|_|\\.|,|;|-))');
 
     const match = re.exec(subject);
 
@@ -19,15 +51,15 @@ const calculateStringLengths = (input: string, size: number): Array<[Length:numb
 
       subject = subject.slice(chunk.length);
 
-      const trimmedLength = chunk.trim().length;
-      const offset = chunk.length - trimmedLength;
+      const trimmedWidth = stringWidth(chunk.trim());
+      const offset = stringWidth(chunk) - trimmedWidth;
 
-      chunks.push([trimmedLength, offset]);
+      chunks.push([trimmedWidth, offset]);
     } else {
-      chunk = subject.slice(0, size);
-      subject = subject.slice(size);
+      chunk = subject.slice(0, wordLimit);
+      subject = subject.slice(chunk.length);
 
-      chunks.push([chunk.length, 0]);
+      chunks.push([stringWidth(chunk), 0]);
     }
   } while (subject.length);
 
