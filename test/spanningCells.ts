@@ -12,6 +12,69 @@ import {
 } from './utils';
 
 describe('spanningCells', () => {
+  it('uses single-column spanning cell content to size the column', () => {
+    const result = table([
+      ['Heading', 'Value'],
+      ['a', '1'],
+    ], {
+      spanningCells: [{alignment: 'center',
+        col: 0,
+        colSpan: 1,
+        row: 0}],
+    });
+
+    expectTable(result, `
+╔═════════╤═══════╗
+║ Heading │ Value ║
+╟─────────┼───────╢
+║ a       │ 1     ║
+╚═════════╧═══════╝
+`);
+  });
+
+  it('sizes a column from a cell spanning multiple rows', () => {
+    const result = table([
+      ['a', 'x'],
+      ['Group', 'y'],
+      ['This content is hidden', 'z'],
+    ], {
+      spanningCells: [{col: 0,
+        row: 1,
+        rowSpan: 2}],
+    });
+
+    expectTable(result, `
+╔═══════╤═══╗
+║ a     │ x ║
+╟───────┼───╢
+║ Group │ y ║
+║       ├───╢
+║       │ z ║
+╚═══════╧═══╝
+`);
+  });
+
+  it('respects explicit column widths for single-column spans', () => {
+    const result = table([
+      ['abcdef'],
+      ['x'],
+    ], {
+      columns: [{width: 3}],
+      spanningCells: [{col: 0,
+        colSpan: 1,
+        row: 0}],
+    });
+
+    expectTable(result, `
+╔═════╗
+║ abc ║
+║ def ║
+╟─────╢
+║ x   ║
+╚═════╝
+`);
+  });
+
   const baseUserCellConfig: CellUserConfig = {
     alignment: 'left',
     verticalAlignment: 'top',
