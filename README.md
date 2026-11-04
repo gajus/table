@@ -1,3 +1,4 @@
+<a name="user-content-table"></a>
 <a name="table"></a>
 # Table
 
@@ -9,18 +10,19 @@
 [![Canonical Code Style](https://img.shields.io/badge/code%20style-canonical-blue.svg?style=flat-square)](https://github.com/gajus/canonical)
 [![Twitter Follow](https://img.shields.io/twitter/follow/kuizinas.svg?style=social&label=Follow)](https://twitter.com/kuizinas)
 
-* [Table](#table)
-    * [Features](#table-features)
-    * [Install](#table-install)
-    * [Usage](#table-usage)
-    * [API](#table-api)
-        * [table](#table-api-table-1)
-        * [createStream](#table-api-createstream)
-        * [getBorderCharacters](#table-api-getbordercharacters)
+* [Table](#user-content-table)
+    * [Features](#user-content-table-features)
+    * [Install](#user-content-table-install)
+    * [Usage](#user-content-table-usage)
+    * [API](#user-content-table-api)
+        * [table](#user-content-table-api-table-1)
+        * [createStream](#user-content-table-api-createstream)
+        * [getBorderCharacters](#user-content-table-api-getbordercharacters)
 
 
 ![Demo of table displaying a list of missions to the Moon.](./.README/demo.png)
 
+<a name="user-content-table-features"></a>
 <a name="table-features"></a>
 ## Features
 
@@ -32,6 +34,7 @@
 * Configurable column width.
 * Text wrapping.
 
+<a name="user-content-table-install"></a>
 <a name="table-install"></a>
 ## Install
 
@@ -43,6 +46,7 @@ npm install table
 [![Become a Patron](https://c5.patreon.com/external/logo/become_a_patron_button.png)](https://www.patreon.com/gajus)
 
 
+<a name="user-content-table-usage"></a>
 <a name="table-usage"></a>
 ## Usage
 
@@ -73,9 +77,11 @@ console.log(table(data));
 ```
 
 
+<a name="user-content-table-api"></a>
 <a name="table-api"></a>
 ## API
 
+<a name="user-content-table-api-table-1"></a>
 <a name="table-api-table-1"></a>
 ### table
 
@@ -90,11 +96,12 @@ Returns the string in the table format
   - Type: `object`
   - Required: `false`
 
+<a name="user-content-table-api-table-1-config-border"></a>
 <a name="table-api-table-1-config-border"></a>
 ##### config.border
 
 Type: `{ [type: string]: string }`\
-Default: `honeywell` [template](#getbordercharacters)
+Default: `honeywell` [template](#user-content-getbordercharacters)
 
 Custom borders. The keys are any of:
 - `topLeft`, `topRight`, `topBody`,`topJoin`
@@ -146,6 +153,7 @@ console.log(table(data, config));
 └────┴────┴────┘
 ```
 
+<a name="user-content-table-api-table-1-config-drawverticalline"></a>
 <a name="table-api-table-1-config-drawverticalline"></a>
 ##### config.drawVerticalLine
 
@@ -189,6 +197,7 @@ console.log(table(data, config));
 
 ```
 
+<a name="user-content-table-api-table-1-config-drawhorizontalline"></a>
 <a name="table-api-table-1-config-drawhorizontalline"></a>
 ##### config.drawHorizontalLine
 
@@ -231,6 +240,7 @@ console.log(table(data, config));
 
 ```
 
+<a name="user-content-table-api-table-1-config-singleline"></a>
 <a name="table-api-table-1-config-singleline"></a>
 ##### config.singleLine
 
@@ -272,6 +282,7 @@ console.log(table(data, config));
 ```
 
 
+<a name="user-content-table-api-table-1-config-columns"></a>
 <a name="table-api-table-1-config-columns"></a>
 ##### config.columns
 
@@ -279,6 +290,7 @@ Type: `Column[] | { [columnIndex: number]: Column }`
 
 Column specific configurations.
 
+<a name="user-content-table-api-table-1-config-columns-config-columns-width"></a>
 <a name="table-api-table-1-config-columns-config-columns-width"></a>
 ###### config.columns[*].width
 
@@ -314,6 +326,7 @@ console.log(table(data, config));
 ╚════╧════════════╧════╝
 ```
 
+<a name="user-content-table-api-table-1-config-columns-config-columns-alignment"></a>
 <a name="table-api-table-1-config-columns-config-columns-alignment"></a>
 ###### config.columns[*].alignment
 
@@ -354,6 +367,7 @@ console.log(table(data, config));
 ╚════════════╧════════════╧════════════╧════════════╝
 ```
 
+<a name="user-content-table-api-table-1-config-columns-config-columns-verticalalignment"></a>
 <a name="table-api-table-1-config-columns-config-columns-verticalalignment"></a>
 ###### config.columns[*].verticalAlignment
 
@@ -389,6 +403,7 @@ console.log(table(data, config));
 ╚═══╧═══╧═══╧═══╝
 ```
 
+<a name="user-content-table-api-table-1-config-columns-config-columns-paddingleft"></a>
 <a name="table-api-table-1-config-columns-config-columns-paddingleft"></a>
 ###### config.columns[*].paddingLeft
 
@@ -397,6 +412,7 @@ Default: `1`
 
 The number of whitespaces used to pad the content on the left.
 
+<a name="user-content-table-api-table-1-config-columns-config-columns-paddingright"></a>
 <a name="table-api-table-1-config-columns-config-columns-paddingright"></a>
 ###### config.columns[*].paddingRight
 
@@ -442,6 +458,7 @@ console.log(table(data, config));
 ╚══════╧══════╧════╝
 ```
 
+<a name="user-content-table-api-table-1-config-columns-config-columns-truncate"></a>
 <a name="table-api-table-1-config-columns-config-columns-truncate"></a>
 ###### config.columns[*].truncate
 
@@ -449,7 +466,7 @@ Type: `number`\
 Default: `Infinity`
 
 The number of characters is which the content will be truncated.
-To handle a content that overflows the container width, `table` package implements [text wrapping](#config.columns[*].wrapWord). However, sometimes you may want to truncate content that is too long to be displayed in the table.
+To handle a content that overflows the container width, `table` package implements [text wrapping](#user-content-config.columns[*].wrapWord). However, sometimes you may want to truncate content that is too long to be displayed in the table.
 
 ```js
 const data = [
@@ -478,6 +495,7 @@ console.log(table(data, config));
 ╚══════════════════════╝
 ```
 
+<a name="user-content-table-api-table-1-config-columns-config-columns-wrapword"></a>
 <a name="table-api-table-1-config-columns-config-columns-wrapword"></a>
 ###### config.columns[*].wrapWord
 
@@ -532,6 +550,7 @@ When `wrapWord` is `true`:
 ```
 
 
+<a name="user-content-table-api-table-1-config-columndefault"></a>
 <a name="table-api-table-1-config-columndefault"></a>
 ##### config.columnDefault
 
@@ -541,6 +560,7 @@ Default: `{}`
 The default configuration for all columns. Column-specific settings will overwrite the default values.
 
 
+<a name="user-content-table-api-table-1-config-header"></a>
 <a name="table-api-table-1-config-header"></a>
 ##### config.header
 
@@ -591,6 +611,7 @@ console.log(table(data, config));
 ```
 
 
+<a name="user-content-table-api-table-1-config-spanningcells"></a>
 <a name="table-api-table-1-config-spanningcells"></a>
 ##### config.spanningCells
 
@@ -667,6 +688,7 @@ console.log(table(data, config));
 ```
 
 
+<a name="user-content-table-api-createstream"></a>
 <a name="table-api-createstream"></a>
 ### createStream
 
@@ -698,6 +720,18 @@ setInterval(() => {
 `table` package uses ANSI escape codes to overwrite the output of the last line when a new row is printed.
 
 The underlying implementation is explained in this [Stack Overflow answer](http://stackoverflow.com/a/32938658/368691).
+
+The cursor stays at the end of the table after each row, so that the next row can replace the bottom border. Call `stream.end()` after the last row to move the cursor below the table, so that whatever is printed next does not overwrite it. A stream cannot be written to after it has ended.
+
+```js
+const stream = createStream(config);
+
+for (const row of rows) {
+  stream.write(row);
+}
+
+stream.end();
+```
 
 Streaming supports all of the configuration properties and functionality of a static table (such as auto text wrapping, alignment and padding), e.g.
 
@@ -738,6 +772,7 @@ setInterval(() => {
 ![Streaming random data.](./.README/api/stream/streaming-random.gif)
 
 
+<a name="user-content-table-api-getbordercharacters"></a>
 <a name="table-api-getbordercharacters"></a>
 ### getBorderCharacters
 
@@ -807,6 +842,7 @@ console.log(table(data, config));
 
 Raise [an issue](https://github.com/gajus/table/issues) if you'd like to contribute a new border template.
 
+<a name="user-content-table-api-getbordercharacters-borderless-table"></a>
 <a name="table-api-getbordercharacters-borderless-table"></a>
 #### Borderless Table
 
