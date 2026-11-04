@@ -6,6 +6,9 @@ import {
 import {
   truncateTableData,
 } from '../src/truncateTableData';
+import {
+  closeBold, closeRed, openBold, openRed, stringToRed,
+} from './utils';
 
 describe('truncateTableData', () => {
   context('when no given userConfig', () => {
@@ -33,6 +36,22 @@ describe('truncateTableData', () => {
       expect(truncateTableData(rows, [30, 20])).to.deep.equal([
         ['a'.repeat(29) + '…', 'b'.repeat(19) + '…'],
         ['c'.repeat(29) + '…', 'd'.repeat(19) + '…']]);
+    });
+  });
+
+  context('when given text with ANSI escape codes', () => {
+    it('closes the escape codes that it cuts through (#220)', () => {
+      expect(truncateTableData([[stringToRed('a'.repeat(10))]], [5])).to.deep.equal([[`${openRed}aaaa${closeRed}…`]]);
+      expect(truncateTableData([[`${openBold}${openRed}abcdef${closeRed}${closeBold}`]], [4])).to.deep.equal([[`${openBold}${openRed}abc${closeRed}${closeBold}…`]]);
+    });
+
+    it('does not count the escape codes towards the length', () => {
+      expect(truncateTableData([[stringToRed('aaaaa')]], [5])).to.deep.equal([[stringToRed('aaaaa')]]);
+    });
+
+    it('counts wide characters and emoji as single characters', () => {
+      expect(truncateTableData([[stringToRed('你好世界')]], [3])).to.deep.equal([[`${openRed}你好${closeRed}…`]]);
+      expect(truncateTableData([[stringToRed('🧪🧪🧪')]], [2])).to.deep.equal([[`${openRed}🧪${closeRed}…`]]);
     });
   });
 

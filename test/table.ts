@@ -10,7 +10,7 @@ import type {
   TableUserConfig,
 } from '../src';
 import {
-  expectTable,
+  closeRed, expectTable, openRed,
 } from './utils';
 
 const data = [
@@ -148,6 +148,20 @@ describe('drawTable', () => {
 ║ 🧪a ║
 ║ bc  ║
 ╚═════╝
+`);
+    });
+  });
+
+  context('truncate', () => {
+    it('closes the colour of truncated text before the border (#220)', () => {
+      expectTable(table([[`${openRed}${'a'.repeat(20)}${closeRed}`]], {
+        columns: [{truncate: 15,
+          width: 10}],
+      }), `
+╔════════════╗
+║ ${openRed}aaaaaaaaaa${closeRed} ║
+║ ${openRed}aaaa${closeRed}…      ║
+╚════════════╝
 `);
     });
   });
