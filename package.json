@@ -34,7 +34,7 @@
     "mkdirp": "^1.0.4",
     "mocha": "^8.2.1",
     "nyc": "^15.1.0",
-    "semantic-release": "^17.3.1",
+    "semantic-release": "^25.0.9",
     "sinon": "^12.0.1",
     "ts-node": "^9.1.1",
     "typescript": "4.5.2"
@@ -68,7 +68,7 @@
   },
   "scripts": {
     "prebuild": "rm -fr ./src/generated && mkdirp ./src/generated",
-    "build": "npm run create-validators && tsc",
+    "build": "\"$npm_execpath\" run create-validators && tsc",
     "create-readme": "gitdown ./.README/README.md --output-file ./README.md",
     "create-validators": "ajv compile --all-errors --inline-refs=false -s src/schemas/config -s src/schemas/streamConfig -r src/schemas/shared -c ajv-keywords/dist/keywords/typeof -o | js-beautify > ./src/generated/validators.js",
     "lint": "eslint ./src ./test",
