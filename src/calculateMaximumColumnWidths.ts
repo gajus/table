@@ -22,16 +22,15 @@ export const calculateMaximumCellWidth = (cell: Cell): number => {
 export const calculateMaximumColumnWidths = (rows: Row[], spanningCellConfigs: SpanningCellConfig[] = []): number[] => {
   const columnWidths = new Array(rows[0].length).fill(0);
   const rangeCoordinates = spanningCellConfigs.map(calculateRangeCoordinate);
-  const isSpanningCell = (rowIndex: number, columnIndex: number): boolean => {
-    return rangeCoordinates.some((rangeCoordinate) => {
-      return isCellInRange({col: columnIndex,
-        row: rowIndex}, rangeCoordinate);
-    });
-  };
 
   rows.forEach((row, rowIndex) => {
     row.forEach((cell, cellIndex) => {
-      if (isSpanningCell(rowIndex, cellIndex)) {
+      const range = rangeCoordinates.find((rangeCoordinate) => {
+        return isCellInRange({col: cellIndex,
+          row: rowIndex}, rangeCoordinate);
+      });
+
+      if (range && (range.topLeft.col !== range.bottomRight.col || range.topLeft.row !== rowIndex)) {
         return;
       }
       columnWidths[cellIndex] = Math.max(columnWidths[cellIndex], calculateMaximumCellWidth(cell));
