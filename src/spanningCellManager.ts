@@ -59,24 +59,34 @@ const getContainingRange = (rangeConfig: RangeConfig, context: SpanningCellConte
 
   const alignedContent = alignVerticalRangeContent(rangeConfig, wrappedContent, context);
 
-  const getCellContent = (rowIndex: number) => {
+  /**
+   * Counts the horizontal borders drawn inside the spanning cell, from the one below its top row up to
+   * and including the given border; each of them takes up a line of the spanning cell content.
+   */
+  const countDrawnHorizontalBorders = (lastBorderIndex: number): number => {
     const {topLeft} = rangeConfig;
     const {drawHorizontalLine, rowHeights} = context;
 
-    const totalWithinHorizontalBorderHeight = rowIndex - topLeft.row;
-    const totalHiddenHorizontalBorderHeight = sequence(topLeft.row + 1, rowIndex).filter((index) => {
+    return sequence(topLeft.row + 1, lastBorderIndex).filter((index) => {
       /* istanbul ignore next */
-      return !drawHorizontalLine?.(index, rowHeights.length);
+      return drawHorizontalLine?.(index, rowHeights.length);
     }).length;
+  };
 
-    const offset = sumArray(rowHeights.slice(topLeft.row, rowIndex)) + totalWithinHorizontalBorderHeight - totalHiddenHorizontalBorderHeight;
+  const getCellContent = (rowIndex: number) => {
+    const {topLeft} = rangeConfig;
+    const {rowHeights} = context;
+
+    const offset = sumArray(rowHeights.slice(topLeft.row, rowIndex)) + countDrawnHorizontalBorders(rowIndex);
 
     return alignedContent.slice(offset, offset + rowHeights[rowIndex]);
   };
 
   const getBorderContent = (borderIndex: number) => {
     const {topLeft} = rangeConfig;
-    const offset = sumArray(context.rowHeights.slice(topLeft.row, borderIndex)) + (borderIndex - topLeft.row - 1);
+
+    // The border being drawn is itself the next line, so only the borders above it count.
+    const offset = sumArray(context.rowHeights.slice(topLeft.row, borderIndex)) + countDrawnHorizontalBorders(borderIndex - 1);
 
     return alignedContent[offset];
   };
