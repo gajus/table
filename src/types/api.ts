@@ -158,6 +158,12 @@ export type StreamUserConfig = BaseUserConfig & {
 };
 
 export type WritableStream = {
+
+  /**
+   * Finishes the table by moving the cursor below it, so that whatever is printed next does not
+   * overwrite its bottom border. The stream cannot be written to afterwards.
+   */
+  readonly end: () => void,
   readonly write: (rows: string[]) => void,
 };
 

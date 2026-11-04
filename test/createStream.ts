@@ -113,5 +113,63 @@ describe('createStream', () => {
         Sinon.assert.calledWithExactly(stub.getCall(2), '\n a');
       });
     });
+
+    context('end', () => {
+      it('moves the cursor below the table (#44)', () => {
+        const stream = createStream({
+          columnCount: 1,
+          columnDefault: {
+            width: 1,
+          },
+        });
+
+        stream.write(['a']);
+        stream.end();
+
+        Sinon.assert.callCount(stub, 2);
+        Sinon.assert.calledWithExactly(stub.getCall(1), '\n');
+      });
+
+      it('writes nothing when no row has been written', () => {
+        createStream({
+          columnCount: 1,
+          columnDefault: {
+            width: 1,
+          },
+        }).end();
+
+        Sinon.assert.notCalled(stub);
+      });
+
+      it('moves the cursor only once', () => {
+        const stream = createStream({
+          columnCount: 1,
+          columnDefault: {
+            width: 1,
+          },
+        });
+
+        stream.write(['a']);
+        stream.end();
+        stream.end();
+
+        Sinon.assert.callCount(stub, 2);
+      });
+
+      it('cannot be written to afterwards', () => {
+        const stream = createStream({
+          columnCount: 1,
+          columnDefault: {
+            width: 1,
+          },
+        });
+
+        stream.end();
+
+        expect(() => {
+          stream.write(['a']);
+        }).to.throw(Error, 'Cannot write to a stream that has ended.');
+      });
+    });
   });
 });

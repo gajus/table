@@ -103,9 +103,26 @@ export const createStream = (userConfig: StreamUserConfig): WritableStream => {
   });
 
   let empty = true;
+  let ended = false;
 
   return {
+    end: () => {
+      if (ended) {
+        return;
+      }
+
+      ended = true;
+
+      // Rows are written without a trailing newline, so that the next row can replace the bottom border.
+      if (!empty) {
+        process.stdout.write('\n');
+      }
+    },
     write: (row: string[]) => {
+      if (ended) {
+        throw new Error('Cannot write to a stream that has ended.');
+      }
+
       if (row.length !== config.columnCount) {
         throw new Error('Row cell count does not match the config.columnCount.');
       }
