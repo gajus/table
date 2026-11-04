@@ -126,6 +126,32 @@ describe('drawTable', () => {
     });
   });
 
+  context('cell content containing emoji', () => {
+    it('wraps a header (#210)', () => {
+      expectTable(table([['A', 'B']], {
+        header: {
+          content: '🧪aaaa',
+        },
+      }), `
+╔═══════╗
+║ 🧪aaa ║
+║   a   ║
+╟───┬───╢
+║ A │ B ║
+╚═══╧═══╝
+`);
+    });
+
+    it('keeps every line of a multi-line cell', () => {
+      expectTable(table([['🧪a\nbc']]), `
+╔═════╗
+║ 🧪a ║
+║ bc  ║
+╚═════╝
+`);
+    });
+  });
+
   context('vertical alignment', () => {
     // eslint-disable-next-line @typescript-eslint/no-shadow
     const data = [

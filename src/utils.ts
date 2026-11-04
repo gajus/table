@@ -12,8 +12,114 @@ import type {
 import type {
   BaseConfig,
   CellCoordinates,
+  Grapheme,
   RangeCoordinate,
 } from './types/internal';
+
+/**
+ * A user-perceived character: a code point together with the combining marks, variation selectors,
+ * emoji modifiers and tag characters attached to it, including zero-width joiner emoji sequences;
+ * or a pair of regional indicators, which is rendered as a flag.
+ */
+const graphemeRegex = /\p{Regional_Indicator}{2}|[\s\S][\p{M}\p{Emoji_Modifier}\u{E0020}-\u{E007F}]*(?:\u200D[\s\S][\p{M}\p{Emoji_Modifier}\u{E0020}-\u{E007F}]*)*/gu;
+
+const printableAsciiRegex = /^[\u0020-\u007E]+$/u;
+
+/**
+ * slice-ansi positions are not terminal columns: it advances one position per code point and two for
+ * full-width BMP characters, but only one for astral characters such as emoji. Asking slice-ansi
+ * directly keeps the computed boundaries aligned with how it slices.
+ */
+const countSlicePositions = (grapheme: string): number => {
+  let positions = 0;
+
+  for (const codePoint of grapheme) {
+    positions += slice(codePoint, 0, 1) === '' ? 2 : 1;
+  }
+
+  return positions;
+};
+
+const graphemeCache = new Map<string, Grapheme>();
+
+/**
+ * Measures a grapheme in terminal columns and in slice-ansi positions. Measurements are cached, and the
+ * cache is emptied whenever it grows large so that its memory use stays bounded.
+ */
+const measureGrapheme = (value: string): Grapheme => {
+  let grapheme = graphemeCache.get(value);
+
+  if (!grapheme) {
+    if (graphemeCache.size >= 10_000) {
+      graphemeCache.clear();
+    }
+
+    grapheme = {
+      positions: countSlicePositions(value),
+      value,
+      width: stringWidth(value),
+    };
+
+    graphemeCache.set(value, grapheme);
+  }
+
+  return grapheme;
+};
+
+/**
+ * Splits a string without ANSI escape codes into graphemes, measured in terminal columns and in
+ * slice-ansi positions.
+ *
+ * @internal
+ */
+export const splitGraphemes = (subject: string): Grapheme[] => {
+  // Printable ASCII, the most common content, is one column and one slice-ansi position per character.
+  if (printableAsciiRegex.test(subject)) {
+    return Array.from(subject, (value) => {
+      return {
+        positions: 1,
+        value,
+        width: 1,
+      };
+    });
+  }
+
+  return (subject.match(graphemeRegex) ?? []).map(measureGrapheme);
+};
+
+/**
+ * Calculates the slice-ansi length of the longest run of whole graphemes at the start of a string
+ * without ANSI escape codes that fits within the given width. At least one grapheme is included, so
+ * that callers always make progress.
+ *
+ * @internal
+ */
+export const calculateSliceLength = (subject: string, maximumWidth: number): number => {
+  // Printable ASCII is one column and one position per character. The character after the cut is
+  // checked as well, so that a combining mark or modifier is never separated from the one before it.
+  if (maximumWidth >= 1 && printableAsciiRegex.test(subject.slice(0, maximumWidth + 1))) {
+    return Math.min(subject.length, maximumWidth);
+  }
+
+  // A copy, so that this loop has its own lastIndex.
+  const regex = new RegExp(graphemeRegex);
+
+  let width = 0;
+  let positions = 0;
+
+  for (let match = regex.exec(subject); match; match = regex.exec(subject)) {
+    const grapheme = measureGrapheme(match[0]);
+
+    if (positions > 0 && width + grapheme.width > maximumWidth) {
+      break;
+    }
+
+    width += grapheme.width;
+    positions += grapheme.positions;
+  }
+
+  return positions;
+};
 
 /**
  * Converts Windows-style newline to Unix-style
@@ -30,7 +136,10 @@ export const normalizeString = (input: string): string => {
  * @internal
  */
 export const splitAnsi = (input: string): string[] => {
-  const lengths = stripAnsi(input).split('\n').map(stringWidth);
+  // Line lengths in slice-ansi positions, which differ from display widths for emoji.
+  const lengths = stripAnsi(input).split('\n').map((line) => {
+    return calculateSliceLength(line, Number.POSITIVE_INFINITY);
+  });
 
   const result: string[] = [];
   let startIndex = 0;

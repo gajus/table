@@ -32,6 +32,26 @@ describe('spanningCells', () => {
 `);
   });
 
+  it('wraps spanning cell content containing emoji (#210)', () => {
+    const result = table([
+      ['🧪aaaa', ''],
+      ['A', 'B'],
+    ], {
+      spanningCells: [{col: 0,
+        colSpan: 2,
+        row: 0}],
+    });
+
+    expectTable(result, `
+╔═══════╗
+║ 🧪aaa ║
+║ a     ║
+╟───┬───╢
+║ A │ B ║
+╚═══╧═══╝
+`);
+  });
+
   it('sizes a column from a cell spanning multiple rows', () => {
     const result = table([
       ['a', 'x'],
