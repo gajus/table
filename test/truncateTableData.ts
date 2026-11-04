@@ -55,6 +55,15 @@ describe('truncateTableData', () => {
     });
   });
 
+  context('when given characters made of several code points', () => {
+    it('counts each displayed character once', () => {
+      const scotland = '\u{1F3F4}\u{E0067}\u{E0062}\u{E0073}\u{E0063}\u{E0074}\u{E007F}';
+
+      expect(truncateTableData([['कि'.repeat(3)]], [2])).to.deep.equal([['कि…']]);
+      expect(truncateTableData([[scotland.repeat(3)]], [2])).to.deep.equal([[`${scotland}…`]]);
+    });
+  });
+
   context('edge cases', () => {
     context('truncate = 0', () => {
       it('returns ellipsis only', () => {
