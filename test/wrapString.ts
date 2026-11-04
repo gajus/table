@@ -6,6 +6,9 @@ import {
 import {
   wrapString,
 } from '../src/wrapString';
+import {
+  arrayToRed, stringToRed,
+} from './utils';
 
 describe('wrapString', () => {
   context('subject is a plain text string', () => {
@@ -43,6 +46,26 @@ describe('wrapString', () => {
           `${openRed}c${closeRed}`,
         ]);
       });
+    });
+  });
+  context('subject contains emoji', () => {
+    it('measures emoji by display width (#210)', () => {
+      expect(wrapString('🧪aaaa', 5)).to.deep.equal(['🧪aaa', 'a']);
+      expect(wrapString(stringToRed('🧪aaaa'), 5)).to.deep.equal(arrayToRed(['🧪aaa', 'a']));
+    });
+    it('does not split or overflow an emoji', () => {
+      expect(wrapString('🧪🧪🧪', 3)).to.deep.equal(['🧪', '🧪', '🧪']);
+      expect(wrapString('👨\u200D👩\u200D👧👨\u200D👩\u200D👧', 3)).to.deep.equal(['👨\u200D👩\u200D👧', '👨\u200D👩\u200D👧']);
+    });
+  });
+  context('subject contains wide characters', () => {
+    it('does not split a wide character', () => {
+      expect(wrapString('你好世界', 3)).to.deep.equal(['你', '好', '世', '界']);
+    });
+  });
+  context('a chunk size smaller than one', () => {
+    it('makes progress', () => {
+      expect(wrapString('ab', 0)).to.deep.equal(['a', 'b']);
     });
   });
 });

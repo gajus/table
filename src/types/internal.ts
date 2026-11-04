@@ -58,6 +58,19 @@ export type BaseConfig = {
 export type SeparatorGetter = (index: number, size: number) => string;
 
 /** @internal */
+export type Grapheme = {
+
+  /** The grapheme as it appears in the text. */
+  value: string,
+
+  /** Width in terminal columns. */
+  width: number,
+
+  /** Number of positions slice-ansi advances over the grapheme. */
+  positions: number,
+};
+
+/** @internal */
 export type CellCoordinates = {
   row: number,
   col: number,

@@ -12,6 +12,159 @@ import {
 } from './utils';
 
 describe('spanningCells', () => {
+  it('uses single-column spanning cell content to size the column', () => {
+    const result = table([
+      ['Heading', 'Value'],
+      ['a', '1'],
+    ], {
+      spanningCells: [{alignment: 'center',
+        col: 0,
+        colSpan: 1,
+        row: 0}],
+    });
+
+    expectTable(result, `
+╔═════════╤═══════╗
+║ Heading │ Value ║
+╟─────────┼───────╢
+║ a       │ 1     ║
+╚═════════╧═══════╝
+`);
+  });
+
+  it('wraps spanning cell content containing emoji (#210)', () => {
+    const result = table([
+      ['🧪aaaa', ''],
+      ['A', 'B'],
+    ], {
+      spanningCells: [{col: 0,
+        colSpan: 2,
+        row: 0}],
+    });
+
+    expectTable(result, `
+╔═══════╗
+║ 🧪aaa ║
+║ a     ║
+╟───┬───╢
+║ A │ B ║
+╚═══╧═══╝
+`);
+  });
+
+  it('draws a horizontal line through a row span when the lines above it are hidden (#232)', () => {
+    const result = table([
+      ['abc', 'abc', ' '],
+      [' ', 'abc', ' '],
+      [' ', 'abc', ' '],
+      [' ', 'abc', 'abc'],
+    ], {
+      columns: {
+        0: {width: 3},
+        1: {width: 3},
+        2: {width: 3},
+      },
+      drawHorizontalLine: (index) => {
+        return [0, 3, 4].includes(index);
+      },
+      spanningCells: [
+        {col: 0,
+          row: 0,
+          rowSpan: 4},
+        {col: 1,
+          colSpan: 2,
+          row: 0},
+        {col: 1,
+          colSpan: 2,
+          row: 1},
+        {col: 1,
+          colSpan: 2,
+          row: 2},
+      ],
+    });
+
+    expectTable(result, `
+╔═════╤═══════════╗
+║ abc │ abc       ║
+║     │ abc       ║
+║     │ abc       ║
+║     ├─────┬─────╢
+║     │ abc │ abc ║
+╚═════╧═════╧═════╝
+`);
+  });
+
+  it('continues row span content through a horizontal line that follows a hidden one', () => {
+    const result = table([
+      ['1 2 3 4 5', 'a'],
+      ['', 'b'],
+      ['', 'c'],
+    ], {
+      columns: {
+        0: {width: 1},
+      },
+      drawHorizontalLine: (index) => {
+        return index !== 1;
+      },
+      spanningCells: [{col: 0,
+        row: 0,
+        rowSpan: 3}],
+    });
+
+    expectTable(result, `
+╔═══╤═══╗
+║ 1 │ a ║
+║ 2 │ b ║
+║ 3 ├───╢
+║ 4 │ c ║
+║ 5 │   ║
+╚═══╧═══╝
+`);
+  });
+
+  it('sizes a column from a cell spanning multiple rows', () => {
+    const result = table([
+      ['a', 'x'],
+      ['Group', 'y'],
+      ['This content is hidden', 'z'],
+    ], {
+      spanningCells: [{col: 0,
+        row: 1,
+        rowSpan: 2}],
+    });
+
+    expectTable(result, `
+╔═══════╤═══╗
+║ a     │ x ║
+╟───────┼───╢
+║ Group │ y ║
+║       ├───╢
+║       │ z ║
+╚═══════╧═══╝
+`);
+  });
+
+  it('respects explicit column widths for single-column spans', () => {
+    const result = table([
+      ['abcdef'],
+      ['x'],
+    ], {
+      columns: [{width: 3}],
+      spanningCells: [{col: 0,
+        colSpan: 1,
+        row: 0}],
+    });
+
+    expectTable(result, `
+╔═════╗
+║ abc ║
+║ def ║
+╟─────╢
+║ x   ║
+╚═════╝
+`);
+  });
+
   const baseUserCellConfig: CellUserConfig = {
     alignment: 'left',
     verticalAlignment: 'top',

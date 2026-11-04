@@ -84,6 +84,44 @@ describe('wrapWord', () => {
     });
   });
 
+  context('emoji', () => {
+    it('keeps the characters that follow an emoji (#180)', () => {
+      expect(wrapWord('🥈 Some more text', 15)).to.deep.equal(['🥈 Some more', 'text']);
+      expect(wrapWord('🥉 I am a reallylong name', 15)).to.deep.equal(['🥉 I am a', 'reallylong name']);
+
+      expect(wrapWord(stringToRed('🥈 Some more text'), 15)).to.deep.equal(arrayToRed(['🥈 Some more', 'text']));
+    });
+
+    it('does not split emoji sequences', () => {
+      expect(wrapWord('👨\u200D👩\u200D👧👨\u200D👩\u200D👧', 2)).to.deep.equal(['👨\u200D👩\u200D👧', '👨\u200D👩\u200D👧']);
+      expect(wrapWord('🇱🇹🇱🇹', 2)).to.deep.equal(['🇱🇹', '🇱🇹']);
+      expect(wrapWord('ℹ️ℹ️', 2)).to.deep.equal(['ℹ️', 'ℹ️']);
+    });
+  });
+
+  context('wide characters', () => {
+    it('wraps by display width', () => {
+      expect(wrapWord('你好 世界 你好世界', 6)).to.deep.equal(['你好', '世界', '你好世', '界']);
+    });
+
+    it('cuts a word without splitting or overflowing a wide character', () => {
+      expect(wrapWord('🧪🧪🧪', 3)).to.deep.equal(['🧪', '🧪', '🧪']);
+      expect(wrapWord('a🧪b', 2)).to.deep.equal(['a', '🧪', 'b']);
+    });
+  });
+
+  context('leading whitespace', () => {
+    it('keeps the characters of the first line', () => {
+      expect(wrapWord('  aaa bbb', 5)).to.deep.equal(['  aaa', 'bbb']);
+    });
+  });
+
+  context('a chunk size smaller than one', () => {
+    it('makes progress', () => {
+      expect(wrapWord('ab', 0)).to.deep.equal(['a', 'b']);
+    });
+  });
+
   context('multiple ansi', () => {
     it('returns proper strings', () => {
       expect(wrapWord(`${openBold}${openRed}Lorem ipsum dolor sit${closeRed}${closeBold}`, 4)).to.deep.equal(
