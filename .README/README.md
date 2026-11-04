@@ -2,7 +2,7 @@
 
 > Produces a string that represents array data in a text table.
 
-[![Github action status](https://github.com/gajus/table/actions/workflows/main.yml/badge.svg)](https://github.com/gajus/table/actions)
+[![Github action status](https://github.com/gajus/table/actions/workflows/main.yaml/badge.svg)](https://github.com/gajus/table/actions)
 [![Coveralls](https://img.shields.io/coveralls/gajus/table.svg?style=flat-square)](https://coveralls.io/github/gajus/table)
 [![NPM version](http://img.shields.io/npm/v/table.svg?style=flat-square)](https://www.npmjs.org/package/table)
 [![Canonical Code Style](https://img.shields.io/badge/code%20style-canonical-blue.svg?style=flat-square)](https://github.com/gajus/canonical)
