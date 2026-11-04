@@ -10,7 +10,7 @@ import type {
   TableUserConfig,
 } from '../src';
 import {
-  closeRed, expectTable, openRed,
+  closeRed, expectTable, hyperlink, openRed,
 } from './utils';
 
 const data = [
@@ -161,6 +161,28 @@ describe('drawTable', () => {
 ╔════════════╗
 ║ ${openRed}aaaaaaaaaa${closeRed} ║
 ║ ${openRed}aaaa${closeRed}…      ║
+╚════════════╝
+`);
+    });
+  });
+
+  context('terminal hyperlinks', () => {
+    it('keeps a hyperlink whose text fits in the cell (#113)', () => {
+      expectTable(table([[hyperlink('foo')]]), `
+╔═════╗
+║ ${hyperlink('foo')} ║
+╚═════╝
+`);
+    });
+
+    it('reopens a hyperlink on each line that it wraps onto (#113)', () => {
+      expectTable(table([[hyperlink('This is a link to example.com')]], {
+        columns: [{width: 10}],
+      }), `
+╔════════════╗
+║ ${hyperlink('This is a ')} ║
+║ ${hyperlink('link to ex')} ║
+║ ${hyperlink('ample.com')}  ║
 ╚════════════╝
 `);
     });

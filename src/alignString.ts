@@ -1,9 +1,8 @@
-import stringWidth from 'string-width';
 import type {
   Alignment,
 } from './types/api';
 import {
-  countSpaceSequence, distributeUnevenly,
+  countSpaceSequence, distributeUnevenly, stringWidth,
 } from './utils';
 
 const alignLeft = (subject: string, width: number): string => {

@@ -1,10 +1,8 @@
-import slice from 'slice-ansi';
-import stripAnsi from 'strip-ansi';
 import type {
   Grapheme,
 } from './types/internal';
 import {
-  splitGraphemes,
+  sliceAnsi, splitGraphemes, stripAnsi,
 } from './utils';
 
 /**
@@ -82,7 +80,7 @@ export const wrapWord = (input: string, size: number): string[] => {
 
   let startIndex = 0;
   calculateStringLengths(input, size).forEach(([length, offset]) => {
-    result.push(slice(input, startIndex, startIndex + length));
+    result.push(sliceAnsi(input, startIndex, startIndex + length));
 
     startIndex += length + offset;
   });

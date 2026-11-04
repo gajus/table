@@ -20,3 +20,7 @@ export const arrayToRed = (array: string[]) => {
 export const expectTable = (result: string, expectedResult: string): void => {
   expect(result).to.equal(expectedResult.trim() + '\n');
 };
+
+export const hyperlink = (text: string, url = 'https://example.com', terminator = '\u0007'): string => {
+  return `\u001B]8;;${url}${terminator}${text}\u001B]8;;${terminator}`;
+};

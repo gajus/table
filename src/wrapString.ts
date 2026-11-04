@@ -1,8 +1,5 @@
-import slice from 'slice-ansi';
-import stringWidth from 'string-width';
-import stripAnsi from 'strip-ansi';
 import {
-  calculateSliceLength,
+  calculateSliceLength, sliceAnsi, stringWidth, stripAnsi,
 } from './utils';
 
 /**
@@ -20,9 +17,9 @@ export const wrapString = (subject: string, size: number): string[] => {
   do {
     const chunkLength = calculateSliceLength(stripAnsi(subjectSlice), size);
 
-    chunks.push(slice(subjectSlice, 0, chunkLength));
+    chunks.push(sliceAnsi(subjectSlice, 0, chunkLength));
 
-    subjectSlice = slice(subjectSlice, chunkLength).trim();
+    subjectSlice = sliceAnsi(subjectSlice, chunkLength).trim();
   } while (stringWidth(subjectSlice));
 
   return chunks;

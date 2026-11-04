@@ -1,4 +1,3 @@
-import stringWidth from 'string-width';
 import type {
   SpanningCellConfig,
 } from './types/api';
@@ -7,7 +6,7 @@ import type {
   Cell,
 } from './types/internal';
 import {
-  calculateRangeCoordinate, isCellInRange,
+  calculateRangeCoordinate, isCellInRange, stringWidth,
 } from './utils';
 
 export const calculateMaximumCellWidth = (cell: Cell): number => {

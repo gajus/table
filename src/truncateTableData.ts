@@ -1,11 +1,9 @@
 import truncate from 'lodash.truncate';
-import slice from 'slice-ansi';
-import stripAnsi from 'strip-ansi';
 import type {
   Row,
 } from './types/internal';
 import {
-  calculateSliceLength,
+  calculateSliceLength, sliceAnsi, stripAnsi,
 } from './utils';
 
 const omission = '…';
@@ -29,7 +27,7 @@ export const truncateString = (input: string, length: number): string => {
   // are still open, so that styles do not leak past the cell.
   const kept = truncated.slice(0, -omission.length);
 
-  return slice(input, 0, calculateSliceLength(kept, Number.POSITIVE_INFINITY)) + omission;
+  return sliceAnsi(input, 0, calculateSliceLength(kept, Number.POSITIVE_INFINITY)) + omission;
 };
 
 export const truncateTableData = (rows: Row[], truncates: number[]): Row[] => {

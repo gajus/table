@@ -1,6 +1,6 @@
-import slice from 'slice-ansi';
-import stringWidth from 'string-width';
-import stripAnsi from 'strip-ansi';
+import baseSliceAnsi from 'slice-ansi';
+import baseStringWidth from 'string-width';
+import baseStripAnsi from 'strip-ansi';
 import {
   getBorderCharacters,
 } from './getBorderCharacters';
@@ -34,7 +34,7 @@ const countSlicePositions = (grapheme: string): number => {
   let positions = 0;
 
   for (const codePoint of grapheme) {
-    positions += slice(codePoint, 0, 1) === '' ? 2 : 1;
+    positions += baseSliceAnsi(codePoint, 0, 1) === '' ? 2 : 1;
   }
 
   return positions;
@@ -57,7 +57,7 @@ const measureGrapheme = (value: string): Grapheme => {
     grapheme = {
       positions: countSlicePositions(value),
       value,
-      width: stringWidth(value),
+      width: baseStringWidth(value),
     };
 
     graphemeCache.set(value, grapheme);
@@ -121,6 +121,131 @@ export const calculateSliceLength = (subject: string, maximumWidth: number): num
   return positions;
 };
 
+type Hyperlink = {
+  readonly close: string,
+  readonly open: string,
+};
+
+type HyperlinkRun = {
+  readonly end: number,
+  readonly link: Hyperlink | undefined,
+  readonly start: number,
+};
+
+type SeparatedHyperlinks = {
+  readonly plain: string,
+  readonly runs: HyperlinkRun[],
+};
+
+/**
+ * A terminal hyperlink (OSC 8) sequence. An opening sequence carries the parameters and the URI of the
+ * link that the text after it belongs to; a closing sequence has an empty URI.
+ */
+// eslint-disable-next-line no-control-regex
+const hyperlinkRegex = /(\u001B\]|\u009D)8;[^\u0007\u001B\u009C;]*;([^\u0007\u001B\u009C]*)(\u0007|\u001B\\|\u009C)/gu;
+
+const containsHyperlink = (input: string): boolean => {
+  return input.includes(']8;') || input.includes('\u009D8;');
+};
+
+const removeHyperlinks = (input: string): string => {
+  return containsHyperlink(input) ? input.replace(hyperlinkRegex, '') : input;
+};
+
+/**
+ * Like strip-ansi, but also removes terminal hyperlinks, whatever their URI and terminator.
+ *
+ * @internal
+ */
+export const stripAnsi = (input: string): string => {
+  return baseStripAnsi(removeHyperlinks(input));
+};
+
+/**
+ * Like string-width, but also ignores terminal hyperlinks, whatever their URI and terminator.
+ *
+ * @internal
+ */
+export const stringWidth = (input: string): number => {
+  return baseStringWidth(removeHyperlinks(input));
+};
+
+/**
+ * Separates the terminal hyperlinks from the rest of the input, and divides its text into runs, measured
+ * in slice-ansi positions, that each belong to one hyperlink or to none.
+ */
+const splitHyperlinks = (input: string): SeparatedHyperlinks => {
+  // A copy, so that this loop has its own lastIndex.
+  const regex = new RegExp(hyperlinkRegex);
+  const runs: HyperlinkRun[] = [];
+
+  let plain = '';
+  let position = 0;
+  let start = 0;
+  let link: Hyperlink | undefined;
+  let lastIndex = 0;
+
+  const appendText = (text: string): void => {
+    plain += text;
+    position += calculateSliceLength(baseStripAnsi(text), Number.POSITIVE_INFINITY);
+
+    if (position > start) {
+      runs.push({end: position,
+        link,
+        start});
+      start = position;
+    }
+  };
+
+  for (let match = regex.exec(input); match; match = regex.exec(input)) {
+    appendText(input.slice(lastIndex, match.index));
+
+    const [escapeSequence, introducer, uri, terminator] = match;
+
+    link = uri ? {close: introducer + '8;;' + terminator,
+      open: escapeSequence} : undefined;
+    lastIndex = regex.lastIndex;
+  }
+
+  appendText(input.slice(lastIndex));
+
+  return {plain,
+    runs};
+};
+
+/**
+ * Like slice-ansi, but keeps terminal hyperlinks: each part of the result that belongs to a hyperlink is
+ * wrapped in its own opening and closing sequences.
+ *
+ * @internal
+ */
+export const sliceAnsi = (input: string, begin: number, end?: number): string => {
+  if (!containsHyperlink(input)) {
+    return baseSliceAnsi(input, begin, end);
+  }
+
+  const {plain, runs} = splitHyperlinks(input);
+
+  if (!runs.some(({link}) => {
+    return link;
+  })) {
+    return baseSliceAnsi(plain, begin, end);
+  }
+
+  return runs.map(({end: runEnd, link, start}) => {
+    const from = Math.max(begin, start);
+    const to = Math.min(end ?? Number.POSITIVE_INFINITY, runEnd);
+
+    if (from >= to) {
+      return '';
+    }
+
+    const text = baseSliceAnsi(plain, from, to);
+
+    return link ? link.open + text + link.close : text;
+  }).join('');
+};
+
 /**
  * Converts Windows-style newline to Unix-style
  *
@@ -145,7 +270,7 @@ export const splitAnsi = (input: string): string[] => {
   let startIndex = 0;
 
   lengths.forEach((length) => {
-    result.push(length === 0 ? '' : slice(input, startIndex, startIndex + length));
+    result.push(length === 0 ? '' : sliceAnsi(input, startIndex, startIndex + length));
 
     // Plus 1 for the newline character itself
     startIndex += length + 1;

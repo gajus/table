@@ -1,4 +1,3 @@
-import stringWidth from 'string-width';
 import {
   alignString,
 } from './alignString';
@@ -18,7 +17,7 @@ import type {
   RangeConfig,
 } from './types/internal';
 import {
-  sequence, sumArray,
+  sequence, stringWidth, sumArray,
 } from './utils';
 import {
   wrapCell,
