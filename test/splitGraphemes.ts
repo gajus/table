@@ -3,6 +3,7 @@ import {
 } from 'chai';
 import {
   calculateSliceLength,
+  sliceAnsi,
   splitGraphemes,
 } from '../src/utils';
 
@@ -78,5 +79,17 @@ describe('calculateSliceLength', () => {
 
   it('returns zero for an empty string', () => {
     expect(calculateSliceLength('', 3)).to.equal(0);
+  });
+});
+
+describe('sliceAnsi', () => {
+  it('slices more distinct wide characters than it caches', () => {
+    const characters = Array.from({length: 12_000}, (_, index) => {
+      return String.fromCodePoint(0x4E_00 + index);
+    });
+    const text = characters.join('');
+
+    expect(sliceAnsi(text, 0, 24_000)).to.equal(text);
+    expect(sliceAnsi(text, 2, 6)).to.equal(characters.slice(1, 3).join(''));
   });
 });

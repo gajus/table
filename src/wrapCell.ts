@@ -36,3 +36,11 @@ export const wrapCell = (cellValue: string, cellWidth: number, useWrapWord: bool
 
   return cellLines;
 };
+
+/**
+ * The lines of the wrapped cells of a table, by row and column. Calculating the row heights fills it, and
+ * mapping the rows to their lines reads it, so that each cell is wrapped once.
+ *
+ * @internal
+ */
+export type WrappedCells = Array<Array<string[] | undefined>>;

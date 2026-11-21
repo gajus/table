@@ -2,7 +2,7 @@ import type {
   Grapheme,
 } from './types/internal';
 import {
-  sliceAnsi, splitGraphemes, stripAnsi,
+  isSingleColumn, sliceAnsi, splitGraphemes, stripAnsi,
 } from './utils';
 
 /**
@@ -75,8 +75,56 @@ const calculateStringLengths = (input: string, size: number): Array<[Length:numb
   return chunks;
 };
 
+/**
+ * Like calculateStringLengths, for single-column text, where every character is one column and one
+ * slice-ansi position and so stands for itself in the wrapping expression.
+ */
+const calculateSingleColumnLengths = (input: string, size: number): Array<[Length:number, Offset: number]> => {
+  const width = Math.max(size, 1);
+
+  // https://regex101.com/r/gY5kZ1/1
+  const re = new RegExp('(^.{1,' + String(width) + '}(\\s+|$))|(^.{1,' + String(Math.max(size - 1, 1)) + '}(\\\\|/|_|\\.|,|;|-))');
+
+  let subject = input;
+
+  const chunks: Array<[number, number]> = [];
+
+  do {
+    const match = re.exec(subject);
+
+    let lineColumns: number;
+    let chunkColumns: number;
+
+    if (match) {
+      chunkColumns = match[0].length;
+      lineColumns = match[0].trimEnd().length;
+    } else {
+      lineColumns = Math.min(width, subject.length);
+      chunkColumns = lineColumns;
+    }
+
+    chunks.push([lineColumns, chunkColumns - lineColumns]);
+
+    subject = subject.slice(chunkColumns);
+  } while (subject.length);
+
+  return chunks;
+};
+
 export const wrapWord = (input: string, size: number): string[] => {
   const result: string[] = [];
+
+  if (isSingleColumn(input)) {
+    let start = 0;
+
+    for (const [length, offset] of calculateSingleColumnLengths(input, size)) {
+      result.push(input.slice(start, start + length));
+
+      start += length + offset;
+    }
+
+    return result;
+  }
 
   let startIndex = 0;
   calculateStringLengths(input, size).forEach(([length, offset]) => {
