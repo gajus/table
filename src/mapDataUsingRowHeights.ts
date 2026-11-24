@@ -11,6 +11,9 @@ import {
 import {
   wrapCell,
 } from './wrapCell';
+import type {
+  WrappedCells,
+} from './wrapCell';
 
 const createEmptyStrings = (length: number) => {
   return new Array(length).fill('');
@@ -34,7 +37,11 @@ export const padCellVertically = (lines: string[], rowHeight: number, verticalAl
   ];
 };
 
-export const mapDataUsingRowHeights = (unmappedRows: Row[], rowHeights: number[], config: BaseConfig): Row[] => {
+/**
+ * Maps the rows to their lines. wrappedCells, if it is given, holds the lines of the cells that
+ * calculateRowHeights wrapped for the same rows and config.
+ */
+export const mapDataUsingRowHeights = (unmappedRows: Row[], rowHeights: number[], config: BaseConfig, wrappedCells?: WrappedCells): Row[] => {
   const nColumns = unmappedRows[0].length;
 
   const mappedRows = unmappedRows.map((unmappedRow, unmappedRowIndex) => {
@@ -53,7 +60,7 @@ export const mapDataUsingRowHeights = (unmappedRows: Row[], rowHeights: number[]
 
         return;
       }
-      const cellLines = wrapCell(cell, config.columns[cellIndex].width, config.columns[cellIndex].wrapWord);
+      const cellLines = wrappedCells?.[unmappedRowIndex]?.[cellIndex] ?? wrapCell(cell, config.columns[cellIndex].width, config.columns[cellIndex].wrapWord);
 
       const paddedCellLines = padCellVertically(cellLines, outputRowHeight, config.columns[cellIndex].verticalAlignment);
 

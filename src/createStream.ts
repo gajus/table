@@ -37,15 +37,19 @@ import type {
 import {
   extractTruncates,
 } from './utils';
+import type {
+  WrappedCells,
+} from './wrapCell';
 
 const prepareData = (data: Row[], config: StreamConfig) => {
   let rows = stringifyTableData(data);
 
   rows = truncateTableData(rows, extractTruncates(config));
 
-  const rowHeights = calculateRowHeights(rows, config);
+  const wrappedCells: WrappedCells = [];
+  const rowHeights = calculateRowHeights(rows, config, wrappedCells);
 
-  rows = mapDataUsingRowHeights(rows, rowHeights, config);
+  rows = mapDataUsingRowHeights(rows, rowHeights, config, wrappedCells);
   rows = alignTableData(rows, config);
   rows = padTableData(rows, config);
 

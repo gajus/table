@@ -23,7 +23,32 @@ import type {
  */
 const graphemeRegex = /\p{Regional_Indicator}{2}|[\s\S][\p{M}\p{Emoji_Modifier}\u{E0020}-\u{E007F}]*(?:\u200D[\s\S][\p{M}\p{Emoji_Modifier}\u{E0020}-\u{E007F}]*)*/gu;
 
+/**
+ * Printable ASCII, printable Latin-1, the IPA and spacing modifier letters, and the dashes, quotes and
+ * ellipsis of General Punctuation. None of these is an escape code, a combining mark, an emoji or a
+ * full-width character, so each is one grapheme, one terminal column and one slice-ansi position.
+ */
+const singleColumnRegex = /^[\u0020-\u007E\u00A0-\u02FF\u2010-\u2027]+$/u;
+
 const printableAsciiRegex = /^[\u0020-\u007E]+$/u;
+
+/**
+ * Tests whether a string is non-empty single-column text. Printable ASCII, the most common content, is
+ * tested first, because its expression is faster than the one of the whole set.
+ */
+const testSingleColumn = (subject: string): boolean => {
+  return printableAsciiRegex.test(subject) || singleColumnRegex.test(subject);
+};
+
+/**
+ * Tests whether a string is non-empty single-column text: no escape codes, and one grapheme, one
+ * terminal column and one slice-ansi position per character.
+ *
+ * @internal
+ */
+export const isSingleColumn = (subject: string): boolean => {
+  return testSingleColumn(subject);
+};
 
 /**
  * slice-ansi positions are not terminal columns: it advances one position per code point and two for
@@ -38,6 +63,20 @@ const countSlicePositions = (grapheme: string): number => {
   }
 
   return positions;
+};
+
+/**
+ * The characters that start an escape code or a terminal hyperlink. A string without them is left as it
+ * is by strip-ansi and is sliced by slice-ansi only by counting positions.
+ */
+// eslint-disable-next-line no-control-regex
+const escapeRegex = /[\u001B\u009B\u009D]/u;
+
+/**
+ * Like strip-ansi, but returns a string without escape codes as it is.
+ */
+const stripEscapes = (input: string): string => {
+  return escapeRegex.test(input) ? baseStripAnsi(input) : input;
 };
 
 const graphemeCache = new Map<string, Grapheme>();
@@ -73,8 +112,8 @@ const measureGrapheme = (value: string): Grapheme => {
  * @internal
  */
 export const splitGraphemes = (subject: string): Grapheme[] => {
-  // Printable ASCII, the most common content, is one column and one slice-ansi position per character.
-  if (printableAsciiRegex.test(subject)) {
+  // Single-column text, the most common content, is one column and one slice-ansi position per character.
+  if (testSingleColumn(subject)) {
     return Array.from(subject, (value) => {
       return {
         positions: 1,
@@ -95,9 +134,9 @@ export const splitGraphemes = (subject: string): Grapheme[] => {
  * @internal
  */
 export const calculateSliceLength = (subject: string, maximumWidth: number): number => {
-  // Printable ASCII is one column and one position per character. The character after the cut is
+  // Single-column text is one column and one position per character. The character after the cut is
   // checked as well, so that a combining mark or modifier is never separated from the one before it.
-  if (maximumWidth >= 1 && printableAsciiRegex.test(subject.slice(0, maximumWidth + 1))) {
+  if (maximumWidth >= 1 && testSingleColumn(subject.slice(0, maximumWidth + 1))) {
     return Math.min(subject.length, maximumWidth);
   }
 
@@ -158,7 +197,12 @@ const removeHyperlinks = (input: string): string => {
  * @internal
  */
 export const stripAnsi = (input: string): string => {
-  return baseStripAnsi(removeHyperlinks(input));
+  // Single-column text has no escape codes to remove.
+  if (testSingleColumn(input)) {
+    return input;
+  }
+
+  return stripEscapes(removeHyperlinks(input));
 };
 
 /**
@@ -167,6 +211,11 @@ export const stripAnsi = (input: string): string => {
  * @internal
  */
 export const stringWidth = (input: string): number => {
+  // Single-column text is one column per character.
+  if (testSingleColumn(input)) {
+    return input.length;
+  }
+
   return baseStringWidth(removeHyperlinks(input));
 };
 
@@ -187,7 +236,7 @@ const splitHyperlinks = (input: string): SeparatedHyperlinks => {
 
   const appendText = (text: string): void => {
     plain += text;
-    position += calculateSliceLength(baseStripAnsi(text), Number.POSITIVE_INFINITY);
+    position += calculateSliceLength(stripEscapes(text), Number.POSITIVE_INFINITY);
 
     if (position > start) {
       runs.push({end: position,
@@ -213,6 +262,50 @@ const splitHyperlinks = (input: string): SeparatedHyperlinks => {
     runs};
 };
 
+const codePointPositionCache = new Map<string, number>();
+
+/**
+ * The number of slice-ansi positions of one code point: two for a full-width BMP character, one
+ * otherwise. Measurements are cached, and the cache is emptied whenever it grows large.
+ */
+const measureCodePoint = (codePoint: string): number => {
+  let positions = codePointPositionCache.get(codePoint);
+
+  if (positions === undefined) {
+    if (codePointPositionCache.size >= 10_000) {
+      codePointPositionCache.clear();
+    }
+
+    positions = baseSliceAnsi(codePoint, 0, 1) === '' ? 2 : 1;
+    codePointPositionCache.set(codePoint, positions);
+  }
+
+  return positions;
+};
+
+/**
+ * Slices a string without escape codes exactly as slice-ansi does: each code point advances one
+ * position, or two if it is full-width, and is kept if the position it reaches is within the range.
+ */
+const slicePlain = (input: string, begin: number, end?: number): string => {
+  const stringEnd = typeof end === 'number' ? end : Number.POSITIVE_INFINITY;
+
+  let output = '';
+  let visible = 0;
+
+  for (const codePoint of input) {
+    visible += codePoint.charCodeAt(0) < 0x7F ? 1 : measureCodePoint(codePoint);
+
+    if (visible > begin && visible <= stringEnd) {
+      output += codePoint;
+    } else if (visible >= stringEnd) {
+      break;
+    }
+  }
+
+  return output;
+};
+
 /**
  * Like slice-ansi, but keeps terminal hyperlinks: each part of the result that belongs to a hyperlink is
  * wrapped in its own opening and closing sequences.
@@ -220,6 +313,16 @@ const splitHyperlinks = (input: string): SeparatedHyperlinks => {
  * @internal
  */
 export const sliceAnsi = (input: string, begin: number, end?: number): string => {
+  // Single-column text has no escape codes and is one slice-ansi position per character.
+  if (begin >= 0 && (end === undefined || end >= 0) && testSingleColumn(input)) {
+    return input.slice(begin, end);
+  }
+
+  // Without escape codes, slice-ansi only counts positions.
+  if (!escapeRegex.test(input)) {
+    return slicePlain(input, begin, end);
+  }
+
   if (!containsHyperlink(input)) {
     return baseSliceAnsi(input, begin, end);
   }
@@ -261,6 +364,16 @@ export const normalizeString = (input: string): string => {
  * @internal
  */
 export const splitAnsi = (input: string): string[] => {
+  const lines = input.split('\n');
+
+  // Lines of single-column text have no escape codes and are one slice-ansi position per character, so
+  // slicing the input gives back each line as it is.
+  if (lines.every((line) => {
+    return line === '' || testSingleColumn(line);
+  })) {
+    return lines;
+  }
+
   // Line lengths in slice-ansi positions, which differ from display widths for emoji.
   const lengths = stripAnsi(input).split('\n').map((line) => {
     return calculateSliceLength(line, Number.POSITIVE_INFINITY);

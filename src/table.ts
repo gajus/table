@@ -37,6 +37,9 @@ import {
 import {
   validateTableData,
 } from './validateTableData';
+import type {
+  WrappedCells,
+} from './wrapCell';
 
 export const table = (data: ReadonlyArray<readonly unknown[]>, userConfig: TableUserConfig = {}): string => {
   validateTableData(data);
@@ -49,12 +52,13 @@ export const table = (data: ReadonlyArray<readonly unknown[]>, userConfig: Table
 
   rows = truncateTableData(injectedRows, extractTruncates(config));
 
-  const rowHeights = calculateRowHeights(rows, config);
+  const wrappedCells: WrappedCells = [];
+  const rowHeights = calculateRowHeights(rows, config, wrappedCells);
 
   config.spanningCellManager.setRowHeights(rowHeights);
   config.spanningCellManager.setRowIndexMapping(rowHeights);
 
-  rows = mapDataUsingRowHeights(rows, rowHeights, config);
+  rows = mapDataUsingRowHeights(rows, rowHeights, config, wrappedCells);
   rows = alignTableData(rows, config);
   rows = padTableData(rows, config);
 

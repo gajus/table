@@ -1,5 +1,5 @@
 import {
-  calculateSliceLength, sliceAnsi, stringWidth, stripAnsi,
+  calculateSliceLength, isSingleColumn, sliceAnsi, stringWidth, stripAnsi,
 } from './utils';
 
 /**
@@ -13,6 +13,18 @@ export const wrapString = (subject: string, size: number): string[] => {
   let subjectSlice = subject;
 
   const chunks: string[] = [];
+
+  // Single-column text is one column and one slice-ansi position per character, and stays so when it is
+  // sliced and trimmed.
+  if (size >= 1 && isSingleColumn(subjectSlice)) {
+    do {
+      chunks.push(subjectSlice.slice(0, size));
+
+      subjectSlice = subjectSlice.slice(size).trim();
+    } while (subjectSlice.length);
+
+    return chunks;
+  }
 
   do {
     const chunkLength = calculateSliceLength(stripAnsi(subjectSlice), size);
