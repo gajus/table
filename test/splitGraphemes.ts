@@ -36,6 +36,18 @@ describe('splitGraphemes', () => {
     ]);
   });
 
+  it('measures a decomposed (NFD) Hangul syllable as one full-width grapheme', () => {
+    // 홍길, as macOS writes it in file names: an initial consonant, a vowel and a final consonant each.
+    expect(splitGraphemes('\u1112\u1169\u11BC\u1100\u1175\u11AF')).to.deep.equal([
+      {positions: 4,
+        value: '\u1112\u1169\u11BC',
+        width: 2},
+      {positions: 4,
+        value: '\u1100\u1175\u11AF',
+        width: 2},
+    ]);
+  });
+
   it('returns no graphemes for an empty string', () => {
     expect(splitGraphemes('')).to.deep.equal([]);
   });

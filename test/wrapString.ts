@@ -28,6 +28,13 @@ describe('wrapString', () => {
       });
     });
   });
+  context('subject is decomposed (NFD) Hangul', () => {
+    it('wraps between syllables, two columns each', () => {
+      expect(wrapString('홍길동전입니다'.normalize('NFD'), 6)).to.deep.equal(['홍길동', '전입니', '다'].map((line) => {
+        return line.normalize('NFD');
+      }));
+    });
+  });
   context('subject string contains ANSI escape codes', () => {
     const openRed = '\u001b[31m';
     const closeRed = '\u001b[39m';

@@ -18,10 +18,26 @@ import type {
 
 /**
  * A user-perceived character: a code point together with the combining marks, variation selectors,
- * emoji modifiers and tag characters attached to it, including zero-width joiner emoji sequences;
- * or a pair of regional indicators, which is rendered as a flag.
+ * emoji modifiers, tag characters and Hangul vowel and final consonant jamo attached to it, including
+ * zero-width joiner emoji sequences; or a pair of regional indicators, which is rendered as a flag.
+ * A decomposed (NFD) Hangul syllable, as macOS writes it in file names, is an initial consonant
+ * followed by those jamo.
  */
-const graphemeRegex = /\p{Regional_Indicator}{2}|[\s\S][\p{M}\p{Emoji_Modifier}\u{E0020}-\u{E007F}]*(?:\u200D[\s\S][\p{M}\p{Emoji_Modifier}\u{E0020}-\u{E007F}]*)*/gu;
+const graphemeRegex = /\p{Regional_Indicator}{2}|[\s\S][\p{M}\p{Emoji_Modifier}\u{E0020}-\u{E007F}\u1160-\u11FF\u{D7B0}-\u{D7FF}]*(?:\u200D[\s\S][\p{M}\p{Emoji_Modifier}\u{E0020}-\u{E007F}\u1160-\u11FF\u{D7B0}-\u{D7FF}]*)*/gu;
+
+/**
+ * Hangul vowel and final consonant jamo. string-width counts each of them as a column, although they
+ * join the initial consonant before them into one full-width syllable.
+ */
+const hangulVowelOrFinalRegex = /[\u1160-\u11FF\u{D7B0}-\u{D7FF}]/u;
+
+/**
+ * Like string-width, but measures decomposed (NFD) Hangul syllables as the full-width syllables they
+ * are rendered as.
+ */
+const measureWidth = (input: string): number => {
+  return baseStringWidth(hangulVowelOrFinalRegex.test(input) ? input.normalize('NFC') : input);
+};
 
 /**
  * Printable ASCII, printable Latin-1, the IPA and spacing modifier letters, and the dashes, quotes and
@@ -96,7 +112,7 @@ const measureGrapheme = (value: string): Grapheme => {
     grapheme = {
       positions: countSlicePositions(value),
       value,
-      width: baseStringWidth(value),
+      width: measureWidth(value),
     };
 
     graphemeCache.set(value, grapheme);
@@ -216,7 +232,7 @@ export const stringWidth = (input: string): number => {
     return input.length;
   }
 
-  return baseStringWidth(removeHyperlinks(input));
+  return measureWidth(removeHyperlinks(input));
 };
 
 /**

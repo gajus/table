@@ -61,6 +61,7 @@ describe('truncateTableData', () => {
 
       expect(truncateTableData([['कि'.repeat(3)]], [2])).to.deep.equal([['कि…']]);
       expect(truncateTableData([[scotland.repeat(3)]], [2])).to.deep.equal([[`${scotland}…`]]);
+      expect(truncateTableData([['홍길동전입니다'.normalize('NFD')]], [4])).to.deep.equal([[`${'홍길동'.normalize('NFD')}…`]]);
     });
   });
 
